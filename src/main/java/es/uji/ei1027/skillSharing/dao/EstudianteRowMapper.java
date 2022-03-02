@@ -22,4 +22,6 @@ public class EstudianteRowMapper implements RowMapper<Estudiante> {
         estudiante.setHoras(rs.getInt("horas"));
         return estudiante;
     }
+
+    //nombres de la base en "" setE
 }
