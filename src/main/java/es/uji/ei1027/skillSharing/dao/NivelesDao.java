@@ -18,15 +18,15 @@ public class NivelesDao {
     public void setDataSource(DataSource dataSource) { jdbcTemplate = new JdbcTemplate(dataSource); }
 
     public void addNivel(Niveles nivel) {
-        jdbcTemplate.update("INSERT INTO niveles VALUES(?, ?)", nivel.getNombre(), nivel.getNivel());
+        jdbcTemplate.update("INSERT INTO niveles VALUES(?)", nivel.getNombre());
     }
 
     public void updateNivel(Niveles nivel) {
-        jdbcTemplate.update("UPDATE FROM niveles WHERE nombre = ? AND nivel = ?", nivel.getNombre(), nivel.getNivel());
+        jdbcTemplate.update("UPDATE FROM niveles WHERE nombre = ? ", nivel.getNombre());
     }
 
-    public void deleteNivel(String nombre, String nivel) {
-        jdbcTemplate.update("DELETE FROM niveles WHERE nombre = ? and nivel = ?", nombre, nivel);
+    public void deleteNivel(String nombre) {
+        jdbcTemplate.update("DELETE FROM niveles WHERE nombre = ? ", nombre);
     }
 
     public List<Niveles> getNivelesporNombre(String nombre){

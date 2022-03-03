@@ -12,7 +12,6 @@ public class NivelesRowMapper implements RowMapper<Niveles> {
     public Niveles mapRow(ResultSet rs, int rowNum) throws SQLException {
         Niveles nivel = new Niveles();
         nivel.setNombre(rs.getString("nombre"));
-        nivel.setNivel(rs.getString("nivel"));
         return nivel;
     }
 }
