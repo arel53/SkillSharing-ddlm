@@ -13,9 +13,7 @@ public class Demanda {
     private String nivel;
     private String descripcion;
 
-    public Demanda(){
-        activa = true;
-    }
+//Quitado el constructor
 
     public void setIdDemanda(int idDemanda) {
         this.idDemanda = idDemanda;

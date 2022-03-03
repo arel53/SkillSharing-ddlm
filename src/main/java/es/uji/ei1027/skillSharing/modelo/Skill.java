@@ -4,9 +4,7 @@ public class Skill {
     private String nombre;
     private Boolean activo;
 
-    public Skill(){
-        activo = true;
-    }
+    //Quitado el constructor
 
     public void setNombre(String nombre) {
         this.nombre = nombre;

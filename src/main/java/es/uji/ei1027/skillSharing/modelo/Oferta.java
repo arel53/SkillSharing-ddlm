@@ -12,11 +12,7 @@ public class Oferta {
     private String skill;
     private String nivel;
     private String descripcion;
-
-    public Oferta(){
-        activa = true;
-    }
-
+//Quitado el constructor
     public void setIdOferta(int idOferta) {
         this.idOferta = idOferta;
     }
