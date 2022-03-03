@@ -23,7 +23,7 @@ public class DemandaDao {
                 demanda.getFinFecha(),demanda.isActiva(),demanda.getSkill(),demanda.getNivel(),demanda.getDescripcion());
     }
 
-    public void deleteDemanda(String idDemanda){jdbcTemplate.update("DELETE FROM demanda WHERE id_demanda = ?", idDemanda);}
+ // No es necesario   public void deleteDemanda(String idDemanda){jdbcTemplate.update("DELETE FROM demanda WHERE id_demanda = ?", idDemanda);}
 
     public void endDemanda(String idDemanda) { jdbcTemplate.update("UPDATE demanda SET activa = FALSE WHERE id_demanda = ?", idDemanda);}
 

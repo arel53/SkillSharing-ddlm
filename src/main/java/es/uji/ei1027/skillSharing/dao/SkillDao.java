@@ -21,7 +21,7 @@ public class SkillDao {
                 skill.getNombre(), skill.isActivo());
     }
 
-    public void deleteSkill(String nombre){jdbcTemplate.update("DELETE FROM skill WHERE nombre = ?", nombre);}
+// No es necesario    public void deleteSkill(String nombre){jdbcTemplate.update("DELETE FROM skill WHERE nombre = ?", nombre);}
 
 
     public void endSkill(String nombre){jdbcTemplate.update("UPDATE skill SET activa = FALSE WHERE nombre = ?", nombre);}
