@@ -1,6 +1,6 @@
 DROP TABLE colaboracion;
-DROP TABLE oferta;
 DROP TABLE demanda;
+DROP TABLE oferta;
 DROP TABLE niveles;
 DROP TABLE skill;
 DROP TABLE estudiante;
@@ -30,6 +30,7 @@ CREATE TABLE skill(
 
 CREATE TABLE niveles(
 	nombre		VARCHAR(20) NOT NULL,
+  CONSTRAINT cp_niveles PRIMARY KEY (nombre)
 );
 
 CREATE TABLE oferta(
