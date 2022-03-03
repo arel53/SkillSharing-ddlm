@@ -23,18 +23,20 @@ public class DemandaDao {
                 demanda.getFinFecha(),demanda.isActiva(),demanda.getSkill(),demanda.getNivel(),demanda.getDescripcion());
     }
 
-    public void deleteDemanda(String idOferta){jdbcTemplate.update("DELETE FROM estudiante WHERE id_oferta = ?", idOferta);}
+    public void deleteDemanda(String idDemanda){jdbcTemplate.update("DELETE FROM demanda WHERE id_demanda = ?", idDemanda);}
+
+    public void endDemanda(String idDemanda) { jdbcTemplate.update("UPDATE demanda SET activa = FALSE WHERE id_demanda = ?", idDemanda);}
 
 
     public void updateDemanda(Demanda demanda) {
-        jdbcTemplate.update("UPDATE estudiante SET id_demanda = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
+        jdbcTemplate.update("UPDATE demanda SET id_demanda = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
                         "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ?", demanda.getIdDemanda(), demanda.getEstudiante(),
                 demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getNivel(), demanda.getDescripcion());
     }
 
-    public Oferta getDemanda(String idDemanda) {
+    public Demanda getDemanda(String idDemanda) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM estudiante WHERE id_demanda = ?", new OfertaRowMapper(), idDemanda);
+            return jdbcTemplate.queryForObject("SELECT * FROM demanda WHERE id_demanda = ?", new DemandaRowMapper(), idDemanda);
         }
         catch (EmptyResultDataAccessException e){
             return null;

@@ -2,31 +2,31 @@ package es.uji.ei1027.skillSharing.modelo;
 
 public class Skill {
     private String nombre;
-    private String nivel;
+    private Boolean activo;
 
-    public Skill(){}
+    public Skill(){
+        activo = true;
+    }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+    public void setActivo(Boolean activo) {
+        this.activo = activo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getNivel() {
-        return nivel;
-    }
+    public boolean isActivo() { return activo; }
 
     @Override
     public String toString() {
         return "Skill{" +
                 "nombre='" + nombre + '\'' +
-                ", nivel='" + nivel + '\'' +
+                ", nivel='" + activo + '\'' +
                 '}';
     }
 }

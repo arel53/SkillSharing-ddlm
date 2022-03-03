@@ -13,7 +13,9 @@ public class Demanda {
     private String nivel;
     private String descripcion;
 
-    public Demanda(){}
+    public Demanda(){
+        activa = true;
+    }
 
     public void setIdDemanda(int idDemanda) {
         this.idDemanda = idDemanda;

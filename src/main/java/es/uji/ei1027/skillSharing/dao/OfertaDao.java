@@ -23,18 +23,20 @@ public class OfertaDao {
         oferta.getFinFecha(),oferta.isActiva(),oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
     }
 
-    public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM estudiante WHERE id_oferta = ?", idOferta);}
+    public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
+
+    public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", idOferta);}
 
 
     public void updateOferta(Oferta oferta) {
-        jdbcTemplate.update("UPDATE estudiante SET id_oferta = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
+        jdbcTemplate.update("UPDATE oferta SET id_oferta = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
                         "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ?", oferta.getIdOferta(), oferta.getEstudiante(),
                 oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion());
     }
 
     public Oferta getOferta(String idOferta) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM estudiante WHERE id_oferta = ?", new OfertaRowMapper(), idOferta);
+            return jdbcTemplate.queryForObject("SELECT * FROM oferta WHERE id_oferta = ?", new OfertaRowMapper(), idOferta);
         }
         catch (EmptyResultDataAccessException e){
             return null;

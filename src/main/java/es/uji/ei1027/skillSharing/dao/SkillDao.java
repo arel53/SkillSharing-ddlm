@@ -1,7 +1,5 @@
 package es.uji.ei1027.skillSharing.dao;
 
-import es.uji.ei1027.skillSharing.modelo.Demanda;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -20,14 +18,17 @@ public class SkillDao {
 
     public void addSkill(Skill skill){
         jdbcTemplate.update("INSERT INTO skill VALUES(?, ?)",
-                skill.getNombre(), skill.getNivel());
+                skill.getNombre(), skill.isActivo());
     }
 
     public void deleteSkill(String nombre){jdbcTemplate.update("DELETE FROM skill WHERE nombre = ?", nombre);}
 
 
+    public void endSkill(String nombre){jdbcTemplate.update("UPDATE skill SET activa = FALSE WHERE nombre = ?", nombre);}
+
+
     public void updateSkill(Skill skill) {
-        jdbcTemplate.update("UPDATE skill SET nombre = ?, nivel = ?", skill.getNombre(), skill.getNivel());
+        jdbcTemplate.update("UPDATE skill SET nombre = ?, nivel = ?", skill.getNombre(), skill.isActivo());
     }
 
     public Skill getSkill(String nombre) {

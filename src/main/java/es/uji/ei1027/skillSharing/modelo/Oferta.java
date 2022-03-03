@@ -14,6 +14,7 @@ public class Oferta {
     private String descripcion;
 
     public Oferta(){
+        activa = true;
     }
 
     public void setIdOferta(int idOferta) {
