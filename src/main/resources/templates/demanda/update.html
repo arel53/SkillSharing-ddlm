@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Demanda</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Modifica Demanda</h2>
+<form action="#" th:action="@{/demanda/update}"
+      th:object="${demanda}" method="post">
+    <table>
+        <tr>
+            <td><label>Estudiante</label></td>
+            <td><input type="text" readonly th:field="*{estudiante}" /></td>
+        </tr>
+        <tr>
+            <td><label>Horas</label></td>
+            <td><input type="number" th:field="*{horas}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de Inicio</label></td>
+            <td><input type="date" th:field="*{iniFecha}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de Final</label></td>
+            <td><input type="date" th:field="*{finFecha}" /></td>
+        </tr>
+        <tr>
+            <td><label>Skill</label></td>
+            <td><input type="text" th:field="*{skill}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nivel</label></td>
+            <td><input type="text" th:field="*{nivel}" /></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion</label></td>
+            <td><input type="text" th:field="*{descripcion}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit" class="btn btn-primary"/>Modifica Demanda</td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
