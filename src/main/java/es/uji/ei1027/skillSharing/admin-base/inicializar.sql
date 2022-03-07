@@ -17,6 +17,7 @@ CREATE TABLE estudiante(
 	direccion	VARCHAR(50) NOT NULL,
 	horas		INTEGER NOT NULL,
 	CONSTRAINT cp_estudiante PRIMARY KEY (nif),
+	CONSTRAINT calt_estudiante UNIQUE(email)
 	CONSTRAINT ri_estudiante_edad CHECK (edad > 16)
 );
 
