@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Colaboracion {
 
-    private String idOferta;
+    private int idOferta;
     private String idDemanda;
     private Date iniFecha;
     private Date finFecha;
@@ -18,7 +18,7 @@ public class Colaboracion {
         super();
     }
 
-    public String getIdOferta() {
+    public int getIdOferta() {
         return idOferta;
     }
 
@@ -50,7 +50,7 @@ public class Colaboracion {
         return horas;
     }
 
-    public void setIdOferta(String idOferta) {
+    public void setIdOferta(int idOferta) {
         this.idOferta = idOferta;
     }
 

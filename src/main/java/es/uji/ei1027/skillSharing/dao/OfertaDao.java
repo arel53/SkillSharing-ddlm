@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -19,6 +20,7 @@ public class OfertaDao {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addOferta(Oferta oferta){
+        System.out.println("hola");
         jdbcTemplate.update("INSERT INTO oferta VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
         oferta.getAndIncrement(), oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
         oferta.getFinFecha(),true,oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
@@ -31,11 +33,11 @@ public class OfertaDao {
 
     public void updateOferta(Oferta oferta) {
         jdbcTemplate.update("UPDATE oferta SET estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
+                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
                 oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion(), oferta.getIdOferta());
     }
 
-    public Oferta getOferta(String idOferta) {
+    public Oferta getOferta(int idOferta) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM oferta WHERE id_oferta = ?", new OfertaRowMapper(), idOferta);
         }
@@ -49,7 +51,7 @@ public class OfertaDao {
             return jdbcTemplate.query("SELECT * FROM oferta", new OfertaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
-            return null;
+            return new ArrayList<Oferta>();
         }
     }
 }

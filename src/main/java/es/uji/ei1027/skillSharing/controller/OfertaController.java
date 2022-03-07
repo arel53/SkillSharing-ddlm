@@ -37,7 +37,7 @@ public class OfertaController {
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)
     public String editOferta(Model model, @PathVariable String idOferta){
-        model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
+        model.addAttribute("oferta",ofertaDao.getOferta(Integer.parseInt(idOferta)));
         return "oferta/update";
     }
 
@@ -45,8 +45,11 @@ public class OfertaController {
     public String processUpdateSubmit(
             @ModelAttribute("oferta") Oferta oferta,
             BindingResult bindingResult){
-        if (bindingResult.hasErrors())
+        System.out.println(oferta);
+        if (bindingResult.hasErrors()) {
+            System.out.println(oferta);
             return "oferta/update";
+        }
         ofertaDao.updateOferta(oferta);
         return "redirect:list";
     }
