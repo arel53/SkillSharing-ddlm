@@ -1,7 +1,6 @@
 DROP TABLE colaboracion;
 DROP TABLE demanda;
 DROP TABLE oferta;
-DROP TABLE niveles;
 DROP TABLE skill;
 DROP TABLE estudiante;
 
