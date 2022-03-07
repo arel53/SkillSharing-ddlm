@@ -61,7 +61,6 @@ public class Oferta{
     }
 
     public int getAndIncrement(){ return a.getAndIncrement(); }
-    public int getAndDecrement(){ return a.getAndDecrement(); }
 
     public int getIdOferta() {
         return idOferta;

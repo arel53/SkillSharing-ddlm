@@ -25,8 +25,8 @@ public class OfertaDao {
         oferta.getAndIncrement(), oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
         oferta.getFinFecha(),true,oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
     }
-
-    public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
+    //este no deberia existir
+    //public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
 
     public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", idOferta);}
 
@@ -48,7 +48,7 @@ public class OfertaDao {
 
     public List<Oferta> getOfertas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM oferta", new OfertaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM oferta WHERE activa= TRUE", new OfertaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();
