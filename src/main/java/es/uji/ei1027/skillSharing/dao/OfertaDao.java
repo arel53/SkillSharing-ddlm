@@ -28,7 +28,7 @@ public class OfertaDao {
     //este no deberia existir
     //public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
 
-    public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", idOferta);}
+    public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", Integer.parseInt(idOferta));}
 
 
     public void updateOferta(Oferta oferta) {
@@ -37,9 +37,9 @@ public class OfertaDao {
                 oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion(), oferta.getIdOferta());
     }
 
-    public Oferta getOferta(int idOferta) {
+    public Oferta getOferta(String idOferta) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM oferta WHERE id_oferta = ?", new OfertaRowMapper(), idOferta);
+            return jdbcTemplate.queryForObject("SELECT * FROM oferta WHERE id_oferta = ?", new OfertaRowMapper(), Integer.parseInt(idOferta));
         }
         catch (EmptyResultDataAccessException e){
             return null;

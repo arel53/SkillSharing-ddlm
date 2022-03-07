@@ -37,7 +37,7 @@ public class OfertaController {
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)
     public String editOferta(Model model, @PathVariable String idOferta){
-        model.addAttribute("oferta",ofertaDao.getOferta(Integer.parseInt(idOferta)));
+        model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
         return "oferta/update";
     }
 
@@ -56,8 +56,8 @@ public class OfertaController {
 
     @RequestMapping(value = "/delete/{idOferta}")
     public String  processDeleteOferta(@PathVariable String idOferta){
-        ofertaDao.endOferta(idOferta);
-        return "redirected:../list";
+        ofertaDao.endOferta((idOferta));
+        return "redirect:../../list";
     }
 
     @RequestMapping("/list")
