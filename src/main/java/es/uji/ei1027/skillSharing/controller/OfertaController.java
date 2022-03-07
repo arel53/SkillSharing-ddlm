@@ -56,7 +56,7 @@ public class OfertaController {
 
     @RequestMapping(value = "/delete/{idOferta}")
     public String  processDeleteOferta(@PathVariable String idOferta){
-        ofertaDao.endOferta((idOferta));
+        ofertaDao.endOferta(idOferta);
         return "redirect:../../list";
     }
 
