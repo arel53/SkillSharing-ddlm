@@ -32,7 +32,7 @@ public class OfertaController {
         if (bindingResult.hasErrors())
             return "oferta/add";
         ofertaDao.addOferta(oferta);
-        return "redirected:list";
+        return "redirect:list";
     }
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)

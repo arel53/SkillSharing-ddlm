@@ -29,9 +29,9 @@ public class DemandaDao {
 
 
     public void updateDemanda(Demanda demanda) {
-        jdbcTemplate.update("UPDATE demanda SET id_demanda = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ?", demanda.getIdDemanda(), demanda.getEstudiante(),
-                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getNivel(), demanda.getDescripcion());
+        jdbcTemplate.update("UPDATE demanda SET  estudiante = ?, horas = ?, ini_fecha = ?, " +
+                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ? WHERE id_demanda = ?", demanda.getEstudiante(),
+                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getNivel(), demanda.getDescripcion(), demanda.getIdDemanda());
     }
 
     public Demanda getDemanda(String idDemanda) {

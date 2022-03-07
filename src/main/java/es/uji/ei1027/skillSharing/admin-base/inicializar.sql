@@ -7,11 +7,11 @@ DROP TABLE estudiante;
 
 
 CREATE TABLE estudiante(
-	nif		CHAR(9) NOT NULL,
+	nif		CHAR(9),
 	nombre		VARCHAR(20) NOT NULL,
 	apellido	VARCHAR(20) NOT NULL,
 	email		VARCHAR(20) NOT NULL,
-	skp		BOOLEAN NOT NULL,
+	skp		    BOOLEAN NOT NULL,
 	grado		VARCHAR(50) NOT NULL,
 	edad		INTEGER NOT NULL,
 	sexo		VARCHAR(10) NOT NULL,
@@ -22,19 +22,14 @@ CREATE TABLE estudiante(
 );
 
 CREATE TABLE skill(
-	nombre		VARCHAR(20) NOT NULL,
+	nombre		VARCHAR(20),
 	activo		BOOLEAN NOT NULL,
 	CONSTRAINT cp_skill PRIMARY KEY (nombre)
 
 );
 
-CREATE TABLE niveles(
-	nombre		VARCHAR(20) NOT NULL,
-  CONSTRAINT cp_niveles PRIMARY KEY (nombre)
-);
-
 CREATE TABLE oferta(
-	id_oferta	NUMERIC(7, 0) NOT NULL,
+	id_oferta	NUMERIC(7, 0),
 	estudiante	CHAR(9) NOT NULL,
 	horas		INTEGER NOT NULL,
 	ini_fecha	DATE NOT NULL,
@@ -45,11 +40,10 @@ CREATE TABLE oferta(
 	descripcion	VARCHAR(200),
 	CONSTRAINT cp_oferta PRIMARY KEY (id_oferta),
 	CONSTRAINT ca_oferta_sn FOREIGN KEY (skill) REFERENCES skill(nombre) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT ca_oferta_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT ca_oferta_nivel FOREIGN KEY (nivel) REFERENCES niveles(nombre) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT ca_oferta_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 CREATE TABLE demanda(
-        id_demanda      NUMERIC(7, 0) NOT NULL,
+        id_demanda      NUMERIC(7, 0),
         estudiante      CHAR(9) NOT NULL,
         horas           INTEGER NOT NULL,
         ini_fecha       DATE NOT NULL,
@@ -60,14 +54,13 @@ CREATE TABLE demanda(
         descripcion     VARCHAR(200),
         CONSTRAINT cp_demanda PRIMARY KEY (id_demanda),
         CONSTRAINT ca_demanda_sn FOREIGN KEY (skill) REFERENCES skill(nombre) ON DELETE RESTRICT ON UPDATE CASCADE,
-        CONSTRAINT ca_demanda_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE,
-        CONSTRAINT ca_demanda_nivel FOREIGN KEY (nivel) REFERENCES niveles(nombre) ON DELETE RESTRICT ON UPDATE CASCADE
+        CONSTRAINT ca_demanda_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE
 
 );
 
 
 CREATE TABLE colaboracion(
-	id_oferta	NUMERIC(7,0) NOT NULL,
+	id_oferta	NUMERIC(7,0),
 	id_demanda	NUMERIC(7,0) NOT NULL,
     ini_fecha       DATE NOT NULL,
     fin_fecha       DATE  NULL,

@@ -13,6 +13,11 @@ public class Colaboracion {
     private String comentario;
     private int horas;
 
+
+    public Colaboracion() {
+        super();
+    }
+
     public String getIdOferta() {
         return idOferta;
     }

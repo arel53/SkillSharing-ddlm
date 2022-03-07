@@ -30,10 +30,10 @@ public class ColaboracionDao {
     }
 
     public void updateColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("UPDATE colaboracion SET id_oferta = ?, id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
-                "activa = ?, rate = ?, comentario = ?,horas = ?", colaboracion.getIdOferta(),
+        jdbcTemplate.update("UPDATE colaboracion SET  id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
+                "activa = ?, rate = ?, comentario = ?,horas = ? WHERE id_oferta = ?",
                 colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
-                colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras());
+                colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras(), colaboracion.getIdOferta());
     }
 
     public Colaboracion getColaboracion(String idOferta, String idDemanda) {

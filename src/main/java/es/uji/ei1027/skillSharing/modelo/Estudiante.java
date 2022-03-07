@@ -12,7 +12,10 @@ public class Estudiante {
     private String direccion;
     private int horas;
 
-    //Quitado el constructor
+
+    public Estudiante(){
+        super();
+    }
 
     public void setNif(String nif) {
         this.nif = nif;

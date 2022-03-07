@@ -13,7 +13,10 @@ public class Demanda {
     private String nivel;
     private String descripcion;
 
-//Quitado el constructor
+    public Demanda(){
+        super();
+    }
+
 
     public void setIdDemanda(int idDemanda) {
         this.idDemanda = idDemanda;

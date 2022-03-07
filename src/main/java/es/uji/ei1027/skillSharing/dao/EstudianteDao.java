@@ -31,10 +31,10 @@ public class EstudianteDao {
     }
 
     public void updateEstudiante(Estudiante estudiante) {
-        jdbcTemplate.update("UPDATE estudiante SET nif = ?, nombre = ?, apellido = ?, email = ?, " +
-                "skp = ?, grado = ?, edad = ?, sexo = ?, direccion = ?, horas = ?", estudiante.getNif(), estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
+        jdbcTemplate.update("UPDATE estudiante SET nombre = ?, apellido = ?, email = ?, " +
+                "skp = ?, grado = ?, edad = ?, sexo = ?, direccion = ?, horas = ? WHERE nif = ?",estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
                 estudiante.isSkp(), estudiante.getGrado(), estudiante.getEdad(), estudiante.getSexo(), estudiante.getDireccion(),
-                estudiante.getHoras());
+                estudiante.getHoras(), estudiante.getNif());
     }
 
     public Estudiante getEstudiante(String nif) {

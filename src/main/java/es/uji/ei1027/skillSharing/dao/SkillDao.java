@@ -28,7 +28,7 @@ public class SkillDao {
 
 
     public void updateSkill(Skill skill) {
-        jdbcTemplate.update("UPDATE skill SET nombre = ?, nivel = ?", skill.getNombre(), skill.isActivo());
+        jdbcTemplate.update("UPDATE skill SET nivel = ? WHERE nombre = ?", skill.isActivo(), skill.getNombre());
     }
 
     public Skill getSkill(String nombre) {

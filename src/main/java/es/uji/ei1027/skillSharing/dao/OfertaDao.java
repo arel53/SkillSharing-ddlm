@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Repository
 public class OfertaDao {
@@ -19,8 +20,8 @@ public class OfertaDao {
 
     public void addOferta(Oferta oferta){
         jdbcTemplate.update("INSERT INTO oferta VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        oferta.getIdOferta(), oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
-        oferta.getFinFecha(),oferta.isActiva(),oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
+        oferta.getAndIncrement(), oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
+        oferta.getFinFecha(),true,oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
     }
 
     public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
@@ -29,9 +30,9 @@ public class OfertaDao {
 
 
     public void updateOferta(Oferta oferta) {
-        jdbcTemplate.update("UPDATE oferta SET id_oferta = ?, estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ?", oferta.getIdOferta(), oferta.getEstudiante(),
-                oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion());
+        jdbcTemplate.update("UPDATE oferta SET estudiante = ?, horas = ?, ini_fecha = ?, " +
+                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
+                oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion(), oferta.getIdOferta());
     }
 
     public Oferta getOferta(String idOferta) {

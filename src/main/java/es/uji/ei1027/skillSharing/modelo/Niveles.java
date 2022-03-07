@@ -10,6 +10,10 @@ public class Niveles {
         this.nombre = nombre;
     }
 
+    public Niveles(){
+        super();
+    }
+
     @Override
     public String toString() {
         return "Niveles{" +
