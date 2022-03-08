@@ -57,8 +57,14 @@
 
             <label class="control-label col-sm-2">Nivel</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" th:field="*{nivel}"/>
+                <select class="form-control" id="sel1" th:field="*{nivel}">
+                    <option value="Bajo">Bajo</option>
+                    <option value="Medio">Medio</option>
+                    <option value="Avanzado">Avanzado</option>
+
+                </select>
             </div>
+
         </div>
         <div class="form-group row">
             <label class="control-label col-sm-2">Descripcion</label>
