@@ -33,8 +33,8 @@ public class OfertaDao {
 
     public void updateOferta(Oferta oferta) {
         jdbcTemplate.update("UPDATE oferta SET estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
-                oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.isActiva(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion(), oferta.getIdOferta());
+                        "fin_fecha = ?, skill = ?, nivel = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
+                oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.getSkill(), oferta.getNivel(), oferta.getDescripcion(), oferta.getIdOferta());
     }
 
     public Oferta getOferta(String idOferta) {
