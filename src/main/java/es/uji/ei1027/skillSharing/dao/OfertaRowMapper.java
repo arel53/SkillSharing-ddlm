@@ -15,7 +15,7 @@ public class OfertaRowMapper implements RowMapper<Oferta> {
         oferta.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
         oferta.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
         oferta.setActiva(rs.getBoolean("activa"));
-        oferta.setSkill(rs.getString("skill"));
+        oferta.setSkill(rs.getInt("id_skill"));
         oferta.setNivel(rs.getString("nivel"));
         oferta.setDescripcion(rs.getString("descripcion"));
         return oferta;

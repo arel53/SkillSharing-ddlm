@@ -2,6 +2,7 @@ package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Estudiante;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
+import es.uji.ei1027.skillSharing.modelo.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,9 +21,8 @@ public class OfertaDao {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addOferta(Oferta oferta){
-        System.out.println("hola");
-        jdbcTemplate.update("INSERT INTO oferta VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
-        oferta.getAndIncrement(), oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
+        jdbcTemplate.update("INSERT INTO oferta(estudiante, horas, ini_fecha, fin_fecha, activa, id_skill, nivel, descripcion) " +
+                        "VALUES(?, ?, ?, ?, ?, ?, ?, ?)", oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
         oferta.getFinFecha(),true,oferta.getSkill(),oferta.getNivel(),oferta.getDescripcion());
     }
     //este no deberia existir
@@ -52,6 +52,15 @@ public class OfertaDao {
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();
+        }
+    }
+
+    public List<Skill> getSkills() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM skill", new SkillRowMapper());
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
         }
     }
 }

@@ -10,8 +10,10 @@ import java.sql.SQLException;
 public class SkillRowMapper implements RowMapper<Skill> {
     public Skill mapRow(ResultSet rs, int rowNum)throws SQLException {
         Skill skill=new Skill();
+        skill.setIdSkill(rs.getInt("id_skill"));
         skill.setNombre(rs.getString("nombre"));
         skill.setActivo(rs.getBoolean("activo"));
+        skill.setNivel(rs.getString("nivel"));
         return skill;
     }
 }
