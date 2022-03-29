@@ -6,14 +6,14 @@ DROP TABLE estudiante;
 
 
 CREATE TABLE estudiante(
-                           nif		    CHAR(9),
+                           nif		CHAR(9),
                            nombre		VARCHAR(20) NOT NULL,
-                           apellido	    VARCHAR(20) NOT NULL,
+                           apellido	VARCHAR(20) NOT NULL,
                            email		VARCHAR(20) NOT NULL,
                            skp		    BOOLEAN NOT NULL,
                            grado		VARCHAR(50) NOT NULL,
-                           edad		    INTEGER NOT NULL,
-                           sexo		    VARCHAR(10) NOT NULL,
+                           edad		INTEGER NOT NULL,
+                           sexo		VARCHAR(10) NOT NULL,
                            direccion	VARCHAR(50) NOT NULL,
                            horas		INTEGER NOT NULL,
                            CONSTRAINT cp_estudiante PRIMARY KEY (nif),
@@ -22,10 +22,10 @@ CREATE TABLE estudiante(
 );
 
 CREATE TABLE skill(
-                      id_skill      SERIAL PRIMARY KEY,
+                      id_skill    SERIAL PRIMARY KEY,
                       nombre		VARCHAR(20),
                       activo		BOOLEAN NOT NULL,
-                      nivel         VARCHAR(20) NOT NULL
+                      nivel       VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE oferta(
@@ -35,7 +35,7 @@ CREATE TABLE oferta(
                        ini_fecha	DATE NOT NULL,
                        fin_fecha	DATE NOT NULL,
                        activa		BOOLEAN NOT NULL,
-                       id_skill	    SERIAL NOT NULL,
+                       id_skill	SERIAL NOT NULL,
                        nivel		VARCHAR(20) NOT NULL,
                        descripcion	VARCHAR(200),
                        CONSTRAINT ca_oferta_sn FOREIGN KEY (id_skill) REFERENCES skill(id_skill) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -58,14 +58,14 @@ CREATE TABLE demanda(
 
 CREATE TABLE colaboracion(
                              id_colaboracion	SERIAL PRIMARY KEY,
-                             id_oferta          SERIAL NOT NULL,
-                             id_demanda	        SERIAL NOT NULL,
-                             ini_fecha          DATE NOT NULL,
-                             fin_fecha          DATE  NULL,
-                             activa             BOOLEAN NOT NULL,
-                             rate		        INTEGER NULL,
-                             comentario	        VARCHAR(200),
-                             horas		        INTEGER NULL,
+                             id_oferta       SERIAL NOT NULL,
+                             id_demanda	    SERIAL NOT NULL,
+                             ini_fecha       DATE NOT NULL,
+                             fin_fecha       DATE  NULL,
+                             activa          BOOLEAN NOT NULL,
+                             rate		INTEGER NULL,
+                             comentario	VARCHAR(200),
+                             horas		INTEGER NULL,
                              CONSTRAINT ca_colaboracion_id_demanda FOREIGN KEY (id_demanda) REFERENCES demanda(id_demanda) ON DELETE RESTRICT ON UPDATE CASCADE,
                              CONSTRAINT ca_colaboracion_id_oferta FOREIGN  KEY (id_oferta) REFERENCES oferta(id_oferta) ON DELETE RESTRICT ON UPDATE CASCADE,
                              CONSTRAINT ri_colaboracion_rate CHECK(rate IS NULL OR rate BETWEEN 1 AND 5 )

@@ -13,7 +13,7 @@ public class Oferta{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate finFecha;
     private boolean activa;
-    private String skill;
+    private int skill;
     private String nivel;
     private String descripcion;
 
@@ -45,7 +45,7 @@ public class Oferta{
         this.activa = activa;
     }
 
-    public void setSkill(String skill) {
+    public void setSkill(int skill) {
         this.skill = skill;
     }
 
@@ -81,7 +81,7 @@ public class Oferta{
         return activa;
     }
 
-    public String getSkill() {
+    public int getSkill() {
         return skill;
     }
 
