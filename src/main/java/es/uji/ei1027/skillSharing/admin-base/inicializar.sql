@@ -36,7 +36,6 @@ CREATE TABLE oferta(
                        fin_fecha	DATE NOT NULL,
                        activa		BOOLEAN NOT NULL,
                        id_skill	SERIAL NOT NULL,
-                       nivel		VARCHAR(20) NOT NULL,
                        descripcion	VARCHAR(200),
                        CONSTRAINT ca_oferta_sn FOREIGN KEY (id_skill) REFERENCES skill(id_skill) ON DELETE RESTRICT ON UPDATE CASCADE,
                        CONSTRAINT ca_oferta_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -69,4 +68,5 @@ CREATE TABLE colaboracion(
                              CONSTRAINT ca_colaboracion_id_demanda FOREIGN KEY (id_demanda) REFERENCES demanda(id_demanda) ON DELETE RESTRICT ON UPDATE CASCADE,
                              CONSTRAINT ca_colaboracion_id_oferta FOREIGN  KEY (id_oferta) REFERENCES oferta(id_oferta) ON DELETE RESTRICT ON UPDATE CASCADE,
                              CONSTRAINT ri_colaboracion_rate CHECK(rate IS NULL OR rate BETWEEN 1 AND 5 )
+                             --> Diría que falta poner que si la colaboración pasa de fecha_fin respecto a la actual, se cambie el estado de activa = FALSE
 
