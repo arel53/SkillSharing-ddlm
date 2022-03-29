@@ -12,10 +12,10 @@ public class DemandaRowMapper implements RowMapper<Demanda> {
         demanda.setIdDemanda(rs.getInt("id_demanda"));
         demanda.setEstudiante(rs.getString("estudiante"));
         demanda.setHoras(rs.getInt("horas"));
-        demanda.setIniFecha(rs.getDate("ini_fecha"));
-        demanda.setFinFecha(rs.getDate("fin_fecha"));
+        demanda.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
+        demanda.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
         demanda.setActiva(rs.getBoolean("activa"));
-        demanda.setSkill(rs.getString("skill"));
+        demanda.setSkill(rs.getInt("skill"));
         demanda.setDescripcion(rs.getString("descripcion"));
         return demanda;
     }

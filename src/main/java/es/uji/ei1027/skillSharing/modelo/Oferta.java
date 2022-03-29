@@ -8,9 +8,9 @@ public class Oferta{
     private int idOferta;
     private String estudiante;
     private int horas;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate iniFecha;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate finFecha;
     private boolean activa;
     private int skill;

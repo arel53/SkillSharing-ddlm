@@ -1,15 +1,19 @@
 package es.uji.ei1027.skillSharing.modelo;
 
-import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 
 public class Demanda {
     private int idDemanda;
     private String estudiante;
     private int horas;
-    private Date iniFecha;
-    private Date finFecha;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate iniFecha;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate finFecha;
     private boolean activa;
-    private String skill;
+    private int skill;
     private String descripcion;
 
     public Demanda(){
@@ -29,11 +33,11 @@ public class Demanda {
         this.horas = horas;
     }
 
-    public void setIniFecha(Date iniFecha) {
+    public void setIniFecha(LocalDate iniFecha) {
         this.iniFecha = iniFecha;
     }
 
-    public void setFinFecha(Date finFecha) {
+    public void setFinFecha(LocalDate finFecha) {
         this.finFecha = finFecha;
     }
 
@@ -41,7 +45,7 @@ public class Demanda {
         this.activa = activa;
     }
 
-    public void setSkill(String skill) {
+    public void setSkill(int skill) {
         this.skill = skill;
     }
 
@@ -61,11 +65,11 @@ public class Demanda {
         return horas;
     }
 
-    public Date getIniFecha() {
+    public LocalDate getIniFecha() {
         return iniFecha;
     }
 
-    public Date getFinFecha() {
+    public LocalDate getFinFecha() {
         return finFecha;
     }
 
@@ -73,7 +77,7 @@ public class Demanda {
         return activa;
     }
 
-    public String getSkill() {
+    public int getSkill() {
         return skill;
     }
 
