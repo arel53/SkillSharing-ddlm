@@ -1,7 +1,6 @@
 package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Oferta;
-import es.uji.ei1027.skillSharing.modelo.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -50,15 +49,6 @@ public class OfertaDao {
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();
-        }
-    }
-
-    public List<Skill> getSkills() {
-        try {
-            return jdbcTemplate.query("SELECT * FROM skill WHERE activa = TRUE", new SkillRowMapper());
-        }
-        catch (EmptyResultDataAccessException e) {
-            return new ArrayList<>();
         }
     }
 }
