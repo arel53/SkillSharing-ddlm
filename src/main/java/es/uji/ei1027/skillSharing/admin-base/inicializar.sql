@@ -67,6 +67,6 @@ CREATE TABLE colaboracion(
                              horas		INTEGER NULL,
                              CONSTRAINT ca_colaboracion_id_demanda FOREIGN KEY (id_demanda) REFERENCES demanda(id_demanda) ON DELETE RESTRICT ON UPDATE CASCADE,
                              CONSTRAINT ca_colaboracion_id_oferta FOREIGN  KEY (id_oferta) REFERENCES oferta(id_oferta) ON DELETE RESTRICT ON UPDATE CASCADE,
-                             CONSTRAINT ri_colaboracion_rate CHECK(rate IS NULL OR rate BETWEEN 1 AND 5 )
+                             CONSTRAINT ri_colaboracion_rate CHECK(rate IS NULL OR rate BETWEEN 1 AND 5 ));
                              --> Diría que falta poner que si la colaboración pasa de fecha_fin respecto a la actual, se cambie el estado de activa = FALSE
 

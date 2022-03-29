@@ -14,7 +14,6 @@ public class Oferta{
     private LocalDate finFecha;
     private boolean activa;
     private int skill;
-    private String nivel;
     private String descripcion;
 
 
@@ -49,10 +48,6 @@ public class Oferta{
         this.skill = skill;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
-    }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -85,10 +80,6 @@ public class Oferta{
         return skill;
     }
 
-    public String getNivel() {
-        return nivel;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -103,7 +94,6 @@ public class Oferta{
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
                 ", skill='" + skill + '\'' +
-                ", nivel='" + nivel + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
