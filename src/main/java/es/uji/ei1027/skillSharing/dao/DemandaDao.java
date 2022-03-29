@@ -1,7 +1,6 @@
 package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Demanda;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,9 +17,9 @@ public class DemandaDao {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addDemanda(Demanda demanda){
-        jdbcTemplate.update("INSERT INTO oferta VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO oferta VALUES(estudiante, horas, ini_fecha, fin_fecha, activa ,skill, descripcion)",
                 demanda.getIdDemanda(), demanda.getEstudiante(), demanda.getHoras(), demanda.getIniFecha(),
-                demanda.getFinFecha(),demanda.isActiva(),demanda.getSkill(),demanda.getNivel(),demanda.getDescripcion());
+                demanda.getFinFecha(),demanda.isActiva(),demanda.getSkill(),demanda.getDescripcion());
     }
 
  // No es necesario   public void deleteDemanda(String idDemanda){jdbcTemplate.update("DELETE FROM demanda WHERE id_demanda = ?", idDemanda);}
@@ -30,8 +29,8 @@ public class DemandaDao {
 
     public void updateDemanda(Demanda demanda) {
         jdbcTemplate.update("UPDATE demanda SET  estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, activa = ?, skill = ?, nivel = ?, direccion = ?, descripcion = ? WHERE id_demanda = ?", demanda.getEstudiante(),
-                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getNivel(), demanda.getDescripcion(), demanda.getIdDemanda());
+                        "fin_fecha = ?, activa = ?, skill = ?, direccion = ?, descripcion = ? WHERE id_demanda = ?", demanda.getEstudiante(),
+                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getDescripcion(), demanda.getIdDemanda());
     }
 
     public Demanda getDemanda(String idDemanda) {

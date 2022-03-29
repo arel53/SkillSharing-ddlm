@@ -2,9 +2,7 @@ package es.uji.ei1027.skillSharing.modelo;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Date;
 import java.time.LocalDate;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Oferta{
     private int idOferta;
@@ -18,7 +16,6 @@ public class Oferta{
     private String skill;
     private String nivel;
     private String descripcion;
-    static private final AtomicInteger a = new AtomicInteger();
 
 
     public Oferta(){
@@ -59,8 +56,6 @@ public class Oferta{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    public int getAndIncrement(){ return a.getAndIncrement(); }
 
     public int getIdOferta() {
         return idOferta;

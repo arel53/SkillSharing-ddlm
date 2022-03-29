@@ -10,7 +10,6 @@ public class Demanda {
     private Date finFecha;
     private boolean activa;
     private String skill;
-    private String nivel;
     private String descripcion;
 
     public Demanda(){
@@ -46,10 +45,6 @@ public class Demanda {
         this.skill = skill;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
-    }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -82,10 +77,6 @@ public class Demanda {
         return skill;
     }
 
-    public String getNivel() {
-        return nivel;
-    }
-
     public String getDescripcion() {
         return descripcion;
     }
@@ -100,7 +91,6 @@ public class Demanda {
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
                 ", skill='" + skill + '\'' +
-                ", nivel='" + nivel + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }

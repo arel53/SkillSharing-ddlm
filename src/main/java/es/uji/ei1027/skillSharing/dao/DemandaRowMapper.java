@@ -1,7 +1,6 @@
 package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Demanda;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -17,7 +16,6 @@ public class DemandaRowMapper implements RowMapper<Demanda> {
         demanda.setFinFecha(rs.getDate("fin_fecha"));
         demanda.setActiva(rs.getBoolean("activa"));
         demanda.setSkill(rs.getString("skill"));
-        demanda.setNivel(rs.getString("nivel"));
         demanda.setDescripcion(rs.getString("descripcion"));
         return demanda;
     }
