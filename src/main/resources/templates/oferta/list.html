@@ -30,7 +30,6 @@
             <td th:text="${oferta.iniFecha}"></td>
             <td th:text="${{oferta.finFecha}}"></td>
             <td th:text="${{oferta.skill}}"></td>
-            <td th:text="${{oferta.nivel}}"></td>
             <td th:text="${{oferta.descripcion}}"></td>
             <td> <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a></td>
             <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>

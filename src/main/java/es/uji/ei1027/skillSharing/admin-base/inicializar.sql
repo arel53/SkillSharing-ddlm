@@ -22,10 +22,10 @@ CREATE TABLE estudiante(
 );
 
 CREATE TABLE skill(
-                      id_skill    SERIAL PRIMARY KEY,
+                      id_skill      SERIAL PRIMARY KEY,
                       nombre		VARCHAR(20),
                       activo		BOOLEAN NOT NULL,
-                      nivel       VARCHAR(20) NOT NULL
+                      nivel         VARCHAR(20) NOT NULL
 );
 
 CREATE TABLE oferta(
@@ -35,7 +35,7 @@ CREATE TABLE oferta(
                        ini_fecha	DATE NOT NULL,
                        fin_fecha	DATE NOT NULL,
                        activa		BOOLEAN NOT NULL,
-                       id_skill	SERIAL NOT NULL,
+                       id_skill	    SERIAL NOT NULL,
                        descripcion	VARCHAR(200),
                        CONSTRAINT ca_oferta_sn FOREIGN KEY (id_skill) REFERENCES skill(id_skill) ON DELETE RESTRICT ON UPDATE CASCADE,
                        CONSTRAINT ca_oferta_estudiante FOREIGN KEY (estudiante) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE
@@ -62,7 +62,7 @@ CREATE TABLE colaboracion(
                              ini_fecha       DATE NOT NULL,
                              fin_fecha       DATE  NULL,
                              activa          BOOLEAN NOT NULL,
-                             rate		INTEGER NULL,
+                             rate		     INTEGER NULL,
                              comentario	VARCHAR(200),
                              horas		INTEGER NULL,
                              CONSTRAINT ca_colaboracion_id_demanda FOREIGN KEY (id_demanda) REFERENCES demanda(id_demanda) ON DELETE RESTRICT ON UPDATE CASCADE,

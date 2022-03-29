@@ -34,8 +34,10 @@ public class OfertaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta,
                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            System.out.println(oferta);
             return "oferta/add";
+        }
         System.out.println("Oferta: " + oferta);
         ofertaDao.addOferta(oferta);
         return "redirect:list";
@@ -67,7 +69,10 @@ public class OfertaController {
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
+        model.addAttribute("skills", skillDao.getSkills());
         return "oferta/list";
     }
+
+
 
 }

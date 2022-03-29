@@ -30,6 +30,7 @@
             <label class="control-label col-sm-2" for="iniFecha">Fecha de Inicio:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="iniFecha" th:field="*{iniFecha}"/>
+                <td th:text="${#temporals.format(oferta.iniFecha,'dd/MM/yyyy')}"></td>
             </div>
         </div>
 
@@ -37,6 +38,7 @@
             <label class="control-label col-sm-2" for="finFecha">Fecha de Final:</label>
             <div class="col-sm-4">
                 <input type="date" class="form-control" id="finFecha" th:field="*{finFecha}"/>
+                <td th:text="${#temporals.format(oferta.finFecha,'dd/MM/yyyy')}"></td>
             </div>
         </div>
 
@@ -44,10 +46,12 @@
             <label class="control-label col-sm-2">Skill</label>
 
             <div class="col-sm-4">
-                <select class="form-control" id="sel1" th:field="*{skill}">
-                <tr th:each="s: ${skills}">
-                    <option th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
-                </select>
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
+                    <tr >
+                        <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+                    </tr>
+            </select>
+                </td>
             </div>
         </div>
 

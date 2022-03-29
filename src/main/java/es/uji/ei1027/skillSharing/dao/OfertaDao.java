@@ -19,18 +19,16 @@ public class OfertaDao {
 
     public void addOferta(Oferta oferta){
         System.out.println("hola");
-        jdbcTemplate.update("INSERT INTO oferta VALUES(estudiante, horas, ini_fecha, fin_fecha, activa ,skill, descripcion)", oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
+        jdbcTemplate.update("INSERT INTO oferta(estudiante, horas, ini_fecha, fin_fecha, activa ,id_skill, descripcion) VALUES(?,?,?,?,?,?,?)", oferta.getEstudiante(), oferta.getHoras(), oferta.getIniFecha(),
         oferta.getFinFecha(),true,oferta.getSkill(),oferta.getDescripcion());
     }
-    //este no deberia existir
-    //public void deleteOferta(String idOferta){jdbcTemplate.update("DELETE FROM oferta WHERE id_oferta = ?", idOferta);}
 
     public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", Integer.parseInt(idOferta));}
 
 
     public void updateOferta(Oferta oferta) {
         jdbcTemplate.update("UPDATE oferta SET estudiante = ?, horas = ?, ini_fecha = ?, " +
-                        "fin_fecha = ?, skill = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
+                        "fin_fecha = ?, id_skill = ?, descripcion = ? WHERE id_oferta = ?", oferta.getEstudiante(),
                 oferta.getHoras(), oferta.getIniFecha(), oferta.getFinFecha(), oferta.getSkill(),oferta.getDescripcion(), oferta.getIdOferta());
     }
 
