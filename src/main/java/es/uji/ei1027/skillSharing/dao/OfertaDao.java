@@ -49,5 +49,6 @@ public class OfertaDao {
             return new ArrayList<Oferta>();
         }
     }
+
 }
 //skl

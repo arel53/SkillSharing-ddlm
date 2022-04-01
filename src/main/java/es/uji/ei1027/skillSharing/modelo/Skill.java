@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillSharing.modelo;
 
+import java.util.ArrayList;
+
 public class Skill {
     private int idSkill;
     private String nombre;

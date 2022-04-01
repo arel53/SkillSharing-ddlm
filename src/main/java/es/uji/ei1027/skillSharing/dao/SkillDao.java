@@ -40,7 +40,17 @@ public class SkillDao {
         }
     }
 
-    public List<Skill> getSkills() {
+    public List<Skill> getSkillsActivas() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM skill WHERE activo = TRUE", new SkillRowMapper());
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+
+    public List<Skill> getSkillsTodas() {
         try {
             return jdbcTemplate.query("SELECT * FROM skill", new SkillRowMapper());
         }

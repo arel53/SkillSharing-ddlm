@@ -27,7 +27,7 @@ public class OfertaController {
     @RequestMapping(value = "/add")
     public String addOferta(Model model){
         model.addAttribute("oferta", new Oferta());
-        model.addAttribute("skills", skillDao.getSkills());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
         return "oferta/add";
     }
 
@@ -46,6 +46,7 @@ public class OfertaController {
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)
     public String editOferta(Model model, @PathVariable String idOferta){
         model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
+        model.addAttribute("skills", skillDao.getSkillsActivas());
         return "oferta/update";
     }
 
@@ -69,7 +70,7 @@ public class OfertaController {
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
-        model.addAttribute("skills", skillDao.getSkills());
+        model.addAttribute("skills", skillDao.getSkillsTodas());
         return "oferta/list";
     }
 

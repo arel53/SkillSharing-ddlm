@@ -49,23 +49,17 @@
 
         <div class="form-group row">
             <label class="control-label col-sm-2">Skill</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{skill}"/>
-            </div>
-        </div>
-        <div class="form-group row">
 
-            <label class="control-label col-sm-2">Nivel</label>
             <div class="col-sm-4">
-                <select class="form-control" id="sel1" th:field="*{nivel}">
-                    <option value="Bajo">Bajo</option>
-                    <option value="Medio">Medio</option>
-                    <option value="Avanzado">Avanzado</option>
-
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
+                    <tr >
+                        <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+                    </tr>
                 </select>
+                </td>
             </div>
-
         </div>
+
         <div class="form-group row">
             <label class="control-label col-sm-2">Descripcion</label>
             <div class="col-sm-4">
