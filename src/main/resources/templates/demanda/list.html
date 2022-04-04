@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Gestionar Demandas</title>
     <meta charset="UTF-8" />
@@ -8,8 +8,13 @@
 </head>
 <body>
 <div class="container">
-    <h1>Llista de Demandas</h1>
-    <table class="table table-striped">
+    <h1>Lista de Demandas</h1>
+
+    <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
+        Encara no s'ha introduït cap demanda a l'aplicació
+    </div>
+
+    <table th:if="${not #lists.isEmpty(demandas)}" class="table table-striped">
         <thead>
         <tr>
             <th>Estudiante</th>
@@ -29,8 +34,8 @@
             <td th:text="${demanda.horas}"></td>
             <td th:text="${demanda.iniFecha}"></td>
             <td th:text="${{demanda.finFecha}}"></td>
-            <td th:text="${{demanda.skill}}"></td>
-            <td th:text="${{demanda.nivel}}"></td>
+            <td th:text="${{skills.get(demanda.idSkill - 1).nombre}}"></td>
+            <td th:text="${{skills.get(demanda.idSkill - 1).nivel}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
             <td> <a th:href="@{/demanda/update/{nom}(nom=${demanda.idDemanda})}" class="btn btn-warning" role="button">Edita</a></td>
             <td><a th:href="@{/demanda/delete/{nom}/(nom=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>

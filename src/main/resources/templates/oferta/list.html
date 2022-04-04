@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Gestionar Ofertas</title>
     <meta charset="UTF-8" />
@@ -9,7 +9,12 @@
 <body>
 <div class="container">
     <h1>Lista de Ofertas</h1>
-    <table class="table table-striped">
+
+    <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
+    Encara no s'ha introduït cap oferta a l'aplicació
+        </div>
+
+    <table th:if="${not #lists.isEmpty(ofertas)}" class="table table-striped">
         <thead>
         <tr>
             <th>Estudiante</th>

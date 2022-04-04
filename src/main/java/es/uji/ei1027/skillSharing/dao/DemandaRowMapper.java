@@ -15,7 +15,7 @@ public class DemandaRowMapper implements RowMapper<Demanda> {
         demanda.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
         demanda.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
         demanda.setActiva(rs.getBoolean("activa"));
-        demanda.setSkill(rs.getInt("skill"));
+        demanda.setIdSkill(rs.getInt("id_skill"));
         demanda.setDescripcion(rs.getString("descripcion"));
         return demanda;
     }

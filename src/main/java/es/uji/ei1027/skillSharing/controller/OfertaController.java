@@ -38,7 +38,6 @@ public class OfertaController {
             System.out.println(oferta);
             return "oferta/add";
         }
-        System.out.println("Oferta: " + oferta);
         ofertaDao.addOferta(oferta);
         return "redirect:list";
     }

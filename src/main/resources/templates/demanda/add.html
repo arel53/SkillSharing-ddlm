@@ -41,19 +41,16 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="skill">Skill:</label>
-            <div class="col-sm-4">
-                <input type="text" class="form-control" id="skill" th:field="*{skill}"/>
-            </div>
-        </div>
+            <label class="control-label col-sm-2">Skill</label>
 
-        <div class="form-group row">
-            <label for="sel1">Nivel:</label>
-            <select class="form-control" id="sel1" th:field="*{nivel}">
-                <option value="Bajo">Bajo</option>
-                <option value="Medio">Medio</option>
-                <option value="Avanzado">Avanzado</option>
-            </select>
+            <div class="col-sm-4">
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
+                    <tr >
+                        <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+                    </tr>
+                </select>
+                </td>
+            </div>
         </div>
 
         <div class="form-group row">
