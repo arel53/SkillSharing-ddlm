@@ -38,6 +38,7 @@ public class OfertaDao {
         }
         catch (EmptyResultDataAccessException e){
             return null;
+
         }
     }
 
