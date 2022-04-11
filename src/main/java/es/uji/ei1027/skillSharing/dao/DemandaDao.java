@@ -22,7 +22,6 @@ public class DemandaDao {
                 demanda.getFinFecha(),true,demanda.getIdSkill(),demanda.getDescripcion());
     }
 
- // No es necesario   public void deleteDemanda(String idDemanda){jdbcTemplate.update("DELETE FROM demanda WHERE id_demanda = ?", idDemanda);}
 
     public void endDemanda(String idDemanda) { jdbcTemplate.update("UPDATE demanda SET activa = FALSE WHERE id_demanda = ?", Integer.parseInt(idDemanda));}
 
@@ -44,7 +43,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM demanda", new DemandaRowMapper());
+            return jdbcTemplate.query("SELECT * FROM demanda WHERE activa= TRUE", new DemandaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return null;
