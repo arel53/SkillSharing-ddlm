@@ -1,8 +1,8 @@
 DELETE FROM skill ;
-INSERT INTO skill(nombre, activo, nivel) VALUES('Ajedrez',TRUE, 'Avanzado');
-INSERT INTO skill(nombre, activo, nivel) VALUES('Ingles',TRUE, 'Avanzado');
-INSERT INTO skill(nombre, activo, nivel) VALUES('Aleman',TRUE, 'Avanzado');
-INSERT INTO skill(nombre, activo, nivel) VALUES('Frances',TRUE, 'Avanzado');
+INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES('Ajedrez',TRUE, 'Avanzado', '...');
+INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES('Ingles',TRUE, 'Avanzado', '...');
+INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES('Aleman',TRUE, 'Avanzado', '...');
+INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES('Frances',TRUE, 'Avanzado', '...');
 INSERT INTO skill(nombre, activo, nivel) VALUES('Piano',TRUE, 'Avanzado');
 INSERT INTO skill(nombre, activo, nivel) VALUES('Violin',TRUE, 'Avanzado');
 INSERT INTO skill(nombre, activo, nivel) VALUES('Educacion Sexual',TRUE, 'Avanzado');

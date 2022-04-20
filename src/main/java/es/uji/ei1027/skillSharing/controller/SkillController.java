@@ -37,6 +37,7 @@ public class SkillController {
 
     @RequestMapping( value = "/update/{idSkill}", method = RequestMethod.GET)
     public String editOferta(Model model, @PathVariable String idSkill){
+        System.out.println(idSkill);
         model.addAttribute("skill", skillDao.getSkill(idSkill));
         return "skill/update";
     }
