@@ -1,13 +1,11 @@
 package es.uji.ei1027.skillSharing.modelo;
 
-import java.util.ArrayList;
-
 public class Skill {
     private int idSkill;
     private String nombre;
     private Boolean activo;
     private String nivel;
-    private String descrip;
+    private String descripcion;
 
 
     public Skill(){
@@ -30,8 +28,8 @@ public class Skill {
         this.nivel = nivel;
     }
 
-    public void setDescrip(String descrip) {
-        this.descrip = descrip;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public int getIdSkill() {
@@ -48,8 +46,8 @@ public class Skill {
         return nivel;
     }
 
-    public String getDescrip() {
-        return descrip;
+    public String getDescripcion() {
+        return descripcion;
     }
 
     @Override

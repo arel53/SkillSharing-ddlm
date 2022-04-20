@@ -14,7 +14,7 @@ public class SkillRowMapper implements RowMapper<Skill> {
         skill.setNombre(rs.getString("nombre"));
         skill.setActivo(rs.getBoolean("activo"));
         skill.setNivel(rs.getString("nivel"));
-        skill.setDescrip(rs.getString("descrip"));
+        skill.setDescripcion(rs.getString("descripcion"));
         return skill;
     }
 }

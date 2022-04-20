@@ -18,7 +18,7 @@ public class SkillDao {
 
     public void addSkill(Skill skill){
         jdbcTemplate.update("INSERT INTO skill VALUES(nombre, activo, nivel, descrip)",
-                skill.getNombre(), skill.isActivo(), skill.getNivel(), skill.getDescrip());
+                skill.getNombre(), skill.isActivo(), skill.getNivel(), skill.getDescripcion());
     }
 
 
@@ -26,7 +26,7 @@ public class SkillDao {
 
 
     public void updateSkill(Skill skill) {
-        jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ?, descrip = ? WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getIdSkill(), skill.getDescrip());
+        jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ?, descrip = ? WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getIdSkill(), skill.getDescripcion());
     }
 
     public Skill getSkill(String idSkill) {
