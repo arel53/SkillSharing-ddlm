@@ -9,51 +9,38 @@
 <body>
 <div class="container">
     <h2>Modifica Oferta</h2>
-    <form class="form-horizontal" action="#" th:action="@{/oferta/update}"
-          th:object="${oferta}" method="post">
+    <form class="form-horizontal" action="#" th:action="@{/skill/update}"
+          th:object="${skill}" method="post">
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">id-oferta</label>
+            <label class="control-label col-sm-2">id-skill</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{idOferta}"/>
+                <input class="form-control" type="hidden" readonly th:field="*{idSkill}"/>
             </div>
         </div>
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Estudiante</label>
+            <label class="control-label col-sm-2">Nombre</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{estudiante}"/>
+                <input class="form-control" type="text" readonly th:field="*{nombre}"/>
             </div>
         </div>
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Horas</label>
+            <label class="control-label col-sm-2">Nivel</label>
             <div class="col-sm-4">
-                <input class="form-control" type="number" th:field="*{horas}"/>
+                <input class="form-control" type="number" th:field="*{nivel}"/>
             </div>
         </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Inicio</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" th:field="*{iniFecha}"/>
-
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Final</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" th:field="*{finFecha}"/>
-            </div>
-        </div>
-
         <div class="form-group row">
             <label class="control-label col-sm-2">Skill</label>
 
             <div class="col-sm-4">
-                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
-                    <tr >
-                        <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+                <td><select class="form-control" id="sel1" type="value" th:field="*{nivel}">
+                    <tr>
+                        <option th:value="Experto">Experto</option>
+                        <option th:value="Medio">Medio</option>
+                        <option th:value="Iniciación">Iniciación</option>
                     </tr>
                 </select>
                 </td>
@@ -66,18 +53,11 @@
                 <input class="form-control" type="text" th:field="*{descripcion}"/>
             </div>
         </div>
-
-        <div class="form-group row">
-            <div class="col-sm-4">
-                <input class="form-control" type="hidden" th:field="*{activa}"/>
-            </div>
-        </div>
-
         <div class="form-group row">
 
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-primary"/>
-                Modifica Oferta</button>
+                Modifica Skill</button>
             </div>
         </div>
 
