@@ -17,12 +17,12 @@ public class SkillDao {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addSkill(Skill skill){
-        jdbcTemplate.update("INSERT INTO skill VALUES(nombre, activo, nivel, descripcion)",
-                skill.getNombre(), skill.isActivo(), skill.getNivel(), skill.getDescripcion());
+        jdbcTemplate.update("INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES(?, ? ,? ,?)",
+                skill.getNombre(), true, skill.getNivel(), skill.getDescripcion());
     }
 
 
-    public void endSkill(String idSkill){jdbcTemplate.update("UPDATE skill SET activa = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
+    public void endSkill(String idSkill){jdbcTemplate.update("UPDATE skill SET activo = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
 
 
     public void updateSkill(Skill skill) {

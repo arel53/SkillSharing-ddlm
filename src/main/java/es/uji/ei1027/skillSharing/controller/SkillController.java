@@ -29,9 +29,9 @@ public class SkillController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult){
         if (bindingResult.hasErrors()) {
-            System.out.println(skill);
             return "skill/add";
         }
+        skillDao.addSkill(skill);
         return "redirect:list";
     }
 
@@ -48,13 +48,13 @@ public class SkillController {
             return "skill/update";
         }
         skillDao.updateSkill(skill);
-        return "reditect:list";
+        return "redirect:list";
     }
 
     @RequestMapping(value = "/delete/{idSkill}")
     public String processDeleteSkill(@PathVariable String idSkill){
         skillDao.endSkill(idSkill);
-        return "redirect/../../list";
+        return "redirect:../list";
     }
 
     @RequestMapping("/list")

@@ -3,7 +3,7 @@ package es.uji.ei1027.skillSharing.modelo;
 public class Skill {
     private int idSkill;
     private String nombre;
-    private Boolean activo;
+    private boolean activo;
     private String nivel;
     private String descripcion;
 
