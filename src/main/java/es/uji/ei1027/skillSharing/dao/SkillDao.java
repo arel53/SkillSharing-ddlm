@@ -24,16 +24,16 @@ public class SkillDao {
 // No es necesario    public void deleteSkill(String nombre){jdbcTemplate.update("DELETE FROM skill WHERE nombre = ?", nombre);}
 
 
-    public void endSkill(int idSkill){jdbcTemplate.update("UPDATE skill SET activa = FALSE WHERE id_skill = ?", idSkill);}
+    public void endSkill(String idSkill){jdbcTemplate.update("UPDATE skill SET activa = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
 
 
     public void updateSkill(Skill skill) {
         jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ? WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getIdSkill());
     }
 
-    public Skill getSkill(int idSkill) {
+    public Skill getSkill(String idSkill) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM skill WHERE id_skill = ?", new SkillRowMapper(), idSkill);
+            return jdbcTemplate.queryForObject("SELECT * FROM skill WHERE id_skill = ?", new SkillRowMapper(), Integer.parseInt(idSkill));
         }
         catch (EmptyResultDataAccessException e){
             return null;
