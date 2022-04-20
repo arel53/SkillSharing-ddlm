@@ -7,6 +7,8 @@ public class Skill {
     private String nombre;
     private Boolean activo;
     private String nivel;
+    private String descrip;
+
 
     public Skill(){
 
@@ -28,6 +30,10 @@ public class Skill {
         this.nivel = nivel;
     }
 
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
+    }
+
     public int getIdSkill() {
         return idSkill;
     }
@@ -40,6 +46,10 @@ public class Skill {
 
     public String getNivel() {
         return nivel;
+    }
+
+    public String getDescrip() {
+        return descrip;
     }
 
     @Override

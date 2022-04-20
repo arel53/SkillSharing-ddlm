@@ -26,6 +26,7 @@ CREATE TABLE skill(
                       nombre		VARCHAR(20),
                       activo		BOOLEAN NOT NULL,
                       nivel         VARCHAR(20) NOT NULL
+                      descrip       VARCHAR(200)
 );
 
 CREATE TABLE oferta(

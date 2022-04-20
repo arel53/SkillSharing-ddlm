@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Skill</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h2>Nova Skill</h2>
+    <form class="form-horizontal" action="#" th:action="@{/skill/add}"
+          th:object="${skill}" method="post">
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2" for="descripcion">Descripcion:</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary">Afegeix Skill</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
