@@ -29,11 +29,13 @@
             <td th:text="${{skill.nombre}}"></td>
             <td th:text="${{skill.nivel}}"></td>
             <td th:text="${{skill.descripcion}}"></td>
-            <td> <a th:href="@{/skill/update/{idSkill}}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/skill/delete/{idSkill}}" class="btn btn-danger" role="button">Borra</a></td>
+            <td> <a th:href="@{/skill/update/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/skill/delete/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-danger" role="button">Borra</a></td>
         </tr>
         </tbody>
     </table>
+
+
     <a href="add" class="btn btn-success" role="button">Añade Skill</a>
 </div>
 </body>
