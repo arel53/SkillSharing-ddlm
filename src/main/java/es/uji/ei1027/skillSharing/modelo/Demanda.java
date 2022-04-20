@@ -13,11 +13,11 @@ public class Demanda {
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate finFecha;
     private boolean activa;
-    private int idSkill;
+    private int skill;
     private String descripcion;
 
     public Demanda(){
-        super();
+
     }
 
 
@@ -45,8 +45,8 @@ public class Demanda {
         this.activa = activa;
     }
 
-    public void setIdSkill(int idSkill) {
-        this.idSkill = idSkill;
+    public void setSkill(int skill) {
+        this.skill = skill;
     }
 
     public void setDescripcion(String descripcion) {
@@ -77,8 +77,8 @@ public class Demanda {
         return activa;
     }
 
-    public int getIdSkill() {
-        return idSkill;
+    public int getSkill() {
+        return skill;
     }
 
     public String getDescripcion() {
@@ -94,7 +94,7 @@ public class Demanda {
                 ", iniFecha=" + iniFecha +
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
-                ", idSkill='" + idSkill + '\'' +
+                ", idSkill='" + skill + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }

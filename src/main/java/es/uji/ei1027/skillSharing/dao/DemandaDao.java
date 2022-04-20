@@ -19,7 +19,7 @@ public class DemandaDao {
     public void addDemanda(Demanda demanda){
         jdbcTemplate.update("INSERT INTO demanda(estudiante, horas, ini_fecha, fin_fecha, activa ,id_skill, descripcion) VALUES(?,?,?,?,?,?,?)",
                 demanda.getEstudiante(), demanda.getHoras(), demanda.getIniFecha(),
-                demanda.getFinFecha(),true,demanda.getIdSkill(),demanda.getDescripcion());
+                demanda.getFinFecha(),true,demanda.getSkill(),demanda.getDescripcion());
     }
 
 
@@ -29,7 +29,7 @@ public class DemandaDao {
     public void updateDemanda(Demanda demanda) {
         jdbcTemplate.update("UPDATE demanda SET  estudiante = ?, horas = ?, ini_fecha = ?, " +
                         "fin_fecha = ?, activa = ?, id_skill = ?, descripcion = ? WHERE id_demanda = ?", demanda.getEstudiante(),
-                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getIdSkill(), demanda.getDescripcion(), demanda.getIdDemanda());
+                demanda.getHoras(), demanda.getIniFecha(), demanda.getFinFecha(), demanda.isActiva(), demanda.getSkill(), demanda.getDescripcion(), demanda.getIdDemanda());
     }
 
     public Demanda getDemanda(String idDemanda) {

@@ -44,7 +44,7 @@
             <label class="control-label col-sm-2">Skill</label>
 
             <div class="col-sm-4">
-                <td><select class="form-control" id="sel1" type="value" th:field="*{idSkill}">
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
                     <tr >
                         <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
                     </tr>
