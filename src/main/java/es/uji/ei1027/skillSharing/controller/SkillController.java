@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.LinkedList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/skill")
 public class SkillController {
@@ -37,7 +40,6 @@ public class SkillController {
 
     @RequestMapping( value = "/update/{idSkill}", method = RequestMethod.GET)
     public String editOferta(Model model, @PathVariable String idSkill){
-        System.out.println(idSkill);
         model.addAttribute("skill", skillDao.getSkill(idSkill));
         return "skill/update";
     }
@@ -54,12 +56,19 @@ public class SkillController {
     @RequestMapping(value = "/delete/{idSkill}")
     public String processDeleteSkill(@PathVariable String idSkill){
         skillDao.endSkill(idSkill);
+        skillDao.endOfertasSkill(idSkill);
+        skillDao.endDemandasSkill(idSkill);
         return "redirect:../list";
     }
 
     @RequestMapping("/list")
     public String listSkills(Model model){
-        model.addAttribute("skills", skillDao.getSkillsActivas());
+        List<Skill> skills =skillDao.getSkillsActivas();
+        for (Skill s : skills){
+            s.setNumeroOfertas(skillDao.getOfertasSkill(s.getIdSkill()+"").size());
+            s.setNumeroDemandas(skillDao.getDemandasSkill(s.getIdSkill()+"").size());
+        }
+        model.addAttribute("skills", skills);
         return "skill/list";
     }
 

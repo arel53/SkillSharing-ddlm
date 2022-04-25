@@ -6,6 +6,9 @@ public class Skill {
     private boolean activo;
     private String nivel;
     private String descripcion;
+    private int numeroOfertas;
+    private int numeroDemandas;
+
 
 
     public Skill(){
@@ -32,6 +35,11 @@ public class Skill {
         this.descripcion = descripcion;
     }
 
+
+    public void setNumeroOfertas(int numeroOfertas) {this.numeroOfertas = numeroOfertas;    }
+
+    public void setNumeroDemandas(int numeroDemandas) {this.numeroDemandas = numeroDemandas;}
+
     public int getIdSkill() {
         return idSkill;
     }
@@ -48,6 +56,14 @@ public class Skill {
 
     public String getDescripcion() {
         return descripcion;
+    }
+
+    public int getNumeroOfertas() {
+        return numeroOfertas;
+    }
+
+    public int getNumeroDemandas() {
+        return numeroDemandas;
     }
 
     @Override

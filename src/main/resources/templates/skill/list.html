@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Gestionar Skills</title>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
@@ -20,6 +20,8 @@
             <th>Nombre</th>
             <th>Nivel</th>
             <th>Descripcion</th>
+            <th>Ofertas Skill</th>
+            <th>Demandas Skill</th>
             <th></th>
             <th></th>
         </tr>
@@ -29,10 +31,24 @@
             <td th:text="${{skill.nombre}}"></td>
             <td th:text="${{skill.nivel}}"></td>
             <td th:text="${{skill.descripcion}}"></td>
-            <td> <a th:href="@{/skill/update/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/skill/delete/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-danger" role="button">Borra</a></td>
+            <td th:text="${{skill.numeroOfertas}}"></td>
+            <td th:text="${{skill.numeroDemandas}}"></td>
+
+
+            <td><a th:href="@{/skill/update/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-warning" role="button">Edita</a>
+            </td>
+            <td><a th:href="@{/skill/delete/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-danger" role="button">Borra</a>
+            </td>
         </tr>
+        <tr th:each="numeroOfertas: ${numeroOfertas}">
+            <td th:text="${{numeroOfertas}}"></td>
+        </tr>
+        <tr th:each="numeroDemandas: ${numeroDemandas}">
+            <td th:text="${{numeroDemandas}}"></td>
+        </tr>
+
         </tbody>
+
     </table>
 
 

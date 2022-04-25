@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillSharing.dao;
 
+import es.uji.ei1027.skillSharing.modelo.Demanda;
+import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -24,6 +26,10 @@ public class SkillDao {
 
     public void endSkill(String idSkill){jdbcTemplate.update("UPDATE skill SET activo = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
 
+    public void endOfertasSkill(String idSkill){jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
+
+    public void endDemandasSkill(String idSkill){jdbcTemplate.update("UPDATE demanda SET activa = FALSE WHERE id_skill = ?", Integer.parseInt(idSkill));}
+
 
     public void updateSkill(Skill skill) {
         jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ?, descripcion = ? WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getDescripcion(), skill.getIdSkill());
@@ -32,6 +38,24 @@ public class SkillDao {
     public Skill getSkill(String idSkill) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM skill WHERE id_skill = ?", new SkillRowMapper(), Integer.parseInt(idSkill));
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    public List<Oferta> getOfertasSkill(String idSkill) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM oferta WHERE id_skill = ?", new OfertaRowMapper(), Integer.parseInt(idSkill));
+        }
+        catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    public List<Demanda> getDemandasSkill(String idSkill) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM demanda WHERE id_skill = ?", new DemandaRowMapper(), Integer.parseInt(idSkill));
         }
         catch (EmptyResultDataAccessException e){
             return null;
