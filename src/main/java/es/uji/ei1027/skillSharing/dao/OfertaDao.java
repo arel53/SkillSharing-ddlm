@@ -34,7 +34,7 @@ public class OfertaDao {
 
     public Oferta getOferta(String idOferta) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM oferta WHERE id_oferta = ?", new OfertaRowMapper(), Integer.parseInt(idOferta));
+            return jdbcTemplate.queryForObject("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.id_oferta = ?", new OfertaRowMapper(), Integer.parseInt(idOferta));
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -44,11 +44,12 @@ public class OfertaDao {
 
     public List<Oferta> getOfertas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM oferta WHERE activa= TRUE", new OfertaRowMapper());
+            return jdbcTemplate.query("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.activa= TRUE", new OfertaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();
         }
+
     }
 
 }

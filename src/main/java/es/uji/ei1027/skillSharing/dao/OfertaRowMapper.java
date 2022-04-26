@@ -18,6 +18,8 @@ public class OfertaRowMapper implements RowMapper<Oferta> {
         oferta.setSkill(rs.getInt("id_skill"));
         oferta.setActiva(rs.getBoolean("activa"));
         oferta.setDescripcion(rs.getString("descripcion"));
+        oferta.setNombreSkill(rs.getString("nombre_skill"));
+        oferta.setNivelSkill(rs.getString("nivel_skill"));
         return oferta;
     }
 }
