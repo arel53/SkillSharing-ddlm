@@ -2,18 +2,19 @@ DROP TABLE colaboracion;
 DROP TABLE demanda;
 DROP TABLE oferta;
 DROP TABLE skill;
+DROP TABLE usuario;
 DROP TABLE estudiante;
 
 
+
 CREATE TABLE estudiante(
-                           nif		CHAR(9),
+                           nif		    CHAR(9),
                            nombre		VARCHAR(20) NOT NULL,
-                           apellido	VARCHAR(20) NOT NULL,
+                           apellido	    VARCHAR(20) NOT NULL,
                            email		VARCHAR(20) NOT NULL,
-                           skp		    BOOLEAN NOT NULL,
                            grado		VARCHAR(50) NOT NULL,
-                           edad		INTEGER NOT NULL,
-                           sexo		VARCHAR(10) NOT NULL,
+                           edad		    INTEGER NOT NULL,
+                           sexo		    VARCHAR(10) NOT NULL,
                            direccion	VARCHAR(50) NOT NULL,
                            horas		INTEGER NOT NULL,
                            CONSTRAINT cp_estudiante PRIMARY KEY (nif),
@@ -25,7 +26,7 @@ CREATE TABLE skill(
                       id_skill      SERIAL PRIMARY KEY,
                       nombre		VARCHAR(20),
                       activo		BOOLEAN NOT NULL,
-                      nivel         VARCHAR(20) NOT NULL
+                      nivel         VARCHAR(20) NOT NULL,
                       descripcion   VARCHAR(200)
 );
 
@@ -71,4 +72,13 @@ CREATE TABLE colaboracion(
                              CONSTRAINT ri_colaboracion_rate CHECK(rate IS NULL OR rate BETWEEN 1 AND 5 )
 );
                              --> Diría que falta poner que si la colaboración pasa de fecha_fin respecto a la actual, se cambie el estado de activa = FALSE
-
+CREATE TABLE usuario(
+        username    VARCHAR(20),
+        password    VARCHAR(200) NOT NULL,
+        skp         BOOLEAN NOT NULL,
+        active      BOOLEAN NOT NULL,
+        nif         CHAR(9) NOT NULL,
+        descripcion VARCHAR(200) NULL,
+        CONSTRAINT cp_usuario PRIMARY KEY (username),
+        CONSTRAINT ca_usuario_es FOREIGN KEY (nif) REFERENCES estudiante(nif) ON DELETE RESTRICT ON UPDATE CASCADE
+);

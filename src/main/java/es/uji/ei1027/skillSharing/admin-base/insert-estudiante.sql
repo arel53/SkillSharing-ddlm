@@ -1,1 +1,1 @@
-INSERT INTO estudiante VALUES('39577284K','Carlos', 'Soria','cs@uji.es',FALSE, 'Ingeniería Informática', 20, 'V', 'C/ Agustín 98', 42);
+INSERT INTO estudiante VALUES('39577284K','Carlos', 'Soria','cs@uji.es', 'Ingeniería Informática', 20, 'V', 'C/ Agustín 98', 4);

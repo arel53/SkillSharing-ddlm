@@ -5,7 +5,6 @@ public class Estudiante {
     private String nombre;
     private String apellido;
     private String email;
-    private boolean skp;
     private String grado;
     private int edad;
     private String sexo;
@@ -31,10 +30,6 @@ public class Estudiante {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public void setSkp(boolean skp) {
-        this.skp = skp;
     }
 
     public void setGrado(String grado) {
@@ -73,10 +68,6 @@ public class Estudiante {
         return email;
     }
 
-    public boolean isSkp() {
-        return skp;
-    }
-
     public String getGrado() {
         return grado;
     }
@@ -105,7 +96,6 @@ public class Estudiante {
                 ", nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", email='" + email + '\'' +
-                ", skp=" + skp +
                 ", grado='" + grado + '\'' +
                 ", edad=" + edad +
                 ", sexo='" + sexo + '\'' +

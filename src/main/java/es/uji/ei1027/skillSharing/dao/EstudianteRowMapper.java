@@ -14,7 +14,6 @@ public class EstudianteRowMapper implements RowMapper<Estudiante> {
         estudiante.setNombre(rs.getString("nombre"));
         estudiante.setApellido(rs.getString("apellido"));
         estudiante.setEmail(rs.getString("email"));
-        estudiante.setSkp(rs.getBoolean("skp"));
         estudiante.setGrado(rs.getString("grado"));
         estudiante.setEdad(rs.getInt("edad"));
         estudiante.setSexo(rs.getString("sexo"));
