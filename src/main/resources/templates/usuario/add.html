@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear nou usuari</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nou usuari</h2>
+<form action="#" th:action="@{/usuario/add}"
+      th:object="${usuario}" method="post">
+    <table>
+        <tr>
+            <td><label>Username</label></td>
+            <td><input type="text" th:field="*{username}" placeholder="Username" maxlength="50" /></td>
+            <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td><input type="text" th:field="*{password}" placeholder="Password" maxlength="50" /></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
+        </tr>
+        <tr>
+            <td><label>SKP</label></td>
+            <td><span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=1 id="skpT" />
+                   <label for="skpT">SI</label>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=0 id="skpF" checked />
+                   <label for="skpF">NO</label>
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Activo</label></td>
+            <td><span>
+                   <input type="radio" th:field ="*{active}"
+                          value=0 id="activeT" checked />
+                   <label for="activeT">SI</label>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{active}"
+                          value=0 id="activeF" />
+                   <label for="activeF">NO</label>
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Nif</label></td>
+            <td><input type="text" th:field="*{nif}" placeholder="Nif" maxlength="9" /></td>
+            <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}"></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion</label></td>
+            <td><textarea th:field="*{descripcion}" maxlength="200"></textarea></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input class="btn btn-success" type="submit" value="Afegeix usuari" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,17 +21,17 @@ public class UsuarioDao {
 
     public void addUsuario(Usuario user){
         jdbcTemplate.update("INSERT INTO usuario VALUES(?, ?, ?, ?, ?, ?)", user.getUsername(),
-                user.getPassword(),user.isSkp(), user.isActive(), user.getNIF(),user.getDescripcion());
+                user.getPassword(),user.isSkp(), user.isActive(), user.getNif(),user.getDescripcion());
 
     }
-    public void deleteEstudiante(String username) {
+    public void deleteUsuario(String username) {
         jdbcTemplate.update("DELETE FROM usuario WHERE username = ?", username);
     }
 
     public void updateUsuario(Usuario user) {
         jdbcTemplate.update("UPDATE usuario SET password = ?, skp = ?, " +
                         "active = ?, nif = ?, descripcion = ? WHERE username = ?", user.getPassword(),user.isSkp(),
-                user.isActive(), user.getNIF(),user.getDescripcion(),user.getUsername());
+                user.isActive(), user.getNif(),user.getDescripcion(),user.getUsername());
     }
     public Usuario getUsuario(String username) {
         try {
@@ -45,10 +46,8 @@ public class UsuarioDao {
             return jdbcTemplate.query("SELECT * FROM usuario", new UsuarioRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
-            return null;
+            return new ArrayList<Usuario>();
         }
     }
 
-
-
-}
+ }

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update usuari</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Edita contrsenya</h2>
+<form action="#" th:action="@{/usuario/passwd}"
+      th:object="${usuario}" method="post">
+    <table>
+        <tr>
+            <td><label>Username</label></td>
+            <td><input type="text"  readonly th:field="*{username}" /></td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td><input type="text"   th:field="*{password}" size="35"/></td>
+        </tr>
+        <tr>
+            <td><span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=1 id="skpT" hidden/>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=0 id="skpF" checked hidden/>
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><span>
+                   <input type="radio" th:field ="*{active}"
+                          value=1 id="activeT" checked hidden/>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{active}"
+                          value=0 id="activeF" hidden />
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="text"  readonly th:field="*{nif}" hidden /></td>
+        </tr>
+        <tr>
+            <td><input type="text"  th:field="*{descripcion}" hidden /></td>
+        <tr>
+            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita contrasenya" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

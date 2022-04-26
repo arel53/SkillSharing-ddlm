@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Usuarios</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Usuarios</h1>
+    <div th:if="${#lists.isEmpty(usuarios)}" class="error">
+        No hi ha usuaris en la base de dades
+    </div>
+    <table th:unless="${#lists.isEmpty(usuarios)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>SKP</th>
+            <th>Active</th>
+            <th>NIF</th>
+            <th>Descripcio</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="usuario: ${usuarios}">
+            <td th:text="${usuario.username}"></td>
+            <td th:text="${usuario.skp}" ></td>
+            <td th:text="${usuario.active}"></td>
+            <td th:text="${usuario.nif}"></td>
+            <td th:text="${usuario.descripcion}"></td>
+            <td><a th:href="@{/usuario/update/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Edita</a>
+            </td>
+            <td><a th:href="@{/usuario/delete/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Esborra</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="add" class="btn btn-success" role="button">Afegeix Usuari</a>
+</div>
+</body>
+</html>

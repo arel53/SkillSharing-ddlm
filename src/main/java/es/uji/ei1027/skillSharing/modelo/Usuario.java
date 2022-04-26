@@ -5,7 +5,7 @@ public class Usuario {
     private String password;
     private boolean skp;
     private boolean active;
-    private String NIF;
+    private String nif;
     private String descripcion;
 
     public String getUsername() {
@@ -40,12 +40,12 @@ public class Usuario {
         this.skp = skp;
     }
 
-    public String getNIF() {
-        return NIF;
+    public String getNif() {
+        return nif;
     }
 
-    public void setNIF(String NIF) {
-        this.NIF = NIF;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getDescripcion() {
@@ -54,5 +54,17 @@ public class Usuario {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", skp=" + skp +
+                ", active=" + active +
+                ", nif='" + nif + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                '}';
     }
 }

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update usuari</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Edita usuaris</h2>
+<form action="#" th:action="@{/usuario/update}"
+      th:object="${usuario}" method="post">
+    <table>
+        <tr>
+            <td><label>Username</label></td>
+            <td><input type="text"  readonly th:field="*{username}" /></td>
+        </tr>
+        <tr>
+            <td><label>Password</label></td>
+            <td><input type="text"  readonly th:field="*{password}" size="35"/></td>
+        </tr>
+        <tr>
+            <td><label>SKP</label></td>
+            <td><span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=1 id="skpT" />
+                   <label for="skpT">SI</label>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{skp}"
+                          value=0 id="skpF" checked />
+                   <label for="skpF">NO</label>
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Activo</label></td>
+            <td><span>
+                   <input type="radio" th:field ="*{active}"
+                          value=1 id="activeT" checked />
+                   <label for="activeT">SI</label>
+               </span>
+                <span>
+                   <input type="radio" th:field ="*{active}"
+                          value=0 id="activeF" />
+                   <label for="activeF">NO</label>
+               </span>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Nif</label></td>
+            <td><input type="text"  readonly th:field="*{nif}" /></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion</label></td>
+            <td><input type="text"  th:field="*{descripcion}" /></td>
+        </tr>
+        <tr><td><a th:href="@{/usuario/passwd/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Canvia la contrasenya</a></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita usuario" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
