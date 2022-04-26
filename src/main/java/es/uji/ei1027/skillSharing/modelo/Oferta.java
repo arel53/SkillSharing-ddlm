@@ -14,6 +14,8 @@ public class Oferta{
     private LocalDate finFecha;
     private boolean activa;
     private int skill;
+    private String nombreSkill;
+    private String  nivelSkill;
     private String descripcion;
 
 
@@ -52,6 +54,14 @@ public class Oferta{
         this.descripcion = descripcion;
     }
 
+    public void setNombreSkill(String nombreSkill) {
+        this.nombreSkill = nombreSkill;
+    }
+
+    public void setNivelSkill(String nivelSkill) {
+        this.nivelSkill = nivelSkill;
+    }
+
     public int getIdOferta() {
         return idOferta;
     }
@@ -84,6 +94,14 @@ public class Oferta{
         return descripcion;
     }
 
+    public String getNombreSkill() {
+        return nombreSkill;
+    }
+
+    public String getNivelSkill() {
+        return nivelSkill;
+    }
+
     @Override
     public String toString() {
         return "Oferta{" +
@@ -93,7 +111,9 @@ public class Oferta{
                 ", iniFecha=" + iniFecha +
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
-                ", skill='" + skill + '\'' +
+                ", skill=" + skill +
+                ", nombreSkill='" + nombreSkill + '\'' +
+                ", nivelSkill='" + nivelSkill + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }
