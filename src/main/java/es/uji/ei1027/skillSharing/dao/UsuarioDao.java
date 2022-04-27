@@ -49,5 +49,19 @@ public class UsuarioDao {
             return new ArrayList<Usuario>();
         }
     }
+    public Usuario loadUser(Usuario usuario){
+        Usuario user;
+        user = getUsuario(usuario.getUsername());
+        if (user == null)
+            return null;
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        if (passwordEncryptor.checkPassword(usuario.getPassword(), user.getPassword())) {
+            user.setPassword("-");
+            return user;
+        }
+        else {
+            return null; // bad login!
+        }
+    }
 
  }
