@@ -12,14 +12,15 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
     @RequestMapping("/")
     public String redirectIndex(HttpSession session, Model model){
-    if (session.getAttribute("user") == null)
-    {
+        return"patata";
+//    if (session.getAttribute("user") == null)
+    /*{
         session.setAttribute("nextUrl","/usuario/list");
         model.addAttribute("usuario", new Usuario());
         return "login";
     }
 
-    return "usuario/list";
+    return "usuario/list";*/
 }
 
 }
