@@ -43,7 +43,7 @@ public class UsuarioDao {
     }
     public List<Usuario> getUsuarios() {
         try {
-            return jdbcTemplate.query("SELECT * FROM usuario", new UsuarioRowMapper());
+            return jdbcTemplate.query("SELECT * FROM usuario ORDER BY username", new UsuarioRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Usuario>();
