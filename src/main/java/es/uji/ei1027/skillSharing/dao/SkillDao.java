@@ -1,7 +1,5 @@
 package es.uji.ei1027.skillSharing.dao;
 
-import es.uji.ei1027.skillSharing.modelo.Demanda;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Skill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -44,21 +42,28 @@ public class SkillDao {
         }
     }
 
-    public List<Oferta> getOfertasSkill(String idSkill) {
+    public int getNumOfertasSkill(int idSkill) {
         try {
-            return jdbcTemplate.query("SELECT * FROM oferta WHERE id_skill = ?", new OfertaRowMapper(), Integer.parseInt(idSkill));
+            Integer numOfertas = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM oferta WHERE id_skill = ?", Integer.class, idSkill);
+            if (numOfertas == null)
+                return -1;
+            return numOfertas;
         }
         catch (EmptyResultDataAccessException e){
-            return null;
+            return -1;
         }
     }
 
-    public List<Demanda> getDemandasSkill(String idSkill) {
+    public int getNumDemandasSkill(int idSkill) {
         try {
-            return jdbcTemplate.query("SELECT * FROM demanda WHERE id_skill = ?", new DemandaRowMapper(), Integer.parseInt(idSkill));
+            Integer numDemandas = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM demanda WHERE id_skill = ?", Integer.class, idSkill);
+            if (numDemandas == null)
+                return -1;
+            return numDemandas;
+
         }
         catch (EmptyResultDataAccessException e){
-            return null;
+            return -1;
         }
     }
 

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -65,8 +64,8 @@ public class SkillController {
     public String listSkills(Model model){
         List<Skill> skills =skillDao.getSkillsActivas();
         for (Skill s : skills){
-            s.setNumeroOfertas(skillDao.getOfertasSkill(s.getIdSkill()+"").size());
-            s.setNumeroDemandas(skillDao.getDemandasSkill(s.getIdSkill()+"").size());
+            s.setNumeroOfertas(skillDao.getNumOfertasSkill(s.getIdSkill()));
+            s.setNumeroDemandas(skillDao.getNumDemandasSkill(s.getIdSkill()));
         }
         model.addAttribute("skills", skills);
         return "skill/list";
