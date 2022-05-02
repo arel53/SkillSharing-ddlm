@@ -12,8 +12,8 @@ public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
         Colaboracion colaboracion = new Colaboracion();
         colaboracion.setIdOferta(rs.getInt("id_oferta"));
         colaboracion.setIdDemanda(rs.getString("id_demanda"));
-        colaboracion.setIniFecha(rs.getDate("ini_fecha"));
-        colaboracion.setFinFecha(rs.getDate("fin_fecha"));
+        colaboracion.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
+        colaboracion.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
         colaboracion.setActiva(rs.getBoolean("activa"));
         colaboracion.setRate(rs.getInt("rate"));
         colaboracion.setComentario(rs.getString("comentario"));

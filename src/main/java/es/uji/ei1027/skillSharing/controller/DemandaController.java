@@ -33,7 +33,7 @@ public class DemandaController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("demanada") Demanda demanda,
+    public String processAddSubmit(@ModelAttribute("demanda") Demanda demanda,
                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "demanda/add";
