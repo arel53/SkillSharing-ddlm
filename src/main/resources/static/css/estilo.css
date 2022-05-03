@@ -1,9 +1,7 @@
 @charset "UTF-8";
 img{
-  width:80%;
-  height:80%;
-  margin-left: 10%;
-  margin-right: 10%;
+  width:50%;
+  height:auto;
   display:block;
 }
 p1{
@@ -11,7 +9,14 @@ p1{
    margin-left: 30%;
    margin-right: 30%;
 }
+
 ul {
-  display: inline;
-  text-align:center;
+   display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+li.green{
+    text-align:right;
+    display:flex
 }

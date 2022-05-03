@@ -1,26 +1,49 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
 
-    <meta charset="UTF-8">
-    <title>Skill Sharing</title>
-    <link rel="stylesheet" href="css/estilo.css">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+
+    <title layout:title-pattern=$"CONTENT_TITLE">Skill Sharing</title>
 </head>
 
-<body style="background-color:#ADFF2F;">
-<div th:replace="fragments/header :: header">
-    <div>
-        <img src="portadaSkillSharing.png" width="100" alt="">
+<body class="container">
+<header class="page-header">
+    <h1>Skill Sharing</h1>
+</header>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" ><a class="nav-link" href="inicio/principal" >Pàgina principal</a></li>
+            <li class="nav-item" ><a class="nav-link" href="oferta/list">Ofertas</a></li>
+            <li class="nav-item" ><a class="nav-link" href="demanda/list">Demandas</a></li>
+
+        </ul>
+        <ul >
+            <li class="green" ><a class="nav-link" href="login">Iniciar sesión</a></li>
+        </ul>
+        <ul >
+            <li class="green" ><a class="nav-link" href="login">Registrarse</a></li>
+        </ul>
     </div>
-<p1> El Consell d’estudiantat de la Universitat Jaume I vol impulsar la col·laboració altruista entre l'estudiantat de la UJI i millorar els resultats i l’aprenentatge d’aquells que necessiten suport en alguna matèria o competència transversal.
-    S’ha pensat crear un portal web que permeta a l’alumnat de la UJI demanar i oferir col·laboració a altres alumnes sobre temes relacionats amb les seues matèries o competències docents o esportives.
-</p1>
-<ul>
-    <li><a href="oferta/list">Gestió de Ofertas</a></li>
-    <li><a href="demanda/list">Gestió de Demandas</a></li>
-    <li><a href="skill/list">Gestió de Skills</a></li>
-    <li><a href="colaboracion/list">Gestió de Colabacion</a></li>
-</ul>
-    </div>
+</nav>
+<div><img class="imgPrincipal" src="imagenes/imagenPrincipal1.jpg" width="310" height="163"></div>
+<footer>
+    <hr>
+    <p class="text-muted">EI1027 - Disseny i Implementació de
+        Sistemes d'Informació</p>
+</footer>
 </body>
 </html>
