@@ -2,7 +2,6 @@ package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.modelo.Estudiante;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
