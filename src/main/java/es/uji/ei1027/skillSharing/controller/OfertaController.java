@@ -73,6 +73,12 @@ public class OfertaController {
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         return "oferta/list";
     }
+    //cosas inicio sesión que no se como hacer
+    @RequestMapping("/listMisOfertas/{nif}")
+    public String listMisOfertas(Model model, @PathVariable String nif){
+        model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(nif));
+        return "oferta/listMisOfertas";
+    }
 
 
 

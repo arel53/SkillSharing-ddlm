@@ -70,4 +70,11 @@ public class DemandaController {
         model.addAttribute("skills", skillDao.getSkillsTodas());
         return "demanda/list";
     }
+
+    @RequestMapping("/listMisDemandas/{nif}")
+    public String listMisDemandas(Model model, @PathVariable String nif){
+        model.addAttribute("demandas",demandaDao.getDemandasEstudiante(nif));
+        model.addAttribute("skills", skillDao.getSkillsTodas());
+        return "demanda/listMisDemandas";
+    }
 }

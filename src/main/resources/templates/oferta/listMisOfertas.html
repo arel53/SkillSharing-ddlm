@@ -11,8 +11,8 @@
     <h1>Lista de Ofertas</h1>
 
     <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
-    Encara no s'ha introduït cap oferta a l'aplicació
-        </div>
+        Encara no s'ha introduït cap oferta a l'aplicació
+    </div>
 
     <table th:if="${not #lists.isEmpty(ofertas)}" class="table table-striped">
         <thead>
@@ -29,18 +29,20 @@
         </tr>
         </thead>
         <tbody>
-            <tr th:each="oferta: ${ofertas}">
-                <td th:text="${oferta.estudiante}"></td>
-                <td th:text="${oferta.horas}"></td>
-                <td th:text="${oferta.iniFecha}"></td>
-                <td th:text="${{oferta.finFecha}}"></td>
-                <td th:text="${{oferta.nombreSkill}}"></td>
-                <td th:text="${{oferta.nivelSkill}}"></td>
-                <td th:text="${{oferta.descripcion}}"></td>
-                <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>
-            </tr>
+        <tr th:each="oferta: ${ofertas}">
+            <td th:text="${oferta.estudiante}"></td>
+            <td th:text="${oferta.horas}"></td>
+            <td th:text="${oferta.iniFecha}"></td>
+            <td th:text="${{oferta.finFecha}}"></td>
+            <td th:text="${{oferta.nombreSkill}}"></td>
+            <td th:text="${{oferta.nivelSkill}}"></td>
+            <td th:text="${{oferta.descripcion}}"></td>
+            <td> <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a></td>
+            <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>
+        </tr>
         </tbody>
     </table>
+    <a href="add" class="btn btn-success" role="button">Afegeix oferta</a>
 </div>
 </body>
 </html>

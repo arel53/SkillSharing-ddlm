@@ -37,10 +37,12 @@
             <td th:text="${{skills.get(demanda.skill - 1).nombre}}"></td>
             <td th:text="${{skills.get(demanda.skill - 1).nivel}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
+            <td> <a th:href="@{/demanda/update/{nom}(nom=${demanda.idDemanda})}" class="btn btn-warning" role="button">Edita</a></td>
             <td><a th:href="@{/demanda/delete/{nom}/(nom=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>
         </tr>
         </tbody>
     </table>
+    <a href="add" class="btn btn-success" role="button">Afegeix Demanda</a>
 </div>
 </body>
 </html>

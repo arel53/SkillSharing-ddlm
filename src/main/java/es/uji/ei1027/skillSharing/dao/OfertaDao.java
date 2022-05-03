@@ -54,7 +54,7 @@ public class OfertaDao {
 
     public List<Oferta> getOfertasEstudiante(String estudiante) {
         try {
-            return jdbcTemplate.query("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.activa= TRUE, estudiante = ?", new OfertaRowMapper(), estudiante);
+            return jdbcTemplate.query("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.activa= TRUE and estudiante = ?", new OfertaRowMapper(), estudiante);
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();

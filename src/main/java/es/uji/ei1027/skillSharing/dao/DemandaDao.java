@@ -49,4 +49,13 @@ public class DemandaDao {
             return null;
         }
     }
+
+    public List<Demanda> getDemandasEstudiante(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM demanda WHERE activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }
