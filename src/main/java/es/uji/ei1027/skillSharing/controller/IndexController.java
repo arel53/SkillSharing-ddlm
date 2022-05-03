@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 
+@RequestMapping("/inicio")
 public class IndexController {
 
     private OfertaDao ofertaDao;
@@ -24,7 +25,7 @@ public class IndexController {
     public String principal(Model model){
         model.addAttribute("ofertas", ofertaDao.getOfertas());
         model.addAttribute("demandas", demandaDao.getDemandas());
-        return "redirect:inicio/pp";
+        return "inicio/pp";
     }
 
 
