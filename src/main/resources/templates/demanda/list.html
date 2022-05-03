@@ -7,7 +7,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div class="container">
+<div class="demanda">
     <h1>Lista de Demandas</h1>
 
     <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
@@ -42,7 +42,8 @@
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Afegeix Demanda</a>
 </div>
+    <a href="add" class="btn btn-success" role="button">Afegeix Demanda</a>
+
 </body>
 </html>
