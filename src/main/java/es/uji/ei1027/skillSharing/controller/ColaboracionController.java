@@ -62,7 +62,7 @@ public class ColaboracionController {
     @RequestMapping("/list")
     public String listDemandas(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
-        return "demanda/list";
+        return "colaboracion/list";
     }
 
 }

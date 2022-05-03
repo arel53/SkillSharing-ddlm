@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Skill Sharing</title>
+    <link rel="stylesheet" href="css/estilo.css">
 </head>
-<body>
-<h1>SKILL SHARING</h1>
+
+<body style="background-color:#ADFF2F;">
+<div th:replace="fragments/header :: header">
+    <div>
+        <img src="portadaSkillSharing.png" width="100" alt="">
+    </div>
+<p1> El Consell d’estudiantat de la Universitat Jaume I vol impulsar la col·laboració altruista entre l'estudiantat de la UJI i millorar els resultats i l’aprenentatge d’aquells que necessiten suport en alguna matèria o competència transversal.
+    S’ha pensat crear un portal web que permeta a l’alumnat de la UJI demanar i oferir col·laboració a altres alumnes sobre temes relacionats amb les seues matèries o competències docents o esportives.
+</p1>
 <ul>
     <li><a href="oferta/list">Gestió de Ofertas</a></li>
     <li><a href="demanda/list">Gestió de Demandas</a></li>
     <li><a href="skill/list">Gestió de Skills</a></li>
+    <li><a href="colaboracion/list">Gestió de Colabacion</a></li>
 </ul>
+    </div>
 </body>
 </html>

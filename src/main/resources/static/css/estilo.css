@@ -1,0 +1,17 @@
+@charset "UTF-8";
+img{
+  width:80%;
+  height:80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  display:block;
+}
+p1{
+  text-align:center;
+   margin-left: 30%;
+   margin-right: 30%;
+}
+ul {
+  display: inline;
+  text-align:center;
+}

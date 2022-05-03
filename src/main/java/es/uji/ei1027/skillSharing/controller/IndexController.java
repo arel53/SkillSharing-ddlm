@@ -1,3 +1,4 @@
+/*
 package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.modelo.Usuario;
@@ -14,13 +15,16 @@ public class IndexController {
     public String redirectIndex(HttpSession session, Model model){
         return"patata";
 //    if (session.getAttribute("user") == null)
-    /*{
+    */
+/*{
         session.setAttribute("nextUrl","/usuario/list");
         model.addAttribute("usuario", new Usuario());
         return "login";
     }
 
-    return "usuario/list";*/
+    return "usuario/list";*//*
+
 }
 
 }
+*/
