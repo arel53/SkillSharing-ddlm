@@ -108,5 +108,5 @@ public class OfertaController {
     }
 
 
-
+    // TODO Falta listOfertas de SKP, hay que pensar entre todos que listar y como
 }

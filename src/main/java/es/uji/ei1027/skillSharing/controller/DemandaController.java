@@ -87,4 +87,6 @@ public class DemandaController {
         model.addAttribute("misDemandas",demandaDao.getDemandasEstudiante(user.getNif()));
         return "demanda/listMisDemandas";
     }
+
+    // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como
 }
