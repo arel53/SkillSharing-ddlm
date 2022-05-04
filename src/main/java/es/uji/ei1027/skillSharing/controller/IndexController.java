@@ -26,12 +26,6 @@ public class IndexController {
         return "inicio/index";
     }
 
-    @RequestMapping(value = "inicio/principal")
-    public String principal(Model model){
-        model.addAttribute("ofertas", ofertaDao.getOfertas());
-        model.addAttribute("demandas", demandaDao.getDemandas());
-        return "inicio/pp";
-    }
 
 
 

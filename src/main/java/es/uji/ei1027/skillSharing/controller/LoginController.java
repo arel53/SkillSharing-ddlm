@@ -64,8 +64,13 @@ public class LoginController {
         session.setAttribute("user", user);
         String nextUrl = (String) session.getAttribute("nextUrl");
         if (nextUrl == null){
-            nextUrl = "/";
+            if(user.isSkp()) {
+                return "inicio/skpIndex";
+            }else{
+                return "inicio/userIndex";
+            }
         }
+
         session.removeAttribute("nextUrl");
         // Torna a la pàgina principal
         return "redirect:"+nextUrl;
