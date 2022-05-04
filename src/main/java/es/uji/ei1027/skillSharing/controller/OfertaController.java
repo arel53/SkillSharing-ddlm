@@ -76,13 +76,13 @@ public class OfertaController {
             Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
             if (user.getNif().equals(of.getEstudiante())){
                 ofertaDao.endOferta(idOferta);
-                return "redirect:../../list";
+                return "redirect:../list";
             }else{
-                return "forbiden";
+                return "redirect:/forbiden";
             }
         }else{
             ofertaDao.endOferta(idOferta);
-            return "redirect:../../list";
+            return "redirect:../list";
         }
     }
 

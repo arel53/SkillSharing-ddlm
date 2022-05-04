@@ -59,15 +59,15 @@ public class LoginController {
         }
         if (!user.isActive()){
             session.setAttribute("disabled", user.getDescripcion());
-            return "disabled_user";
+            return "redirect:/disableduser";
         }
         session.setAttribute("user", user);
         String nextUrl = (String) session.getAttribute("nextUrl");
         if (nextUrl == null){
             if(user.isSkp()) {
-                return "inicio/skpIndex";
+                return "redirect:/inicio/skpIndex";
             }else{
-                return "inicio/userIndex";
+                return "redirect:/inicio/userIndex";
             }
         }
 
@@ -80,4 +80,5 @@ public class LoginController {
         session.invalidate();
         return "redirect:/";
     }
+
 }
