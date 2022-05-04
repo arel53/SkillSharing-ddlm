@@ -8,8 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-
-@RequestMapping("/inicio")
 public class IndexController {
 
     private OfertaDao ofertaDao;
@@ -21,7 +19,14 @@ public class IndexController {
     public void setDemandaDao(DemandaDao demandaDao) {this.demandaDao = demandaDao;}
 
 
-    @RequestMapping(value = "/principal")
+
+
+    @RequestMapping("/")
+    public String home(){
+        return "inicio/index";
+    }
+
+    @RequestMapping(value = "inicio/principal")
     public String principal(Model model){
         model.addAttribute("ofertas", ofertaDao.getOfertas());
         model.addAttribute("demandas", demandaDao.getDemandas());
