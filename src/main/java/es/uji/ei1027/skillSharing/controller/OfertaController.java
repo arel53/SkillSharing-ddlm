@@ -3,6 +3,7 @@ package es.uji.ei1027.skillSharing.controller;
 import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
+import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/oferta")
@@ -63,9 +66,24 @@ public class OfertaController {
     }
 
     @RequestMapping(value = "/delete/{idOferta}")
-    public String  processDeleteOferta(@PathVariable String idOferta){
-        ofertaDao.endOferta(idOferta);
-        return "redirect:../../list";
+    public String  processDeleteOferta(HttpSession session,@PathVariable String idOferta){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.isSkp()){
+            Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
+            if (user.getNif().equals(of.getEstudiante())){
+                ofertaDao.endOferta(idOferta);
+                return "redirect:../../list";
+            }else{
+                return "forbiden";
+            }
+        }else{
+            ofertaDao.endOferta(idOferta);
+            return "redirect:../../list";
+        }
     }
 
     @RequestMapping("/list")
@@ -74,9 +92,15 @@ public class OfertaController {
         return "oferta/list";
     }
     //cosas inicio sesión que no se como hacer
-    @RequestMapping("/listMisOfertas/{nif}")
-    public String listMisOfertas(Model model, @PathVariable String nif){
-        model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(nif));
+    @RequestMapping("/listMisOfertas")
+    public String listMisOfertas(HttpSession session,Model model){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+
+        model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(user.getNif()));
         return "oferta/listMisOfertas";
     }
 
