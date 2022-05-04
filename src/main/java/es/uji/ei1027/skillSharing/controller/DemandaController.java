@@ -86,8 +86,7 @@ public class DemandaController {
 
 
 
-    // TODO Se tiene que utilizar una vista especifica para listar las demandas de usuario,
-    //  así se diferencian de las de alguien no registrado
+
 
     @RequestMapping("/list")
     public String listDemandas(Model model){
