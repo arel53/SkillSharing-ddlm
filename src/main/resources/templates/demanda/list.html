@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Lista de Demandas</title>
+    <title>Demandas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,10 +9,10 @@
 <body>
 <div th:replace="../templates/fragments/navPublic"></div>
 <div class="demanda">
-    <h1>Lista de Demandas</h1>
+    <h1>Demandas de los Estudiantes</h1>
 
     <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
-        Encara no s'ha introduït cap demanda a l'aplicació
+        Nadie demanda ninguna clase.
     </div>
 
     <table th:if="${not #lists.isEmpty(demandas)}" class="table table-striped">
@@ -35,8 +35,8 @@
             <td th:text="${demanda.horas}"></td>
             <td th:text="${demanda.iniFecha}"></td>
             <td th:text="${{demanda.finFecha}}"></td>
-            <td th:text="${{skills.get(demanda.skill - 1).nombre}}"></td>
-            <td th:text="${{skills.get(demanda.skill - 1).nivel}}"></td>
+            <td th:text="${{demanda.nombreSkill}}"></td>
+            <td th:text="${{demanda.nivelSkill}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
         </tr>
         </tbody>

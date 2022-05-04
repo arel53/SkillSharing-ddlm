@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Gestionar Ofertas</title>
+    <title>Demandas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,10 +9,10 @@
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h1>Lista de Ofertas</h1>
+    <h1>Demandas</h1>
 
     <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">
-        Encara no s'ha introduït cap oferta a l'aplicació
+        Nadie demanda ninguna clase.
     </div>
 
     <table th:if="${not #lists.isEmpty(misDemandas)}" class="table table-striped">
@@ -22,8 +22,8 @@
             <th>Horas</th>
             <th>Fecha de Inicio</th>
             <th>Fecha de Final</th>
-            <th>Nombre Skill</th>
-            <th>Nivel Skill </th>
+            <th>Skill</th>
+            <th>Nivel</th>
             <th>Descripcion</th>
             <th></th>
             <th></th>
@@ -38,12 +38,10 @@
             <td th:text="${{demanda.nombreSkill}}"></td>
             <td th:text="${{demanda.nivelSkill}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
-            <td> <a th:href="@{/demanda/update/{idOferta}(idDemanda=${demanda.idDemanda})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td> <a th:href="@{/}" class="btn btn-warning" role="button">Colabora</a></td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Afegeix oferta</a>
 </div>
 </body>
 </html>

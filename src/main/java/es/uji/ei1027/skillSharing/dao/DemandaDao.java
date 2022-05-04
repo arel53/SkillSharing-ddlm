@@ -34,7 +34,7 @@ public class DemandaDao {
 
     public Demanda getDemanda(String idDemanda) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM demanda WHERE id_demanda = ?", new DemandaRowMapper(), Integer.parseInt(idDemanda));
+            return jdbcTemplate.queryForObject("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.id_demanda = ?", new DemandaRowMapper(), Integer.parseInt(idDemanda));
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -43,7 +43,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM demanda WHERE activa= TRUE", new DemandaRowMapper());
+            return jdbcTemplate.query("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.activa= TRUE", new DemandaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return null;
@@ -52,7 +52,16 @@ public class DemandaDao {
 
     public List<Demanda> getDemandasEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT * FROM demanda WHERE activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
+            return jdbcTemplate.query("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public List<Demanda> getTodasDemandasMenosMias(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.activa= TRUE and estudiante <> ?", new DemandaRowMapper(), nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

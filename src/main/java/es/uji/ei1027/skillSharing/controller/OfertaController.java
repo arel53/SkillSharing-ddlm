@@ -76,13 +76,13 @@ public class OfertaController {
             Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
             if (user.getNif().equals(of.getEstudiante())){
                 ofertaDao.endOferta(idOferta);
-                return "redirect:../list";
+                return "redirect:../../listMisOfertas";
             }else{
                 return "redirect:/forbiden";
             }
         }else{
             ofertaDao.endOferta(idOferta);
-            return "redirect:../list";
+            return "redirect:../listSKP";
         }
     }
 
@@ -92,9 +92,28 @@ public class OfertaController {
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
+        return "oferta/list";
+    }
+
+    @RequestMapping("/listSKP")
+    public String listOfertasSKP(Model model){
+        model.addAttribute("ofertas",ofertaDao.getOfertas());
+        return "oferta/listSKP";
+    }
+
+    // TODO en este método no se tienen que mostrar las ofertas del usuario de la sesión
+    @RequestMapping("/listOfertasUser")
+    public String listOfertasUser(HttpSession session, Model model){
+
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+
+        model.addAttribute("ofertas",ofertaDao.getTodasOfertasMenosMias(user.getNif()));
         return "oferta/listOfertasUser";
     }
-    //cosas inicio sesión que no se como hacer
     @RequestMapping("/listMisOfertas")
     public String listMisOfertas(HttpSession session,Model model){
         if (session.getAttribute("user") == null){

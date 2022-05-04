@@ -7,6 +7,7 @@
 
 </head>
 <body>
+<div class="container">
 <h2>Accés</h2>
 <form action="#" th:action="@{/login}"
       th:object="${usuario}" method="post">
@@ -20,8 +21,8 @@
     <input class="form_control" type="password" th:field="*{password}"/>
   <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
   </p>
-  <input type="submit" value="Accedir" />
+  <input type="submit" class="btn btn-success" value="Accedir" />
 </form>
-
+</div>
 </body>
 </html>

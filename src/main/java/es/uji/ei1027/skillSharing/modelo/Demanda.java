@@ -14,6 +14,8 @@ public class Demanda {
     private LocalDate finFecha;
     private boolean activa;
     private int skill;
+    private String nombreSkill;
+    private String  nivelSkill;
     private String descripcion;
 
     public Demanda(){
@@ -49,6 +51,16 @@ public class Demanda {
         this.skill = skill;
     }
 
+    public void setNombreSkill(String nombreSkill) {
+        this.nombreSkill = nombreSkill;
+    }
+
+    public void setNivelSkill(String nivelSkill) {
+        this.nivelSkill = nivelSkill;
+    }
+
+
+
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -81,6 +93,14 @@ public class Demanda {
         return skill;
     }
 
+    public String getNombreSkill() {
+        return nombreSkill;
+    }
+
+    public String getNivelSkill() {
+        return nivelSkill;
+    }
+
     public String getDescripcion() {
         return descripcion;
     }
@@ -94,7 +114,9 @@ public class Demanda {
                 ", iniFecha=" + iniFecha +
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
-                ", idSkill='" + skill + '\'' +
+                ", skill='" + skill + '\'' +
+                ", nombreSkill='" + nombreSkill + '\'' +
+                ", nivelSkill='" + nivelSkill + '\'' +
                 ", descripcion='" + descripcion + '\'' +
                 '}';
     }

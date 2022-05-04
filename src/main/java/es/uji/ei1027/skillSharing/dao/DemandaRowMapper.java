@@ -17,6 +17,8 @@ public class DemandaRowMapper implements RowMapper<Demanda> {
         demanda.setActiva(rs.getBoolean("activa"));
         demanda.setSkill(rs.getInt("id_skill"));
         demanda.setDescripcion(rs.getString("descripcion"));
+        demanda.setNombreSkill(rs.getString("nombre_skill"));
+        demanda.setNivelSkill(rs.getString("nivel_skill"));
         return demanda;
     }
 }

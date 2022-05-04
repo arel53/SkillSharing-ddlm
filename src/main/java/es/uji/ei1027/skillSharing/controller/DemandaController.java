@@ -3,6 +3,7 @@ package es.uji.ei1027.skillSharing.controller;
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
+import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -62,10 +63,28 @@ public class DemandaController {
     }
 
     @RequestMapping(value = "/delete/{idDemanda}")
-    public String  processDeleteDemanda(@PathVariable String idDemanda){
-        demandaDao.endDemanda(idDemanda);
-        return "redirect:../../list";
+    public String  processDeleteOferta(HttpSession session,@PathVariable String idDemanda){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.isSkp()){
+            Demanda demanda = (Demanda)demandaDao.getDemanda(idDemanda);
+            if (user.getNif().equals(demanda.getEstudiante())){
+                demandaDao.endDemanda(idDemanda);
+                return "redirect:../../listMisDemandas";
+            }else{
+                return "redirect:/forbiden";
+            }
+        }else{
+            demandaDao.endDemanda(idDemanda);
+            return "redirect:../listSKP";
+        }
     }
+
+
+
 
     // TODO Se tiene que utilizar una vista especifica para listar las demandas de usuario,
     //  así se diferencian de las de alguien no registrado
@@ -73,8 +92,24 @@ public class DemandaController {
     @RequestMapping("/list")
     public String listDemandas(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
-        model.addAttribute("skills", skillDao.getSkillsTodas());
-        return "demanda/listOfertasUser";
+        return "demanda/list";
+    }
+
+    @RequestMapping("/listSKP")
+    public String listDemandasSKP(Model model){
+        model.addAttribute("demandas",demandaDao.getDemandas());
+        return "demanda/listSKP";
+    }
+
+    @RequestMapping("/listDemandasUser")
+    public String listDemandasUser(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misDemandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
+        return "demanda/listDemandasUser";
     }
 
     @RequestMapping("/listMisDemandas")

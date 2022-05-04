@@ -12,7 +12,7 @@
   <h1>Lista de Colaboraciones</h1>
 
   <div th:if="${#lists.isEmpty(colaboraciones)}" layout:fragment="content">
-    Encara no s'ha introduït cap colaboració a l'aplicació
+    No hay ninguna colaboracion.
   </div>
 
   <table th:if="${not #lists.isEmpty(colaboraciones)}" class="table table-striped">

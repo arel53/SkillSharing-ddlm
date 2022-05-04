@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Gestionar Ofertas</title>
+    <title>Administrar Ofertas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navPublic"></div>
+<div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
-    <h1>Lista de Ofertas</h1>
+    <h1>Ofertas de los Usuarios</h1>
 
     <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
-        Encara no s'ha introduït cap oferta a l'aplicació
+        No hay ofertas en la aplicación
     </div>
 
     <table th:if="${not #lists.isEmpty(ofertas)}" class="table table-striped">
