@@ -1,10 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>nav</title>
 </head>
 <body>
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/}">Pàgina principal</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/oferta/listSKP}">Ofertas</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/demanda/listSKP}">Demandas</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/colaboracion/list}">Colaboraciones</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/skill/list}">Skills</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/usuario/list}">Usuarios</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/login}">Iniciar Sesión</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/logout}">Cerrar Sesión</a></li>
+        </ul>
+    </div>
+</nav>
 </body>
 </html>
