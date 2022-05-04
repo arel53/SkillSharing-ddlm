@@ -16,7 +16,7 @@ ul {
     align-items: center;
 }
 
-li.green{
+li.right{
     text-align:right;
     display:flex
 }
