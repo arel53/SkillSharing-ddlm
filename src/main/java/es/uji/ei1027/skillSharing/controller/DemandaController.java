@@ -3,6 +3,7 @@ package es.uji.ei1027.skillSharing.controller;
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
+import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -64,17 +67,24 @@ public class DemandaController {
         return "redirect:../../list";
     }
 
+    // TODO Se tiene que utilizar una vista especifica para listar las demandas de usuario,
+    //  así se diferencian de las de alguien no registrado
+
     @RequestMapping("/list")
     public String listDemandas(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
         model.addAttribute("skills", skillDao.getSkillsTodas());
-        return "demanda/list";
+        return "demanda/listOfertasUser";
     }
 
-    @RequestMapping("/listMisDemandas/{nif}")
-    public String listMisDemandas(Model model, @PathVariable String nif){
-        model.addAttribute("demandas",demandaDao.getDemandasEstudiante(nif));
-        model.addAttribute("skills", skillDao.getSkillsTodas());
+    @RequestMapping("/listMisDemandas")
+    public String listMisDemandas(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misDemandas",demandaDao.getDemandasEstudiante(user.getNif()));
         return "demanda/listMisDemandas";
     }
 }

@@ -86,10 +86,13 @@ public class OfertaController {
         }
     }
 
+    // TODO Se tiene que utilizar una vista especifica para listar las ofertas de usuario,
+    //  así se diferencian de las de alguien no registrado
+
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
-        return "oferta/list";
+        return "oferta/listOfertasUser";
     }
     //cosas inicio sesión que no se como hacer
     @RequestMapping("/listMisOfertas")
