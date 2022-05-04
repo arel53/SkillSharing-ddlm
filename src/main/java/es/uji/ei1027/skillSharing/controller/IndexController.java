@@ -32,8 +32,9 @@ public class IndexController {
     @RequestMapping("/inicio/skpIndex")
     public String goInicioSkpIndex(HttpSession session){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            session.setAttribute("nextUrl","/inicio/skpIndex");
+            System.out.println("noesd");
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
@@ -43,7 +44,7 @@ public class IndexController {
     }@RequestMapping("/inicio/userIndex")
     public String goInicioUserIndex(HttpSession session){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
+            session.setAttribute("nextUrl","/inicio/userIndex");
             return "login";
         }
         Usuario user = (Usuario)session.getAttribute("user");

@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    />
+
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+
+    <title layout:title-pattern=$"CONTENT_TITLE">Skill Sharing</title>
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
-sdfsdfsdf
-</body>
+<!--<div><img class="imgPrincipal" src="imagenes/imagenPrincipal1.jpg" width="310" height="163"></div>-->
+
+<h1>Cuidao eres admin, un gran poder conlleva una gran responsabilidad</h1></body>
 </html>
