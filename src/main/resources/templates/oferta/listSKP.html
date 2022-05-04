@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Gestionar Ofertas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navPublic"></div>
+<div class="container">
+    <h1>Lista de Ofertas</h1>
+
+    <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
+        Encara no s'ha introduït cap oferta a l'aplicació
+    </div>
+
+    <table th:if="${not #lists.isEmpty(ofertas)}" class="table table-striped">
+        <thead>
+        <tr>
+            <th>Estudiante</th>
+            <th>Horas</th>
+            <th>Fecha de Inicio</th>
+            <th>Fecha de Final</th>
+            <th>Nombre Skill</th>
+            <th>Nivel Skill </th>
+            <th>Descripcion</th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="oferta: ${ofertas}">
+            <td th:text="${oferta.estudiante}"></td>
+            <td th:text="${oferta.horas}"></td>
+            <td th:text="${oferta.iniFecha}"></td>
+            <td th:text="${{oferta.finFecha}}"></td>
+            <td th:text="${{oferta.nombreSkill}}"></td>
+            <td th:text="${{oferta.nivelSkill}}"></td>
+            <td th:text="${{oferta.descripcion}}"></td>
+            <td><a th:href="@{/oferta/delete/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
