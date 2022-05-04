@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Gestionar Demandas</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navSKP"></div>
+<div class="demanda">
+  <h1>Lista de Demandas</h1>
+
+  <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
+    Encara no s'ha introduït cap demanda a l'aplicació
+  </div>
+
+  <table th:if="${not #lists.isEmpty(demandas)}" class="table table-striped">
+    <thead>
+    <tr>
+      <th>Estudiante</th>
+      <th>Horas</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Final</th>
+      <th>Skill</th>
+      <th>Nivel</th>
+      <th>Descripcion</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="demanda: ${demandas}">
+      <td th:text="${demanda.estudiante}"></td>
+      <td th:text="${demanda.horas}"></td>
+      <td th:text="${demanda.iniFecha}"></td>
+      <td th:text="${{demanda.finFecha}}"></td>
+      <td th:text="${{skills.get(demanda.skill - 1).nombre}}"></td>
+      <td th:text="${{skills.get(demanda.skill - 1).nivel}}"></td>
+      <td th:text="${{demanda.descripcion}}"></td>
+      <td><a th:href="@{/demanda/delete/{nom}/(nom=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
