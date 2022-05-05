@@ -38,7 +38,7 @@ public class ColaboracionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = "/update/{idOferta}/{idDemanda}", method = RequestMethod.GET)
+    @RequestMapping(value = "/update/{idColaboracion}", method = RequestMethod.GET)
     public String editColaboracion(Model model, @PathVariable String idColaboracion){
         model.addAttribute("colaboracion",colaboracionDao.getColaboracion(idColaboracion));
         return "colaboracion/update";
