@@ -36,31 +36,14 @@ public class ColaboracionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = "/update/{idOferta}/{idDemanda}", method = RequestMethod.GET)
-    public String editColaboracion(Model model, @PathVariable String idOferta,
-                                                @PathVariable String idDemanda){
-        model.addAttribute("colaboracion",colaboracionDao.getColaboracion(idOferta,idDemanda));
-        return "colaboracion/update";
-    }
-
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("colaboracion") Colaboracion colaboracion,
-            BindingResult bindingResult){
-        if (bindingResult.hasErrors())
-            return "colaboracion/update";
-        colaboracionDao.updateColaboracion(colaboracion);
-        return "redirect:list";
-    }
-
-    @RequestMapping(value = "/delete/{idOferta}/{idDemanda}")
-    public String  processDeleteDemanda(@PathVariable String idOferta, @PathVariable String idDemanda){
-        colaboracionDao.endColaboracion(idOferta,idDemanda);
+    @RequestMapping(value = "/delete/{idColaboracion}")
+    public String  processDeleteColaboracion(@PathVariable String idColaboracion){
+        colaboracionDao.endColaboracion(idColaboracion);
         return "redirect:../../list";
     }
 
     @RequestMapping("/list")
-    public String listDemandas(Model model){
+    public String listColaboraciones(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
         return "colaboracion/list";
     }

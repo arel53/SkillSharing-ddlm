@@ -10,8 +10,9 @@ public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
     @Override
     public Colaboracion mapRow(ResultSet rs, int rowNum) throws SQLException {
         Colaboracion colaboracion = new Colaboracion();
+        colaboracion.setIdColaboracion(rs.getInt("id_colaboracion"));
         colaboracion.setIdOferta(rs.getInt("id_oferta"));
-        colaboracion.setIdDemanda(rs.getString("id_demanda"));
+        colaboracion.setIdDemanda(rs.getInt("id_demanda"));
         colaboracion.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
         colaboracion.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
         colaboracion.setActiva(rs.getBoolean("activa"));

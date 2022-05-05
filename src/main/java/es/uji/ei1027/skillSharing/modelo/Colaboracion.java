@@ -1,14 +1,14 @@
 package es.uji.ei1027.skillSharing.modelo;
 
-import org.apache.tomcat.jni.Local;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
 public class Colaboracion {
 
+    private int idColaboracion;
     private int idOferta;
-    private String idDemanda;
+    private int idDemanda;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate iniFecha;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -23,11 +23,15 @@ public class Colaboracion {
         super();
     }
 
+    public int getIdColaboracion() {
+        return idColaboracion;
+    }
+
     public int getIdOferta() {
         return idOferta;
     }
 
-    public String getIdDemanda() {
+    public int getIdDemanda() {
         return idDemanda;
     }
 
@@ -55,11 +59,14 @@ public class Colaboracion {
         return horas;
     }
 
+    public void setIdColaboracion(int idColaboracion) {
+        this.idColaboracion = idColaboracion;
+    }
     public void setIdOferta(int idOferta) {
         this.idOferta = idOferta;
     }
 
-    public void setIdDemanda(String idDemanda) {
+    public void setIdDemanda(int idDemanda) {
         this.idDemanda = idDemanda;
     }
 

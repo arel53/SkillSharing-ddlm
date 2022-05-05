@@ -20,25 +20,25 @@ public class ColaboracionDao {
 
 
     public void addColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("INSERT INTO colaboracion VALUES(?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
+        jdbcTemplate.update("INSERT INTO colaboracion VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdColaboracion(), colaboracion.getIdOferta(),
                 colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
                 colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras());
     }
 
-    public void endColaboracion(String idOferta, String idDemanda) {
-        jdbcTemplate.update("UPDATE colaboracion SET activa = FALSE WHERE id_oferta = ? AND id_demanda = ?", idOferta, idDemanda);
+    public void endColaboracion(String idColaboracion) {
+        jdbcTemplate.update("UPDATE colaboracion SET activa = FALSE WHERE id_colaboracion = ?", idColaboracion);
     }
 
     public void updateColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("UPDATE colaboracion SET  id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
-                "activa = ?, rate = ?, comentario = ?,horas = ? WHERE id_oferta = ?",
-                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
-                colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras(), colaboracion.getIdOferta());
+        jdbcTemplate.update("UPDATE colaboracion SET  id_colaboracion = ?, id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
+                "activa = ?, rate = ?, comentario = ?,horas = ? WHERE id_colaboracion = ?",
+                colaboracion.getIdColaboracion(), colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
+                colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras(), colaboracion.getIdColaboracion());
     }
 
-    public Colaboracion getColaboracion(String idOferta, String idDemanda) {
+    public Colaboracion getColaboracion(String idColaboracion) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM colaboracion WHERE id_oferta = ? AND id_demanda = ?", new ColaboracionRowMapper(), idOferta, idDemanda);
+            return jdbcTemplate.queryForObject("SELECT * FROM colaboracion WHERE id_colaboracion = ?", new ColaboracionRowMapper(), idColaboracion);
         }
         catch (EmptyResultDataAccessException e){
             return null;

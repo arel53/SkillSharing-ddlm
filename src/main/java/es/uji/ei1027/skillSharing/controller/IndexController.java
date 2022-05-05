@@ -1,13 +1,9 @@
 package es.uji.ei1027.skillSharing.controller;
 
-import es.uji.ei1027.skillSharing.dao.DemandaDao;
-import es.uji.ei1027.skillSharing.dao.EstudianteDao;
-import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.UsuarioDao;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpSession;
@@ -27,7 +23,7 @@ public class IndexController {
                 return "redirect:/inicio/userIndex";
             }
         }
-        return "inicio/index";
+        return "/inicio/index";
     }
     @RequestMapping("/disableduser")
     public String goDisabled(HttpSession session) {
