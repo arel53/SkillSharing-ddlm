@@ -69,7 +69,7 @@ public class DemandaController {
         if (bindingResult.hasErrors())
             return "demanda/update";
         demandaDao.updateDemanda(demanda);
-        return "redirect:list";
+        return "redirect:listMisDemandas";
     }
 
     @RequestMapping(value = "/delete/{idDemanda}")

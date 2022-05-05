@@ -45,7 +45,9 @@ public class IndexController {
             return "redirect:/forbiden";
         }
         return "/inicio/skpIndex";
-    }@RequestMapping("/inicio/userIndex")
+    }
+
+    @RequestMapping("/inicio/userIndex")
     public String goInicioUserIndex(HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/inicio/userIndex");
@@ -57,9 +59,4 @@ public class IndexController {
         }
         return "/inicio/userIndex";
     }
-
-
-
-
-
 }
