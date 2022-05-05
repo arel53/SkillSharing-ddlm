@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/colaboracion")
 public class ColaboracionController {
@@ -65,7 +67,11 @@ public class ColaboracionController {
     }
 
     @RequestMapping("/listMisColaboraciones")
-    public String listMisColaboraciones(Model model){
+    public String listMisColaboraciones(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
         return "colaboracion/listMisColaboraciones";
     }
