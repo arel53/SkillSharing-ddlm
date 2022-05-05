@@ -1,6 +1,7 @@
 package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Colaboracion;
+import es.uji.ei1027.skillSharing.modelo.Demanda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -72,4 +73,15 @@ public class ColaboracionDao {
             return null;
         }
     }
+
+    public List<Colaboracion> getColaboracionesEstudiante(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT c.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM colaboracion AS c JOIN demanda as d USING(id_demanda) JOIN estuciante as e USING(estudiante) WHERE c.activa= TRUE and estudiante = ?", new ColaboracionRowMapper(), nif);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    
 }

@@ -36,8 +36,24 @@ public class ColaboracionController {
         return "redirect:list";
     }
 
+    @RequestMapping(value = "/update/{idOferta}/{idDemanda}", method = RequestMethod.GET)
+    public String editColaboracion(Model model, @PathVariable String idColaboracion){
+        model.addAttribute("colaboracion",colaboracionDao.getColaboracion(idColaboracion));
+        return "colaboracion/update";
+    }
+
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
+    public String processUpdateSubmit(
+            @ModelAttribute("colaboracion") Colaboracion colaboracion,
+            BindingResult bindingResult){
+        if (bindingResult.hasErrors())
+            return "colaboracion/update";
+        colaboracionDao.updateColaboracion(colaboracion);
+        return "redirect:list";
+    }
+
     @RequestMapping(value = "/delete/{idColaboracion}")
-    public String  processDeleteColaboracion(@PathVariable String idColaboracion){
+    public String  processDeleteDemanda(@PathVariable String idColaboracion){
         colaboracionDao.endColaboracion(idColaboracion);
         return "redirect:../../list";
     }
@@ -46,6 +62,12 @@ public class ColaboracionController {
     public String listColaboraciones(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
         return "colaboracion/list";
+    }
+
+    @RequestMapping("/listMisColaboraciones")
+    public String listMisColaboraciones(Model model){
+        model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
+        return "colaboracion/listMisColaboraciones";
     }
 
 }
