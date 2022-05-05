@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Datos</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h2>Modifica Datos</h2>
+    <form class="form-horizontal" action="#" th:action="@{/demanda/update}"
+          th:object="${demanda}" method="post">
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">nif</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" readonly th:field="*{nif}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <label class="control-label col-sm-2">Estudiante</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" readonly th:field="*{estudiante}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <label class="control-label col-sm-2">Horas</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="number" th:field="*{horas}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Fecha de Inicio</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{iniFecha}"/>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Fecha de Final</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{finFecha}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Skill</label>
+
+            <div class="col-sm-4">
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
+                    <tr >
+                        <option th:each="s: ${skills}" th:value="${s.idSkill}" th:selected="${s.idSkill == demanda.skill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+                    </tr>
+                </select>
+                </td>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Descripcion</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{descripcion}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <input class="form-control" type="hidden" th:field="*{activa}"/>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary"/>
+                Modifica Demanda</button>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
