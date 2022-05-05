@@ -18,7 +18,15 @@ public class IndexController {
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao){this.usuarioDao=usuarioDao;}
     @RequestMapping("/")
-    public String home(){
+    public String home(HttpSession session){
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (user != null){
+            if (user.isSkp()){
+                return "redirect:/inicio/skpIndex";
+            }else{
+                return "redirect:/inicio/userIndex";
+            }
+        }
         return "inicio/index";
     }
     @RequestMapping("/disableduser")

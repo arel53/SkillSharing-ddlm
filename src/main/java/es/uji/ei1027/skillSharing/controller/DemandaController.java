@@ -30,19 +30,30 @@ public class DemandaController {
     public void setSkillDao(SkillDao skillDao){this.skillDao=skillDao;}
 
     @RequestMapping(value = "/add")
-    public String addDemanda(Model model){
+    public String addDemanda(HttpSession session, Model model){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/demanda/add");
+            return "redirect:/login";
+        }
+
         model.addAttribute("demanda", new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
         return "demanda/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("demanda") Demanda demanda,
+    public String processAddSubmit(HttpSession session,@ModelAttribute("demanda") Demanda demanda,
                                   BindingResult bindingResult) {
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/demanda/add");
+            return "redirect:/login";
+        }
         if (bindingResult.hasErrors())
             return "demanda/add";
+        Usuario user  = (Usuario) session.getAttribute("user");
+        demanda.setEstudiante(user.getNif());
         demandaDao.addDemanda(demanda);
-        return "redirect:list";
+        return "redirect:listMisDemandas";
     }
 
     @RequestMapping(value = "/update/{idDemanda}", method = RequestMethod.GET)

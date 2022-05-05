@@ -13,9 +13,9 @@
           th:object="${oferta}" method="post">
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label>
+            <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="estudiante" th:field="*{estudiante}"/>
+                <input type="hidden" class="form-control" id="estudiante" th:field="*{estudiante} "/>
             </div>
         </div>
 

@@ -31,7 +31,7 @@
         </thead>
         <tbody>
         <tr th:each="demanda: ${misDemandas}">
-            <td th:text="${demanda.estudiante}"></td>
+            <td th:text="${demanda.estudiante}"></td><!-- Bindeao el nif con el estudiante en la consulta sql -->
             <td th:text="${demanda.horas}"></td>
             <td th:text="${demanda.iniFecha}"></td>
             <td th:text="${{demanda.finFecha}}"></td>

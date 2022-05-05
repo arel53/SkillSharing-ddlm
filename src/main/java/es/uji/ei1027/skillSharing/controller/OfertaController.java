@@ -28,21 +28,27 @@ public class OfertaController {
     public void setSkillDao(SkillDao skillDao){this.skillDao=skillDao;}
 
     @RequestMapping(value = "/add")
-    public String addOferta(Model model){
+    public String addOferta(HttpSession session, Model model){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/add");
+            return "redirect:/login";
+        }
         model.addAttribute("oferta", new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         return "oferta/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("oferta") Oferta oferta,
+    public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta,
                                   BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             System.out.println(oferta);
             return "oferta/add";
         }
+        Usuario user = (Usuario)session.getAttribute("user");
+        oferta.setEstudiante(user.getNif());
         ofertaDao.addOferta(oferta);
-        return "redirect:list";
+        return "redirect:listMisOfertas";
     }
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)

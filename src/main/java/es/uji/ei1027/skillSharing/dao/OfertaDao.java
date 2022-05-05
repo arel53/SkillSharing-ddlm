@@ -65,7 +65,7 @@ public class OfertaDao {
     public List<Oferta> getTodasOfertasMenosMias(String estudiante) {
 
         try {
-            return jdbcTemplate.query("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.activa= TRUE and estudiante <> ?", new OfertaRowMapper(), estudiante);
+            return jdbcTemplate.query("SELECT o.id_oferta, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and estudiante <> ?", new OfertaRowMapper(), estudiante);
         }
         catch (EmptyResultDataAccessException e) {
             return new ArrayList<Oferta>();
