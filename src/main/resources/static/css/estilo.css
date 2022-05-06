@@ -1,6 +1,7 @@
 @charset "UTF-8";
-img{
-  width:50%;
+
+.imga{
+  width:auto;
   height:auto;
   display:block;
 }
@@ -20,4 +21,85 @@ li.right{
     text-align:right;
     display:flex
 }
+
+#authentication {
+    width: 100%;
+    overflow: hidden;
+    font-size: 1em;
+    max-height: 9em;
+}
+
+.panel-heading {
+    padding: 1em 1em;
+    border-radius: 0.3em 0.3em 0 0;
+    background-color: #055bb5;
+}
+
+.text-center {
+    text-align: center;
+}
+div {
+    display: block;
+}
+
+#logo.customlogo {
+    background-image: url(https://xarxa.uji.es:8090/images/customizeimages/uploadedwebclientlogo.jpg);
+    height: 3em;
+}
+#logo {
+    margin: 0 auto;
+    width: 90%;
+    height: 1em;
+    color: #055bb5;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+.text-center {
+    text-align: center;
+}
+
+style attribute {
+    cursor: pointer;
+    background-color: #F0F0F0;
+}
+
+body {
+    font-family: 'SophosSansRegular', sans-serif;
+    color: #5c5c5c;
+    margin: 5em 0;
+}
+
+
+.center-box {
+    width: 20em;
+    margin: 10vh auto;
+    border: none;
+}
+
+.panel-primary {
+    border-color: #d7dbdd;
+}
+.panel {
+    box-shadow: none;
+    margin-bottom: 1em;
+    background-color: #fff;
+    border-radius: 0.3em;
+}
+
+.panel-body {
+    border: 1px solid #d7dbdd;
+    border-top: none;
+}
+
+.panel-body {
+    padding: 1.8em;
+}
+
 
