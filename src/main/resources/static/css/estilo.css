@@ -43,7 +43,7 @@ div {
 }
 
 #logo.customlogo {
-    background-image: url(https://xarxa.uji.es:8090/images/customizeimages/uploadedwebclientlogo.jpg);
+    background-image: url(https://www.vertebres.es/paginas/images/ujion.png);
     height: 3em;
 }
 #logo {
@@ -101,5 +101,7 @@ body {
 .panel-body {
     padding: 1.8em;
 }
+
+
 
 
