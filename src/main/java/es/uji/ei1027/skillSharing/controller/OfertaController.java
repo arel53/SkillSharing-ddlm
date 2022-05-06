@@ -118,6 +118,21 @@ public class OfertaController {
         model.addAttribute("ofertas",ofertaDao.getTodasOfertasMenosMias(user.getNif()));
         return "oferta/listOfertasUser";
     }
+
+    @RequestMapping("/listOfertasUser/{idSkill}")
+    public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill){
+
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+
+        model.addAttribute("ofertas",ofertaDao.getOfertasAsociadasASkill(Integer.parseInt(idSkill)));
+        return "oferta/listOfertasAsociadasSkillUser";
+    }
+
+
     @RequestMapping("/listMisOfertas")
     public String listMisOfertas(HttpSession session,Model model){
         if (session.getAttribute("user") == null){

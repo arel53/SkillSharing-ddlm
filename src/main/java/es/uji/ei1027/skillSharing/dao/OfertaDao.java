@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillSharing.dao;
 
+import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -71,6 +72,15 @@ public class OfertaDao {
             return new ArrayList<Oferta>();
         }
 
+    }
+
+    public List<Oferta> getOfertasAsociadasASkill(int idSkill) {
+        try {
+            return jdbcTemplate.query("SELECT o.id_oferta, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and id_skill=?", new OfertaRowMapper(), idSkill);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
 }

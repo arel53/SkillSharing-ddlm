@@ -1,8 +1,10 @@
 package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
+import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
+import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @Controller
@@ -22,13 +25,16 @@ public class DemandaController {
 
     private DemandaDao demandaDao;
     private SkillDao skillDao;
+    private OfertaDao ofertaDao;
 
     @Autowired
     public void setDemandaDao(DemandaDao demandaDao){this.demandaDao=demandaDao;}
     @Autowired
     public void setSkillDao(SkillDao skillDao){this.skillDao=skillDao;}
+    @Autowired
+    public void setOfertaDao(OfertaDao ofertaDao) {this.ofertaDao = ofertaDao;}
 
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String addDemanda(HttpSession session, Model model){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/demanda/add");
@@ -51,8 +57,14 @@ public class DemandaController {
             return "demanda/add";
         Usuario user  = (Usuario) session.getAttribute("user");
         demanda.setEstudiante(user.getNif());
+        List<Oferta> ofertaAsociadasSkill = ofertaDao.getOfertasAsociadasASkill(demanda.getSkill());
         demandaDao.addDemanda(demanda);
-        return "redirect:listMisDemandas";
+        if (ofertaAsociadasSkill.isEmpty())
+            return "redirect:listMisDemandas";
+        else{
+            demandaDao.endDemanda(String.valueOf(demanda.getIdDemanda()));
+            return "redirect:../listOfertasUser/"+"{"+demanda.getSkill()+"}";
+        }
     }
 
     @RequestMapping(value = "/update/{idDemanda}", method = RequestMethod.GET)
@@ -132,5 +144,5 @@ public class DemandaController {
         return "demanda/listMisDemandas";
     }
 
-    // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como
+    // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como 259x2x48
 }
