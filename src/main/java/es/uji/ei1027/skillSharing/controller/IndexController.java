@@ -59,4 +59,20 @@ public class IndexController {
         }
         return "/inicio/userIndex";
     }
+
+    @RequestMapping("/inicio/miCuenta")
+    public String goInicioUserMiCuenta(HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/inicio/userIndex");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+
+        if (user.isSkp()){
+            return "redirect:/forbiden";
+        }
+
+        return "/inicio/miCuentaIndex";
+
+    }
 }

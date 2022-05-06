@@ -58,12 +58,13 @@ public class DemandaController {
         Usuario user  = (Usuario) session.getAttribute("user");
         demanda.setEstudiante(user.getNif());
         List<Oferta> ofertaAsociadasSkill = ofertaDao.getOfertasAsociadasASkill(demanda.getSkill());
+        System.out.println(ofertaAsociadasSkill);
         demandaDao.addDemanda(demanda);
         if (ofertaAsociadasSkill.isEmpty())
             return "redirect:listMisDemandas";
         else{
-            demandaDao.endDemanda(String.valueOf(demanda.getIdDemanda()));
-            return "redirect:../listOfertasUser/"+"{"+demanda.getSkill()+"}";
+            System.out.println("hola");
+            return "redirect:/oferta/listOfertasUser/"+ demanda.getSkill();
         }
     }
 

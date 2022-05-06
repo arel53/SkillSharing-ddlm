@@ -79,7 +79,7 @@ public class OfertaController {
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
-            Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
+            Oferta of = (Oferta) ofertaDao.getOferta(idOferta);
             if (user.getNif().equals(of.getEstudiante())){
                 ofertaDao.endOferta(idOferta);
                 return "redirect:../../listMisOfertas";
@@ -129,7 +129,7 @@ public class OfertaController {
         Usuario user = (Usuario)session.getAttribute("user");
 
         model.addAttribute("ofertas",ofertaDao.getOfertasAsociadasASkill(Integer.parseInt(idSkill)));
-        return "oferta/listOfertasAsociadasSkillUser";
+        return "oferta/listOfertasEnlazadas";
     }
 
 
