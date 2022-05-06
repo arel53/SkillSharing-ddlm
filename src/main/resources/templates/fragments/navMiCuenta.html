@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>nav</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="navbar-collapse collapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/oferta/listMisOfertas}">Mis Ofertas</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/demanda/listMisDemandas}">Mis Demandas</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/colaboracion/listMisColaboraciones}">Mis Colaboraciones</a></li>
+            <li class="nav-item" ><a class="nav-link" href="/" th:href="@{/estudiante/perfil}">Mi perfil</a></li>
+        </ul>
+    </div>
+
+</nav>
+</body>
+</html>
