@@ -2,7 +2,6 @@ package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.modelo.Estudiante;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -34,7 +33,7 @@ public class EstudianteController {
         Usuario user = (Usuario)session.getAttribute("user");
 
         model.addAttribute("estudiante",estudianteDao.getEstudiante(user.getNif()));
-        return "redirect:/get/"+ user.getNif();
+        return "redirect:get/"+ user.getNif();
     }
 
     @RequestMapping(value = "/get/{nif}", method = RequestMethod.GET)
@@ -64,7 +63,7 @@ public class EstudianteController {
             session.setAttribute("nextUrl","/estudiante/update");
             return "login";
         }
-        return "/update";
+        return "estudiante/update";
     }
 
 
@@ -76,6 +75,6 @@ public class EstudianteController {
             return "estudiante/update";
         }
         estudianteDao.updateEstudiante(estudiante);
-        return "redirect:/getEstudiante";
+        return "redirect:getEstudiante";
     }
 }
