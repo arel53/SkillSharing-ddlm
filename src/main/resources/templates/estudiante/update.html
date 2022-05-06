@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica Datos</title>
+    <title>Modifica Demanda</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,8 +9,8 @@
 <body>
 <div class="container">
     <h2>Modifica Datos</h2>
-    <form class="form-horizontal" action="#" th:action="@{/demanda/update}"
-          th:object="${demanda}" method="post">
+    <form class="form-horizontal" action="#" th:action="@{/estudiante/update}"
+          th:object="${estudiante}" method="post">
 
         <div class="form-group row">
             <label class="control-label col-sm-2">nif</label>
@@ -21,56 +21,59 @@
 
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Estudiante</label>
+            <label class="control-label col-sm-2">Nombre</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{estudiante}"/>
+                <input class="form-control" type="text" th:field="*{nombre}"/>
             </div>
         </div>
 
         <div class="form-group row">
 
+            <label class="control-label col-sm-2">Apellido</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="number" th:field="*{apellido}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Email</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{email}"/>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Grado</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{grado}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Edad</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" readonly th:field="*{edad}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Sexo</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{sexo}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Dirección</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{direccion}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
             <label class="control-label col-sm-2">Horas</label>
             <div class="col-sm-4">
-                <input class="form-control" type="number" th:field="*{horas}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Inicio</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" th:field="*{iniFecha}"/>
-
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Final</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" th:field="*{finFecha}"/>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Skill</label>
-
-            <div class="col-sm-4">
-                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
-                    <tr >
-                        <option th:each="s: ${skills}" th:value="${s.idSkill}" th:selected="${s.idSkill == demanda.skill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
-                    </tr>
-                </select>
-                </td>
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <label class="control-label col-sm-2">Descripcion</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="text" th:field="*{descripcion}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-4">
-                <input class="form-control" type="hidden" th:field="*{activa}"/>
+                <input class="form-control" type="text" readonly th:field="*{direccion}"/>
             </div>
         </div>
 
@@ -79,9 +82,10 @@
 
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-primary"/>
-                Modifica Demanda</button>
+                Modifica Datos</button>
             </div>
         </div>
+
     </form>
 </div>
 </body>

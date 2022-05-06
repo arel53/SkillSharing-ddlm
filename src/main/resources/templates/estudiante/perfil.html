@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Mi Perfil</title>
+    <title>Mi perfil</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navPerfil"></div>
+<div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h1>Mi Perfil</h1>
+    <h1>Mi perfil</h1>
 
     <table  class="table table-striped">
         <thead>
@@ -29,16 +29,16 @@
         </thead>
         <tbody>
         <tr >
-<!--            <td th:text="${estudiante.nif}"></td>-->
-<!--            <td th:text="${estudiante.nombre}"></td>-->
-<!--            <td th:text="${estudiante.apellido}"></td>-->
-<!--            <td th:text="${{estudiante.email}}"></td>-->
-<!--            <td th:text="${{estudiante.grado}}"></td>-->
-<!--            <td th:text="${{estudiante.edad}}"></td>-->
-<!--            <td th:text="${{estudiante.sexo}}"></td>-->
-<!--            <td th:text="${{estudiante.direccion}}"></td>-->
-<!--            <td th:text="${{estudiante.horas}}"></td>-->
-<!--            <td> <a th:href="@{/estudiante/update/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Edita</a></td>-->
+            <td th:text="${estudiante.nif}"></td>
+            <td th:text="${estudiante.nombre}"></td>
+            <td th:text="${estudiante.apellido}"></td>
+            <td th:text="${{estudiante.email}}"></td>
+            <td th:text="${{estudiante.grado}}"></td>
+            <td th:text="${{estudiante.edad}}"></td>
+            <td th:text="${{estudiante.sexo}}"></td>
+            <td th:text="${{estudiante.direccion}}"></td>
+            <td th:text="${{estudiante.horas}}"></td>
+            <td> <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Edita</a></td>
         </tr>
         </tbody>
     </table>
