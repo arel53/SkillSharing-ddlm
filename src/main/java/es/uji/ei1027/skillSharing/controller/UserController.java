@@ -1,12 +1,11 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.dao.UsuarioDao;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
-import org.apache.catalina.User;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,16 +14,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
 
 @Controller
 @RequestMapping("/usuario")
 public class UserController {
     private UsuarioDao usuarioDao;
+    private EstudianteDao estudianteDao;
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao) {
         this.usuarioDao=usuarioDao;
+    }
+    @Autowired
+    public void setEstudianteDao(EstudianteDao estudianteDao) {
+        this.estudianteDao = estudianteDao;
     }
     @RequestMapping("/list")
     public String listUsuarios(HttpSession session, Model model) {
@@ -47,6 +49,7 @@ public class UserController {
             return "forbiden";
         }
         model.addAttribute("usuario", new Usuario());
+        model.addAttribute("estudiantes",estudianteDao.getEstudiantesInactivos());
         return "usuario/add";
     }
     @RequestMapping(value="/add", method= RequestMethod.POST)
