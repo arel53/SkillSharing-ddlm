@@ -50,7 +50,9 @@
         </tr>
         <tr>
             <td><label>Nif</label></td>
-            <td><input type="text" th:field="*{nif}" placeholder="Nif" maxlength="9" /></td>
+            <td><select id="sel1" type="value" th:field="*{nif}">
+            <option th:each="e: ${estudiantes}" th:value="${e.nif}" th:text="${e.nif}"></option>
+                </select></td>
             <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}"></td>
         </tr>
         <tr>

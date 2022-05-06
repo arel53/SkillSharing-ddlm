@@ -1,6 +1,5 @@
 package es.uji.ei1027.skillSharing.dao;
 
-import es.uji.ei1027.skillSharing.modelo.Estudiante;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +60,15 @@ public class UsuarioDao {
         }
         else {
             return null; // bad login!
+        }
+    }
+
+    public List<Usuario> getUsuariosInactivos() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM usuario WHERE active = FALSE", new UsuarioRowMapper());
+        }
+        catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
         }
     }
 
