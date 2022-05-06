@@ -18,12 +18,11 @@
     <table th:if="${not #lists.isEmpty(misOfertas)}" class="table table-striped">
         <thead>
         <tr>
-            <th>Estudiante</th>
+            <th>Nombre Skill</th>
+            <th>Nivel Skill </th>
             <th>Horas</th>
             <th>Fecha de Inicio</th>
             <th>Fecha de Final</th>
-            <th>Nombre Skill</th>
-            <th>Nivel Skill </th>
             <th>Descripcion</th>
             <th></th>
             <th></th>
@@ -31,12 +30,11 @@
         </thead>
         <tbody>
         <tr th:each="oferta: ${misOfertas}">
-            <td th:text="${oferta.estudiante}"></td>
+            <td th:text="${{oferta.nombreSkill}}"></td>
+            <td th:text="${{oferta.nivelSkill}}"></td>
             <td th:text="${oferta.horas}"></td>
             <td th:text="${oferta.iniFecha}"></td>
             <td th:text="${{oferta.finFecha}}"></td>
-            <td th:text="${{oferta.nombreSkill}}"></td>
-            <td th:text="${{oferta.nivelSkill}}"></td>
             <td th:text="${{oferta.descripcion}}"></td>
             <td> <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a></td>
             <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>
