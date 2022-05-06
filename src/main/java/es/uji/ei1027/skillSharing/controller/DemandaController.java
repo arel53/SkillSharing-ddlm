@@ -58,12 +58,10 @@ public class DemandaController {
         Usuario user  = (Usuario) session.getAttribute("user");
         demanda.setEstudiante(user.getNif());
         List<Oferta> ofertaAsociadasSkill = ofertaDao.getOfertasAsociadasASkill(demanda.getSkill());
-        System.out.println(ofertaAsociadasSkill);
         demandaDao.addDemanda(demanda);
         if (ofertaAsociadasSkill.isEmpty())
             return "redirect:listMisDemandas";
         else{
-            System.out.println("hola");
             return "redirect:/oferta/listOfertasUser/"+ demanda.getSkill();
         }
     }
@@ -132,6 +130,17 @@ public class DemandaController {
         Usuario user = (Usuario) session.getAttribute("user");
         model.addAttribute("misDemandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
         return "demanda/listDemandasUser";
+    }
+
+    @RequestMapping("/listDemandasUser/{idSkill}")
+    public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misDemandas",demandaDao.getDemandasAsociadasASkill(Integer.parseInt(idSkill)));
+        return "demanda/listDemandasEnlazadas";
     }
 
     @RequestMapping("/listMisDemandas")

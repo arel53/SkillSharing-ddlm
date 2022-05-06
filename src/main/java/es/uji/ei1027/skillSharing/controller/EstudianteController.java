@@ -23,7 +23,7 @@ public class EstudianteController {
     @Autowired
     public void setEstudianteDao(EstudianteDao estudianteDao){this.estudianteDao=estudianteDao;}
 
-    @RequestMapping("/getEstudiante")
+    @RequestMapping("/perfil")
     public String listEstudiante(HttpSession session, Model model){
 
         if (session.getAttribute("user") == null){
