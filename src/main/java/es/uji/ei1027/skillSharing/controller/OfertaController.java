@@ -1,7 +1,9 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import es.uji.ei1027.skillSharing.dao.DemandaDao;
 import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
+import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 @RequestMapping("/oferta")
@@ -21,11 +24,15 @@ public class OfertaController {
 
     private OfertaDao ofertaDao;
     private SkillDao skillDao;
+    private DemandaDao demandaDao;
 
     @Autowired
     public void setOfertaDao(OfertaDao ofertaDao){this.ofertaDao=ofertaDao;}
     @Autowired
     public void setSkillDao(SkillDao skillDao){this.skillDao=skillDao;}
+    @Autowired
+    public void setDemandaDao(DemandaDao demandaDao) {this.demandaDao = demandaDao;}
+
 
     @RequestMapping(value = "/add")
     public String addOferta(HttpSession session, Model model){
@@ -41,14 +48,21 @@ public class OfertaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta,
                                   BindingResult bindingResult) {
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/add");
+            return "redirect:/login";
+        }
         if (bindingResult.hasErrors()) {
-            System.out.println(oferta);
             return "oferta/add";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         oferta.setEstudiante(user.getNif());
+        List<Demanda> demandaAsociadaSkill = demandaDao.getDemandasAsociadasASkill(oferta.getSkill());
         ofertaDao.addOferta(oferta);
-        return "redirect:listMisOfertas";
+        if (demandaAsociadaSkill.isEmpty())
+            return "redirect:listMisOfertas";
+        else
+            return "redirect:/demanda/listDemandasUser/"+ oferta.getSkill();
     }
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)

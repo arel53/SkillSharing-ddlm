@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Mis Demandas</title>
+    <title>Demandas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navMiCuenta"></div>
+<div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h1>Mis Demandas</h1>
+    <h1>Demandas</h1>
 
     <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">
-        No tienes demandas.
+        Nadie demanda ninguna clase.
     </div>
 
     <table th:if="${not #lists.isEmpty(misDemandas)}" class="table table-striped">
+        <p>Estas son las demandas relacionadas con la habilidad requerida en la oferta creada</p>
         <thead>
         <tr>
             <th>Estudiante</th>
@@ -31,19 +32,22 @@
         </thead>
         <tbody>
         <tr th:each="demanda: ${misDemandas}">
-            <td th:text="${demanda.estudiante}"></td>
+            <td th:text="${demanda.estudiante}"></td><!-- Bindeao el nif con el estudiante en la consulta sql -->
             <td th:text="${demanda.horas}"></td>
             <td th:text="${demanda.iniFecha}"></td>
             <td th:text="${{demanda.finFecha}}"></td>
             <td th:text="${{demanda.nombreSkill}}"></td>
             <td th:text="${{demanda.nivelSkill}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
-            <td> <a th:href="@{/demanda/update/{nom}(nom=${demanda.idDemanda})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/demanda/delete/{nom}/(nom=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>
+            <td> <a th:href="@{/}" class="btn btn-warning" role="button">Colabora</a></td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Añade Demanda</a>
+    <div class="form-group row">
+        <div class="col-sm-offset-2 col-sm-4">
+            <a role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
+        </div>
+    </div>
 </div>
 </body>
 </html>
