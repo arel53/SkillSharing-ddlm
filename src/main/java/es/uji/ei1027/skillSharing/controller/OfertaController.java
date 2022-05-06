@@ -68,7 +68,7 @@ public class OfertaController {
             return "oferta/update";
         }
         ofertaDao.updateOferta(oferta);
-        return "redirect:list";
+        return "redirect:listMisOfertas";
     }
 
     @RequestMapping(value = "/delete/{idOferta}")

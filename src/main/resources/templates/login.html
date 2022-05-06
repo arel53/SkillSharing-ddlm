@@ -1,28 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Login</title>
-  <meta charset="UTF-8"/>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+    <title>Login</title>
+    <meta charset="UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css"/>
+
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 
 </head>
 <body>
 <div class="container">
-<h2>Accés</h2>
-<form action="#" th:action="@{/login}"
-      th:object="${usuario}" method="post">
-  <p>
-    <label>Nom d'usuari:</label>
-    <input class="form_control" type="text" th:field="*{username}"/>
-  <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
-  </p>
-  <p>
-    <label>Contrasenya:</label>
-    <input class="form_control" type="password" th:field="*{password}"/>
-  <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
-  </p>
-  <input type="submit" class="btn btn-success" value="Accedir" />
-</form>
+    <div class="panel panel-primary center-box">
+        <!-- Esto para el logo UJI -->
+        <div id="panelheading" class="panel-heading text-center" style="cursor:pointer; background-color:#F0F0F0;">
+            <a href="http://www.uji.es" target="_blank">
+                <div id="logo" class="customlogo">
+
+                </div>
+            </a>
+        </div>
+        <!-- Esto para el logo UJI -->
+        <div class="panel-body">
+            <h2>Accés</h2>
+            <form action="#" th:action="@{/login}"
+                  th:object="${usuario}" method="post">
+                <p>
+                    <input class="form_control" type="text" th:field="*{username}" placeholder="Usuario"/>
+                <div class="error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+                </p>
+                <p>
+                    <input class="form_control" type="password" th:field="*{password}" placeholder="Contraseña"/>
+                <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+                </p>
+                <input type="submit" class="btn btn-success" value="Acceder"/>
+            </form>
+        </div>
+    </div>
 </div>
 </body>
 </html>
