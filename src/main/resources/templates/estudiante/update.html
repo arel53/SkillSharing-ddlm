@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Demanda</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h2>Modifica Datos</h2>
+    <form class="form-horizontal" action="#" th:action="@{/estudiante/update}"
+          th:object="${estudiante}" method="post">
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">nif</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" readonly th:field="*{nif}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <label class="control-label col-sm-2">Nombre</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{nombre}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+
+            <label class="control-label col-sm-2">Apellido</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="number" th:field="*{apellido}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Email</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{email}"/>
+
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Grado</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" th:field="*{grado}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Edad</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" readonly th:field="*{edad}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Sexo</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{sexo}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Dirección</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" th:field="*{direccion}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Horas</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="text" readonly th:field="*{direccion}"/>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-primary"/>
+                Modifica Datos</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+</body>
+</html>
