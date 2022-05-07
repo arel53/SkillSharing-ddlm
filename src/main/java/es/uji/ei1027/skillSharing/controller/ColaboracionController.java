@@ -60,10 +60,10 @@ public class ColaboracionController {
         return "redirect:../../list";
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/listSKP")
     public String listColaboraciones(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
-        return "colaboracion/list";
+        return "colaboracion/listSKP";
     }
 
     @RequestMapping("/listMisColaboraciones")
@@ -75,5 +75,4 @@ public class ColaboracionController {
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
         return "colaboracion/listMisColaboraciones";
     }
-
 }
