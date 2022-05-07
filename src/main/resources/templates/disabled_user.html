@@ -1,13 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+/>
 <head>
     <meta charset="UTF-8">
     <title>Disabled user</title>
 </head>
-<body>
-Lo sentimos su usuario ha sido deshabilitado.
-Por favor ponte en contacto con administracion o inicia sesion con otra cuenta.
-
-Poner aqui boton de login y de inicio.
+<body class="container">
+<div th:replace="../templates/fragments/navPublic"></div>
+<br>
+<div><img class="imgUsuarioCancelado" src="imagenes/cancelado.jpg" width="310" height="163" alt=""></div>
+<br>
+<p>Lo sentimos, su usuario ha sido deshabilitado.</p>
+<p>Por favor ponte en contacto con administracion o inicia sesion con otra cuenta.</p>
+<br>
+<footer>
+    <hr>
+    <p class="text-muted">EI1027 - Disseny i Implementació de
+        Sistemes d'Informació</p>
+</footer>
 </body>
 </html>
