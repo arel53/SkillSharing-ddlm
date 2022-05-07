@@ -75,7 +75,7 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboracionesEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT c.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM colaboracion AS c JOIN demanda as d USING(id_demanda) JOIN estuciante as e USING(estudiante) WHERE c.activa= TRUE and estudiante = ?", new ColaboracionRowMapper(), nif);
+            return jdbcTemplate.query("SELECT c.* FROM colaboracion AS c JOIN demanda as d USING(id_demanda) JOIN estudiante as e USING(estudiante) WHERE c.activa= TRUE and estudiante = ?", new ColaboracionRowMapper(), nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;
