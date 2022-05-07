@@ -23,6 +23,9 @@ public class OfertaDao {
         oferta.getFinFecha(),true,oferta.getSkill(),oferta.getDescripcion());
     }
 
+    public int devuelveUltimoId(){
+        return jdbcTemplate.queryForObject("SELECT MAX(id_oferta) FROM oferta", Integer.class);
+    }
     public void endOferta(String idOferta) { jdbcTemplate.update("UPDATE oferta SET activa = FALSE WHERE id_oferta = ?", Integer.parseInt(idOferta));}
 
 

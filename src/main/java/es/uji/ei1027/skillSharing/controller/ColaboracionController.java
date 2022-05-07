@@ -36,27 +36,48 @@ public class ColaboracionController {
     public void setDemandaDao(DemandaDao demandaDao) {this.demandaDao = demandaDao;}
 
     @RequestMapping(value = "/addColaboracionOferta/{idOferta}")
-    public String addColaboracionOferta(Model model, HttpSession session,@PathVariable String idOferta){
+    public String addColaboracionOferta(HttpSession session,@PathVariable String idOferta){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
+            session.setAttribute("nextUrl","/addColaboracionOferta/" + idOferta);
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
         Oferta oferta = ofertaDao.getOferta(idOferta);
         Colaboracion colaboracion = new Colaboracion();
         Demanda demanda = new Demanda();
-        System.out.println(oferta.getIniFecha());
         demanda.setEstudiante(user.getNif()); demanda.setHoras(oferta.getHoras()); demanda.setIniFecha(oferta.getIniFecha());
         demanda.setFinFecha(oferta.getFinFecha()); demanda.setSkill(oferta.getSkill());
         demanda.setNombreSkill(oferta.getNombreSkill()); demanda.setNivelSkill(oferta.getNivelSkill());demanda.setDescripcion("Creada automática por el sistema");
         demandaDao.addDemanda(demanda);
         int idDemanda = demandaDao.devuelveUltimoId();
-        demandaDao.endDemanda(idDemanda+ "");
         colaboracion.setIdOferta(oferta.getIdOferta()); colaboracion.setIdDemanda(idDemanda);colaboracion.setHoras(oferta.getHoras());
         colaboracion.setIniFecha(oferta.getIniFecha()); colaboracion.setFinFecha(oferta.getFinFecha());
         colaboracionDao.addColaboracion(colaboracion);
-        ofertaDao.endOferta(idOferta);
-        return "redirect:../list";
+        return "redirect:../listMisColaboraciones";
+    }
+
+
+    @RequestMapping(value = "/addColaboracionDemanda/{idDemanda}")
+    public String addColaboracionDemanda(HttpSession session,@PathVariable String idDemanda){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/addColaboracionDemanda/"+ idDemanda);
+            return "login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        Demanda demanda = demandaDao.getDemanda(idDemanda);
+        Colaboracion colaboracion = new Colaboracion();
+        Oferta oferta = new Oferta();
+        oferta.setEstudiante(user.getNif());oferta.setHoras(demanda.getHoras());
+        oferta.setIniFecha(demanda.getIniFecha());
+        oferta.setFinFecha(demanda.getFinFecha()); oferta.setSkill(demanda.getSkill());
+        oferta.setNombreSkill(demanda.getNombreSkill()); oferta.setNivelSkill(demanda.getNivelSkill());
+        oferta.setDescripcion("Creada automática por el sistema");
+        ofertaDao.addOferta(oferta);
+        int idOferta = ofertaDao.devuelveUltimoId();
+        colaboracion.setIdOferta(idOferta); colaboracion.setIdDemanda(demanda.getIdDemanda());colaboracion.setHoras(demanda.getHoras());
+        colaboracion.setIniFecha(demanda.getIniFecha()); colaboracion.setFinFecha(demanda.getFinFecha());
+        colaboracionDao.addColaboracion(colaboracion);
+        return "redirect:../listMisColaboraciones";
     }
 
     @RequestMapping(value = "/update/{idColaboracion}", method = RequestMethod.GET)
@@ -81,10 +102,10 @@ public class ColaboracionController {
         return "redirect:../../list";
     }
 
-    @RequestMapping("/list")
+    @RequestMapping("/listColaboracionesUser")
     public String listColaboraciones(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
-        return "colaboracion/list";
+        return "colaboracion/listUser";
     }
 
     @RequestMapping("/listMisColaboraciones")
