@@ -38,7 +38,7 @@
             <td th:text="${oferta.iniFecha}"></td>
             <td th:text="${{oferta.finFecha}}"></td>
             <td th:text="${{oferta.descripcion}}"></td>
-            <td> <a class="btn btn-warning" role="button">Colaborar</a></td>
+            <td> <a class="btn btn-warning" role="button" th:href="@{/colaboracion/addColaboracionOferta/{idOferta}(idOferta=${oferta.idOferta})}">Colaborar</a></td>
         </tr>
         </tbody>
     </table>
