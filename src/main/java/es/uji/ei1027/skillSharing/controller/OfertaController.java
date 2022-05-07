@@ -62,7 +62,7 @@ public class OfertaController {
         if (demandaAsociadaSkill.isEmpty())
             return "redirect:listMisOfertas";
         else
-            return "redirect:/demanda/listDemandasUser/"+ oferta.getSkill();
+            return "redirect:/demanda/listDemandasUser/"+ oferta.getSkill()+"/"+ofertaDao.devuelveUltimoId();
     }
 
     @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)
@@ -133,8 +133,8 @@ public class OfertaController {
         return "oferta/listOfertasUser";
     }
 
-    @RequestMapping("/listOfertasUser/{idSkill}")
-    public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill){
+    @RequestMapping("/listOfertasUser/{idSkill}/{idDemanda}")
+    public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill, @PathVariable String idDemanda){
 
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
@@ -143,6 +143,7 @@ public class OfertaController {
         Usuario user = (Usuario)session.getAttribute("user");
 
         model.addAttribute("ofertas",ofertaDao.getOfertasAsociadasASkill(Integer.parseInt(idSkill)));
+        model.addAttribute("demanda",demandaDao.getDemanda(idDemanda));
         return "oferta/listOfertasEnlazadas";
     }
 

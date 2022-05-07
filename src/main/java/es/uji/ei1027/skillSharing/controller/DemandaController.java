@@ -62,7 +62,7 @@ public class DemandaController {
         if (ofertaAsociadasSkill.isEmpty())
             return "redirect:listMisDemandas";
         else{
-            return "redirect:/oferta/listOfertasUser/"+ demanda.getSkill();
+            return "redirect:/oferta/listOfertasUser/"+ demanda.getSkill()+"/"+demandaDao.devuelveUltimoId();
         }
     }
 
@@ -132,14 +132,15 @@ public class DemandaController {
         return "demanda/listDemandasUser";
     }
 
-    @RequestMapping("/listDemandasUser/{idSkill}")
-    public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill){
+    @RequestMapping("/listDemandasUser/{idSkill}/{idOferta}")
+    public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill,@PathVariable String idOferta){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
         model.addAttribute("misDemandas",demandaDao.getDemandasAsociadasASkill(Integer.parseInt(idSkill)));
+        model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
         return "demanda/listDemandasEnlazadas";
     }
 

@@ -80,6 +80,26 @@ public class ColaboracionController {
         return "redirect:../listMisColaboraciones";
     }
 
+    @RequestMapping(value = "/colaborar/{idOferta}/{idDemanda}")
+    public String addColaboracionDemanda(HttpSession session,@PathVariable String idOferta,@PathVariable String idDemanda ){
+
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/addColaboracionDemanda/"+ idDemanda);
+            return "login";
+        }
+
+        Oferta oferta = ofertaDao.getOferta(idOferta);
+        Demanda demanda = demandaDao.getDemanda(idDemanda);
+        Colaboracion colaboracion = new Colaboracion();
+
+        colaboracion.setIdOferta(Integer.parseInt(idOferta)); colaboracion.setIdDemanda(Integer.parseInt(idDemanda));colaboracion.setHoras(demanda.getHoras());
+        colaboracion.setIniFecha(demanda.getIniFecha()); colaboracion.setFinFecha(demanda.getFinFecha());
+        colaboracionDao.addColaboracion(colaboracion);
+
+        return "redirect:../../listMisColaboraciones";
+
+    }
+
     @RequestMapping(value = "/update/{idColaboracion}", method = RequestMethod.GET)
     public String editColaboracion(Model model, @PathVariable String idColaboracion){
         model.addAttribute("colaboracion",colaboracionDao.getColaboracion(idColaboracion));
