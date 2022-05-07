@@ -8,9 +8,9 @@ public class Demanda {
     private int idDemanda;
     private String estudiante;
     private int horas;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate iniFecha;
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
     private LocalDate finFecha;
     private boolean activa;
     private int skill;

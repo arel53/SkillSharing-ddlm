@@ -22,6 +22,10 @@ public class DemandaDao {
                 demanda.getFinFecha(),true,demanda.getSkill(),demanda.getDescripcion());
     }
 
+    public int devuelveUltimoId(){
+        return jdbcTemplate.queryForObject("SELECT MAX(id_demanda) FROM demanda", Integer.class);
+    }
+
 
     public void endDemanda(String idDemanda) { jdbcTemplate.update("UPDATE demanda SET activa = FALSE WHERE id_demanda = ?", Integer.parseInt(idDemanda));}
 

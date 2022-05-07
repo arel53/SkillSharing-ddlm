@@ -1,7 +1,6 @@
 package es.uji.ei1027.skillSharing.dao;
 
 import es.uji.ei1027.skillSharing.modelo.Colaboracion;
-import es.uji.ei1027.skillSharing.modelo.Demanda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,9 +20,9 @@ public class ColaboracionDao {
 
 
     public void addColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("INSERT INTO colaboracion VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdColaboracion(), colaboracion.getIdOferta(),
-                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
-                colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras());
+        jdbcTemplate.update("INSERT INTO colaboracion(id_oferta, id_demanda, ini_fecha, fin_fecha, activa, rate, comentario, horas) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
+                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), true,
+                null, colaboracion.getComentario(),colaboracion.getHoras());
     }
 
     public void endColaboracion(String idColaboracion) {

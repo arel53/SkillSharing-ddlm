@@ -75,6 +75,6 @@ public class EstudianteController {
             return "estudiante/update";
         }
         estudianteDao.updateEstudiante(estudiante);
-        return "redirect:getEstudiante";
+        return "redirect:perfil";
     }
 }
