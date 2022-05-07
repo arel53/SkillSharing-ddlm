@@ -102,10 +102,10 @@ public class ColaboracionController {
         return "redirect:../../list";
     }
 
-    @RequestMapping("/listColaboracionesUser")
+    @RequestMapping("/listSKP")
     public String listColaboraciones(Model model){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
-        return "colaboracion/listUser";
+        return "colaboracion/listSKP";
     }
 
     @RequestMapping("/listMisColaboraciones")
@@ -114,7 +114,8 @@ public class ColaboracionController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudiante(user.getNif()));
         return "colaboracion/listMisColaboraciones";
     }
 

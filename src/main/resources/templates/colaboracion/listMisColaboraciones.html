@@ -36,7 +36,7 @@
             <td th:text="${{colaboracion.rate}}"></td>
             <td th:text="${{colaboracion.comentario}}"></td>
             <td th:text="${colaboracion.horas}"></td>
-            <td><a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.id})}" class="btn btn-danger" role="button">Anular</a></td>
+            <td><a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}" class="btn btn-danger" role="button">Anular</a></td>
             </tr>
         </tbody>
     </table>
