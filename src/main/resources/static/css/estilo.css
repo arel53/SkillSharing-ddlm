@@ -43,7 +43,7 @@ div {
 }
 
 #logo.customlogo {
-    background-image: url(https://www.vertebres.es/paginas/images/ujion.png);
+    background-image: url("../imagenes/imagenPrincipal1.png");
     height: 3em;
 }
 #logo {
