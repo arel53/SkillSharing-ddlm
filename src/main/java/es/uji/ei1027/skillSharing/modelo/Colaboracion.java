@@ -17,6 +17,8 @@ public class Colaboracion {
     private int rate;
     private String comentario;
     private int horas;
+    private String nombreApellidoOfertante;
+    private String nombreApellidoDemandante;
 
 
     public Colaboracion() {
@@ -59,6 +61,14 @@ public class Colaboracion {
         return horas;
     }
 
+    public String getNombreApellidoOfertante() {
+        return nombreApellidoOfertante;
+    }
+
+    public String getNombreApellidoDemandante() {
+        return nombreApellidoDemandante;
+    }
+
     public void setIdColaboracion(int idColaboracion) {
         this.idColaboracion = idColaboracion;
     }
@@ -94,16 +104,28 @@ public class Colaboracion {
         this.horas = horas;
     }
 
+    public void setNombreApellidoOfertante(String nombreApellidoOfertante) {
+        this.nombreApellidoOfertante = nombreApellidoOfertante;
+    }
+
+    public void setNombreApellidoDemandante(String nombreApellidoDemandante) {
+        this.nombreApellidoDemandante = nombreApellidoDemandante;
+    }
+
     @Override
     public String toString() {
         return "Colaboracion{" +
-                "idOferta='" + idOferta + '\'' +
-                ", idDemanda='" + idDemanda + '\'' +
+                "idColaboracion=" + idColaboracion +
+                ", idOferta=" + idOferta +
+                ", idDemanda=" + idDemanda +
                 ", iniFecha=" + iniFecha +
                 ", finFecha=" + finFecha +
+                ", activa=" + activa +
                 ", rate=" + rate +
                 ", comentario='" + comentario + '\'' +
                 ", horas=" + horas +
+                ", nombreApellidoOfertante='" + nombreApellidoOfertante + '\'' +
+                ", nombreApellidoDemandante='" + nombreApellidoDemandante + '\'' +
                 '}';
     }
 }

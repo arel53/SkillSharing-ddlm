@@ -20,8 +20,8 @@ public class ColaboracionDao {
 
 
     public void addColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("INSERT INTO colaboracion(id_oferta, id_demanda, ini_fecha, fin_fecha, activa, rate, comentario, horas) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
-                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), true,
+        jdbcTemplate.update("INSERT INTO colaboracion(id_oferta, id_demanda, ini_fecha, activa, rate, comentario, horas) VALUES(?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
+                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), true,
                 null, colaboracion.getComentario(),colaboracion.getHoras());
     }
 
@@ -38,7 +38,14 @@ public class ColaboracionDao {
 
     public Colaboracion getColaboracion(String idColaboracion) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM colaboracion WHERE id_colaboracion = ?", new ColaboracionRowMapper(), idColaboracion);
+            return jdbcTemplate.queryForObject("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+                    "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
+                    "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
+                    "                           ) AS t " +
+                    "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
+                    "                      WHERE t.id_colaboracion = ?", new ColaboracionRowMapper(), idColaboracion);
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -48,36 +55,29 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboraciones() {
         try {
-            return jdbcTemplate.query("SELECT * FROM colaboracion", new ColaboracionRowMapper());
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
-
-    public List<Colaboracion> getColaboracionesPorOferta(String idOferta) {
-        try {
-            return jdbcTemplate.query("SELECT * FROM colaboracion WHERE id_oferta = ?", new ColaboracionRowMapper(), idOferta);
-        }
-        catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
-
-    public List<Colaboracion> getColaboracionesPorDemanda(String idDemanda) {
-        try {
-            return jdbcTemplate.query("SELECT * FROM colaboracion WHERE id_demanda = ?", new ColaboracionRowMapper(), idDemanda);
-        }
-        catch (EmptyResultDataAccessException e){
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante " +
+                    "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante " +
+                    "       FROM colaboracion AS c " +
+                    "       JOIN oferta AS o USING(id_oferta) " +
+                    "       JOIN estudiante as e ON(e.nif = o.estudiante)" +
+                    "     ) AS t " +
+                    "JOIN demanda AS d USING(id_demanda) " +
+                    "JOIN estudiante AS es ON(es.nif = d.estudiante)", new ColaboracionRowMapper());
+        }catch (EmptyResultDataAccessException e){
             return null;
         }
     }
 
     public List<Colaboracion> getColaboracionesEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("select * from colaboracion " +
-                    "where id_oferta in ( select id_oferta from oferta where estudiante=? ) or " +
-                    "id_demanda in ( select id_demanda from demanda where estudiante=? )", new ColaboracionRowMapper(), nif, nif);
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+                    "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
+                    "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
+                    "                           ) AS t " +
+                    "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
+                    "                      WHERE es.nif = ? or t.nif_ofertante = ?", new ColaboracionRowMapper(), nif, nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

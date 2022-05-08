@@ -18,6 +18,9 @@
     <table th:if="${not #lists.isEmpty(misColaboraciones)}" class="table table-striped">
         <thead>
         <tr>
+
+            <th>Ofertante</th>
+            <th>Demandante</th>
             <th>Fecha de Inicio</th>
             <th>Fecha de Final</th>
             <th>Activa</th>
@@ -30,6 +33,8 @@
         </thead>
         <tbody>
         <tr th:each="colaboracion: ${misColaboraciones}">
+            <td th:text="${colaboracion.nombreApellidoOfertante}"></td>
+            <td th:text="${colaboracion.nombreApellidoDemandante}"></td>
             <td th:text="${colaboracion.iniFecha}"></td>
             <td th:text="${{colaboracion.finFecha}}"></td>
             <td th:text="${{colaboracion.activa}}"></td>
