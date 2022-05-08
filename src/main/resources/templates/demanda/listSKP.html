@@ -20,10 +20,10 @@
     <tr>
       <th>Estudiante</th>
       <th>Horas</th>
-      <th>Fecha de Inicio</th>
-      <th>Fecha de Final</th>
       <th>Skill</th>
       <th>Nivel</th>
+      <th>Fecha de Inicio</th>
+      <th>Fecha de Final</th>
       <th>Descripcion</th>
       <th></th>
       <th></th>
@@ -32,11 +32,11 @@
     <tbody>
     <tr th:each="demanda: ${demandas}">
       <td th:text="${demanda.estudiante}"></td>
+      <td th:text="${{demanda.nombreSkill}}"></td>
+      <td th:text="${{demanda.nivelSkill}}"></td>
       <td th:text="${demanda.horas}"></td>
       <td th:text="${demanda.iniFecha}"></td>
       <td th:text="${{demanda.finFecha}}"></td>
-      <td th:text="${{demanda.nombreSkill}}"></td>
-      <td th:text="${{demanda.nivelSkill}}"></td>
       <td th:text="${{demanda.descripcion}}"></td>
       <td><a th:href="@{/demanda/delete/{idDemanda}(idDemanda=${demanda.idDemanda})}" class="btn btn-danger" role="button">Esborra</a></td>
     </tr>
