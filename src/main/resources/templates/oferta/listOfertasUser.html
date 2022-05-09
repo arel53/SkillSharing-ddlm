@@ -31,7 +31,7 @@
         </thead>
         <tbody>
         <tr th:each="oferta: ${ofertas}">
-            <td th:text="${oferta.estudiante}"></td> <!-- Bindeao el nif con el estudiante en la consulta sql -->
+            <td th:text="${oferta.estudiante}"></td>
             <td th:text="${{oferta.nombreSkill}}"></td>
             <td th:text="${{oferta.nivelSkill}}"></td>
             <td th:text="${oferta.horas}"></td>

@@ -48,12 +48,21 @@ public class ColaboracionController {
         model.addAttribute("estudiante", es);
         model.addAttribute("oferta", of);
         return "colaboracion/confirmColabOferta";
-
-
-
-
-
     }
+
+    @RequestMapping(value = "/confirmColabDemanda/{idDemanda}")
+    public String goConfirmDemanda(HttpSession session, Model model, @PathVariable String idDemanda){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/confirmColabDemanda/" + idDemanda);
+            return "login";
+        }
+        Demanda demanda = demandaDao.getDemanda(idDemanda);
+        Estudiante es = estudianteDao.getEstudiante(demanda.getEstudiante());
+        model.addAttribute("estudiante", es);
+        model.addAttribute("demanda", demanda);
+        return "colaboracion/confirmColabDemanda";
+    }
+
     @RequestMapping(value = "/addColaboracionOferta/{idOferta}")
     public String addColaboracionOferta(HttpSession session,@PathVariable String idOferta){
         if (session.getAttribute("user") == null){
@@ -68,6 +77,7 @@ public class ColaboracionController {
         demanda.setFinFecha(oferta.getFinFecha()); demanda.setSkill(oferta.getSkill());
         demanda.setNombreSkill(oferta.getNombreSkill()); demanda.setNivelSkill(oferta.getNivelSkill());demanda.setDescripcion("Creada automática por el sistema");
         demandaDao.addDemanda(demanda);
+        demandaDao.endDemanda(demanda.getIdDemanda()+"");
         int idDemanda = demandaDao.devuelveUltimoId();
         colaboracion.setIdOferta(oferta.getIdOferta()); colaboracion.setIdDemanda(idDemanda);colaboracion.setHoras(oferta.getHoras());
         colaboracion.setIniFecha(oferta.getIniFecha()); colaboracion.setFinFecha(oferta.getFinFecha());
@@ -92,6 +102,7 @@ public class ColaboracionController {
         oferta.setNombreSkill(demanda.getNombreSkill()); oferta.setNivelSkill(demanda.getNivelSkill());
         oferta.setDescripcion("Creada automática por el sistema");
         ofertaDao.addOferta(oferta);
+        ofertaDao.endOferta(oferta.getIdOferta()+"");
         int idOferta = ofertaDao.devuelveUltimoId();
         colaboracion.setIdOferta(idOferta); colaboracion.setIdDemanda(demanda.getIdDemanda());colaboracion.setHoras(demanda.getHoras());
         colaboracion.setIniFecha(demanda.getIniFecha()); colaboracion.setFinFecha(demanda.getFinFecha());

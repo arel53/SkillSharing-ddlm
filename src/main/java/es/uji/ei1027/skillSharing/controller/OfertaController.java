@@ -159,7 +159,4 @@ public class OfertaController {
         model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(user.getNif()));
         return "oferta/listMisOfertas";
     }
-
-
-    // TODO Falta listOfertas de SKP, hay que pensar entre todos que listar y como
 }

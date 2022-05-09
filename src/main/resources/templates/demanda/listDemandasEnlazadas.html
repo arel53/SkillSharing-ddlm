@@ -39,7 +39,6 @@
             <td th:text="${demanda.iniFecha}"></td>
             <td th:text="${{demanda.finFecha}}"></td>
             <td th:text="${{demanda.descripcion}}"></td>
-<!--            <td> <a th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}" class="btn btn-warning" role="button">Colabora</a></td>-->
             <td> <a class="btn btn-warning" role="button" th:href="@{/colaboracion/colaborar/{idOferta}/{idDemanda}(idOferta=${oferta.idOferta}, idDemanda=${demanda.idDemanda})}">Colaborar</a></td>
         </tr>
         </tbody>

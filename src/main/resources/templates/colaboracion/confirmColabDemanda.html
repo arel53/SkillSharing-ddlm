@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Confirmar Colaboracion</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navMiCuenta"></div>
+
+<div class="container">
+
+  <h1>Confirmar Colaboracion</h1>
+  <div class="container">
+    <h3>Información Estudiante</h3>
+    <table  class="table table-striped">
+      <thead>
+      <tr><td>Nombre</td><td th:text="${estudiante.nombre}"></td></tr>
+      <tr><td>Apellido</td><td th:text="${estudiante.apellido}"></td></tr>
+      <tr><td>Email</td><td th:text="${estudiante.email}"></td></tr>
+      <tr><td>Grado</td><td th:text="${estudiante.grado}"></td></tr>
+      <tr><td>Edad</td><td th:text="${estudiante.edad}"></td></tr>
+      <tr><td>Sexo</td><td th:text="${estudiante.sexo}"></td></tr>
+      <tr><td>Horas</td><td th:text="${estudiante.horas}"></td></tr>
+      </thead>
+    </table>
+  </div>
+
+  <div class="container">
+    <h3>Información Demanda</h3>
+    <table  class="table table-striped">
+      <thead>
+      <tr><td>Horas</td><td th:text="${demanda.horas}"></td></tr>
+      <tr><td>Fecha de Inicio</td><td th:text="${demanda.iniFecha}"></td></tr>
+      <tr><td>Fecha de Final</td><td th:text="${demanda.finFecha}"></td></tr>
+      <tr><td>Skill</td><td th:text="${demanda.nombreSkill}"></td></tr>
+      <tr><td>Nivel</td><td th:text="${demanda.nivelSkill}"></td></tr>
+      <tr><td>Descripcion</td><td th:text="${demanda.descripcion}"></td></tr>
+      </thead>
+    </table>
+  </div>
+<div>
+  <div class="col-sm-offset-2 col-sm-4">
+    <a th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}" class="btn btn-success" role="button">Colaborar</a>
+  </div>
+  <br>
+  <div class="col-sm-offset-2 col-sm-4">
+    <a role="button" class="btn btn-primary" th:href="@{/oferta/listDemandasUser}">Continua sin colaborar</a>
+  </div>
+</div>
+</div>
+</body>
+</html>
