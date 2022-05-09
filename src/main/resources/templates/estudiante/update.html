@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica Demanda</title>
+    <title>Modifica Perfil</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
 <div class="container">
-    <h2>Modifica Datos</h2>
+    <h2>Modifica Perfil</h2>
     <form class="form-horizontal" action="#" th:action="@{/estudiante/update}"
           th:object="${estudiante}" method="post">
 
@@ -77,15 +77,16 @@
             </div>
         </div>
         <div>
-        <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Canvia contrasenya</a>
+        <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Cambia contraseña</a>
         </div>
+        <br>
 
 
         <div class="form-group row">
 
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary"/>
-                Modifica Datos</button>
+                <button type="submit" class="btn btn-success"/>
+                Modificar</button>
             </div>
         </div>
 
