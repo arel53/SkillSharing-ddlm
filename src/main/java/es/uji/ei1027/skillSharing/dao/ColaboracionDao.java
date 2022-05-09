@@ -38,12 +38,13 @@ public class ColaboracionDao {
 
     public Colaboracion getColaboracion(String idColaboracion) {
         try {
-            return jdbcTemplate.queryForObject("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante " +
+            return jdbcTemplate.queryForObject("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill  " +
                     "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
                     "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN skill as S USING(id_skill) " +
                     "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
                     "                      WHERE t.id_colaboracion = ?", new ColaboracionRowMapper(), idColaboracion);
         }
@@ -55,13 +56,14 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboraciones() {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, s.nombre || ' ' || s.nivel AS skill " +
                     "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante " +
                     "       FROM colaboracion AS c " +
                     "       JOIN oferta AS o USING(id_oferta) " +
                     "       JOIN estudiante as e ON(e.nif = o.estudiante)" +
                     "     ) AS t " +
                     "JOIN demanda AS d USING(id_demanda) " +
+                    "JOIN skill as S USING(id_skill) " +
                     "JOIN estudiante AS es ON(es.nif = d.estudiante)", new ColaboracionRowMapper());
         }catch (EmptyResultDataAccessException e){
             return null;
@@ -70,12 +72,13 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboracionesEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
                     "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
                     "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN skill as S USING(id_skill) " +
                     "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
                     "                      WHERE es.nif = ? or t.nif_ofertante = ?", new ColaboracionRowMapper(), nif, nif);
         }

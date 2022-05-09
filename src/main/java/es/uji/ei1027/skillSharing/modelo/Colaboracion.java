@@ -19,6 +19,7 @@ public class Colaboracion {
     private int horas;
     private String nombreApellidoOfertante;
     private String nombreApellidoDemandante;
+    private String skill;
 
 
     public Colaboracion() {
@@ -69,6 +70,8 @@ public class Colaboracion {
         return nombreApellidoDemandante;
     }
 
+    public String getSkill() {return skill;}
+
     public void setIdColaboracion(int idColaboracion) {
         this.idColaboracion = idColaboracion;
     }
@@ -111,6 +114,8 @@ public class Colaboracion {
     public void setNombreApellidoDemandante(String nombreApellidoDemandante) {
         this.nombreApellidoDemandante = nombreApellidoDemandante;
     }
+
+    public void setSkill(String skill) {this.skill = skill;}
 
     @Override
     public String toString() {

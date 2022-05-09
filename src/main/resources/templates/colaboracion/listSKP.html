@@ -20,6 +20,7 @@
     <tr>
       <th>Ofertante</th>
       <th>Demandante</th>
+      <th>Skill</th>
       <th>Fecha de Inicio</th>
       <th>Fecha de Final</th>
       <th>Activa</th>
@@ -34,6 +35,7 @@
     <tr th:each="colaboracion: ${colaboraciones}">
       <td th:text="${colaboracion.nombreApellidoOfertante}"></td>
       <td th:text="${colaboracion.nombreApellidoDemandante}"></td>
+      <td th:text="${colaboracion.skill}"></td>
       <td th:text="${colaboracion.iniFecha}"></td>
       <td th:text="${{colaboracion.finFecha}}"></td>
       <td th:text="${{colaboracion.activa}}"></td>
