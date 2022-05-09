@@ -51,7 +51,7 @@ public class IndexController {
     public String goInicioUserIndex(HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/inicio/userIndex");
-            return "login";
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (user.isSkp()){
