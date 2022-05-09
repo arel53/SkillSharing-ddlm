@@ -10,6 +10,13 @@
 ul, ol {
 	list-style:none;
 }
+
+.nav{
+    background: #eaeded !important;
+    transition: all 0.9s;
+    width: 111%
+}
+
 .nav > li {
 	float:left;
 }
@@ -104,8 +111,6 @@ style attribute {
 
 body {
     font-family: 'SophosSansRegular', sans-serif;
-    color: #5c5c5c;
-    margin: 5em 0;
 }
 
 
