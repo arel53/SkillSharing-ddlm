@@ -1,4 +1,4 @@
-package es.uji.ei1027.skillSharing;
+/*package es.uji.ei1027.skillSharing;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -56,3 +56,4 @@ public class Mail {
 
     }
 }
+*/

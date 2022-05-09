@@ -2,11 +2,9 @@ package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.dao.ColaboracionDao;
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
+import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.dao.OfertaDao;
-import es.uji.ei1027.skillSharing.modelo.Colaboracion;
-import es.uji.ei1027.skillSharing.modelo.Demanda;
-import es.uji.ei1027.skillSharing.modelo.Oferta;
-import es.uji.ei1027.skillSharing.modelo.Usuario;
+import es.uji.ei1027.skillSharing.modelo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +23,10 @@ public class ColaboracionController {
     private ColaboracionDao colaboracionDao;
     private OfertaDao ofertaDao;
     private DemandaDao demandaDao;
+    private EstudianteDao estudianteDao;
 
+    @Autowired
+    public  void setEstudianteDao(EstudianteDao estudianteDao){this.estudianteDao=estudianteDao;}
     @Autowired
     public void setColaboracionDao(ColaboracionDao colaboracionDao){this.colaboracionDao=colaboracionDao;}
 
@@ -35,6 +36,24 @@ public class ColaboracionController {
     @Autowired
     public void setDemandaDao(DemandaDao demandaDao) {this.demandaDao = demandaDao;}
 
+
+    @RequestMapping(value = "/confirmColabOferta/{idOferta}")
+    public String goConfirmOferta(HttpSession session, Model model, @PathVariable String idOferta){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/confirmColabOferta/" + idOferta);
+            return "login";
+        }
+        Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
+        Estudiante es = (Estudiante) estudianteDao.getEstudiante(of.getEstudiante());
+        model.addAttribute("estudiante", es);
+        model.addAttribute("oferta", of);
+        return "colaboracion/confirmColabOferta";
+
+
+
+
+
+    }
     @RequestMapping(value = "/addColaboracionOferta/{idOferta}")
     public String addColaboracionOferta(HttpSession session,@PathVariable String idOferta){
         if (session.getAttribute("user") == null){

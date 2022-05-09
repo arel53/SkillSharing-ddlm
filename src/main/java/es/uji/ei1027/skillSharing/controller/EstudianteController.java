@@ -1,8 +1,12 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import com.fasterxml.jackson.databind.ser.std.UUIDSerializer;
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
+import es.uji.ei1027.skillSharing.dao.UsuarioDao;
 import es.uji.ei1027.skillSharing.modelo.Estudiante;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
+import org.apache.catalina.User;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +23,9 @@ import javax.servlet.http.HttpSession;
 public class EstudianteController {
 
     private EstudianteDao estudianteDao;
+    private UsuarioDao usuarioDao;
+    @Autowired
+    public void setUsuarioDao(UsuarioDao usuarioDao){this.usuarioDao=usuarioDao;}
 
     @Autowired
     public void setEstudianteDao(EstudianteDao estudianteDao){this.estudianteDao=estudianteDao;}
@@ -32,7 +39,6 @@ public class EstudianteController {
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
-        model.addAttribute("estudiante",estudianteDao.getEstudiante(user.getNif()));
         return "redirect:get/"+ user.getNif();
     }
 
@@ -40,7 +46,11 @@ public class EstudianteController {
     public String getEstudiante(HttpSession session, Model model, @PathVariable String nif){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/estudiante/perfil");
-            return "login";
+            return "redirect:/login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        if (!user.getNif().equals(nif)){
+            return "redict:/forbiden";
         }
         Estudiante estudiante = estudianteDao.getEstudiante(nif);
         model.addAttribute("estudiante", estudiante);
@@ -57,13 +67,43 @@ public class EstudianteController {
 
     @RequestMapping(value = "/update/{nif}", method = RequestMethod.GET)
     public String editEstudiante(HttpSession session,Model model, @PathVariable String nif){
-        Estudiante e = estudianteDao.getEstudiante(nif);
-        model.addAttribute("estudiante", e);
+
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/estudiante/update");
-            return "login";
+            session.setAttribute("nextUrl","/estudiante/update/"+nif);
+            return "redirect:/login";
         }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.getNif().equals(nif)){
+            return "redirect:/forbiden";
+        }
+        Estudiante es = estudianteDao.getEstudiante(nif);
+        model.addAttribute("estudiante", es);
         return "estudiante/update";
+    }
+
+    @RequestMapping(value = "/passwdUser/{nif}", method = RequestMethod.GET)
+    public String goPasswdUser(HttpSession session ,Model model, @PathVariable String nif){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/estudiante/update/"+nif);
+            return "redirect:/login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        if (!user.getNif().equals(nif)){
+            return "redirect:/forbiden";
+            }
+        model.addAttribute("usuario", user);
+        return "estudiante/passwdUser";
+
+        }
+    @RequestMapping(value="/passwdUser", method = RequestMethod.POST)
+    public String processUpdateSubmitUser(HttpSession session, @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "estudiante/passwd";
+        }
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        usuario.setPassword(passwordEncryptor.encryptPassword(usuario.getPassword()));
+        usuarioDao.updateUsuario(usuario);
+        return "redirect:update/"+usuario.getNif();
     }
 
 

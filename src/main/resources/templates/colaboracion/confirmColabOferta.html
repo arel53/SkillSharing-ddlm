@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Oferta</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <h1>Informacion Estudiante (esto va a la izquierda)</h1>
+    <table>
+        <tr>
+            <td>Nombre: </td>
+            <td th:text="${estudiante.nombre}"></td>
+        </tr>
+        <tr>
+            <td>Apellido: </td>
+            <td th:text="${estudiante.apellido}"></td>
+        </tr>
+        <tr>
+            <td>Email: </td>
+            <td th:text="${estudiante.email}"></td>
+        </tr>
+        <tr>
+            <td>Grado: </td>
+            <td th:text="${estudiante.grado}"></td>
+        </tr>
+        <tr>
+            <td>Edad: </td>
+            <td th:text="${estudiante.edad}"></td>
+        </tr>
+        <tr>
+            <td>Sexo: </td>
+            <td th:text="${estudiante.sexo}"></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h1>Informacion oferta (esto va a la derecha)</h1>
+    <table>
+        <tr>
+            <td>Horas: </td>
+            <td th:text="${oferta.horas}"></td>
+        </tr>
+        <tr>
+            <td>Fecha de Inicio: </td>
+            <td th:text="${oferta.iniFecha}"></td>
+        </tr>
+        <tr>
+            <td>Fecha finalizacion: </td>
+            <td th:text="${oferta.finFecha}"></td>
+        </tr>
+        <tr>
+            <td>Habilidad: </td>
+            <td th:text="${oferta.nombreSkill}"></td>
+        </tr>
+        <tr>
+            <td>Nivel: </td>
+            <td th:text="${oferta.nivelSkill}"></td>
+        </tr>
+        <tr>
+            <td>Descripcion: </td>
+            <td th:text="${oferta.descripcion}"></td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h1>¿Quieres colaborar con esta persona ? (esto va abajo)</h1>
+    <a th:href="@{/oferta/listOfertasUser}" class="btn btn-primary" role="button">No</a>
+    <a th:href="@{/colaboracion/addColaboracionOferta/{id_oferta}(id_oferta=${oferta.idOferta})}" class="btn btn-success" role="button">Colaborar</a>
+</div>
+
+</body>
+</html>
