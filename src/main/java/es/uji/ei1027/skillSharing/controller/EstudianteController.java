@@ -50,7 +50,7 @@ public class EstudianteController {
         }
         Usuario user = (Usuario) session.getAttribute("user");
         if (!user.getNif().equals(nif)){
-            return "redict:/forbiden";
+            return "redirect:/forbiden";
         }
         Estudiante estudiante = estudianteDao.getEstudiante(nif);
         model.addAttribute("estudiante", estudiante);

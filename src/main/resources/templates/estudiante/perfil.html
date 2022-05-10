@@ -24,6 +24,7 @@
         <tr><td>Horas</td><td th:text="${estudiante.horas}"></td></tr>
         </thead>
     </table>
+    <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Canvia contrasenya</a>
     <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Edita</a>
 
 </div>
