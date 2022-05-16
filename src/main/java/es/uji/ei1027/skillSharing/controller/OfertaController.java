@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+
+
+class OfertaValidator implements Validator {
+    @Override
+    public boolean supports(Class<?> cls) {
+        return Oferta.class.isAssignableFrom(cls);
+    }
+    @Override
+    public void validate(Object obj, Errors errors) {
+        Oferta of = (Oferta) obj;
+        if (of.getIniFecha() == null)
+            errors.rejectValue("iniFecha", "empty_fechai", "Cal introduir una data de inici");
+        if (of.getFinFecha() == null)
+            errors.rejectValue("finFecha", "empty_fechaf", "Cal introduir una data de finalització");
+        if (of.getDescripcion().equals(""))
+            errors.rejectValue("descripcion","empty_descr", "Cal introduir una descripció");
+        if (of.getHoras() == 0 )
+            errors.rejectValue("horas","horas0","El nombre de hores no pot ser 0");
+        if (of.getHoras() < 0 )
+            errors.rejectValue("horas","horas_neg","El nombre de hores no pot ser negatiu");
+
+    }
+}
+
+
 
 @Controller
 @RequestMapping("/oferta")
@@ -52,6 +79,8 @@ public class OfertaController {
             session.setAttribute("nextUrl","/oferta/add");
             return "redirect:/login";
         }
+        OfertaValidator ofertaValidator = new OfertaValidator();
+        ofertaValidator.validate(oferta, bindingResult);
         if (bindingResult.hasErrors()) {
             return "oferta/add";
         }

@@ -62,7 +62,7 @@ public class UserController {
             model.addAttribute("usuario", new Usuario());
             return "login";
         }
-        Usuario user = (Usuario) session.getAttribute("usuario");
+        Usuario user = (Usuario) session.getAttribute("user");
         if (!user.isSkp()){
             return "redirect:/forbiden";
         }

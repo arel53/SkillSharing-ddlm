@@ -13,6 +13,7 @@ public class IndexController {
     private UsuarioDao usuarioDao;
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao){this.usuarioDao=usuarioDao;}
+
     @RequestMapping("/")
     public String home(HttpSession session){
         Usuario user = (Usuario)session.getAttribute("user");
@@ -37,7 +38,7 @@ public class IndexController {
     public String goInicioSkpIndex(HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/inicio/skpIndex");
-            System.out.println("noesd");
+            //System.out.println("noesd");
             return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
@@ -58,21 +59,5 @@ public class IndexController {
             return "redirect:/forbiden";
         }
         return "/inicio/userIndex";
-    }
-
-    @RequestMapping("/inicio/miCuenta")
-    public String goInicioUserMiCuenta(HttpSession session){
-        if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/inicio/userIndex");
-            return "login";
-        }
-        Usuario user = (Usuario)session.getAttribute("user");
-
-        if (user.isSkp()){
-            return "redirect:/forbiden";
-        }
-
-        return "/inicio/miCuentaIndex";
-
     }
 }
