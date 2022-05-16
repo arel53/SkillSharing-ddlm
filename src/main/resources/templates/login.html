@@ -33,6 +33,11 @@
                     <input class="form_control" type="password" th:field="*{password}" placeholder="Contraseña"/>
                 <div class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
                 </p>
+                <input type="hidden" th:field="*{skp}" />
+                <input type="hidden" th:field="*{active}" />
+                <input  type="hidden" th:field="*{nif}" />
+                <input  type="hidden" th:field="*{descripcion}"/>
+
                 <input type="submit" class="btn btn-success" value="Acceder"/>
             </form>
         </div>

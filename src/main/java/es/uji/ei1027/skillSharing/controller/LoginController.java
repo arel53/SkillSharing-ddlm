@@ -23,13 +23,15 @@ class UserValidator implements Validator {
     }
     @Override
     public void validate(Object obj, Errors errors) {
-        Usuario userd = (Usuario) obj;
-        if (userd.getUsername().equals(""))
-            errors.rejectValue("usuario", "user_empty",
-                    "Cal introduir un usuari");
-        if (userd.getPassword().equals(""))
-            errors.rejectValue("usuario", "pd_empty",
-                    "Cal introduir una contrasenya");
+        Usuario usuario = (Usuario) obj;
+        if (usuario.getUsername().equals("")){
+            //System.out.println("baduser");
+            errors.rejectValue("username", "user_empty", "Cal introduir un usuari");
+        }
+        if (usuario.getPassword().equals("")) {
+            //System.out.println("empt pass");
+            errors.rejectValue("password", "pd_empty","Cal introduir una contrasenya");
+        }
     }
 }
 
