@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,28 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
+
+class DemandaValidator implements Validator {
+    @Override
+    public boolean supports(Class<?> cls) {
+        return Demanda.class.isAssignableFrom(cls);
+    }
+    @Override
+    public void validate(Object obj, Errors errors) {
+        Demanda dem = (Demanda) obj;
+        if (dem.getIniFecha() == null)
+            errors.rejectValue("iniFecha", "empty_fechai", "Cal introduir una data de inici");
+        if (dem.getFinFecha() == null)
+            errors.rejectValue("finFecha", "empty_fechaf", "Cal introduir una data de finalització");
+        if (dem.getDescripcion().equals(""))
+            errors.rejectValue("descripcion","empty_descr", "Cal introduir una descripció");
+        if (dem.getHoras() == 0 )
+            errors.rejectValue("horas","horas0","El nombre de hores no pot ser 0");
+        if (dem.getHoras() < 0 )
+            errors.rejectValue("horas","horas_neg","El nombre de hores no pot ser negatiu");
+
+    }
+}
 
 @Controller
 @RequestMapping("/demanda")
@@ -34,12 +58,13 @@ public class DemandaController {
     @Autowired
     public void setOfertaDao(OfertaDao ofertaDao) {this.ofertaDao = ofertaDao;}
 
-    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET) //alumno
     public String addDemanda(HttpSession session, Model model){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/demanda/add");
             return "redirect:/login";
         }
+
 
         model.addAttribute("demanda", new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
@@ -53,6 +78,8 @@ public class DemandaController {
             session.setAttribute("nextUrl","/demanda/add");
             return "redirect:/login";
         }
+        DemandaValidator demandaValidator = new DemandaValidator();
+        demandaValidator.validate(demanda, bindingResult);
         if (bindingResult.hasErrors())
             return "demanda/add";
         Usuario user  = (Usuario) session.getAttribute("user");
@@ -66,19 +93,34 @@ public class DemandaController {
         }
     }
 
-    @RequestMapping(value = "/update/{idDemanda}", method = RequestMethod.GET)
-    public String editDemanda(Model model, @PathVariable String idDemanda){
+    @RequestMapping(value = "/update/{idDemanda}", method = RequestMethod.GET) //alumno
+    public String editDemanda(HttpSession session, Model model, @PathVariable String idDemanda){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/update/"+idDemanda);
+            return "redirect:/login";
+        }
         model.addAttribute("demanda",demandaDao.getDemanda(idDemanda));
         model.addAttribute("skills",skillDao.getSkillsActivas());
         return "demanda/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("demanda") Demanda demanda,
+    public String processUpdateSubmit(Model model, HttpSession session,@ModelAttribute("demanda") Demanda demanda,
             BindingResult bindingResult){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/update/"+demanda.getIdDemanda());
+            return "redirect:/login";
+        }
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+
+        DemandaValidator demandaValidator = new DemandaValidator();
+        demandaValidator.validate(demanda, bindingResult);
         if (bindingResult.hasErrors())
             return "demanda/update";
+        Usuario user = (Usuario) session.getAttribute("user");
+        if (!user.getNif().equals(demanda.getEstudiante())){
+            return "redirect:/forbiden";
+        }
         demandaDao.updateDemanda(demanda);
         return "redirect:listMisDemandas";
     }

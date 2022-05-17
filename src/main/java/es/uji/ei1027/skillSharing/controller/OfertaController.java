@@ -72,9 +72,11 @@ public class OfertaController {
         return "oferta/add";
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(HttpSession session, @ModelAttribute("oferta") Oferta oferta,
+    @RequestMapping(value="/add", method= RequestMethod.POST) //alumno
+    public String processAddSubmit(HttpSession session,Model model, @ModelAttribute("oferta") Oferta oferta,
                                   BindingResult bindingResult) {
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/oferta/add");
             return "redirect:/login";
@@ -94,8 +96,12 @@ public class OfertaController {
             return "redirect:/demanda/listDemandasUser/"+ oferta.getSkill()+"/"+ofertaDao.devuelveUltimoId();
     }
 
-    @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET)
-    public String editOferta(Model model, @PathVariable String idOferta){
+    @RequestMapping(value = "/update/{idOferta}", method = RequestMethod.GET) //alumno
+    public String editOferta(HttpSession session, Model model, @PathVariable String idOferta){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/update/"+idOferta);
+            return "redirect:/login";
+        }
         Oferta o = ofertaDao.getOferta(idOferta);
         model.addAttribute("oferta", o);
         model.addAttribute("skills", skillDao.getSkillsActivas());
@@ -103,12 +109,22 @@ public class OfertaController {
         return "oferta/update";
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("oferta") Oferta oferta,
+    @RequestMapping(value="/update", method = RequestMethod.POST) //alumno
+    public String processUpdateSubmit(Model model, HttpSession session,@ModelAttribute("oferta") Oferta oferta,
             BindingResult bindingResult){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/update/"+oferta.getIdOferta());
+            return "redirect:/login";
+        }
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        OfertaValidator ofertaValidator = new OfertaValidator();
+        ofertaValidator.validate(oferta, bindingResult);
         if (bindingResult.hasErrors()) {
             return "oferta/update";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        if (!user.getNif().equals(oferta.getEstudiante())){
+            return "redirect:/forbiden";
         }
         ofertaDao.updateOferta(oferta);
         return "redirect:listMisOfertas";
@@ -116,9 +132,10 @@ public class OfertaController {
 
     @RequestMapping(value = "/delete/{idOferta}")
     public String  processDeleteOferta(HttpSession session,@PathVariable String idOferta){
+
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            session.setAttribute("nextUrl","/oferta/delete/"+idOferta);
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
@@ -135,7 +152,6 @@ public class OfertaController {
         }
     }
 
-
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
@@ -144,6 +160,7 @@ public class OfertaController {
 
     @RequestMapping("/listSKP")
     public String listOfertasSKP(Model model){
+
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         return "oferta/listSKP";
     }

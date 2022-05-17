@@ -13,37 +13,43 @@
           th:object="${oferta}" method="post">
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">id-oferta</label>
+
             <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{idOferta}"/>
+                <input class="form-control" type="hidden" readonly th:field="*{idOferta}"/>
             </div>
         </div>
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Estudiante</label>
+
             <div class="col-sm-4">
-                <input class="form-control" type="text" readonly th:field="*{estudiante}"/>
+                <input class="form-control" type="hidden" readonly th:field="*{estudiante}"/>
             </div>
         </div>
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Horas</label>
+            <label class="control-label col-sm-2">Hores</label>
             <div class="col-sm-4">
                 <input class="form-control" type="number" th:field="*{horas}"/>
+                <div class="error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></div>
+
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Inicio</label>
+            <label class="control-label col-sm-2">Data de inici</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" th:field="*{iniFecha}"/>
+                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
+
 
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Fecha de Final</label>
+            <label class="control-label col-sm-2">Data de final</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" th:field="*{finFecha}"/>
+                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
+
             </div>
         </div>
 
@@ -61,9 +67,11 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Descripcion</label>
+            <label class="control-label col-sm-2">Descripcio</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" th:field="*{descripcion}"/>
+                <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+
             </div>
         </div>
 
