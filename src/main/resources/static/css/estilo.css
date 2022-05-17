@@ -12,7 +12,7 @@ ul, ol {
 }
 
 .nav{
-    background: #eaeded !important;
+    background: #F7F7F7 !important;
     transition: all 0.9s;
     width: 111%
 }
@@ -21,12 +21,13 @@ ul, ol {
 	float:left;
 }
 .nav li a {
-	background-color:#eaeded ;
+	background-color:#F7F7F7 ;
 	color:#000;
 	text-decoration:none;
-	padding:0.9em 2em;
+	padding:0.9em 1em;
 	display:block;
 }
+
 .nav li a:hover {
 	background-color:#f6ddcc ;
 }

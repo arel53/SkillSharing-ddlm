@@ -55,9 +55,9 @@ public class EstudianteDao {
         }
     }
 
-    public List<Estudiante> getEstudiantesInactivos() {
+    public List<Estudiante> getEstudiantesSinCuentas() {
         try {
-            return jdbcTemplate.query("SELECT * FROM estudiante AS e LEFT JOIN usuario AS u ON(e.nif = u.nif AND u.active = FALSE)", new EstudianteRowMapper());
+            return jdbcTemplate.query("SELECT e.* FROM usuario AS u RIGHT JOIN estudiante as e USING(nif) WHERE e.nif NOT IN (SELECT nif from usuario);", new EstudianteRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return null;

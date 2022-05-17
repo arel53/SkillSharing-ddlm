@@ -80,7 +80,7 @@ public class UserController {
             return "redirect:/forbiden";
         }
         model.addAttribute("usuario", new Usuario());
-        model.addAttribute("estudiantes",estudianteDao.getEstudiantesInactivos());
+        model.addAttribute("estudiantes",estudianteDao.getEstudiantesSinCuentas());
         return "usuario/add";
     }
     @RequestMapping(value="/add", method= RequestMethod.POST)
@@ -96,7 +96,7 @@ public class UserController {
         }
         UsuarioValidator usuarioValidator = new UsuarioValidator();
         usuarioValidator.validate(usuario, bindingResult);
-        model.addAttribute("estudiantes",estudianteDao.getEstudiantesInactivos());
+        model.addAttribute("estudiantes",estudianteDao.getEstudiantesSinCuentas());
 
         if (bindingResult.hasErrors())
             return "usuario/add";
@@ -104,7 +104,7 @@ public class UserController {
         List<Usuario> lu = usuarioDao.getUsuarios();
         for (Usuario u : lu){
             if (u.getUsername().equals(usuario.getUsername().trim())){
-                bindingResult.rejectValue("username", "repeated_user","El usuari ja existeix");
+                bindingResult.rejectValue("username", "repeated_user","El usuario ya existe");
                 return "usuario/add";
             }
         }
