@@ -188,7 +188,6 @@ body {
 .fotoPerfil{
     width: 70px;
     height: 70px;
-    border-radius: 100px;
     border-top-left-radius: 100px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
@@ -220,10 +219,9 @@ body {
     color: #17202A;
     background-color: #fff;
     border: 1px solid #eee;
-    position: relative;
     padding: 20px;
     border-width: 0 0 3px;
-    max-width: 2000px;
+    max-width: 735px;
     border: 1px solid #eee;
 }
 
