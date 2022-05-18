@@ -17,10 +17,8 @@
         Nadie demanda ninguna clase.
     </div>
 
-    <br>
-    <br>
 <div>
-    <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
+    <section class="listado" th:if="${not #lists.isEmpty(demandas)}">
     <article th:each="demanda: ${demandas}" class="anuncio">
         <figure class="estudiante">
             <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">

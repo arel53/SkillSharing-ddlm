@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
     <title>Demandas</title>
@@ -32,7 +32,7 @@
         </thead>
         <tbody>
         <tr th:each="demanda: ${misDemandas}">
-            <td th:text="${demanda.estudiante}"></td><!-- Bindeao el nif con el estudiante en la consulta sql -->
+            <td th:text="${demanda.estudiante}"></td>&lt;!&ndash; Bindeao el nif con el estudiante en la consulta sql &ndash;&gt;
             <td th:text="${{demanda.nombreSkill}}"></td>
             <td th:text="${{demanda.nivelSkill}}"></td>
             <td th:text="${demanda.horas}"></td>
@@ -47,6 +47,63 @@
         <div class="col-sm-offset-2 col-sm-4">
             <a style="float: left" role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
         </div>
+    </div>
+</div>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Demandas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navUser"></div>
+<div class="container">
+    <h1>Demandas</h1>
+
+    <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">
+        Nadie demanda ninguna clase.
+    </div>
+
+    <div>
+        <div class="mensaje">
+        <p>Estas son las demandas relacionadas con la habilidad requerida en la oferta creada</p>
+        <a style="float: left" role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
+        </div>
+        <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
+            <article th:each="demanda: ${misDemandas}" class="anuncio">
+                <figure class="estudiante">
+                    <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                </figure>
+                <div class="info">
+                    <hgroup>
+                        <h3 class="nombre" th:text="${demanda.estudiante}"></h3>
+                        <div class="skill">
+                            <table>
+                                <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
+                                <tr><td><p class="nivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
+                                <tr><p th:text="${{demanda.descripcion}}"></p></tr>
+                            </table>
+                        </div>
+                    </hgroup>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="horas">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
+                        <tr><td><p class="inicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
+                        <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
+                    </table>
+                    <div>
+                        <a class="btn btn-warning" role="button" th:href="@{/colaboracion/colaborar/{idOferta}/{idDemanda}(idOferta=${oferta.idOferta}, idDemanda=${demanda.idDemanda})}">Colaborar</a>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
 </div>
 </body>
