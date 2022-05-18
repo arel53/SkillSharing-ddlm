@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
+<div th:replace="../templates/fragments/navUser"></div>
 <h2>Nou usuari</h2>
 <form action="#" th:action="@{/usuario/add}"
       th:object="${usuario}" method="post">

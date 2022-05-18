@@ -40,7 +40,7 @@ public class ColaboracionController {
     @RequestMapping(value = "/confirmColabOferta/{idOferta}")
     public String goConfirmOferta(HttpSession session, Model model, @PathVariable String idOferta){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/confirmColabOferta/" + idOferta);
+            session.setAttribute("nextUrl","colaboracion/confirmColabOferta/" + idOferta);
             return "redirect:../../login";
         }
         Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
