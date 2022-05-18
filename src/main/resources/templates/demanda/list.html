@@ -45,7 +45,7 @@
                 <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
             </table>
             <div>
-            <a class="btn btn-secondary" role="button">Colabora</a>
+            <a class="btn btn-secondary" role="button" th:href="@{/loginColaboraDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a>
             </div>
         </div>
     </article>

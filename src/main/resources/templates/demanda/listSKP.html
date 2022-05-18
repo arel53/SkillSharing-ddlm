@@ -9,8 +9,8 @@
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
-<div class="demanda">
-  <h1>Demandas los usuarios</h1>
+<div class="container">
+  <h1>Demandas de los usuarios</h1>
 
   <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
     No hay demandas en la aplicación
