@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
@@ -7,7 +8,7 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
+<div th:replace="../templates/fragments/navMiCuenta"></div>
 <h1>Mis Ofertas</h1>
 <div th:replace="../templates/fragments/pruebas"></div>
 <div class="container">
@@ -47,3 +48,56 @@
 </div>
 </body>
 </html>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Mis Ofertas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navUser"></div>
+<div class="container">
+    <h1>Mis Ofertas</h1>
+
+    <div th:if="${#lists.isEmpty(misOfertas)}" layout:fragment="content">
+        No tienes Ofertas.
+    </div>
+
+    <div>
+        <section class="listado" th:if="${not #lists.isEmpty(misOfertas)}">
+            <article th:each="oferta: ${misOfertas}" class="anuncio">
+                <figure class="estudiante">
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                </figure>
+                <div class="info">
+                    <div class="skill">
+                        <table>
+                            <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{oferta.nombreSkill}}"></p></td></tr>
+                            <tr><td><p class="nivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${oferta.nivelSkill}"></p></td></tr>
+                            <tr><p th:text="${{oferta.descripcion}}"></p></tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="horas">Horas: </p></td> <td><p class="horas" th:text="${{oferta.horas}}"></p></td></tr>
+                        <tr><td><p class="inicio">Inicio: </p></td><td><p class="iniFecha" th:text="${oferta.iniFecha}"></p></td></tr>
+                        <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${oferta.finFecha}"></p></td></tr>
+                    </table>
+                    <div>
+                        <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a>
+                        <a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Borra</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
+</div>
+</body>
+</html>
+

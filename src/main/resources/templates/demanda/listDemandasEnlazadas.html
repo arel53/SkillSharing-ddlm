@@ -71,8 +71,9 @@
     </div>
 
     <div>
-        <p>Algunas demandas que podrían resultarte de interés</p>
-        <a style="float: left" role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
+        <div class="mensaje">
+            <p>Algunas demandas que podrían resultarte de interés</p>
+            <a role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
         </div>
         <br>
         <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
