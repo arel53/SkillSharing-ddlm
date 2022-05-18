@@ -63,7 +63,9 @@
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
     <h1>Mis Ofertas</h1>
-
+    <div>
+    <a href="add" class="btn btn-success" role="button">Añade Oferta</a>
+    </div>
     <div th:if="${#lists.isEmpty(misOfertas)}" layout:fragment="content">
         No tienes Ofertas.
     </div>
