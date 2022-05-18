@@ -11,6 +11,12 @@ ul, ol {
 	list-style:none;
 }
 
+li{
+     display:inline;
+     padding-left:3px;
+     padding-right:3px;
+}
+
 .nav{
     background: #F7F7F7 !important;
     transition: all 0.9s;
@@ -45,7 +51,38 @@ ul, ol {
 	position:relative;
 }
 
+.prueba{
+    background: #FFFFFF !important;
+    transition: all 0.9s;
+    width: 111%
+   }
+.prueba > li {
+	float:left;
+}
+.prueba li a {
+	background-color:#FFFFFF ;
+	color:#000;
+	text-decoration:none;
+	padding:0.9em 1em;
+	display:block;
+}
 
+.prueba li a:hover {
+	background-color:#FFFFFF ;
+}
+
+.prueba li ul {
+	display:none;
+	position:absolute;
+	min-width:9em;
+}
+.prueba li:hover > ul {
+	display:block;
+}
+
+.prueba li ul li {
+	position:relative;
+}
 
 
 
