@@ -5,42 +5,51 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navPublic"></div>
 <div class="container">
-    <h1 style="float: left">Demandas de los Estudiantes</h1>
+    <h1>Demandas de los Estudiantes</h1>
 
     <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
         Nadie demanda ninguna clase.
     </div>
 
-    <table th:if="${not #lists.isEmpty(demandas)}" class="table table-striped">
-        <thead>
-        <tr>
-            <th>Estudiante</th>
-            <th>Skill</th>
-            <th>Nivel</th>
-            <th>Horas</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Final</th>
-            <th>Descripcion</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="demanda: ${demandas}">
-            <td th:text="${demanda.estudiante}"></td>
-            <td th:text="${{demanda.nombreSkill}}"></td>
-            <td th:text="${{demanda.nivelSkill}}"></td>
-            <td th:text="${demanda.horas}"></td>
-            <td th:text="${demanda.iniFecha}"></td>
-            <td th:text="${{demanda.finFecha}}"></td>
-            <td th:text="${{demanda.descripcion}}"></td>
-        </tr>
-        </tbody>
-    </table>
+    <br>
+    <br>
+<div>
+    <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
+    <article th:each="demanda: ${demandas}" class="anuncio">
+        <figure class="estudiante">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+        </figure>
+        <div class="info">
+            <hgroup>
+                <h3 class="nombre" th:text="${demanda.estudiante}"></h3>
+                <div class="skill">
+                    <table>
+                        <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
+                        <tr><td><p class="nivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
+                        <tr><p th:text="${{demanda.descripcion}}"></p></tr>
+                    </table>
+                </div>
+            </hgroup>
+        </div>
+        <div class="botones">
+            <table>
+                <tr><td><p class="horas">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
+                <tr><td><p class="inicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
+                <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
+            </table>
+            <div>
+            <a class="btn btn-secondary" role="button">Colabora</a>
+            </div>
+        </div>
+    </article>
+    </section>
+</div>
 </div>
 </body>
 </html>

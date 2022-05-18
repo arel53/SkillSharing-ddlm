@@ -140,3 +140,61 @@ body {
     padding: 1.8em;
 }
 
+.listado {
+    max-width: 700px;
+    min-width: 200px;
+    margin: auto;
+}
+
+
+.estudiante {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    width: 15%;
+}
+.fotoPerfil{
+    width: 150px;
+    height: 150px;
+    border-radius: 100px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.botones {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    text-align: left !important;
+    top: 17px;
+    width: 50%;
+}
+.anuncio {
+    display: flex;
+    margin:auto;
+    font-size: 14px;
+    color: #17202A;
+    background-color: #fff;
+    border: 1px solid #eee;
+    position: relative;
+    padding: 20px;
+    border-width: 0 0 3px;
+    max-width: 735px;
+    border: 1px solid #eee;
+}
+
+.info{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    text-align: left !important;
+    top: 17px;
+    width: 50%;
+}
+
+
