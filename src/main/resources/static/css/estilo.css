@@ -11,12 +11,6 @@ ul, ol {
 	list-style:none;
 }
 
-li{
-     display:inline;
-     padding-left:3px;
-     padding-right:3px;
-}
-
 .nav{
     background: #F7F7F7 !important;
     transition: all 0.9s;
@@ -233,5 +227,7 @@ body {
     top: 17px;
     width: 50%;
 }
+
+
 
 
