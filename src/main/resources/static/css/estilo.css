@@ -192,13 +192,22 @@ body {
     width: 15%;
 }
 .fotoPerfil{
-    width: 150px;
-    height: 150px;
+    width: 70px;
+    height: 70px;
     border-radius: 100px;
     border-top-left-radius: 100px;
     border-top-right-radius: 100px;
     border-bottom-right-radius: 100px;
     border-bottom-left-radius: 100px;
+}
+
+.fotoSkill{
+    width: 150px;
+    height: 150px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
 }
 
 .botones {
@@ -220,7 +229,7 @@ body {
     position: relative;
     padding: 20px;
     border-width: 0 0 3px;
-    max-width: 735px;
+    max-width: 2000px;
     border: 1px solid #eee;
 }
 

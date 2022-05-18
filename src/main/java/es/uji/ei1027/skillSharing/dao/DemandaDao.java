@@ -56,7 +56,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandasEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
+            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

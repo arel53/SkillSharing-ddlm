@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,6 +43,62 @@
     </tr>
     </tbody>
   </table>
+</div>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Administrar Demandas</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/estilo.css"
+        th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navSKP"></div>
+<div class="container">
+  <h1>Demandas de los Usuarios</h1>
+
+  <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
+    No hay demandas en la aplicación
+  </div>
+
+  <div>
+    <section class="listado" th:if="${not #lists.isEmpty(demandas)}">
+      <article th:each="demanda: ${demandas}" class="anuncio">
+        <figure class="estudiante">
+          <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+        </figure>
+        <div class="info">
+          <hgroup>
+            <table>
+              <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
+              <tr><td><h5 class="nombre" th:text="${demanda.estudiante}"></h5></td></tr>
+            </table>
+            <div class="skill">
+              <table>
+                <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
+                <tr><td><p class="nivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
+                <tr><p th:text="${{demanda.descripcion}}"></p></tr>
+              </table>
+            </div>
+          </hgroup>
+        </div>
+        <div class="botones">
+          <table>
+            <tr><td><p class="horas">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
+            <tr><td><p class="inicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
+            <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
+          </table>
+          <div>
+            <a th:href="@{/demanda/delete/{idDemanda}(idDemanda=${demanda.idDemanda})}" class="btn btn-danger" role="button">Anular</a>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
 </div>
 </body>
 </html>

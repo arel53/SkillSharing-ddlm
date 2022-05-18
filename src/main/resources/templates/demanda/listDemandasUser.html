@@ -69,11 +69,14 @@
         <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
             <article th:each="demanda: ${misDemandas}" class="anuncio">
                 <figure class="estudiante">
-                    <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
                 </figure>
                 <div class="info">
                     <hgroup>
-                        <h3 class="nombre" th:text="${demanda.estudiante}"></h3>
+                        <table>
+                            <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
+                            <tr><td><h5 class="nombre" th:text="${demanda.estudiante}"></h5></td></tr>
+                        </table>
                         <div class="skill">
                             <table>
                                 <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
