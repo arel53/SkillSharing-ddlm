@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear nou usuari</title>
+    <title>Crear Usuario Nuevo</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
-<h2>Nou usuari</h2>
+<div th:replace="../templates/fragments/navSKP"></div>
+<h2>CrearUsuario Nuevo</h2>
 <form action="#" th:action="@{/usuario/add}"
       th:object="${usuario}" method="post">
     <table>
         <tr>
-            <td><label>Username</label></td>
+            <td><label>Nombre de Usuario</label></td>
             <td><input type="text" th:field="*{username}" placeholder="Username" maxlength="50" /></td>
             <td th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></td>
         </tr>
         <tr>
-            <td><label>Password</label></td>
+            <td><label>Contraseña</label></td>
             <td><input type="text" th:field="*{password}" placeholder="Password" maxlength="50" /></td>
             <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></td>
         </tr>
@@ -61,7 +61,7 @@
             <td><textarea th:field="*{descripcion}" maxlength="200"></textarea></td>
         </tr>
         <tr>
-            <td colspan="2"><input class="btn btn-success" type="submit" value="Afegeix usuari" /></td>
+            <td colspan="2"><input class="btn btn-success" type="submit" value="Añade Usuario" /></td>
         </tr>
     </table>
 </form>
