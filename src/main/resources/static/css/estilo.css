@@ -249,6 +249,16 @@ body {
     width: 50%;
 }
 
+.imgUsuarioCancelado{
+    margin-block-end: 1em;
+    width: 120px;
+    height: 120px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
 
 
 
