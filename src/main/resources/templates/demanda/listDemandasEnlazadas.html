@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
@@ -15,38 +17,42 @@
         Nadie demanda ninguna clase.
     </div>
 
-    <table th:if="${not #lists.isEmpty(misDemandas)}" class="table table-striped">
-        <p>Estas son las demandas relacionadas con la habilidad requerida en la oferta creada</p>
-        <thead>
-        <tr>
-            <th>Estudiante</th>
-            <th>Skill</th>
-            <th>Nivel</th>
-            <th>Horas</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Final</th>
-            <th>Descripcion</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="demanda: ${misDemandas}">
-            <td th:text="${demanda.estudiante}"></td><!-- Bindeao el nif con el estudiante en la consulta sql -->
-            <td th:text="${{demanda.nombreSkill}}"></td>
-            <td th:text="${{demanda.nivelSkill}}"></td>
-            <td th:text="${demanda.horas}"></td>
-            <td th:text="${demanda.iniFecha}"></td>
-            <td th:text="${{demanda.finFecha}}"></td>
-            <td th:text="${{demanda.descripcion}}"></td>
-            <td> <a class="btn btn-warning" role="button" th:href="@{/colaboracion/colaborar/{idOferta}/{idDemanda}(idOferta=${oferta.idOferta}, idDemanda=${demanda.idDemanda})}">Colaborar</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="form-group row" >
-        <div class="col-sm-offset-2 col-sm-4">
-            <a style="float: left" role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
+    <div>
+        <div class="mensaje">
+            <p>Algunas demandas que podrían resultarte de interés</p>
+            <a role="button" class="btn btn-primary" th:href="@{/oferta/listMisOfertas}">Añade oferta sin colaborar</a>
         </div>
+        <br>
+        <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
+            <article th:each="demanda: ${misDemandas}" class="anuncio">
+                <figure class="estudiante">
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                </figure>
+                <div class="info">
+                    <hgroup>
+                        <table>
+                            <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
+                            <tr><td><h5 class="nombre" th:text="${demanda.estudiante}"></h5></td></tr>
+                        </table>
+                        <div class="descripcion">
+                                <p th:text="${{demanda.descripcion}}"></p>
+                        </div>
+                    </hgroup>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
+                        <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
+                        <tr><td><p class="etiquetaNivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
+                    </table>
+                    <div>
+                        <a class="btn btn-warning" role="button" th:href="@{/colaboracion/colaborar/{idOferta}/{idDemanda}(idOferta=${oferta.idOferta}, idDemanda=${demanda.idDemanda})}">Colaborar</a>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
 </div>
 </body>

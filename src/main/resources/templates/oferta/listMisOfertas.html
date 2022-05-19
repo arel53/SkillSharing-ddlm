@@ -1,49 +1,52 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Gestionar Ofertas</title>
+    <title>Mis Ofertas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navMiCuenta"></div>
-<h1>Mis Ofertas</h1>
-<div th:replace="../templates/fragments/pruebas"></div>
+<div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-
-
+    <h1>Mis Ofertas</h1>
+    <div>
+    <a href="add" class="btn btn-success" role="button">Añade Oferta</a>
+    </div>
     <div th:if="${#lists.isEmpty(misOfertas)}" layout:fragment="content">
-        No tienes ofertas.
+        No tienes Ofertas.
     </div>
 
-    <table th:if="${not #lists.isEmpty(misOfertas)}" class="table table-striped">
-        <thead>
-        <tr>
-            <th>Skill</th>
-            <th>Nivel</th>
-            <th>Horas</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Final</th>
-            <th>Descripcion</th>
-            <th></th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="oferta: ${misOfertas}">
-            <td th:text="${{oferta.nombreSkill}}"></td>
-            <td th:text="${{oferta.nivelSkill}}"></td>
-            <td th:text="${oferta.horas}"></td>
-            <td th:text="${oferta.iniFecha}"></td>
-            <td th:text="${{oferta.finFecha}}"></td>
-            <td th:text="${{oferta.descripcion}}"></td>
-            <td> <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a></td>
-            <td><a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Esborra</a></td>
-        </tr>
-        </tbody>
-    </table>
-    <a href="add" class="btn btn-success" role="button">Añade Oferta</a>
+    <div>
+        <section class="listado" th:if="${not #lists.isEmpty(misOfertas)}">
+            <article th:each="oferta: ${misOfertas}" class="anuncio">
+                <figure class="estudiante">
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                </figure>
+                <div class="info">
+                    <p th:text="${{oferta.descripcion}}"></p>
+                        <table>
+                            <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{oferta.nombreSkill}}"></p></td></tr>
+                            <tr><td><p class="etiquetaNivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${oferta.nivelSkill}"></p></td></tr>
+                        </table>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{oferta.horas}}"></p></td></tr>
+                        <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${oferta.iniFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${oferta.finFecha}"></p></td></tr>
+                    </table>
+                    <div>
+                        <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a>
+                        <a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Borra</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+    </div>
 </div>
 </body>
 </html>
+

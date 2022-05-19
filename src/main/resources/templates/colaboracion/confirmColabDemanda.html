@@ -1,54 +1,108 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Confirmar Colaboracion</title>
-  <meta charset="UTF-8" />
-  <link rel="stylesheet"
-        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <title>Confirmar Colaboracion</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navMiCuenta"></div>
+<div th:replace="../templates/fragments/navUser"></div>
 
 <div class="container">
 
-  <h1>Confirmar Colaboracion</h1>
-  <div class="container">
-    <h3>Información Estudiante</h3>
-    <table  class="table table-striped">
-      <thead>
-      <tr><td>Nombre</td><td th:text="${estudiante.nombre}"></td></tr>
-      <tr><td>Apellido</td><td th:text="${estudiante.apellido}"></td></tr>
-      <tr><td>Email</td><td th:text="${estudiante.email}"></td></tr>
-      <tr><td>Grado</td><td th:text="${estudiante.grado}"></td></tr>
-      <tr><td>Edad</td><td th:text="${estudiante.edad}"></td></tr>
-      <tr><td>Sexo</td><td th:text="${estudiante.sexo}"></td></tr>
-      <tr><td>Horas</td><td th:text="${estudiante.horas}"></td></tr>
-      </thead>
-    </table>
-  </div>
+    <h1>Confirmar Colaboracion</h1>
+    <div class="container">
+    </div>
 
-  <div class="container">
-    <h3>Información Demanda</h3>
-    <table  class="table table-striped">
-      <thead>
-      <tr><td>Horas</td><td th:text="${demanda.horas}"></td></tr>
-      <tr><td>Fecha de Inicio</td><td th:text="${demanda.iniFecha}"></td></tr>
-      <tr><td>Fecha de Final</td><td th:text="${demanda.finFecha}"></td></tr>
-      <tr><td>Skill</td><td th:text="${demanda.nombreSkill}"></td></tr>
-      <tr><td>Nivel</td><td th:text="${demanda.nivelSkill}"></td></tr>
-      <tr><td>Descripcion</td><td th:text="${demanda.descripcion}"></td></tr>
-      </thead>
-    </table>
-  </div>
-<div>
-  <div class="col-sm-offset-2 col-sm-4">
-    <a th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}" class="btn btn-success" role="button">Colaborar</a>
-  </div>
-  <br>
-  <div class="col-sm-offset-2 col-sm-4">
-    <a role="button" class="btn btn-primary" th:href="@{/demanda/listDemandasUser}">Continuar sin colaborar</a>
-  </div>
-</div>
+
+    <article class="anuncio">
+        <figure class="estudiante">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
+        </figure>
+        <div class="info">
+            <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
+            <hgroup>
+                <div class="infoEstudiante2">
+                    <table>
+                        <tr>
+                            <td><p class="etiquetaEmail">Email: </p></td>
+                            <td><p class="" th:text="${{estudiante.email}}"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="etiquetaGrado">Grado: </p></td>
+                            <td><p class="" th:text="${estudiante.grado}"></p></td>
+                        </tr>
+                    </table>
+                </div>
+            </hgroup>
+        </div>
+
+        <div class="info infoEstudiante3">
+            <br>
+            <table>
+                <tr>
+                    <td><p class="etiquetaEdad">Edad: </p></td>
+                    <td><p class="" th:text="${estudiante.edad}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaSexo">Sexo: </p></td>
+                    <td><p class="" th:text="${estudiante.sexo}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaHoras">Horas: </p></td>
+                    <td><p class="" th:text="${estudiante.horas}"></p></td>
+                </tr>
+            </table>
+        </div>
+    </article>
+
+
+    <article class="anuncio">
+        <div class="info">
+            <h2>Demanda:</h2>
+            <figure class="estudiante">
+                <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+            </figure>
+                <div class="skill">
+                    <p th:text="${{demanda.descripcion}}"></p>
+                </div>
+
+        </div>
+        <div class="botones">
+            <table>
+                <tr>
+                    <td><p class="etiquetaHoras">Horas: </p></td>
+                    <td><p class="horas" th:text="${{demanda.horas}}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaInicio">Inicio: </p></td>
+                    <td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaFinal">Final: </p></td>
+                    <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaSkill">Skill: </p></td>
+                    <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaNivel">Nivel: </p></td>
+                    <td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td>
+                </tr>
+            </table>
+        </div>
+    </article>
+    <div>
+        <table>
+            <td><tr><a class="btn btn-secondary" role="button"
+                       th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a></tr></td>
+            <br>
+            <td><tr><a role="button" class="btn btn-primary" th:href="@{/demanda/listDemandasUser}">Continuar sin
+                colaborar</a></tr></td>
+        </table>
+    </div>
 </div>
 </body>
 </html>

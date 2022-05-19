@@ -7,26 +7,15 @@
 	font-family:Arial, Helvetica, sans-serif;
 }
 
-h1{
-    text-align:center;
-}
-
 ul, ol {
 	list-style:none;
- }
-
-li{
-     display:inline;
-     padding-left:3px;
-     padding-right:3px;
 }
+
 .nav{
     background: #F7F7F7 !important;
     transition: all 0.9s;
     width: 111%
 }
-
-
 
 .nav > li {
 	float:left;
@@ -89,10 +78,6 @@ li{
 	position:relative;
 }
 
-
-.left{
-    float:left;
-}
 
 
 .imga{
@@ -185,4 +170,95 @@ body {
 .panel-body {
     padding: 1.8em;
 }
+
+.listado {
+    max-width: 10000px;
+    min-width: 300px;
+    margin: auto;
+}
+
+
+.estudiante {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    width: 15%;
+}
+.fotoPerfil{
+    width: 70px;
+    height: 70px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+.fotoPerfilMasGrande{
+   width: 160px;
+   height: 160px;
+   border-top-left-radius: 100px;
+   border-top-right-radius: 100px;
+   border-bottom-right-radius: 100px;
+   border-bottom-left-radius: 100px;
+}
+
+.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad{
+    font-weight: bolder;
+}
+
+.fotoSkill{
+    width: 150px;
+    height: 150px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.botones {
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    text-align: left !important;
+    top: 17px;
+    width: 50%;
+}
+.anuncio {
+      border: 2px solid #0A52A2 ;
+      border-radius: 16px;
+    display: flex;
+    margin:auto;
+    font-size: 14px;
+    color: #17202A;
+    background-color: #fff;
+    padding: 20px;
+
+    max-width: 735px;
+
+}
+
+.info{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 40px;
+    margin-inline-end: 40px;
+    text-align: left !important;
+    top: 17px;
+    width: 50%;
+}
+
+.imgUsuarioCancelado{
+    margin-block-end: 1em;
+    width: 120px;
+    height: 120px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
+
+
 

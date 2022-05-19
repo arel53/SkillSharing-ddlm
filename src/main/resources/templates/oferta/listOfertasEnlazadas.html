@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
@@ -47,6 +48,65 @@
         <div class="col-sm-offset-2 col-sm-4">
             <a role="button" class="btn btn-primary" th:href="@{/demanda/listMisDemandas}">Añade demanda sin colaborar</a>
         </div>
+    </div>
+</div>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Demandas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navUser"></div>
+<div class="container">
+    <h1>Ofertas</h1>
+
+    <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
+        Nadie oferta ninguna clase.
+    </div>
+
+    <div>
+        <div class="mensaje">
+            <p>Algunas ofertas que podrían resultarte de interés</p>
+            <a role="button" class="btn btn-primary" th:href="@{/demanda/listMisDemandas}">Añade demanda sin colaborar</a>
+        </div>
+        <br>
+        <section class="listado" th:if="${not #lists.isEmpty(ofertas)}">
+            <article th:each="oferta: ${ofertas}" class="anuncio">
+                <figure class="estudiante">
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                </figure>
+                <div class="info">
+                    <hgroup>
+                        <table>
+                            <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
+                            <tr><td><h5 class="nombre" th:text="${oferta.estudiante}"></h5></td></tr>
+                        </table>
+                        <div class="descripcion">
+                            <p th:text="${{oferta.descripcion}}"></p>
+                        </div>
+                    </hgroup>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{oferta.horas}}"></p></td></tr>
+                        <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${oferta.iniFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${oferta.finFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{oferta.nombreSkill}}"></p></td></tr>
+                        <tr><td><p class="etiquetaNivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${oferta.nivelSkill}"></p></td></tr>
+                    </table>
+                    <div>
+                        <a class="btn btn-warning" role="button" th:href="@{/colaboracion/colaborar/{idOferta}/{idDemanda}(idOferta=${oferta.idOferta}, idDemanda=${demanda.idDemanda})}">Colaborar</a>
+                    </div>
+                </div>
+            </article>
+        </section>
     </div>
 </div>
 </body>

@@ -26,7 +26,7 @@ public class ColaboracionDao {
     }
 
     public void endColaboracion(String idColaboracion) {
-        jdbcTemplate.update("UPDATE colaboracion SET activa = FALSE WHERE id_colaboracion = ?", idColaboracion);
+        jdbcTemplate.update("UPDATE colaboracion SET activa = FALSE WHERE id_colaboracion = ?", Integer.parseInt(idColaboracion));
     }
 
     public void updateColaboracion(Colaboracion colaboracion) {
