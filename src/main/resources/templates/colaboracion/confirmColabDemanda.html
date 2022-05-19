@@ -18,7 +18,7 @@
 
     <article class="anuncio">
         <figure class="estudiante">
-            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
         </figure>
         <div class="info">
             <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
@@ -26,11 +26,11 @@
                 <div class="infoEstudiante2">
                     <table>
                         <tr>
-                            <td><p class="">Email: </p></td>
+                            <td><p class="etiquetaEmail">Email: </p></td>
                             <td><p class="" th:text="${{estudiante.email}}"></p></td>
                         </tr>
                         <tr>
-                            <td><p class="">Grado: </p></td>
+                            <td><p class="etiquetaGrado">Grado: </p></td>
                             <td><p class="" th:text="${estudiante.grado}"></p></td>
                         </tr>
                     </table>
@@ -42,15 +42,15 @@
             <br>
             <table>
                 <tr>
-                    <td><p class="">Edad: </p></td>
+                    <td><p class="etiquetaEdad">Edad: </p></td>
                     <td><p class="" th:text="${estudiante.edad}"></p></td>
                 </tr>
                 <tr>
-                    <td><p class="">Sexo: </p></td>
+                    <td><p class="etiquetaSexo">Sexo: </p></td>
                     <td><p class="" th:text="${estudiante.sexo}"></p></td>
                 </tr>
                 <tr>
-                    <td><p class="">Horas: </p></td>
+                    <td><p class="etiquetaHoras">Horas: </p></td>
                     <td><p class="" th:text="${estudiante.horas}"></p></td>
                 </tr>
             </table>
@@ -60,47 +60,49 @@
 
     <article class="anuncio">
         <div class="info">
-            <hgroup>
+            <h2>Demanda:</h2>
+            <figure class="estudiante">
+                <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+            </figure>
                 <div class="skill">
-                    <h3>Demanda</h3>
-                    <table>
-                        <tr>
-                            <td><p class="skill">Skill: </p></td>
-                            <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td>
-                        </tr>
-                        <tr>
-                            <td><p class="nivel">Nivel: </p></td>
-                            <td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td>
-                        </tr>
-                        <tr><td><p th:text="${{demanda.descripcion}}"></td></p></tr>
-                    </table>
+                    <p th:text="${{demanda.descripcion}}"></p>
                 </div>
-            </hgroup>
+
         </div>
         <div class="botones">
             <table>
                 <tr>
-                    <td><p class="horas">Horas: </p></td>
+                    <td><p class="etiquetaHoras">Horas: </p></td>
                     <td><p class="horas" th:text="${{demanda.horas}}"></p></td>
                 </tr>
                 <tr>
-                    <td><p class="inicio">Inicio: </p></td>
+                    <td><p class="etiquetaInicio">Inicio: </p></td>
                     <td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td>
                 </tr>
                 <tr>
-                    <td><p class="final">Final: </p></td>
+                    <td><p class="etiquetaFinal">Final: </p></td>
                     <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td>
                 </tr>
+                <tr>
+                    <td><p class="etiquetaSkill">Skill: </p></td>
+                    <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td>
+                </tr>
+                <tr>
+                    <td><p class="etiquetaNivel">Nivel: </p></td>
+                    <td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td>
+                </tr>
             </table>
-            <div>
-                <a class="btn btn-secondary" role="button"
-                   th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a>
-                <br></br>
-                <a role="button" class="btn btn-primary" th:href="@{/demanda/listDemandasUser}">Continuar sin
-                    colaborar</a>
-            </div>
         </div>
     </article>
+    <div>
+        <table>
+            <td><tr><a class="btn btn-secondary" role="button"
+                       th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a></tr></td>
+            <br>
+            <td><tr><a role="button" class="btn btn-primary" th:href="@{/demanda/listDemandasUser}">Continuar sin
+                colaborar</a></tr></td>
+        </table>
+    </div>
 </div>
 </body>
 </html>

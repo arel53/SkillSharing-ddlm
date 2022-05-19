@@ -194,7 +194,16 @@ body {
     border-bottom-left-radius: 100px;
 }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel{
+.fotoPerfilMasGrande{
+   width: 160px;
+   height: 160px;
+   border-top-left-radius: 100px;
+   border-top-right-radius: 100px;
+   border-bottom-right-radius: 100px;
+   border-bottom-left-radius: 100px;
+}
+
+.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad{
     font-weight: bolder;
 }
 
