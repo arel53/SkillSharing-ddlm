@@ -171,7 +171,7 @@ public class OfertaController {
 
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            return "redirect:../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
 

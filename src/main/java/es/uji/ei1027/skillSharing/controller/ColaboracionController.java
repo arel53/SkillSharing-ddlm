@@ -45,6 +45,11 @@ public class ColaboracionController {
         }
         Oferta of = (Oferta)ofertaDao.getOferta(idOferta);
         Estudiante es = (Estudiante) estudianteDao.getEstudiante(of.getEstudiante());
+
+        if(es.getNif().equals(of.getEstudiante())){
+            return "redirect:../mismaPersona";
+        }
+
         model.addAttribute("estudiante", es);
         model.addAttribute("oferta", of);
         return "colaboracion/confirmColabOferta";
@@ -58,9 +63,22 @@ public class ColaboracionController {
         }
         Demanda demanda = demandaDao.getDemanda(idDemanda);
         Estudiante es = estudianteDao.getEstudiante(demanda.getEstudiante());
+        if(es.getNif().equals(demanda.getEstudiante())){
+            return "redirect:../mismaPersona";
+        }
         model.addAttribute("estudiante", es);
         model.addAttribute("demanda", demanda);
         return "colaboracion/confirmColabDemanda";
+    }
+
+    @RequestMapping(value = "/mismaPersona")
+    public String noColaborarMismaPersona(HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","colaboracion/mismaPersona");
+            return "redirect:../../login";
+        }
+        return "colaboracion/noColaborarMismaPersona";
+
     }
 
     @RequestMapping(value = "/addColaboracionOferta/{idOferta}")
