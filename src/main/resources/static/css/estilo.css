@@ -79,7 +79,6 @@ ul, ol {
 }
 
 
-
 .imga{
   width:auto;
   height:auto;
@@ -203,8 +202,21 @@ body {
    border-bottom-left-radius: 100px;
 }
 
+.imgPrincipal{
+    width: 1000px;
+    height: 450px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    }
+
 .etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad{
     font-weight: bolder;
+}
+
+.footer{
+    text-align:center;
 }
 
 .fotoSkill{
