@@ -29,20 +29,18 @@
                     <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
                     <tr><td><h5 class="nombre" th:text="${demanda.estudiante}"></h5></td></tr>
                 </table>
-                <div class="skill">
-                    <table>
-                        <tr><td><p class="skill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
-                        <tr><td><p class="nivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
-                        <tr><p th:text="${{demanda.descripcion}}"></p></tr>
-                    </table>
+                <div class="descripcion">
+                    <p th:text="${{demanda.descripcion}}"></p>
                 </div>
             </hgroup>
         </div>
         <div class="botones">
             <table>
-                <tr><td><p class="horas">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
-                <tr><td><p class="inicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
-                <tr><td><p class="final">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
+                <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{demanda.nombreSkill}}"></p></td></tr>
+                <tr><td><p class="etiquetaNivel">Nivel: </p></td><td><p class="nivelSkill" th:text="${demanda.nivelSkill}"></p></td></tr>
+                <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{demanda.horas}}"></p></td></tr>
+                <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${demanda.iniFecha}"></p></td></tr>
+                <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${demanda.finFecha}"></p></td></tr>
             </table>
             <div>
             <a class="btn btn-secondary" role="button" th:href="@{/loginColaboraDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a>
