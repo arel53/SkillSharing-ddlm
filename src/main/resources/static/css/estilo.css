@@ -177,6 +177,7 @@ body {
 }
 
 
+
 .estudiante {
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -211,7 +212,7 @@ body {
     border-bottom-left-radius: 30px;
     }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad{
+.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio{
     font-weight: bolder;
 }
 

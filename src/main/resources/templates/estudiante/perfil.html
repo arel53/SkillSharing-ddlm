@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" >
 <head>
     <title>Mi perfil</title>
     <meta charset="UTF-8" />
@@ -11,22 +11,61 @@
 <div class="container">
     <h1>Mi perfil</h1>
 
-    <table  class="table table-striped">
-        <thead>
-        <tr><td>Nif</td> <td th:text="${estudiante.nif}"></td></tr>
-        <tr><td>Nombre</td><td th:text="${estudiante.nombre}"></td></tr>
-        <tr><td>Apellido</td><td th:text="${estudiante.apellido}"></td></tr>
-        <tr><td>Email</td><td th:text="${estudiante.email}"></td></tr>
-        <tr><td>Grado</td><td th:text="${estudiante.grado}"></td></tr>
-        <tr><td>Edad</td><td th:text="${estudiante.edad}"></td></tr>
-        <tr><td>Sexo</td><td th:text="${estudiante.sexo}"></td></tr>
-        <tr><td>Dirección</td><td th:text="${estudiante.direccion}"></td></tr>
-        <tr><td>Horas</td><td th:text="${estudiante.horas}"></td></tr>
-        </thead>
-    </table>
-    <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Canvia contrasenya</a>
-    <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Edita</a>
+<article class="anuncio" xmlns:th="http://www.w3.org/1999/xhtml">
+    <figure class="estudiante">
+        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
+    </figure>
+    <div class="info">
+        <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
+        <hgroup>
+            <div class="infoEstudiante2">
+                <table>
+                    <tr>
+                        <td><p class="etiquetaNIF">NIF: </p></td>
+                        <td><p class="" th:text="${estudiante.nif}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="etiquetaEmail">Email: </p></td>
+                        <td><p class="" th:text="${{estudiante.email}}"></p></td>
+                    </tr>
+                    <tr>
+                        <td><p class="etiquetaGrado">Grado: </p></td>
+                        <td><p class="" th:text="${estudiante.grado}"></p></td>
+                    </tr>
+                </table>
+            </div>
+        </hgroup>
+    </div>
 
+    <div class="info infoEstudiante3">
+        <br>
+        <table>
+            <tr>
+                <td><p class="etiquetaEdad">Edad: </p></td>
+                <td><p class="" th:text="${estudiante.edad}"></p></td>
+            </tr>
+            <tr>
+                <td><p class="etiquetaSexo">Sexo: </p></td>
+                <td><p class="" th:text="${estudiante.sexo}"></p></td>
+            </tr>
+            <tr>
+                <td><p class="etiquetaHoras">Horas: </p></td>
+                <td><p class="" th:text="${estudiante.horas}"></p></td>
+            </tr>
+
+            <tr>
+                <td><p class="etiquetaDomicilio">Domicilio: </p></td>
+                <td><p class="" th:text="${estudiante.direccion}"></p></td>
+            </tr>
+        </table>
+
+    </div>
+</article>
+<div>
+    <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Cambiar contraseña</a>
+    <br>
+    <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Editar</a>
+</div>
 </div>
 <footer class="footer">
     <hr>
