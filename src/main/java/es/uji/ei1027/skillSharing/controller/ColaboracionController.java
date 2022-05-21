@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
+
+
+
+//TODO Se tiene que hacer un validados de colaboración
 
 @Controller
 @RequestMapping("/colaboracion")
@@ -179,6 +184,7 @@ public class ColaboracionController {
         return "colaboracion/listSKP";
     }
 
+    // Solo puede valorar el demandante
     @RequestMapping("/listMisColaboraciones")
     public String listMisColaboraciones(Model model, HttpSession session){
         if (session.getAttribute("user") == null){
@@ -186,10 +192,45 @@ public class ColaboracionController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudiante(user.getNif()));
+        model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudianteActivas(user.getNif()));
+        model.addAttribute("fechaActual", LocalDate.now());
+        model.addAttribute("userNif", user.getNif());
         return "colaboracion/listMisColaboraciones";
     }
 
+    @RequestMapping("/listMisColaboracionesValoradas")
+    public String listMisColaboracionesValoradas(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
+            return "login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudianteNoActivas(user.getNif()));
+        return "colaboracion/listMisColaboracionesValoradas";
+    }
 
+    @RequestMapping(value = "/valorar/{idColaboracion}", method = RequestMethod.GET)
+    public String valorar(HttpSession session, Model model, @PathVariable("idColaboracion") String idColaboracion){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
+            return "redirect:../../login";
+        }
+        model.addAttribute("colaboracion", colaboracionDao.getColaboracion(idColaboracion));
+        return "colaboracion/valorar";
+    }
+
+    @RequestMapping(value = "processValoracion", method = RequestMethod.POST)
+    public String processValoracion(HttpSession session, @ModelAttribute("colaboracion") Colaboracion colaboracion, BindingResult bindingResult){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
+            return "redirect:../../login";
+        }
+        if (bindingResult.hasErrors())
+            return "colaboracion/valorar";
+        System.out.println(colaboracion);
+        colaboracionDao.updateColaboracion(colaboracion);
+        colaboracionDao.endColaboracion(colaboracion.getIdColaboracion() + "");
+        return "redirect:listMisColaboraciones";
+    }
 
 }

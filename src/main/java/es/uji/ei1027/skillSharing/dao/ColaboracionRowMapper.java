@@ -22,6 +22,7 @@ public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
         colaboracion.setHoras(rs.getInt("horas"));
         colaboracion.setNombreApellidoOfertante(rs.getString("nombre_apellido_ofertante"));
         colaboracion.setNombreApellidoDemandante(rs.getString("nombre_apellido_demandante"));
+        colaboracion.setNifDemandante(rs.getString("nif_demandante"));
         colaboracion.setSkill(rs.getString("skill"));
         return colaboracion;
     }

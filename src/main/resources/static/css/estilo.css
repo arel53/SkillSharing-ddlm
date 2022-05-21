@@ -206,6 +206,7 @@ body {
 .imgPrincipal{
     width: 1000px;
     height: 450px;
+    margin-block-end: 1em;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;

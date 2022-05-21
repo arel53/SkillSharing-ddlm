@@ -19,6 +19,9 @@ public class Colaboracion {
     private int horas;
     private String nombreApellidoOfertante;
     private String nombreApellidoDemandante;
+    private String nifDemandante;
+
+
     private String skill;
 
 
@@ -70,6 +73,11 @@ public class Colaboracion {
         return nombreApellidoDemandante;
     }
 
+
+    public String getNifDemandante() {
+        return nifDemandante;
+    }
+
     public String getSkill() {return skill;}
 
     public void setIdColaboracion(int idColaboracion) {
@@ -114,6 +122,11 @@ public class Colaboracion {
     public void setNombreApellidoDemandante(String nombreApellidoDemandante) {
         this.nombreApellidoDemandante = nombreApellidoDemandante;
     }
+
+    public void setNifDemandante(String nifDemandante) {
+        this.nifDemandante = nifDemandante;
+    }
+
 
     public void setSkill(String skill) {this.skill = skill;}
 

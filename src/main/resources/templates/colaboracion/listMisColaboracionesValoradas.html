@@ -44,22 +44,6 @@
             <td th:text="${{colaboracion.comentario}}"></td>
             <td th:text="${colaboracion.horas}"></td>
 
-            <div th:if="${colaboracion.activa == true}">
-                <div th:if="${fechaActual.compareTo(colaboracion.finFecha) <= 0}">
-                    <td>
-                        <a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
-                           class="btn btn-danger" role="button">Anular</a></td>
-                </div>
-            </div>
-
-            <div th:if="${colaboracion.activa == true && colaboracion.nifDemandante.equals(userNif)}">
-                <div th:if="${fechaActual.compareTo(colaboracion.finFecha) > 0}">
-                    <td>
-                        <a th:href="@{/colaboracion/valorar/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
-                           class="btn btn-secondary" role="button">Valorar</a></td>
-                </div>
-            </div>
-
         </tr>
         </tbody>
     </table>
