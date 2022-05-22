@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Skill</title>
+    <title>Añadir Skill</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,7 +9,7 @@
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h2>Nova Skill</h2>
+    <h2>Nueva Skill</h2>
     <form class="form-horizontal" action="#" th:action="@{/skill/add}"
           th:object="${skill}" method="post">
 
@@ -48,7 +48,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="descripcion">Descripcion:</label>
+            <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"/>
             </div>

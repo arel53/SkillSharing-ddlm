@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Update usuari</title>
+    <title>Cambia contraseña</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
-<h2>Edita contrsenya</h2>
+<h2>Edita contraseña</h2>
 <form action="#" th:action="@{/estudiante/passwdUser}"
       th:object="${usuario}" method="post">
     <table>
@@ -48,7 +48,7 @@
         <tr>
             <td><input type="text"  th:field="*{descripcion}" hidden /></td>
         <tr>
-            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita contrasenya" /></td>
+            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita contraseña" /></td>
         </tr>
     </table>
 </form>

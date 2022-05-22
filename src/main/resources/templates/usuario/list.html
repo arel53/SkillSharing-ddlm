@@ -32,12 +32,12 @@
             <td th:text="${usuario.descripcion}"></td>
             <td><a th:href="@{/usuario/update/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Edita</a>
             </td>
-            <td><a th:href="@{/usuario/delete/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Esborra</a>
+            <td><a th:href="@{/usuario/delete/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Borra</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Afegeix Usuari</a>
+    <a href="add" class="btn btn-success" role="button">Añade usuario</a>
 </div>
 <footer class="footer">
     <hr>
