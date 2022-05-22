@@ -56,7 +56,7 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboraciones() {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, s.nombre || ' ' || s.nivel AS skill " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
                     "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante " +
                     "       FROM colaboracion AS c " +
                     "       JOIN oferta AS o USING(id_oferta) " +
