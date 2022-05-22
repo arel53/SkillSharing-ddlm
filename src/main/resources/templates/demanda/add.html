@@ -23,7 +23,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="horas">Horas:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="horas" th:field="*{horas}" />
+                <input type="number" min=1 class="form-control" id="horas" th:field="*{horas}" />
             </div>
         </div>
 
@@ -57,7 +57,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="descripcion">Descripcion:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"/>
+                <input type="text" class="form-control" maxlength="200" id="descripcion" th:field="*{descripcion}"/>
             </div>
         </div>
 

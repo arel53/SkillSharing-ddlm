@@ -23,7 +23,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="horas">Hores:</label>
             <div class="col-sm-4">
-                <input type="number" class="form-control" id="horas" th:field="*{horas}"/>
+                <input type="number" class="form-control" min=1 id="horas" th:field="*{horas}"/>
                 <div class="error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></div>
 
             </div>
@@ -42,7 +42,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="finFecha">Data de final: </label>
             <div class="col-sm-4">
-                <input type="date" class="form-control" id="finFecha" th:field="*{finFecha}"/>
+                <input type="date" class="form-control"  id="finFecha" th:field="*{finFecha}"/>
                 <td th:text="${#temporals.format(oferta.finFecha,'dd/MM/yyyy')}"></td>
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
 
@@ -66,7 +66,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="descripcion">Descripció:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"/>
+                <input type="text" class="form-control" id="descripcion" maxlength="200" th:field="*{descripcion}"/>
                 <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
             </div>

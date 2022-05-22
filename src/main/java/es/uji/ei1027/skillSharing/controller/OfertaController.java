@@ -5,6 +5,7 @@ import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
+import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -179,20 +180,6 @@ public class OfertaController {
         return "oferta/listOfertasUser";
     }
 
-    @RequestMapping("/listOfertasUser/{idSkill}/{idDemanda}")
-    public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill, @PathVariable String idDemanda){
-
-        if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
-        }
-        Usuario user = (Usuario)session.getAttribute("user");
-
-        model.addAttribute("ofertas",ofertaDao.getOfertasAsociadasASkill(Integer.parseInt(idSkill)));
-        model.addAttribute("demanda",demandaDao.getDemanda(idDemanda));
-        return "oferta/listOfertasEnlazadas";
-    }
-
 
     @RequestMapping("/listMisOfertas")
     public String listMisOfertas(HttpSession session,Model model){
@@ -203,6 +190,22 @@ public class OfertaController {
         Usuario user = (Usuario)session.getAttribute("user");
 
         model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(user.getNif()));
+        model.addAttribute("oferta",new Oferta());
         return "oferta/listMisOfertas";
     }
+
+
+    @RequestMapping("/buscar")
+    public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("oferta") Oferta oferta){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
+        return "oferta/list";
+    }
+
+
+
+
 }
