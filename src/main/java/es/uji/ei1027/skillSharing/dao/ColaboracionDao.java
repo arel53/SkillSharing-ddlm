@@ -20,8 +20,8 @@ public class ColaboracionDao {
 
 
     public void addColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("INSERT INTO colaboracion(id_oferta, id_demanda, ini_fecha, activa, rate, comentario, horas) VALUES(?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
-                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), true,
+        jdbcTemplate.update("INSERT INTO colaboracion(id_oferta, id_demanda, ini_fecha, fin_fecha,activa, rate, comentario, horas) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", colaboracion.getIdOferta(),
+                colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), true,
                 null, colaboracion.getComentario(),colaboracion.getHoras());
     }
 
@@ -30,9 +30,9 @@ public class ColaboracionDao {
     }
 
     public void updateColaboracion(Colaboracion colaboracion) {
-        jdbcTemplate.update("UPDATE colaboracion SET  id_colaboracion = ?, id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
+        jdbcTemplate.update("UPDATE colaboracion SET id_oferta = ?, id_demanda = ?, ini_fecha = ?, fin_fecha = ?, " +
                 "activa = ?, rate = ?, comentario = ?,horas = ? WHERE id_colaboracion = ?",
-                colaboracion.getIdColaboracion(), colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
+                colaboracion.getIdOferta(), colaboracion.getIdDemanda(), colaboracion.getIniFecha(), colaboracion.getFinFecha(), colaboracion.isActiva(),
                 colaboracion.getRate(), colaboracion.getComentario(),colaboracion.getHoras(), colaboracion.getIdColaboracion());
     }
 
@@ -46,7 +46,7 @@ public class ColaboracionDao {
                     "                      JOIN demanda AS d USING(id_demanda) " +
                     "                      JOIN skill as S USING(id_skill) " +
                     "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
-                    "                      WHERE t.id_colaboracion = ?", new ColaboracionRowMapper(), idColaboracion);
+                    "                      WHERE t.id_colaboracion = ?", new ColaboracionRowMapper(), Integer.parseInt(idColaboracion));
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -56,7 +56,7 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboraciones() {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, s.nombre || ' ' || s.nivel AS skill " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
                     "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante " +
                     "       FROM colaboracion AS c " +
                     "       JOIN oferta AS o USING(id_oferta) " +
@@ -86,6 +86,42 @@ public class ColaboracionDao {
             return null;
         }
     }
+
+    public List<Colaboracion> getColaboracionesEstudianteActivas(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+                    "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
+                    "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
+                    "                           ) AS t " +
+                    "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN skill as S USING(id_skill) " +
+                    "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
+                    "                      WHERE (es.nif = ? or t.nif_ofertante = ?) AND t.activa = TRUE", new ColaboracionRowMapper(), nif, nif);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public List<Colaboracion> getColaboracionesEstudianteNoActivas(String nif) {
+        try {
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+                    "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
+                    "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
+                    "                           ) AS t " +
+                    "                      JOIN demanda AS d USING(id_demanda) " +
+                    "                      JOIN skill as S USING(id_skill) " +
+                    "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
+                    "                      WHERE (es.nif = ? or t.nif_ofertante = ?) AND t.activa = FALSE", new ColaboracionRowMapper(), nif, nif);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+
 
     
 }

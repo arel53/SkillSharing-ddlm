@@ -41,14 +41,18 @@
                         <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${oferta.finFecha}"></p></td></tr>
                     </table>
                     <div>
-                        <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Edita</a>
-                        <a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Borra</a>
+                        <a th:href="@{/oferta/update/{idOferta}(idOferta=${oferta.idOferta})}" class="btn btn-warning" role="button">Editar</a>
+                        <a th:href="@{/oferta/delete/{idOferta}/(idOferta=${oferta.idOferta})}" class="btn btn-danger" role="button">Borrar</a>
                     </div>
                 </div>
             </article>
         </section>
     </div>
 </div>
+<footer class="footer">
+    <hr>
+    <p class="text-muted">UJI - Skill Sharing</p>
+</footer>
 </body>
 </html>
 

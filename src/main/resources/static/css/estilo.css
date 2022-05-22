@@ -79,7 +79,6 @@ ul, ol {
 }
 
 
-
 .imga{
   width:auto;
   height:auto;
@@ -112,9 +111,19 @@ p1{
 div {
     display: block;
 }
-
+.titulo {
+text-align: center;
+font-family: Arial Black;
+font-weight: bold; font-size: 80px;
+background: #202020;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+color: transparent;
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(0,0,0,0.3);
+}
 #logo.customlogo {
-    background-image: url("../imagenes/imagenPrincipal1.png");
+    background-image: url("../imagenes/logoUJI.png");
     height: 3em;
 }
 #logo {
@@ -178,6 +187,7 @@ body {
 }
 
 
+
 .estudiante {
     margin-block-start: 1em;
     margin-block-end: 1em;
@@ -203,8 +213,22 @@ body {
    border-bottom-left-radius: 100px;
 }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad{
+.imgPrincipal{
+    width: 500px;
+    height: 450px;
+    margin-block-end: 1em;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    }
+
+.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio{
     font-weight: bolder;
+}
+
+.footer{
+    text-align:center;
 }
 
 .fotoSkill{

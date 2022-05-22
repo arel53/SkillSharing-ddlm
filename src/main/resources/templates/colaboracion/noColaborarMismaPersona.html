@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -10,10 +10,14 @@
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
-  <div class="info">
+
+<div class="info">
     <img class="imgUsuarioCancelado" src="../imagenes/cancelado.jpg">
     <h1>No puedes colaborar contigo mismo</h1>
-  </div>
-
+</div>
+<footer class="footer">
+    <hr>
+    <p class="text-muted">UJI - Skill Sharing</p>
+</footer>
 </body>
 </html>

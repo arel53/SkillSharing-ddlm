@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gestionar Oferta</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navUser"></div>
+<div class="container">
+  <h2>Valorar colaboración</h2>
+  <form class="form-horizontal" action="#" th:action="@{/colaboracion/processValoracion}"
+        th:object="${colaboracion}" method="post">
+
+
+
+    <div class="">
+      <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
+      <div class="">
+        <input type="hidden" class="form-control" id="idColaboracion" th:field="*{idColaboracion} "/>
+      </div>
+    </div>
+
+
+    <div class="">
+      <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
+      <div class="">
+        <input type="hidden" class="form-control" id="idOferta" th:field="*{idOferta} "/>
+      </div>
+    </div>
+
+
+    <div class="">
+      <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
+      <div class="">
+        <input type="hidden" class="form-control" id="idDemanda" th:field="*{idDemanda} "/>
+      </div>
+    </div>
+
+    <div class="">
+      <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
+      <div class="">
+        <input type="hidden" class="form-control" id="nombreApellidoOfertante" th:field="*{nombreApellidoOfertante} "/>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="">
+        <input type="hidden" class="form-control" id="nombreApellidoDemandante" th:field="*{nombreApellidoDemandante}"/>
+
+      </div>
+    </div>
+
+    <div class="">
+      <div class="">
+        <input type="hidden" class="form-control" id="skill" th:field="*{skill}"/>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="iniFecha">Data de inici: </label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="iniFecha" th:field="*{iniFecha}" readonly/>
+<!--        <td th:text="${#temporals.format(colaboracion.iniFecha,'dd/MM/yyyy')}"></td>-->
+<!--        <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>-->
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="finFecha">Data de final: </label>
+      <div class="col-sm-4">
+        <input type="date" class="form-control" id="finFecha" th:field="*{finFecha}" readonly/>
+<!--        <td th:text="${#temporals.format(colaboracion.finFecha,'dd/MM/yyyy')}"></td>-->
+        <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="horas">Hores:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="horas" th:field="*{horas}" readonly/>
+
+      </div>
+    </div>
+
+    <div class="">
+      <div class="">
+        <input type="hidden" class="form-control" id="activa" th:field="*{activa}"/>
+
+      </div>
+    </div>
+
+
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="rate">Puntuacion estimada:</label>
+      <div class="col-sm-4">
+        <input type="number" class="form-control" id="rate" th:field="*{rate}"/>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="control-label col-sm-2" for="comentario">Comentario:</label>
+      <div class="col-sm-4">
+        <input type="text" class="form-control" id="comentario" th:field="*{comentario}"/>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="col-sm-offset-2 col-sm-4">
+        <button type="submit" class="btn btn-primary">Añadir valoración</button>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="">
+        <input type="hidden" class="form-control" id="nifDemandante" th:field="*{nifDemandante}"/>
+
+      </div>
+    </div>
+
+  </form>
+</div>
+<footer class="footer">
+  <hr>
+  <p class="text-muted">UJI - Skill Sharing</p>
+</footer>
+</body>
+</html>
