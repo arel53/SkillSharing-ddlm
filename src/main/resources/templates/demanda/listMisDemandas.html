@@ -12,7 +12,7 @@
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
     <h1>Mis Demandas</h1>
-    <div>
+    <div class="botonesAñadir">
     <a href="add" class="btn btn-success" role="button">Añade Demanda</a>
     </div>
     <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">

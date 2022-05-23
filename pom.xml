@@ -11,8 +11,8 @@
 	<groupId>es.uji.ei1027</groupId>
 	<artifactId>clubesportiu</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>clubesportiu</name>
-	<description>Exemple laboratori EI1027</description>
+	<name>SkillSharing</name>
+	<description>Proyecto final EI1027</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
