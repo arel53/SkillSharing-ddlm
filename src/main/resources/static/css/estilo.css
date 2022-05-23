@@ -223,7 +223,7 @@ body {
     border-bottom-left-radius: 30px;
     }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio{
+.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio, .etiquetaHoras{
     font-weight: bolder;
 }
 

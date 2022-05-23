@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import es.uji.ei1027.skillSharing.dao.ColaboracionDao;
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.dao.UsuarioDao;
 import es.uji.ei1027.skillSharing.modelo.Estudiante;
@@ -44,11 +45,15 @@ public class EstudianteController {
 
     private EstudianteDao estudianteDao;
     private UsuarioDao usuarioDao;
+    private ColaboracionDao colaboracionDao;
     @Autowired
     public void setUsuarioDao(UsuarioDao usuarioDao){this.usuarioDao=usuarioDao;}
 
     @Autowired
     public void setEstudianteDao(EstudianteDao estudianteDao){this.estudianteDao=estudianteDao;}
+
+    @Autowired
+    public void setcolaboracionDao(ColaboracionDao colaboracionDao){this.colaboracionDao=colaboracionDao;}
 
     @RequestMapping("/perfil")
     public String listEstudiante(HttpSession session, Model model){
@@ -74,6 +79,8 @@ public class EstudianteController {
         }
         Estudiante estudiante = estudianteDao.getEstudiante(nif);
         model.addAttribute("estudiante", estudiante);
+        model.addAttribute("horasOfrecidas", colaboracionDao.getHorasOfrecidasEstudiante(nif));
+        model.addAttribute("horasRecibidas", colaboracionDao.getHorasRecibidasEstudiante(nif));
         return "estudiante/perfil";
     }
 

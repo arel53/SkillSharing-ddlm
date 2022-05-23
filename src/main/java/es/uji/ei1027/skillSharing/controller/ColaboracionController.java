@@ -99,7 +99,8 @@ public class ColaboracionController {
         Oferta oferta = ofertaDao.getOferta(idOferta);
         Colaboracion colaboracion = new Colaboracion();
         Demanda demanda = new Demanda();
-        demanda.setEstudiante(user.getNif()); demanda.setHoras(oferta.getHoras()); demanda.setIniFecha(oferta.getIniFecha());
+        demanda.setEstudiante(user.getNif());
+        demanda.setHoras(oferta.getHoras()); demanda.setIniFecha(oferta.getIniFecha());
         demanda.setFinFecha(oferta.getFinFecha()); demanda.setSkill(oferta.getSkill());
         demanda.setNombreSkill(oferta.getNombreSkill()); demanda.setNivelSkill(oferta.getNivelSkill());demanda.setDescripcion("Creada automática por el sistema");
         demandaDao.addDemanda(demanda);

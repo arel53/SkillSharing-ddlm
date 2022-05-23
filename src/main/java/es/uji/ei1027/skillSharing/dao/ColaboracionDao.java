@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
 import java.util.List;
 
 @Repository
@@ -118,6 +119,30 @@ public class ColaboracionDao {
         }
         catch (EmptyResultDataAccessException e) {
             return null;
+        }
+    }
+
+
+    public int getHorasOfrecidasEstudiante(String dni){
+        try {
+            Integer numHorasOfrecidas = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) WHERE o.estudiante = ? AND c.activa = FALSE GROUP BY o.estudiante", Integer.class, dni);
+            if (numHorasOfrecidas == null)
+                return 0;
+            return numHorasOfrecidas;
+        }catch (EmptyResultDataAccessException e){
+            return 0;
+        }
+    }
+
+
+    public int getHorasRecibidasEstudiante(String dni){
+        try {
+            Integer numHorasRecibidas = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN demanda AS d USING(id_demanda) WHERE d.estudiante = ? AND c.activa = FALSE GROUP BY d.estudiante", Integer.class, dni);
+            if (numHorasRecibidas == null)
+                return 0;
+            return numHorasRecibidas;
+        }catch (EmptyResultDataAccessException e){
+            return 0;
         }
     }
 
