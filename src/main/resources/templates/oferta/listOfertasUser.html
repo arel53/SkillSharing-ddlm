@@ -12,13 +12,14 @@
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
     <h1>Ofertas</h1>
+    <div th:replace="../templates/fragments/filtroOfertas"></div>
 
     <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
         Nadie oferta ninguna clase.
     </div>
 
     <div>
-        <section class="listado" th:if="${not #lists.isEmpty(ofertas)}">
+        <section class="listado" th:if="${not #lists.isEmpty(oferta)}">
             <article th:each="oferta: ${ofertas}" class="anuncio">
                 <figure class="estudiante">
                     <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">

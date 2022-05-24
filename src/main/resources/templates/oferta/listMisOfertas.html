@@ -12,18 +12,21 @@
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
     <h1>Mis Ofertas</h1>
-    <div th:replace="../templates/fragments/pruebas"></div>
+    <div th:replace="../templates/fragments/filtroOfertas"></div>
+
+
     <div>
     <a href="add" class="btn btn-success" role="button">Añade Oferta</a>
     </div>
+
     <br>
-    <div th:if="${#lists.isEmpty(misOfertas)}" layout:fragment="content">
+    <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
         No tienes Ofertas.
     </div>
 
     <div>
-        <section class="listado" th:if="${not #lists.isEmpty(misOfertas)}">
-            <article th:each="oferta: ${misOfertas}" class="anuncio">
+        <section class="listado" th:if="${not #lists.isEmpty(ofertas)}">
+            <article th:each="oferta: ${ofertas}" class="anuncio">
                 <figure class="estudiante">
                     <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
                 </figure>

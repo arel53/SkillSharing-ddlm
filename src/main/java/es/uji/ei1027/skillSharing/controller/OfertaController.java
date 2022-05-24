@@ -155,6 +155,9 @@ public class OfertaController {
     @RequestMapping("/list")
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
+        model.addAttribute("oferta",new Oferta());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "inicioOfertas");
         return "oferta/list";
     }
 
@@ -162,6 +165,9 @@ public class OfertaController {
     public String listOfertasSKP(Model model){
 
         model.addAttribute("ofertas",ofertaDao.getOfertas());
+        model.addAttribute("oferta",new Oferta());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "skpOfertas");
         return "oferta/listSKP";
     }
 
@@ -176,6 +182,9 @@ public class OfertaController {
         Usuario user = (Usuario)session.getAttribute("user");
 
         model.addAttribute("ofertas",ofertaDao.getTodasOfertasMenosMias(user.getNif()));
+        model.addAttribute("oferta",new Oferta());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "ofertasUser");
         return "oferta/listOfertasUser";
     }
 
@@ -188,22 +197,38 @@ public class OfertaController {
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
-        model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(user.getNif()));
+        model.addAttribute("ofertas",ofertaDao.getOfertasEstudiante(user.getNif()));
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "misOfertas");
         return "oferta/listMisOfertas";
     }
 
 
-    @RequestMapping("/buscar")
-    public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("oferta") Oferta oferta){
-        if (session.getAttribute("user") == null){
+    @RequestMapping("/buscarOfertas/{idListado}")
+    public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("oferta") Oferta oferta, @PathVariable("idListado") int idListado){
+        if (idListado != 0 && session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("misOfertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
+        model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
         model.addAttribute("skills", skillDao.getSkillsActivas());
-        return "oferta/listMisOfertas";
+        if (idListado == 0){
+            model.addAttribute("list", "inicioOfertas");
+            return "oferta/list";
+        }
+        else if (idListado == 1){
+            model.addAttribute("list", "ofertasUser");
+            return "oferta/listOfertasUser";
+        }
+        else if (idListado == 2){
+            model.addAttribute("list", "misOfertas");
+            return "oferta/listMisOfertas";
+        }
+        else {
+            model.addAttribute("list", "skpOfertas");
+            return "oferta/listSKP";
+        }
     }
 
 

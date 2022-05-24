@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Oferta</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <form class="form-horizontal" th:if="${list != null && list == 'inicioOfertas'}" th:action="@{/oferta/buscarOfertas/0/}"
+          th:object="${oferta}" method="GET">
+        <!--    <div>-->
+        <!--        <br>-->
+        <!--        <ul class="prueba">-->
+        <!--            <li><h2>Buscar por:</h2></li>-->
+        <!--            <li><a>Skill:</a></li>-->
+        <!--            <li>-->
+        <!--                <input class="form-control" type="text" placeholder="Ej:ingles, oratoria, ..."-->
+        <!--                       spellcheck="false">-->
+        <!--            </li>-->
+        <!--            <li><a>Fecha inicio:</a></li>-->
+        <!--            <li> <input class="form-control" type="date" id="iniFecha" th:field="*{iniFecha}"/></li>-->
+        <!--            <li><a>Fecha fin:</a></li>-->
+        <!--            <li> <input class="form-control" type="date" id="finFecha" th:field="*{finFecha}"/></li>-->
+        <!--            <li></li>-->
+        <!--            <div class="form-group row">-->
+        <!--                <div class="col-sm-offset-2 col-sm-4">-->
+        <!--                    <button type="submit" class="btn btn-primary">Afegeix Demanda</button>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--        </ul>-->
+        <!--        <br>-->
+        <!--        <br>-->
+        <!--    </div>-->
+
+        <!--    <div class="form-group row">-->
+        <!--        <label class="control-label col-sm-2">Skill: </label>-->
+
+        <!--        <div class="col-sm-4">-->
+        <!--            <li><select class="form-control" id="sel1" type="value" th:field="*{skill}">-->
+
+        <!--                    <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>-->
+
+        <!--            </select>-->
+        <!--            </li>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+
+        <!--    <div class="form-group row">-->
+        <!--        <label class="control-label col-sm-2">Skill</label>-->
+        <!--        <div class="col-sm-4">-->
+        <!--            <input class="form-control" type="date" th:field="*{finFecha}"/>-->
+        <!--            <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>-->
+
+        <!--        </div>-->
+        <!--    </div>-->
+        <!--<div class="form-group row">-->
+        <!--    <label class="control-label col-sm-2">Fecha inicio</label>-->
+        <!--    <div class="col-sm-4">-->
+        <!--        <input class="form-control" type="date" th:field="*{iniFecha}"/>-->
+        <!--        <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>-->
+
+
+        <!--    </div>-->
+        <!--</div>-->
+
+        <!--<div class="form-group row">-->
+        <!--    <label class="control-label col-sm-2">Fecha final</label>-->
+        <!--    <div class="col-sm-4">-->
+        <!--        <input class="form-control" type="date" th:field="*{finFecha}"/>-->
+        <!--        <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>-->
+
+        <!--    </div>-->
+        <!--</div>-->
+
+
+        <!--    <div class="form-group row">-->
+        <!--        <label class="control-label col-sm-2">Skill</label>-->
+
+        <!--        <div class="col-sm-4">-->
+        <!--            <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">-->
+        <!--                <tr >-->
+        <!--                    <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>-->
+        <!--                </tr>-->
+        <!--            </select>-->
+        <!--            </td>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+        <!--    <div class="form-group row">-->
+        <!--        <label class="control-label col-sm-2" for="iniFecha">Fecha de Inicio:</label>-->
+        <!--        <div class="col-sm-4">-->
+        <!--            <input type="date" class="form-control" id="iniFecha" th:field="*{iniFecha}" />-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+        <!--    <div class="form-group row">-->
+        <!--        <label class="control-label col-sm-2" for="finFecha">Fecha de Final:</label>-->
+        <!--        <div class="col-sm-4">-->
+        <!--            <input type="date" class="form-control" id="finFecha" th:field="*{finFecha}"/>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+        <!--    <div class="form-group row">-->
+        <!--        <div class="col-sm-offset-2 col-sm-4">-->
+        <!--            <button type="submit" class="btn btn-primary">Afegeix Demanda</button>-->
+        <!--        </div>-->
+        <!--    </div>-->
+
+
+        <select id="sel1" type="value" th:field="*{skill}">
+            <tr>
+                <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                    <td th:text="${s.nombre}"></td>
+                    <td th:text="${s.nivel}"></td>
+                </option>
+            </tr>
+        </select>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+
+    </form>
+
+    <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}" th:action="@{/oferta/buscarOfertas/1}"
+          th:object="${oferta}" method="GET">
+
+        <select id="sel1" type="value" th:field="*{skill}">
+            <tr>
+                <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                    <td th:text="${s.nombre}"></td>
+                    <td th:text="${s.nivel}"></td>
+                </option>
+            </tr>
+        </select>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+
+    </form>
+
+
+    <form class="form-horizontal" th:if="${list != null && list.equals('misOfertas')}" th:action="@{/oferta/buscarOfertas/2}"
+          th:object="${oferta}" method="GET">
+
+        <select id="sel1" type="value" th:field="*{skill}">
+            <tr>
+                <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                    <td th:text="${s.nombre}"></td>
+                    <td th:text="${s.nivel}"></td>
+                </option>
+            </tr>
+        </select>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+
+    </form>
+
+    <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}" th:action="@{/oferta/buscarOfertas/3}"
+          th:object="${oferta}" method="GET">
+
+        <select id="sel1" type="value" th:field="*{skill}">
+            <tr>
+                <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                    <td th:text="${s.nombre}"></td>
+                    <td th:text="${s.nivel}"></td>
+                </option>
+            </tr>
+        </select>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+
+    </form>
+</div>
+</body>
+</html>
