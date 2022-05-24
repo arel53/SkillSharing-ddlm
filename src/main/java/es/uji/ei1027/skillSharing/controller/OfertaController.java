@@ -44,7 +44,6 @@ class OfertaValidator implements Validator {
 }
 
 
-
 @Controller
 @RequestMapping("/oferta")
 public class OfertaController {
@@ -213,6 +212,7 @@ public class OfertaController {
         }
         model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
         model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("filtrado", true);
         if (idListado == 0){
             model.addAttribute("list", "inicioOfertas");
             return "oferta/list";

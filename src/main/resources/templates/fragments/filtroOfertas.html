@@ -8,7 +8,8 @@
 </head>
 <body>
 <div>
-    <form class="form-horizontal" th:if="${list != null && list == 'inicioOfertas'}" th:action="@{/oferta/buscarOfertas/0/}"
+    <form class="form-horizontal" th:if="${list != null && list == 'inicioOfertas'}"
+          th:action="@{/oferta/buscarOfertas/0/}"
           th:object="${oferta}" method="GET">
         <!--    <div>-->
         <!--        <br>-->
@@ -119,10 +120,12 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/list}">Lista sin filtrar</a>
 
     </form>
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}" th:action="@{/oferta/buscarOfertas/1}"
+    <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}"
+          th:action="@{/oferta/buscarOfertas/1/}"
           th:object="${oferta}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
@@ -134,11 +137,13 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listOfertasUser}">Lista sin filtrar</a>
 
     </form>
 
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('misOfertas')}" th:action="@{/oferta/buscarOfertas/2}"
+    <form class="form-horizontal" th:if="${list != null && list.equals('misOfertas')}"
+          th:action="@{/oferta/buscarOfertas/2/}"
           th:object="${oferta}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
@@ -150,10 +155,12 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listMisOfertas}">Lista sin filtrar</a>
 
     </form>
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}" th:action="@{/oferta/buscarOfertas/3}"
+    <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}"
+          th:action="@{/oferta/buscarOfertas/3/}"
           th:object="${oferta}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
@@ -165,6 +172,7 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listSKP}">Lista sin filtrar</a>
 
     </form>
 </div>
