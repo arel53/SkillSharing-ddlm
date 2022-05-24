@@ -110,10 +110,13 @@
 <!--        </div>-->
 <!--    </div>-->
 
-<input type="number" th:field="*{skill}"/>
-    <button type="submit">Buscar</button>
 
-
+    <select id="sel1" type="value" th:field="*{skill}">
+        <tr >
+            <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
+        </tr>
+    </select>
+    <button type="submit" class="botonesAñadir">Buscar</button>
 
 </form>
 </div>

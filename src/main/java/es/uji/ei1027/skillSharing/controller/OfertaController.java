@@ -5,7 +5,6 @@ import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
-import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -191,6 +190,7 @@ public class OfertaController {
 
         model.addAttribute("misOfertas",ofertaDao.getOfertasEstudiante(user.getNif()));
         model.addAttribute("oferta",new Oferta());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
         return "oferta/listMisOfertas";
     }
 
@@ -201,8 +201,9 @@ public class OfertaController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
-        return "oferta/list";
+        model.addAttribute("misOfertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        return "oferta/listMisOfertas";
     }
 
 
