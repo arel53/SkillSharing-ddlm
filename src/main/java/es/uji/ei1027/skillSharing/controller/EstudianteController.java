@@ -12,12 +12,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 
 class EstudianteValidador implements Validator{
@@ -95,17 +99,19 @@ public class EstudianteController {
     }
 
     @RequestMapping(value = "/update/{nif}", method = RequestMethod.GET)
-    public String editEstudiante(HttpSession session,Model model, @PathVariable String nif){
+    public String editEstudiante(HttpSession session, Model model, @PathVariable String nif)  {
 
-        if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/estudiante/update/"+nif);
-            return "redirect:/login";
-        }
-        Usuario user = (Usuario)session.getAttribute("user");
-        if (!user.getNif().equals(nif)){
-            return "redirect:/forbiden";
-        }
+//        if (session.getAttribute("user") == null){
+//            session.setAttribute("nextUrl","/estudiante/update/"+nif);
+//            return "redirect:/login";
+//        }
+//        Usuario user = (Usuario)session.getAttribute("user");
+//        if (!user.getNif().equals(nif)){
+//            return "redirect:/forbiden";
+//        }
         Estudiante es = estudianteDao.getEstudiante(nif);
+
+
         model.addAttribute("estudiante", es);
         session.setAttribute("old_estudiante", es);
         return "estudiante/update";
@@ -113,8 +119,8 @@ public class EstudianteController {
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit( HttpSession session,
-            @ModelAttribute("estudiante") Estudiante estudiante,
-            BindingResult bindingResult){
+            @ModelAttribute("estudiante") Estudiante estudiante, @RequestParam("imagen")MultipartFile imagen,
+            BindingResult bindingResult) throws IOException {
         Usuario user = (Usuario) session.getAttribute("user");
         Estudiante oldEstudiante = (Estudiante) session.getAttribute("old_estudiante");
         if (user.isSkp()){
@@ -147,6 +153,22 @@ public class EstudianteController {
             return "estudiante/update";
         }
 
+
+        if (!imagen.isEmpty()){
+            String rutavieja = oldEstudiante.getRutaimg();
+            if (!rutavieja.equals("")){
+                File fichero = new File(rutavieja);
+                fichero.delete();
+            }
+            Path di = Paths.get("src//main//resources//static/imagenes/estudiantes");
+            String ra = di.toFile().getAbsolutePath();
+            byte[] imgb = imagen.getBytes();
+            Path ruta = Paths.get(ra+"//"+imagen.getOriginalFilename());
+            Files.write(ruta,imgb, StandardOpenOption.CREATE);
+            String rutabd = "/imagenes/estudiantes/"+imagen.getOriginalFilename();
+            estudiante.setRutaimg(rutabd);
+
+        }
         estudianteDao.updateEstudiante(estudiante);
         return "redirect:perfil";
     }

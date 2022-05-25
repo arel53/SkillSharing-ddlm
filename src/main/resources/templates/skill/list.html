@@ -29,6 +29,7 @@
         </thead>
         <tbody>
         <tr th:each="skill: ${skills}">
+            <td><img th:src="${skill.rutaim}" height="80" width="80"/></td>
             <td th:text="${{skill.nombre}}"></td>
             <td th:text="${{skill.nivel}}"></td>
             <td th:text="${{skill.descripcion}}"></td>

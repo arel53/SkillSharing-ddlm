@@ -1,5 +1,7 @@
 package es.uji.ei1027.skillSharing.modelo;
 
+import java.awt.image.BufferedImage;
+
 public class Skill {
     private int idSkill;
     private String nombre;
@@ -9,8 +11,20 @@ public class Skill {
     private int numeroOfertas;
     private int numeroDemandas;
 
+    public String getRutaim() {
+        return rutaim;
+    }
+
+    public void setRutaim(String rutaim) {
+        this.rutaim = rutaim;
+    }
+
+    private String rutaim;
 
 
+    public void setActivo(boolean activo) {
+        this.activo = activo;
+    }
     public Skill(){
 
     }

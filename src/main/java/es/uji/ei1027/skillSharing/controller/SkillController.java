@@ -6,11 +6,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 @Controller
@@ -28,11 +37,26 @@ public class SkillController {
         return "skill/add";
     }
 
+
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult){
+    public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult, @RequestParam("foto") MultipartFile foto) throws IOException {
         if (bindingResult.hasErrors()) {
             return "skill/add";
         }
+        if (foto.isEmpty()){
+            //bindingResult.rejectValue();
+            System.out.println("empotyfoto");
+            return "skill/add ";
+        }
+        //System.out.println(foto.getOriginalFilename());
+
+        Path di = Paths.get("src//main//resources//static/imagenes/skill");
+        String ra = di.toFile().getAbsolutePath();
+        byte[] imgb = foto.getBytes();
+        Path ruta = Paths.get(ra+"//"+foto.getOriginalFilename());
+        Files.write(ruta,imgb, StandardOpenOption.CREATE);
+        String rutabd = "/imagenes/skill/"+foto.getOriginalFilename();
+        skill.setRutaim(rutabd);
         skillDao.addSkill(skill);
         return "redirect:list";
     }
@@ -61,12 +85,13 @@ public class SkillController {
     }
 
     @RequestMapping("/list")
-    public String listSkills(Model model){
+    public String listSkills(Model model) throws IOException {
         List<Skill> skills =skillDao.getSkillsActivas();
         for (Skill s : skills){
             s.setNumeroOfertas(skillDao.getNumOfertasSkill(s.getIdSkill()));
             s.setNumeroDemandas(skillDao.getNumDemandasSkill(s.getIdSkill()));
         }
+
         model.addAttribute("skills", skills);
         return "skill/list";
     }

@@ -11,7 +11,7 @@
 <div class="container">
     <h2>Nueva Skill</h2>
     <form class="form-horizontal" action="#" th:action="@{/skill/add}"
-          th:object="${skill}" method="post">
+          th:object="${skill}" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
             <div class="col-sm-4">
@@ -59,12 +59,25 @@
                 <input class="form-control" type="hidden" readonly th:field="*{activo}"/>
             </div>
         </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <input class="form-control" type="hidden" readonly th:field="*{rutaim}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-4">
+                <input class="form-control" type="file" name="foto"/>
+            </div>
+        </div>
+
+
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-primary">Añadir Skill</button>
             </div>
         </div>
+
 
     </form>
 </div>

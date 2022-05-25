@@ -10,7 +10,7 @@
 <div class="container">
     <h2>Modifica Perfil</h2>
     <form class="form-horizontal" action="#" th:action="@{/estudiante/update}"
-          th:object="${estudiante}" method="post">
+          th:object="${estudiante}" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
             <label class="control-label col-sm-2">nif</label>
@@ -78,6 +78,13 @@
             <div class="col-sm-4">
                 <input class="form-control" type="number" readonly th:field="*{horas}"/>
             </div>
+        </div>
+        <div class="form-group row">
+            <label class="control-label col-sm-2">Canvia foto</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="file" name="foto"/>
+            </div>
+
         </div>
         <div>
         <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Cambia contraseña</a>
