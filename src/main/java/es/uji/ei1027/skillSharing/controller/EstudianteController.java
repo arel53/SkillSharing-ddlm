@@ -81,6 +81,8 @@ public class EstudianteController {
         model.addAttribute("estudiante", estudiante);
         model.addAttribute("horasOfrecidas", colaboracionDao.getHorasOfrecidasEstudiante(nif));
         model.addAttribute("horasRecibidas", colaboracionDao.getHorasRecibidasEstudiante(nif));
+        model.addAttribute("ratioHorasOferta", colaboracionDao.getHorasOfrecidasEstudiantePorHorasOfertasTotales(nif) + " %");
+        model.addAttribute("ratioHorasDemanda", colaboracionDao.getHorasDemandadasEstudiantePorHorasDemandasTotales(nif) + " %");
         return "estudiante/perfil";
     }
 
