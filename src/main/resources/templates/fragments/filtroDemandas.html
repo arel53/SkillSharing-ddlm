@@ -29,7 +29,7 @@
 
     <form class="form-horizontal" th:if="${list != null && list.equals('demandasUser')}"
           th:action="@{/oferta/buscarDemandas/1/}"
-          th:object="${oferta}" method="GET">
+          th:object="${demanda}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
             <tr>
@@ -62,7 +62,7 @@
 
     </form>
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}"
+    <form class="form-horizontal" th:if="${list != null && list.equals('skpDemandas')}"
           th:action="@{/demanda/buscarDemandas/3/}"
           th:object="${demanda}" method="GET">
 

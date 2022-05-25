@@ -154,12 +154,18 @@ public class DemandaController {
     @RequestMapping("/list")
     public String listDemandas(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","inicioDemandas");
         return "demanda/list";
     }
 
     @RequestMapping("/listSKP")
     public String listDemandasSKP(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","skpDemandas");
         return "demanda/listSKP";
     }
 
@@ -170,21 +176,13 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
+        model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","demandasUser");
         return "demanda/listDemandasUser";
     }
 
-    @RequestMapping("/listDemandasUser/{idSkill}/{idOferta}")
-    public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill,@PathVariable String idOferta){
-        if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
-        }
-        Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getDemandasAsociadasASkill(Integer.parseInt(idSkill)));
-        model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
-        return "demanda/listDemandasEnlazadas";
-    }
 
     @RequestMapping("/listMisDemandas")
     public String listMisDemandas(Model model, HttpSession session){
@@ -193,7 +191,7 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getDemandasEstudiante(user.getNif()));
+        model.addAttribute("demandas",demandaDao.getDemandasEstudiante(user.getNif()));
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misDemandas");
