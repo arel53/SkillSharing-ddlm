@@ -7,7 +7,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 @Repository
@@ -135,12 +136,42 @@ public class ColaboracionDao {
     }
 
 
+    public float getHorasOfrecidasEstudiantePorHorasOfertasTotales(String dni) {
+        try {
+            Float numHorasOfrecidas = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) WHERE o.estudiante = ? AND c.activa = FALSE GROUP BY o.estudiante", Float.class, dni);
+            Float numHorasTotalesOfertasColaboraciones = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN oferta USING(id_oferta)", Float.class);
+            System.out.println(numHorasOfrecidas);
+            System.out.println(numHorasTotalesOfertasColaboraciones);
+            if (numHorasOfrecidas == null || numHorasTotalesOfertasColaboraciones == null)
+                return 0;
+            System.out.println(numHorasOfrecidas / numHorasTotalesOfertasColaboraciones);
+            BigDecimal bd = BigDecimal.valueOf((numHorasOfrecidas / numHorasTotalesOfertasColaboraciones) * 100).setScale(2, RoundingMode.HALF_UP);
+            return bd.floatValue();
+        }catch (EmptyResultDataAccessException e){
+            return 0;
+        }
+    }
+
+
     public int getHorasRecibidasEstudiante(String dni){
         try {
             Integer numHorasRecibidas = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN demanda AS d USING(id_demanda) WHERE d.estudiante = ? AND c.activa = FALSE GROUP BY d.estudiante", Integer.class, dni);
             if (numHorasRecibidas == null)
                 return 0;
             return numHorasRecibidas;
+        }catch (EmptyResultDataAccessException e){
+            return 0;
+        }
+    }
+
+    public float getHorasDemandadasEstudiantePorHorasDemandasTotales(String dni) {
+        try {
+            Float numHorasDemandadas = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN demanda AS o USING(id_demanda) WHERE o.estudiante = ? AND c.activa = FALSE GROUP BY o.estudiante", Float.class, dni);
+            Float numHorasTotalesOfertasColaboraciones = jdbcTemplate.queryForObject("SELECT SUM(c.horas) FROM colaboracion AS c JOIN demanda USING(id_demanda)", Float.class);
+            if (numHorasDemandadas == null || numHorasTotalesOfertasColaboraciones == null)
+                return 0;
+            BigDecimal bd = BigDecimal.valueOf((numHorasDemandadas / numHorasTotalesOfertasColaboraciones) * 100).setScale(2, RoundingMode.HALF_UP);
+            return bd.floatValue();
         }catch (EmptyResultDataAccessException e){
             return 0;
         }

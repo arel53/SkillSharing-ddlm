@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" >
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Mi perfil</title>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
@@ -11,72 +11,94 @@
 <div class="container">
     <h1>Mi perfil</h1>
 
-<article class="anuncio" xmlns:th="http://www.w3.org/1999/xhtml">
-    <figure class="estudiante">
-        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
-    </figure>
-    <div class="info">
-        <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
-        <hgroup>
-            <div class="infoEstudiante2">
-                <table>
-                    <tr>
-                        <td><p class="etiquetaNIF">NIF: </p></td>
-                        <td><p class="" th:text="${estudiante.nif}"></p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="etiquetaEmail">Email: </p></td>
-                        <td><p class="" th:text="${{estudiante.email}}"></p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="etiquetaGrado">Grado: </p></td>
-                        <td><p class="" th:text="${estudiante.grado}"></p></td>
-                    </tr>
-                    <tr>
-                        <td><p class="etiquetaEdad">Edad: </p></td>
-                        <td><p class="" th:text="${estudiante.edad}"></p></td>
-                    </tr>
+    <article class="anuncio" xmlns:th="http://www.w3.org/1999/xhtml">
+        <figure class="estudiante">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
+        </figure>
+        <div class="info">
+            <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
+            <hgroup>
+                <div class="infoEstudiante2">
+                    <table>
+                        <tr>
+                            <td><p class="etiquetaNIF">NIF: </p></td>
+                            <td><p class="" th:text="${estudiante.nif}"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="etiquetaEmail">Email: </p></td>
+                            <td><p class="" th:text="${{estudiante.email}}"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="etiquetaGrado">Grado: </p></td>
+                            <td><p class="" th:text="${estudiante.grado}"></p></td>
+                        </tr>
+                        <tr>
+                            <td><p class="etiquetaEdad">Edad: </p></td>
+                            <td><p class="" th:text="${estudiante.edad}"></p></td>
+                        </tr>
 
-                    <tr>
-                        <td><p class="etiquetaSexo">Sexo: </p></td>
-                        <td><p class="" th:text="${estudiante.sexo}"></p></td>
-                    </tr>
-                </table>
-            </div>
-        </hgroup>
-    </div>
+                        <tr>
+                            <td><p class="etiquetaSexo">Sexo: </p></td>
+                            <td><p class="" th:text="${estudiante.sexo}"></p></td>
+                        </tr>
+                    </table>
+                </div>
+            </hgroup>
+        </div>
 
-    <div class="info infoEstudiante3">
+        <div class="info infoEstudiante3">
+            <br>
+            <table>
+                <tr>
+                    <td><p class="etiquetaHoras">Horas: </p></td>
+                    <td><p class="" th:text="${estudiante.horas}"></p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="etiquetaDomicilio">Domicilio: </p></td>
+                    <td><p class="" th:text="${estudiante.direccion}"></p></td>
+                </tr>
+            </table>
+
+        </div>
+    </article>
+
+    <article class="anuncio" xmlns:th="http://www.w3.org/1999/xhtml">
+
+        <div class="infoExtraEstudiante">
+            <br>
+            <table>
+
+                <tr>
+                    <td><p class="etiquetaHoras">Horas ofrecidas: </p></td>
+                    <td><p class="" th:text="${horasOfrecidas}"></p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="etiquetaHoras">Horas Demandadas: </p></td>
+                    <td><p class="" th:text="${horasRecibidas}"></p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="etiquetaRatios"><!--Porcentaje horas ofrecidas por <b>ti</b> / horas totales ya ofrecidas por <b>todos</b>:-->Ratio horas ofrecidas</p></td>
+                    <td><p class="" th:text="${ratioHorasOferta}"></p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="etiquetaRatios"><!--Porcentaje horas demandadas por <b>ti</b> / horas totales ya demandadas por <b>todos</b>--> Ratio horas demandadas:</p></td>
+                    <td><p class="" th:text="${ratioHorasDemanda}"></p></td>
+                </tr>
+
+            </table>
+
+        </div>
+    </article>
+    <div>
+        <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Cambiar
+            contraseña</a>
         <br>
-        <table>
-            <tr>
-                <td><p class="etiquetaHoras">Horas: </p></td>
-                <td><p class="" th:text="${estudiante.horas}"></p></td>
-            </tr>
-
-            <tr>
-                <td><p class="etiquetaDomicilio">Domicilio: </p></td>
-                <td><p class="" th:text="${estudiante.direccion}"></p></td>
-            </tr>
-
-            <tr>
-                <td><p class="etiquetaHoras">Horas ofrecidas: </p></td>
-                <td><p class="" th:text="${horasOfrecidas}"></p></td>
-            </tr>
-
-            <tr>
-                <td><p class="etiquetaHoras">Horas Demandadas: </p></td>
-                <td><p class="" th:text="${horasRecibidas}"></p></td>
-            </tr>
-        </table>
-
+        <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Editar</a>
     </div>
-</article>
-<div>
-    <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-danger" role="button">Cambiar contraseña</a>
-    <br>
-    <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Editar</a>
-</div>
 </div>
 <footer class="footer">
     <hr>
