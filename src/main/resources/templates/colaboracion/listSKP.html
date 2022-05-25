@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
@@ -46,6 +47,65 @@
     </tr>
     </tbody>
   </table>
+</div>
+<footer class="footer">
+  <hr>
+  <p class="text-muted">UJI - Skill Sharing</p>
+</footer>
+</body>
+</html>-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Mis Colaboraciones</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div th:replace="../templates/fragments/navUser"></div>
+<div class="container">
+  <h1>Mis Colaboraciones</h1>
+
+  <div th:if="${#lists.isEmpty(misColaboraciones)}" layout:fragment="content">
+    No tienes colaboraciones.
+  </div>
+  <div>
+    <section class="listado" th:if="${not #lists.isEmpty(misColaboraciones)}">
+      <article th:each="colaboracion: ${misColaboraciones}" class="anuncio">
+        <figure class="colaborarImg">
+          <div class="iconoColaborar">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+            <img src="/imagenes/colaborar1.png" class="colaborar">
+            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+          </div>
+          <br>
+          <img src="/imagenes/skill/Yoga.jfif" class="fotoSkillColab">
+        </figure>
+        <div class="info">
+          <table>
+            <tr><td><p class="etiquetaOfertante">Ofertante: </p></td> <td><p class="ofertante" th:text="${{colaboracion.nombreApellidoOfertante}}"></p></td></tr>
+            <tr><td><p class="etiquetaDemandante">Demandante: </p></td> <td><p class="demandante" th:text="${{colaboracion.nombreApellidoDemandante}}"></p></td></tr>
+          </table>
+          <div class="comentario">
+            <p th:text="${{colaboracion.comentario}}"></p>
+          </div>
+          <a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}" class="btn btn-danger" role="button">Anular</a>
+
+        </div>
+        <div class="botones">
+          <table>
+            <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{colaboracion.skill}}"></p></td></tr>
+            <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{colaboracion.horas}}"></p></td></tr>
+            <tr><td><p class="etiquetaRate">Rate: </p></td> <td><p class="rate" th:text="${colaboracion.rate}"></p></td></tr>
+            <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${colaboracion.iniFecha}"></p></td></tr>
+            <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${colaboracion.finFecha}"></p></td></tr>
+
+          </table>
+        </div>
+      </article>
+    </section>
+  </div>
 </div>
 <footer class="footer">
   <hr>

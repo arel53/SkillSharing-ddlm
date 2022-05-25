@@ -129,6 +129,20 @@ div {
     background-image: url("../imagenes/logoUJI.png");
     height: 3em;
 }
+.iconoColaborar{
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  height: 80px;
+  background-color: #F5BF2E;
+  border:-color: #aaaaaa;
+  border-width: 1px;
+  border-style: solid;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
 #logo {
     margin: 0 auto;
     width: 90%;
@@ -212,6 +226,15 @@ body {
     border-bottom-left-radius: 100px;
 }
 
+.colaborar{
+    width: 40px;
+    height: 40px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+
 .fotoPerfilMasGrande{
    width: 160px;
    height: 160px;
@@ -231,7 +254,7 @@ body {
     border-bottom-left-radius: 30px;
     }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio, .etiquetaHoras, .etiquetaRatios{
+.etiquetaHoras, .etiquetaInicio, .etiquetaOfertante, .etiquetaDemandante, .etiquetaRate, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio, .etiquetaHoras, .etiquetaRatios{
     font-weight: bolder;
 }
 
@@ -242,6 +265,14 @@ body {
 .fotoSkill{
     width: 150px;
     height: 150px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.fotoSkillColab{
+    width: 120px;
+    height: 120px;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;

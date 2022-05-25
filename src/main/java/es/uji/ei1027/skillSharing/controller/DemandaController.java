@@ -154,12 +154,18 @@ public class DemandaController {
     @RequestMapping("/list")
     public String listDemandas(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","inicioDemandas");
         return "demanda/list";
     }
 
     @RequestMapping("/listSKP")
     public String listDemandasSKP(Model model){
         model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","skpDemandas");
         return "demanda/listSKP";
     }
 
@@ -170,21 +176,13 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
+        model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills",skillDao.getSkillsActivas());
+        model.addAttribute("list","demandasUser");
         return "demanda/listDemandasUser";
     }
 
-    @RequestMapping("/listDemandasUser/{idSkill}/{idOferta}")
-    public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill,@PathVariable String idOferta){
-        if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
-        }
-        Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getDemandasAsociadasASkill(Integer.parseInt(idSkill)));
-        model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
-        return "demanda/listDemandasEnlazadas";
-    }
 
     @RequestMapping("/listMisDemandas")
     public String listMisDemandas(Model model, HttpSession session){
@@ -193,9 +191,38 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("misDemandas",demandaDao.getDemandasEstudiante(user.getNif()));
+        model.addAttribute("demandas",demandaDao.getDemandasEstudiante(user.getNif()));
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "misDemandas");
         return "demanda/listMisDemandas";
     }
 
+    @RequestMapping("/buscarOfertas/{idListado}")
+    public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("demanda") Demanda demanda, @PathVariable("idListado") int idListado){
+        if (idListado != 0 && session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill()));
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("filtrado", true);
+        if (idListado == 0){
+            model.addAttribute("list", "inicioDemandas");
+            return "demanda/list";
+        }
+        else if (idListado == 1){
+            model.addAttribute("list", "demandasUser");
+            return "demanda/listDemandasUser";
+        }
+        else if (idListado == 2){
+            model.addAttribute("list", "misDemandas");
+            return "demanda/listMisDemandas";
+        }
+        else {
+            model.addAttribute("list", "skpDemandas");
+            return "demanda/listSKP";
+        }
+    }
     // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como 259x2x48
 }

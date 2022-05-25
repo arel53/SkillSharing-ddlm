@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica Oferta</title>
+    <title>Modifica Demanda</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
 <div>
-    <form class="form-horizontal" th:if="${list != null && list == 'inicioOfertas'}"
-          th:action="@{/oferta/buscarOfertas/0/}"
-          th:object="${oferta}" method="GET">
+    <form class="form-horizontal" th:if="${list != null && list == 'inicioDemandas'}"
+          th:action="@{/demanda/buscarDemandas/0/}"
+          th:object="${demanda}" method="GET">
 
 
 
@@ -23,13 +23,13 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="button" th:href="@{/oferta/list}">Lista sin filtrar</a>
+        <a th:if="${filtrado != null}" role="button" class="button" th:href="@{/demanda/list}">Lista sin filtrar</a>
 
     </form>
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}"
-          th:action="@{/oferta/buscarOfertas/1/}"
-          th:object="${oferta}" method="GET">
+    <form class="form-horizontal" th:if="${list != null && list.equals('demandasUser')}"
+          th:action="@{/oferta/buscarDemandas/1/}"
+          th:object="${demanda}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
             <tr>
@@ -40,14 +40,14 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listOfertasUser}">Lista sin filtrar</a>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/demanda/listDemandasUser}">Lista sin filtrar</a>
 
     </form>
 
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('misOfertas')}"
-          th:action="@{/oferta/buscarOfertas/2/}"
-          th:object="${oferta}" method="GET">
+    <form class="form-horizontal" th:if="${list != null && list.equals('misDemandas')}"
+          th:action="@{/demanda/buscarDemandas/2/}"
+          th:object="${demanda}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
             <tr>
@@ -58,13 +58,13 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listMisOfertas}">Lista sin filtrar</a>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/demanda/listMisDemandas}">Lista sin filtrar</a>
 
     </form>
 
-    <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}"
-          th:action="@{/oferta/buscarOfertas/3/}"
-          th:object="${oferta}" method="GET">
+    <form class="form-horizontal" th:if="${list != null && list.equals('skpDemandas')}"
+          th:action="@{/demanda/buscarDemandas/3/}"
+          th:object="${demanda}" method="GET">
 
         <select id="sel1" type="value" th:field="*{skill}">
             <tr>
@@ -75,7 +75,7 @@
             </tr>
         </select>
         <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listSKP}">Lista sin filtrar</a>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/demanda/listSKP}">Lista sin filtrar</a>
 
     </form>
 </div>

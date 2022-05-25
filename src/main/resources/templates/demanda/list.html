@@ -13,6 +13,8 @@
 <div class="container">
     <h1>Demandas de los Estudiantes</h1>
 
+    <div th:replace="../templates/fragments/filtroDemandas"></div>
+
     <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
         Nadie demanda ninguna clase.
     </div>

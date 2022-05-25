@@ -14,37 +14,41 @@
     <div th:if="${#lists.isEmpty(misColaboraciones)}" layout:fragment="content">
         No tienes colaboraciones.
     </div>
+    <div>
+        <section class="listado" th:if="${not #lists.isEmpty(misColaboraciones)}">
+            <article th:each="colaboracion: ${misColaboraciones}" class="anuncio">
+                <figure class="colaborarImg">
+                    <div class="iconoColaborar">
+                        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                        <img src="/imagenes/colaborar1.png" class="colaborar">
+                        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                    </div>
+                    <br>
+                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkillColab">
+                </figure>
+                <div class="info">
+                    <table>
+                        <tr><td><p class="etiquetaOfertante">Ofertante: </p></td> <td><p class="ofertante" th:text="${{colaboracion.nombreApellidoOfertante}}"></p></td></tr>
+                        <tr><td><p class="etiquetaDemandante">Demandante: </p></td> <td><p class="demandante" th:text="${{colaboracion.nombreApellidoDemandante}}"></p></td></tr>
+                    </table>
+                        <div class="comentario">
+                            <p th:text="${{colaboracion.comentario}}"></p>
+                        </div>
 
-    <table th:if="${not #lists.isEmpty(misColaboraciones)}" class="table table-striped">
-        <thead>
-        <tr>
+                </div>
+                <div class="botones">
+                    <table>
+                        <tr><td><p class="etiquetaSkill">Skill: </p></td> <td><p class="nombreSkill" th:text="${{colaboracion.skill}}"></p></td></tr>
+                        <tr><td><p class="etiquetaHoras">Horas: </p></td> <td><p class="horas" th:text="${{colaboracion.horas}}"></p></td></tr>
+                        <tr><td><p class="etiquetaRate">Rate: </p></td> <td><p class="rate" th:text="${colaboracion.rate}"></p></td></tr>
+                        <tr><td><p class="etiquetaInicio">Inicio: </p></td><td><p class="iniFecha" th:text="${colaboracion.iniFecha}"></p></td></tr>
+                        <tr><td><p class="etiquetaFinal">Final: </p></td> <td><p class="finFecha" th:text="${colaboracion.finFecha}"></p></td></tr>
 
-            <th>Ofertante</th>
-            <th>Demandante</th>
-            <th>Skill</th>
-            <th>Fecha de Inicio</th>
-            <th>Fecha de Final</th>
-            <th>Activa</th>
-            <th>Rate</th>
-            <th>Comentario</th>
-            <th>Horas</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="colaboracion: ${misColaboraciones}">
-            <td th:text="${colaboracion.nombreApellidoOfertante}"></td>
-            <td th:text="${colaboracion.nombreApellidoDemandante}"></td>
-            <td th:text="${colaboracion.skill}"></td>
-            <td th:text="${colaboracion.iniFecha}"></td>
-            <td th:text="${{colaboracion.finFecha}}"></td>
-            <td th:text="${{colaboracion.activa}}"></td>
-            <td th:text="${{colaboracion.rate}}"></td>
-            <td th:text="${{colaboracion.comentario}}"></td>
-            <td th:text="${colaboracion.horas}"></td>
-
-        </tr>
-        </tbody>
-    </table>
+                    </table>
+                </div>
+            </article>
+        </section>
+    </div>
 </div>
 <footer class="footer">
     <hr>
