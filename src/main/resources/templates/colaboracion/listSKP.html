@@ -57,22 +57,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
-  <title>Mis Colaboraciones</title>
+  <title>Colaboraciones</title>
   <meta charset="UTF-8"/>
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
+<div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
-  <h1>Mis Colaboraciones</h1>
+  <h1>Colaboraciones</h1>
 
-  <div th:if="${#lists.isEmpty(misColaboraciones)}" layout:fragment="content">
+  <div th:if="${#lists.isEmpty(colaboraciones)}" layout:fragment="content">
     No tienes colaboraciones.
   </div>
   <div>
-    <section class="listado" th:if="${not #lists.isEmpty(misColaboraciones)}">
-      <article th:each="colaboracion: ${misColaboraciones}" class="anuncio">
+    <section class="listado" th:if="${not #lists.isEmpty(colaboraciones)}">
+      <article th:each="colaboracion: ${colaboraciones}" class="anuncio">
         <figure class="colaborarImg">
           <div class="iconoColaborar">
             <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
