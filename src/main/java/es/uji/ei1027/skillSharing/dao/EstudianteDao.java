@@ -34,7 +34,7 @@ public class EstudianteDao {
         jdbcTemplate.update("UPDATE estudiante SET nombre = ?, apellido = ?, email = ?, " +
                 "grado = ?, edad = ?, sexo = ?, direccion = ?, horas = ?, rutaimg= ? WHERE nif = ?",estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
                 estudiante.getGrado(), estudiante.getEdad(), estudiante.getSexo(), estudiante.getDireccion(),
-                estudiante.getHoras(), estudiante.getNif(), estudiante.getRutaimg());
+                estudiante.getHoras(), estudiante.getRutaimg(), estudiante.getNif());
     }
 
     public Estudiante getEstudiante(String nif) {
