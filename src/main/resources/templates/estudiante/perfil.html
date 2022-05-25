@@ -32,15 +32,6 @@
                             <td><p class="etiquetaGrado">Grado: </p></td>
                             <td><p class="" th:text="${estudiante.grado}"></p></td>
                         </tr>
-                        <tr>
-                            <td><p class="etiquetaEdad">Edad: </p></td>
-                            <td><p class="" th:text="${estudiante.edad}"></p></td>
-                        </tr>
-
-                        <tr>
-                            <td><p class="etiquetaSexo">Sexo: </p></td>
-                            <td><p class="" th:text="${estudiante.sexo}"></p></td>
-                        </tr>
                     </table>
                 </div>
             </hgroup>
@@ -49,6 +40,15 @@
         <div class="info infoEstudiante3">
             <br>
             <table>
+                <tr>
+                    <td><p class="etiquetaEdad">Edad: </p></td>
+                    <td><p class="" th:text="${estudiante.edad}"></p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="etiquetaSexo">Sexo: </p></td>
+                    <td><p class="" th:text="${estudiante.sexo}"></p></td>
+                </tr>
                 <tr>
                     <td><p class="etiquetaHoras">Horas: </p></td>
                     <td><p class="" th:text="${estudiante.horas}"></p></td>
