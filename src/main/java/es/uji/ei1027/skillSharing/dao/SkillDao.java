@@ -17,8 +17,8 @@ public class SkillDao {
     public void setDataSource(DataSource dataSource){jdbcTemplate = new JdbcTemplate(dataSource);}
 
     public void addSkill(Skill skill){
-        jdbcTemplate.update("INSERT INTO skill(nombre, activo, nivel, descripcion) VALUES(?, ? ,? ,?)",
-                skill.getNombre(), true, skill.getNivel(), skill.getDescripcion());
+        jdbcTemplate.update("INSERT INTO skill(nombre, activo, nivel, descripcion, rutaim) VALUES(?, ? ,? ,?, ?)",
+                skill.getNombre(), true, skill.getNivel(), skill.getDescripcion(), skill.getRutaim());
     }
 
 
@@ -30,7 +30,7 @@ public class SkillDao {
 
 
     public void updateSkill(Skill skill) {
-        jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ?, descripcion = ? WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getDescripcion(), skill.getIdSkill());
+        jdbcTemplate.update("UPDATE skill SET activo = ?, nivel = ?, descripcion = ?, WHERE id_skill = ?", skill.isActivo(), skill.getNivel(), skill.getDescripcion(), skill.getIdSkill());
     }
 
     public Skill getSkill(String idSkill) {

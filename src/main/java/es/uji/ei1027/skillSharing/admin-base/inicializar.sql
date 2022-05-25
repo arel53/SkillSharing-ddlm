@@ -17,6 +17,7 @@ CREATE TABLE estudiante(
                            sexo		    VARCHAR(10) NOT NULL,
                            direccion	VARCHAR(50) NOT NULL,
                            horas		INTEGER NOT NULL,
+                           rutaimg      VARCHAR(150),
                            CONSTRAINT cp_estudiante PRIMARY KEY (nif),
                            CONSTRAINT calt_estudiante UNIQUE(email),
                            CONSTRAINT ri_estudiante_edad CHECK (edad > 16)
@@ -27,7 +28,8 @@ CREATE TABLE skill(
                       nombre		VARCHAR(20),
                       activo		BOOLEAN NOT NULL,
                       nivel         VARCHAR(20) NOT NULL,
-                      descripcion   VARCHAR(200)
+                      descripcion   VARCHAR(200),
+                      rutaim        VARCHAR(150)
 );
 
 CREATE TABLE oferta(

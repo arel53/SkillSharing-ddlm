@@ -10,7 +10,15 @@ public class Estudiante {
     private String sexo;
     private String direccion;
     private int horas;
+    private String rutaimg;
 
+    public String getRutaimg() {
+        return rutaimg;
+    }
+
+    public void setRutaimg(String rutaimg) {
+        this.rutaimg = rutaimg;
+    }
 
     public Estudiante(){
         super();

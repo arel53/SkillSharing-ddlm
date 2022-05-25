@@ -19,6 +19,7 @@ public class EstudianteRowMapper implements RowMapper<Estudiante> {
         estudiante.setSexo(rs.getString("sexo"));
         estudiante.setDireccion(rs.getString("direccion"));
         estudiante.setHoras(rs.getInt("horas"));
+        estudiante.setRutaimg(rs.getString("rutaimg"));
         return estudiante;
     }
 

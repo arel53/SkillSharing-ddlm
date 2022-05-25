@@ -20,10 +20,10 @@ public class EstudianteDao {
     // Añade estudiante a la base de datos
 
     public void addEstudiante(Estudiante estudiante){
-        jdbcTemplate.update("INSERT INTO estudiante VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        jdbcTemplate.update("INSERT INTO estudiante VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 estudiante.getNif(), estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
                 estudiante.getGrado(), estudiante.getEdad(), estudiante.getSexo(), estudiante.getDireccion(),
-                estudiante.getHoras());
+                estudiante.getHoras(), estudiante.getRutaimg());
     }
 
     public void deleteEstudiante(String nif) {
@@ -32,9 +32,9 @@ public class EstudianteDao {
 
     public void updateEstudiante(Estudiante estudiante) {
         jdbcTemplate.update("UPDATE estudiante SET nombre = ?, apellido = ?, email = ?, " +
-                "grado = ?, edad = ?, sexo = ?, direccion = ?, horas = ? WHERE nif = ?",estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
+                "grado = ?, edad = ?, sexo = ?, direccion = ?, horas = ?, rutaimg= ? WHERE nif = ?",estudiante.getNombre(), estudiante.getApellido(), estudiante.getEmail(),
                 estudiante.getGrado(), estudiante.getEdad(), estudiante.getSexo(), estudiante.getDireccion(),
-                estudiante.getHoras(), estudiante.getNif());
+                estudiante.getHoras(), estudiante.getNif(), estudiante.getRutaimg());
     }
 
     public Estudiante getEstudiante(String nif) {
