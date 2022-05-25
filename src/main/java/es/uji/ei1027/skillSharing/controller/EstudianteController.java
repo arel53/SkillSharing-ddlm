@@ -101,14 +101,14 @@ public class EstudianteController {
     @RequestMapping(value = "/update/{nif}", method = RequestMethod.GET)
     public String editEstudiante(HttpSession session, Model model, @PathVariable String nif)  {
 
-//        if (session.getAttribute("user") == null){
-//            session.setAttribute("nextUrl","/estudiante/update/"+nif);
-//            return "redirect:/login";
-//        }
-//        Usuario user = (Usuario)session.getAttribute("user");
-//        if (!user.getNif().equals(nif)){
-//            return "redirect:/forbiden";
-//        }
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/estudiante/update/"+nif);
+            return "redirect:/login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.getNif().equals(nif)){
+            return "redirect:/forbiden";
+        }
         Estudiante es = estudianteDao.getEstudiante(nif);
 
 
@@ -121,8 +121,8 @@ public class EstudianteController {
     public String processUpdateSubmit( HttpSession session,
             @ModelAttribute("estudiante") Estudiante estudiante, @RequestParam("imagen")MultipartFile imagen,
             BindingResult bindingResult) throws IOException {
-        Usuario user = (Usuario) session.getAttribute("user");
-        Estudiante oldEstudiante = (Estudiante) session.getAttribute("old_estudiante");
+          Usuario user = (Usuario) session.getAttribute("user");
+          Estudiante oldEstudiante = (Estudiante) session.getAttribute("old_estudiante");
         if (user.isSkp()){
             return "redirect:/forbiden";
         }
