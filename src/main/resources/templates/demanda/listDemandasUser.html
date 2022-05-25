@@ -13,6 +13,8 @@
 <div class="container">
     <h1>Demandas</h1>
 
+    <div th:replace="../templates/fragments/filtroDemandas"></div>
+
     <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">
         Nadie demanda ninguna clase.
     </div>

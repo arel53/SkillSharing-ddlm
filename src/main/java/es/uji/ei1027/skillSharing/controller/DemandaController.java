@@ -194,8 +194,37 @@ public class DemandaController {
         }
         Usuario user = (Usuario) session.getAttribute("user");
         model.addAttribute("misDemandas",demandaDao.getDemandasEstudiante(user.getNif()));
+        model.addAttribute("demanda",new Demanda());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("list", "misDemandas");
         return "demanda/listMisDemandas";
     }
 
+    @RequestMapping("/buscarOfertas/{idListado}")
+    public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("demanda") Demanda demanda, @PathVariable("idListado") int idListado){
+        if (idListado != 0 && session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill()));
+        model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("filtrado", true);
+        if (idListado == 0){
+            model.addAttribute("list", "inicioDemandas");
+            return "demanda/list";
+        }
+        else if (idListado == 1){
+            model.addAttribute("list", "demandasUser");
+            return "demanda/listDemandasUser";
+        }
+        else if (idListado == 2){
+            model.addAttribute("list", "misDemandas");
+            return "demanda/listMisDemandas";
+        }
+        else {
+            model.addAttribute("list", "skpDemandas");
+            return "demanda/listSKP";
+        }
+    }
     // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como 259x2x48
 }

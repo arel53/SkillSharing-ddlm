@@ -13,6 +13,9 @@
 <div class="container">
   <h1>Demandas de los Usuarios</h1>
 
+  <div th:replace="../templates/fragments/filtroDemandas"></div>
+
+
   <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
     No hay demandas en la aplicación
   </div>
