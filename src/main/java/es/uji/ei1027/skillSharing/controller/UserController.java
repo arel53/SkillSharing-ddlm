@@ -199,5 +199,4 @@ public class UserController {
         return "redirect:update/"+usuario.getUsername();
     }
 
-    // TODO Hay que realizar el controlador del estudiante (alex:creo q hay, a lo mejor hay q añadir cosas claro)
 }
