@@ -104,8 +104,8 @@ public class ColaboracionController {
         demanda.setFinFecha(oferta.getFinFecha()); demanda.setSkill(oferta.getSkill());
         demanda.setNombreSkill(oferta.getNombreSkill()); demanda.setNivelSkill(oferta.getNivelSkill());demanda.setDescripcion("Creada automática por el sistema");
         demandaDao.addDemanda(demanda);
-        demandaDao.endDemanda(demanda.getIdDemanda()+"");
         int idDemanda = demandaDao.devuelveUltimoId();
+        demandaDao.endDemanda(idDemanda +"");
         colaboracion.setIdOferta(oferta.getIdOferta()); colaboracion.setIdDemanda(idDemanda);colaboracion.setHoras(oferta.getHoras());
         colaboracion.setIniFecha(oferta.getIniFecha()); colaboracion.setFinFecha(oferta.getFinFecha());
         colaboracionDao.addColaboracion(colaboracion);
@@ -129,8 +129,8 @@ public class ColaboracionController {
         oferta.setNombreSkill(demanda.getNombreSkill()); oferta.setNivelSkill(demanda.getNivelSkill());
         oferta.setDescripcion("Creada automática por el sistema");
         ofertaDao.addOferta(oferta);
-        ofertaDao.endOferta(oferta.getIdOferta()+"");
         int idOferta = ofertaDao.devuelveUltimoId();
+        ofertaDao.endOferta(idOferta + "");
         colaboracion.setIdOferta(idOferta); colaboracion.setIdDemanda(demanda.getIdDemanda());colaboracion.setHoras(demanda.getHoras());
         colaboracion.setIniFecha(demanda.getIniFecha()); colaboracion.setFinFecha(demanda.getFinFecha());
         colaboracionDao.addColaboracion(colaboracion);
