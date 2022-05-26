@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class OfertaRowMapper implements RowMapper<Oferta> {
     public Oferta mapRow(ResultSet rs, int rowNum)throws SQLException{

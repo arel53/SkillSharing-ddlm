@@ -210,7 +210,10 @@ public class OfertaController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
+        if (oferta.getIniFecha() == null)
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0"));
+        else
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString()));
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
