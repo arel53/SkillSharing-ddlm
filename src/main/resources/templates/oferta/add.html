@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Gestionar Oferta</title>
     <meta charset="UTF-8"/>
@@ -66,7 +66,7 @@
         <div class="form-group row">
             <label class="control-label col-sm-2" for="descripcion">Descripció:</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" id="descripcion" maxlength="200" th:field="*{descripcion}"/>
+                <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50" th:field="*{descripcion}"></textarea>
                 <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
             </div>

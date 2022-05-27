@@ -7,9 +7,14 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
+
 <div class="container">
     <h1>Mis Colaboraciones</h1>
+
+    <div th:if="${valorada != null}" class="alert alert-success text-center alerta" role="alert">
+        <div class="text-center"><p>Se ha valorado la colaboración correctamente</p>
+        </div>
+    </div>
 
     <div th:if="${#lists.isEmpty(misColaboraciones)}" layout:fragment="content">
         No tienes colaboraciones.
@@ -50,6 +55,7 @@
         </section>
     </div>
 </div>
+<div th:replace="../templates/fragments/navUser"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>

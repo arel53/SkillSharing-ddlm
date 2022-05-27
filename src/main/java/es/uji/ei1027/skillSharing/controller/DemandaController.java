@@ -6,6 +6,7 @@ import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
+import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,10 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
@@ -88,6 +86,8 @@ public class DemandaController {
         demanda.setEstudiante(user.getNif());
         List<Oferta> ofertaAsociadasSkill = ofertaDao.getOfertasAsociadasASkill(demanda.getSkill());
         demandaDao.addDemanda(demanda);
+        Skill skillInfo = skillDao.getSkill(demanda.getSkill() + "");
+        session.setAttribute("nombre", skillInfo.getNombre() + " " + skillInfo.getNivel());
         if (ofertaAsociadasSkill.isEmpty())
             return "redirect:listMisDemandas";
         else{
@@ -120,6 +120,7 @@ public class DemandaController {
         if (bindingResult.hasErrors())
             return "demanda/update";
         Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("editado", true);
         if (!user.getNif().equals(demanda.getEstudiante())){
             return "redirect:/forbiden";
         }
@@ -134,6 +135,7 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
+        session.setAttribute("eliminado", true);
         if (!user.isSkp()){
             Demanda demanda = (Demanda)demandaDao.getDemanda(idDemanda);
             if (user.getNif().equals(demanda.getEstudiante())){
@@ -209,7 +211,8 @@ public class DemandaController {
 
 
     @RequestMapping("/listMisDemandas")
-    public String listMisDemandas(Model model, HttpSession session){
+    public String listMisDemandas(Model model, HttpSession session, @SessionAttribute(name = "nombre", required = false)
+            String nombre, @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
@@ -219,6 +222,12 @@ public class DemandaController {
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misDemandas");
+        model.addAttribute("nombre", nombre);
+        session.removeAttribute("nombre");
+        model.addAttribute("editado", editado);
+        session.removeAttribute("editado");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "demanda/listMisDemandas";
     }
 

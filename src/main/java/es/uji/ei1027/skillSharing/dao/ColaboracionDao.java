@@ -116,7 +116,7 @@ public class ColaboracionDao {
                     "                      JOIN demanda AS d USING(id_demanda) " +
                     "                      JOIN skill as S USING(id_skill) " +
                     "                      JOIN estudiante AS es ON(es.nif = d.estudiante) " +
-                    "                      WHERE (es.nif = ? or t.nif_ofertante = ?) AND t.activa = FALSE", new ColaboracionRowMapper(), nif, nif);
+                    "                      WHERE (es.nif = ? or t.nif_ofertante = ?) AND t.comentario IS NOT NULL", new ColaboracionRowMapper(), nif, nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

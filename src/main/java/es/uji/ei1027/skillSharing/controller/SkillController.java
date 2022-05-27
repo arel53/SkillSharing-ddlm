@@ -9,13 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.RenderedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,16 +56,25 @@ public class SkillController {
     }
 
     @RequestMapping( value = "/update/{idSkill}", method = RequestMethod.GET)
-    public String editOferta(Model model, @PathVariable String idSkill){
+    public String editSkill(Model model, @PathVariable String idSkill){
+
         model.addAttribute("skill", skillDao.getSkill(idSkill));
         return "skill/update";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String processUpdateSubmit( @ModelAttribute("skill") Skill skill, BindingResult bindingResult){
+    public String processUpdateSubmit( @ModelAttribute("skill") Skill skill, @RequestParam("foto") MultipartFile foto, BindingResult bindingResult) throws IOException {
         if (bindingResult.hasErrors()){
             return "skill/update";
         }
+        Path di = Paths.get("src//main//resources//static/imagenes/skill");
+        String ra = di.toFile().getAbsolutePath();
+
+        byte[] imgb = foto.getBytes();
+        Path ruta = Paths.get(ra+"//"+foto.getOriginalFilename());
+        Files.write(ruta,imgb, StandardOpenOption.CREATE);
+        String rutabd = "/imagenes/skill/"+foto.getOriginalFilename();
+        skill.setRutaim(rutabd);
         skillDao.updateSkill(skill);
         return "redirect:list";
     }

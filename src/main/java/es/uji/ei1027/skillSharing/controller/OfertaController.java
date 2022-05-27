@@ -13,10 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -89,6 +86,8 @@ public class OfertaController {
         oferta.setEstudiante(user.getNif());
         List<Demanda> demandaAsociadaSkill = demandaDao.getDemandasAsociadasASkill(oferta.getSkill());
         ofertaDao.addOferta(oferta);
+        Skill skillInfo = skillDao.getSkill(oferta.getSkill() + "");
+        session.setAttribute("nombre", skillInfo.getNombre() + " " + skillInfo.getNivel());
         if (demandaAsociadaSkill.isEmpty())
             return "redirect:listMisOfertas";
         else
@@ -122,6 +121,7 @@ public class OfertaController {
             return "oferta/update";
         }
         Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("editado", true);
         if (!user.getNif().equals(oferta.getEstudiante())){
             return "redirect:/forbiden";
         }
@@ -137,6 +137,7 @@ public class OfertaController {
             return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
+        session.setAttribute("eliminado", true);
         if (!user.isSkp()){
             Oferta of = (Oferta) ofertaDao.getOferta(idOferta);
             if (user.getNif().equals(of.getEstudiante())){
@@ -204,7 +205,8 @@ public class OfertaController {
 
 
     @RequestMapping("/listMisOfertas")
-    public String listMisOfertas(HttpSession session,Model model){
+    public String listMisOfertas(HttpSession session, Model model, @SessionAttribute(name = "nombre", required = false) String nombre,
+                                 @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
@@ -215,6 +217,12 @@ public class OfertaController {
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misOfertas");
+        model.addAttribute("nombre", nombre);
+        session.removeAttribute("nombre");
+        model.addAttribute("editado", editado);
+        session.removeAttribute("editado");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "oferta/listMisOfertas";
     }
 

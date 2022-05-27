@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.Errors;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
@@ -22,6 +21,25 @@ import java.time.LocalDate;
 
 
 //TODO Se tiene que hacer un validados de colaboración
+class ValoracionValidator implements Validator {
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return false;
+    }
+
+    @Override
+    public void validate(Object obj, Errors errors) {
+        Colaboracion colaboracion = (Colaboracion) obj;
+        if (colaboracion.getComentario().equals("")){
+            errors.rejectValue("comentario", "empty_comment", "Se debe introducir un comentario");
+        }
+        if ( colaboracion.getRate() > 5 || colaboracion.getRate() <= 0){
+            errors.rejectValue("rate", "bad_rate_value", "Se debe introducir un valor para " +
+                    "la puntuación entre el 0 y el 5 (incluidos)");
+        }
+    }
+}
 
 @Controller
 @RequestMapping("/colaboracion")
@@ -92,7 +110,7 @@ public class ColaboracionController {
     }
 
     @RequestMapping(value = "/addColaboracionOferta/{idOferta}")
-    public String addColaboracionOferta(HttpSession session,@PathVariable String idOferta){
+    public String addColaboracionOferta(HttpSession session,@PathVariable String idOferta, Model model){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/addColaboracionOferta/" + idOferta);
             return "login";
@@ -113,6 +131,7 @@ public class ColaboracionController {
         colaboracionDao.addColaboracion(colaboracion);
 
         Estudiante e = estudianteDao.getEstudiante(user.getNif());
+        Estudiante ofertante = estudianteDao.getEstudiante(oferta.getEstudiante());
         Mail.connect();
         Session s = Mail.connect();
 
@@ -120,6 +139,9 @@ public class ColaboracionController {
             "Conectate a la aplicación para ver con quien vas a tener el gusto de colaborar. ", e.getEmail());
 
         Mail.close(s);
+
+        session.setAttribute("nombre", ofertante.getNombre() + " " + ofertante.getApellido());
+
         return "redirect:../listMisColaboraciones";
     }
 
@@ -147,6 +169,7 @@ public class ColaboracionController {
         colaboracionDao.addColaboracion(colaboracion);
 
         Estudiante e = estudianteDao.getEstudiante(user.getNif());
+        Estudiante demandante = estudianteDao.getEstudiante(demanda.getEstudiante());
         Mail.connect();
         Session s = Mail.connect();
 
@@ -154,6 +177,8 @@ public class ColaboracionController {
                 "Conectate a la aplicación para ver con quien vas a tener el gusto de colaborar. ", e.getEmail());
 
         Mail.close(s);
+
+        session.setAttribute("nombre", demandante.getNombre() + " " + demandante.getApellido());
         return "redirect:../listMisColaboraciones";
     }
 
@@ -162,7 +187,7 @@ public class ColaboracionController {
 
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/addColaboracionDemanda/"+ idDemanda);
-            return "login";
+            return "redirect:../login";
         }
 
         Oferta oferta = ofertaDao.getOferta(idOferta);
@@ -194,20 +219,33 @@ public class ColaboracionController {
     }
 
     @RequestMapping(value = "/delete/{idColaboracion}")
-    public String  processDeleteDemanda(@PathVariable String idColaboracion){
+    public String  processDeleteColaboracion(@PathVariable String idColaboracion, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/delete/" + idColaboracion);
+            return "redirect:../login";
+        }
+
+        Usuario user = (Usuario) session.getAttribute("user");
         colaboracionDao.endColaboracion(idColaboracion);
-        return "redirect:../../listSKP";
+        session.setAttribute("eliminado", true);
+        if (user.isSkp()){
+            return "redirect:../../listSKP";
+        }
+        else
+            return "redirect:../../listMisColaboraciones";
     }
 
     @RequestMapping("/listSKP")
-    public String listColaboraciones(Model model){
+    public String listColaboraciones(Model model, @SessionAttribute(name = "eliminado") String eliminado){
         model.addAttribute("colaboraciones",colaboracionDao.getColaboraciones());
+        model.addAttribute("eliminado");
         return "colaboracion/listSKP";
     }
 
     // Solo puede valorar el demandante
     @RequestMapping("/listMisColaboraciones")
-    public String listMisColaboraciones(Model model, HttpSession session){
+    public String listMisColaboraciones(Model model, HttpSession session, @SessionAttribute(name= "nombre", required=false) String nombre,
+                                        @SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
             return "login";
@@ -216,17 +254,25 @@ public class ColaboracionController {
         model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudianteActivas(user.getNif()));
         model.addAttribute("fechaActual", LocalDate.now());
         model.addAttribute("userNif", user.getNif());
+        System.out.println(nombre);
+        model.addAttribute("nombre", nombre);
+        session.removeAttribute("nombre");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "colaboracion/listMisColaboraciones";
     }
 
     @RequestMapping("/listMisColaboracionesValoradas")
-    public String listMisColaboracionesValoradas(Model model, HttpSession session){
+    public String listMisColaboracionesValoradas(Model model, HttpSession session,
+                                                 @SessionAttribute(name = "valorada", required = false) String valorada){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
         model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudianteNoActivas(user.getNif()));
+        model.addAttribute("valorada", valorada);
+        session.removeAttribute("valorada");
         return "colaboracion/listMisColaboracionesValoradas";
     }
 
@@ -246,12 +292,15 @@ public class ColaboracionController {
             session.setAttribute("nextUrl","/colaboracion/listMisCoraciones");
             return "redirect:../../login";
         }
+        ValoracionValidator valoracionValidator = new ValoracionValidator();
+        valoracionValidator.validate(colaboracion, bindingResult);
         if (bindingResult.hasErrors())
             return "colaboracion/valorar";
         System.out.println(colaboracion);
         colaboracionDao.updateColaboracion(colaboracion);
         colaboracionDao.endColaboracion(colaboracion.getIdColaboracion() + "");
-        return "redirect:listMisColaboraciones";
+        session.setAttribute("valorada", true);
+        return "redirect:listMisColaboracionesValoradas";
     }
 
 }
