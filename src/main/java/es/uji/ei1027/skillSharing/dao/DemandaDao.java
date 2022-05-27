@@ -90,4 +90,14 @@ public class DemandaDao {
             return null;
         }
     }
+
+
+    public List<String> getDemandasEstudiantesEnviarCorreo(int idSkill) {
+        try {
+            return jdbcTemplate.queryForList("SELECT DISTINCT LOWER(e.email) FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ?",String.class , idSkill);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

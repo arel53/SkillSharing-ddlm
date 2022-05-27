@@ -5,6 +5,7 @@ import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
 import es.uji.ei1027.skillSharing.modelo.Demanda;
 import es.uji.ei1027.skillSharing.modelo.Oferta;
+import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,7 +40,6 @@ class OfertaValidator implements Validator {
             errors.rejectValue("horas","horas0","El nombre de hores no pot ser 0");
         if (of.getHoras() < 0 )
             errors.rejectValue("horas","horas_neg","El nombre de hores no pot ser negatiu");
-
     }
 }
 
@@ -155,7 +155,8 @@ public class OfertaController {
     public String listOfertas(Model model){
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         model.addAttribute("oferta",new Oferta());
-        model.addAttribute("skills", skillDao.getSkillsActivas());
+        List<Skill> skills = skillDao.getSkillsActivas();
+        model.addAttribute("skills", skills);
         model.addAttribute("list", "inicioOfertas");
         return "oferta/list";
     }

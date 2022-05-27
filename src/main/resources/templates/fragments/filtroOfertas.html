@@ -14,53 +14,65 @@
 
 
 
+
+        <div class="filtroSkill">
+            <label>Skill: </label>
         <select id="sel1" type="value" th:field="*{skill}">
             <tr>
                 <option th:each="s: ${skills}" th:value="${s.idSkill}">
                     <td th:text="${s.nombre}"></td>
                     <td th:text="${s.nivel}"></td>
                 </option>
+
             </tr>
+        </select>
             <tr>
-                <input type="date" class="form-control"   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+                <label>Inicio:</label>
+                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
             </tr>
             <tr>
-                <input type="date" class="form-control"   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+                <label>Final:</label>
+                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
             </tr>
-        </select>
-        <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="button" th:href="@{/oferta/list}">Lista sin filtrar</a>
-
+            <button type="submit" class="botonesFiltos">Buscar</button>
+            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
+        </div>
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}"
           th:action="@{/oferta/buscarOfertas/1/}"
           th:object="${oferta}" method="GET">
 
-        <select id="sel1" type="value" th:field="*{skill}">
+        <div class="filtroSkill">
+            <label>Skill: </label>
+            <select id="sel1" type="value" th:field="*{skill}">
+                <tr>
+                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                        <td th:text="${s.nombre}"></td>
+                        <td th:text="${s.nivel}"></td>
+                    </option>
+
+                </tr>
+            </select>
             <tr>
-                <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                    <td th:text="${s.nombre}"></td>
-                    <td th:text="${s.nivel}"></td>
-                </option>
-            </tr>
-            <tr>
-                <input type="date" class="form-control"   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+                <label>Inicio:</label>
+                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
             </tr>
             <tr>
-                <input type="date" class="form-control"   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+                <label>Final:</label>
+                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
             </tr>
-        </select>
-        <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listOfertasUser}">Lista sin filtrar</a>
+            <button type="submit" class="botonesFiltos">Buscar</button>
+            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
+        </div>
 
     </form>
 
@@ -69,26 +81,32 @@
           th:action="@{/oferta/buscarOfertas/2/}"
           th:object="${oferta}" method="GET">
 
-        <select id="sel1" type="value" th:field="*{skill}">
+        <div class="filtroSkill">
+            <label>Skill: </label>
+            <select id="sel1" type="value" th:field="*{skill}">
+                <tr>
+                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                        <td th:text="${s.nombre}"></td>
+                        <td th:text="${s.nivel}"></td>
+                    </option>
+
+                </tr>
+            </select>
             <tr>
-                <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                    <td th:text="${s.nombre}"></td>
-                    <td th:text="${s.nivel}"></td>
-                </option>
-            </tr>
-            <tr>
-                <input type="date" class="form-control"   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
-<!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+                <label>Inicio:</label>
+                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
             </tr>
             <tr>
-                <input type="date" class="form-control"   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+                <label>Final:</label>
+                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
             </tr>
-        </select>
-        <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listMisOfertas}">Lista sin filtrar</a>
+            <button type="submit" class="botonesFiltos">Buscar</button>
+            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
+        </div>
 
     </form>
 
@@ -96,27 +114,32 @@
           th:action="@{/oferta/buscarOfertas/3/}"
           th:object="${oferta}" method="GET">
 
-        <select id="sel1" type="value" th:field="*{skill}">
+        <div class="filtroSkill">
+            <label>Skill: </label>
+            <select id="sel1" type="value" th:field="*{skill}">
+                <tr>
+                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                        <td th:text="${s.nombre}"></td>
+                        <td th:text="${s.nivel}"></td>
+                    </option>
+
+                </tr>
+            </select>
             <tr>
-                <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                    <td th:text="${s.nombre}"></td>
-                    <td th:text="${s.nivel}"></td>
-                </option>
+                <label>Inicio:</label>
+                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
             </tr>
             <tr>
-                <input type="date" class="form-control" value="00/00/0000"  id="finFecha" th:field="*{finFecha}"/>
-                <td th:text="${#temporals.format(oferta.finFecha,'dd/MM/yyyy')}"></td>
-                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
-            </tr>
-            <tr>
-                <input type="date" class="form-control"   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+                <label>Final:</label>
+                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
                 <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
             </tr>
-        </select>
-        <button type="submit" class="botonesAñadir">Buscar</button>
-        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listSKP}">Lista sin filtrar</a>
-
+            <button type="submit" class="botonesFiltos">Buscar</button>
+            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
+        </div>
     </form>
 </div>
 </body>

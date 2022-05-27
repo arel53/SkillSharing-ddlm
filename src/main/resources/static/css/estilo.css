@@ -339,5 +339,18 @@ body {
 }
 
 
+.filtroSkill{
+    text-align: center;
+    margin-block-end: 1em;
+}
+
+.filtroFecha{
+    text-align: center;
+    margin: auto;
+}
+
+.botonesFiltos{
+    margin-inline-start: 1em;
+}
 
 

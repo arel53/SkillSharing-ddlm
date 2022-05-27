@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import es.uji.ei1027.skillSharing.Mail;
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
 import es.uji.ei1027.skillSharing.dao.OfertaDao;
 import es.uji.ei1027.skillSharing.dao.SkillDao;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -178,6 +180,14 @@ public class DemandaController {
         Usuario user = (Usuario) session.getAttribute("user");
         model.addAttribute("misDemandas",demandaDao.getDemandasAsociadasASkill(Integer.parseInt(idSkill)));
         model.addAttribute("oferta",ofertaDao.getOferta(idOferta));
+        List<String> emails = demandaDao.getDemandasEstudiantesEnviarCorreo(Integer.parseInt(idSkill));
+        Session s = Mail.connect();
+
+        for (String email: emails){
+            Mail.send(s,"¡Hey! ¿Como va? Hay alguien que oferta tu habilidad demandada",
+                    "Conectate a la aplicación para ver quien te podría ayudar y gana una nueva experiencia. ", email);
+        }
+
         return "demanda/listDemandasEnlazadas";
     }
 
@@ -188,7 +198,7 @@ public class DemandaController {
             return "login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        model.addAttribute("demandas",demandaDao.getDemandas());
+        model.addAttribute("demandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
         model.addAttribute("list","demandasUser");

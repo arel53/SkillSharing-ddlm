@@ -15,13 +15,13 @@
 
     <div th:replace="../templates/fragments/filtroDemandas"></div>
 
-    <div th:if="${#lists.isEmpty(misDemandas)}" layout:fragment="content">
+    <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
         Nadie demanda ninguna clase.
     </div>
 
     <div>
-        <section class="listado" th:if="${not #lists.isEmpty(misDemandas)}">
-            <article th:each="demanda: ${misDemandas}" class="anuncio">
+        <section class="listado" th:if="${not #lists.isEmpty(demandas)}">
+            <article th:each="demanda: ${demandas}" class="anuncio">
                 <figure class="estudiante">
                     <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
                 </figure>
