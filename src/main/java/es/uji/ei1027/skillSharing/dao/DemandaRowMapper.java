@@ -5,6 +5,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class DemandaRowMapper implements RowMapper<Demanda> {
     public Demanda mapRow(ResultSet rs, int rowNum)throws SQLException {
@@ -12,8 +14,8 @@ public class DemandaRowMapper implements RowMapper<Demanda> {
         demanda.setIdDemanda(rs.getInt("id_demanda"));
         demanda.setEstudiante(rs.getString("estudiante"));
         demanda.setHoras(rs.getInt("horas"));
-        demanda.setIniFecha(rs.getDate("ini_fecha").toLocalDate());
-        demanda.setFinFecha(rs.getDate("fin_fecha").toLocalDate());
+        demanda.setIniFecha(rs.getObject("ini_fecha", LocalDate.class));
+        demanda.setFinFecha(rs.getObject("fin_fecha", LocalDate.class));
         demanda.setActiva(rs.getBoolean("activa"));
         demanda.setSkill(rs.getInt("id_skill"));
         demanda.setDescripcion(rs.getString("descripcion"));

@@ -224,7 +224,14 @@ public class OfertaController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill()));
+        if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0","999999999"));
+        else if(oferta.getIniFecha() == null)
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0",oferta.getFinFecha().toString()));
+        else if(oferta.getFinFecha()==null)
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(),"999999999"));
+        else
+            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
