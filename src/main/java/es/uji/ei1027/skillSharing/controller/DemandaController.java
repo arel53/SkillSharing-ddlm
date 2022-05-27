@@ -216,7 +216,14 @@ public class DemandaController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill()));
+        if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
+            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0","999999999"));
+        else if(demanda.getIniFecha() == null)
+            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0",demanda.getFinFecha().toString()));
+        else if(demanda.getFinFecha()==null)
+            model.addAttribute("de,amdas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));
+        else
+            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){

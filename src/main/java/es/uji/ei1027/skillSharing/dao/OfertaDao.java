@@ -85,9 +85,9 @@ public class OfertaDao {
         }
     }
 
-    public List<Oferta> getOfertasAsociadasASkill(int skill, String iniFecha) {
+    public List<Oferta> getOfertasAsociadasASkill(int skill, String iniFecha, String finFecha) {
         try {
-            return jdbcTemplate.query("SELECT o.id_oferta, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as s USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and s.id_skill=? and to_char(o.ini_fecha, 'YYYYMMDD') >=?", new OfertaRowMapper(), skill, iniFecha );
+            return jdbcTemplate.query("SELECT o.id_oferta, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as s USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and s.id_skill=? and to_char(o.ini_fecha, 'YYYYMMDD') >=? and to_char(o.fin_fecha, 'YYYYMMDD') <=?", new OfertaRowMapper(), skill, iniFecha, finFecha );
         }
         catch (EmptyResultDataAccessException e) {
             return null;
