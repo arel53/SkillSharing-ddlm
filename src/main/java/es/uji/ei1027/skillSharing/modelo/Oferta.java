@@ -6,6 +6,8 @@ import java.time.LocalDate;
 
 public class Oferta{
     private int idOferta;
+    private String rutaImg;
+    private String rutaImgSkill;
     private String estudiante;
     private int horas;
     @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
@@ -22,6 +24,17 @@ public class Oferta{
     public Oferta(){
 
     }
+
+
+
+    public void setRutaImgSkill(String rutaImgSkill) {
+        this.rutaImgSkill = rutaImgSkill;
+    }
+
+    public void setRutaImg(String rutaImg) {
+        this.rutaImg = rutaImg;
+    }
+
     public void setIdOferta(int idOferta) {
         this.idOferta = idOferta;
     }
@@ -78,6 +91,9 @@ public class Oferta{
         return iniFecha;
     }
 
+    public String getRutaImgSkill() {
+        return rutaImgSkill;
+    }
     public LocalDate getFinFecha() {
         return finFecha;
     }
@@ -101,6 +117,11 @@ public class Oferta{
     public String getNivelSkill() {
         return nivelSkill;
     }
+
+    public String getRutaImg() {
+        return rutaImg;
+    }
+
 
     @Override
     public String toString() {

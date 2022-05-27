@@ -23,12 +23,12 @@
         <section class="listado" th:if="${not #lists.isEmpty(ofertas)}">
             <article th:each="oferta: ${ofertas}" class="anuncio">
                 <figure class="estudiante">
-                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                    <img th:src="${oferta.rutaImgSkill}" class="fotoSkill">
                 </figure>
                 <div class="info">
                     <hgroup>
                         <table>
-                            <tr><td><img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil"></td></tr>
+                            <tr><td><img th:src="${oferta.rutaImg}" class="fotoPerfil"></td></tr>
                             <tr><td><h5 class="nombre" th:text="${oferta.estudiante}"></h5></td></tr>
                         </table>
                         <div class="descripcion">
