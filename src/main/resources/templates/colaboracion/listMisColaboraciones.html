@@ -1,16 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Mis Colaboraciones</title>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/estilo.css"
           th:href="@{/css/estilo.css}"/>
-</head>
-<body>
-<div class="container">
-    <h1>Mis Colaboraciones</h1>
     <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
         <div class="text-center"><p>Se ha eliminado correctamente la colaboración elegida </p>
         </div>
@@ -44,7 +34,7 @@
                     </table>
                     <div class="comentario">
                         <p th:text="${{colaboracion.comentario}}"></p>
-                    </div>ofertante
+                    </div>
                     <div th:if="${colaboracion.activa == true}">
                         <div th:if="${fechaActual.compareTo(colaboracion.finFecha) <= 0}">
                             <td>
@@ -57,7 +47,7 @@
                         <div th:if="${fechaActual.compareTo(colaboracion.finFecha) > 0}">
                             <td>
                                 <a th:href="@{/colaboracion/valorar/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
-                                   class="btn btn-secondary" role="button">Valorar</a></td>
+                                   class="btn btn-primary" role="button">Valorar</a></td>
                         </div>
                     </div>
 
@@ -76,7 +66,6 @@
         </section>
     </div>
 </div>
-<div th:replace="../templates/fragments/navUser"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>

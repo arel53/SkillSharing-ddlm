@@ -4,23 +4,27 @@
     <title>Gestionar Usuarios</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
-    <h1>Lista de Usuarios</h1>
+    <h1>Gestionar Usuarios</h1>
     <div th:if="${#lists.isEmpty(usuarios)}" class="error">
         No hi ha usuaris en la base de dades
     </div>
+    <a href="add" class="btn btn-success" role="button">Añadir usuario</a>
     <table th:unless="${#lists.isEmpty(usuarios)}" class="table table-striped">
         <thead>
         <tr>
             <th>Username</th>
             <th>SKP</th>
-            <th>Active</th>
+            <th>Activo</th>
             <th>NIF</th>
-            <th>Descripcio</th>
-
+            <th>Descripcion</th>
+            <th></th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -30,14 +34,13 @@
             <td th:text="${usuario.active}"></td>
             <td th:text="${usuario.nif}"></td>
             <td th:text="${usuario.descripcion}"></td>
-            <td><a th:href="@{/usuario/update/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Edita</a>
+            <td><a th:href="@{/usuario/update/{username}(username=${usuario.username})}" class="btn btn-warning" role="button">Editar</a>
             </td>
-            <td><a th:href="@{/usuario/delete/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Borra</a>
+            <td><a th:href="@{/usuario/delete/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         </tbody>
     </table>
-    <a href="add" class="btn btn-success" role="button">Añade usuario</a>
 </div>
 <footer class="footer">
     <hr>

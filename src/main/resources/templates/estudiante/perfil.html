@@ -5,6 +5,8 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
@@ -100,7 +102,7 @@
     </article>
     <div>
         <br>
-        <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-warning" role="button">Editar</a>
+        <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Editar</a>
     </div>
 </div>
 <footer class="footer">

@@ -5,16 +5,18 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
-    <h1>Lista de Skills</h1>
+    <h1>Gestionar Skills</h1>
 
     <div th:if="${#lists.isEmpty(skills)}" layout:fragment="content">
         Aún no se han introducido skills a la aplicación.
     </div>
-
+    <a href="add" class="btn btn-success" role="button">Añadir Skill</a><br>
     <table th:if="${not #lists.isEmpty(skills)}" class="table table-striped">
         <thead>
         <tr>
@@ -38,9 +40,9 @@
             <td th:text="${{skill.numeroDemandas}}"></td>
 
 
-            <td><a th:href="@{/skill/update/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-warning" role="button">Edita</a>
+            <td><a th:href="@{/skill/update/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-warning" role="button">Editar</a>
             </td>
-            <td><a th:href="@{/skill/delete/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-danger" role="button">Borra</a>
+            <td><a th:href="@{/skill/delete/{idSkill}(idSkill=${skill.idSkill})}" class="btn btn-danger" role="button">Borrar</a>
             </td>
         </tr>
         <tr th:each="numeroOfertas: ${numeroOfertas}">
@@ -53,9 +55,6 @@
         </tbody>
 
     </table>
-
-
-    <a href="add" class="btn btn-success" role="button">Añade Skill</a>
 </div>
 <footer class="footer">
     <hr>

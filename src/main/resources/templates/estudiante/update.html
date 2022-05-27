@@ -1,27 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica Perfil</title>
+    <title>Modificar Perfil</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div class="container">
-    <h2>Modifica Perfil</h2>
+    <h1>Modificar Perfil</h1>
     <form class="form-horizontal" action="#" th:action="@{/estudiante/update}"
           th:object="${estudiante}" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">nif</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">NIF:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="text" readonly th:field="*{nif}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Nombre</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Nombre:</label>
+            <div class="col-sm-6">
                 <div class="error" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
                 <input class="form-control" type="text" th:field="*{nombre}"/>
             </div>
@@ -29,65 +31,62 @@
 
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Apellido</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Apellido:</label>
+            <div class="col-sm-6">
                 <div class="error" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></div>
                 <input class="form-control" type="text" th:field="*{apellido}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2">Email</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Email:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="text" readonly th:field="*{email}"/>
 
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Grado</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Grado:</label>
+            <div class="col-sm-6">
                 <div class="error" th:if="${#fields.hasErrors('grado')}" th:errors="*{grado}"></div>
                 <input class="form-control" type="text" th:field="*{grado}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Edad</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Edad:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="number" readonly th:field="*{edad}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Sexo</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Sexo:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="text" readonly th:field="*{sexo}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Dirección</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Dirección:</label>
+            <div class="col-sm-6">
                 <div class="error" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
                 <input class="form-control" type="text" th:field="*{direccion}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Horas</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Horas:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="number" readonly th:field="*{horas}"/>
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2">Canvia foto</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Cambiar Foto:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="file" name="imagen"/>
             </div>
 
-        </div>
-        <div>
-        <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Cambia contraseña</a>
         </div>
         <br>
 
@@ -97,6 +96,9 @@
             <div class="col-sm-offset-2 col-sm-4">
                 <button type="submit" class="btn btn-success"/>
                 Modificar</button>
+                <div>
+                    <a th:href="@{/estudiante/passwdUser/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Cambiar contraseña</a>
+                </div>
             </div>
         </div>
 
