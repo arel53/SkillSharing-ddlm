@@ -18,7 +18,7 @@
 
     <article class="anuncio">
         <figure class="estudiante">
-            <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfilMasGrande">
+            <img th:src="${estudiante.rutaimg}" class="fotoPerfilMasGrande">
         </figure>
         <div class="info">
             <h3 class="nombre" th:text="${estudiante.nombre} + ' ' + ${estudiante.apellido}"></h3>
@@ -62,7 +62,7 @@
         <div class="info">
             <h2>Oferta:</h2>
             <figure class="estudiante">
-                <img src="/imagenes/skill/Yoga.jfif" class="fotoSkill">
+                <img th:src="${oferta.rutaImgSkill}" class="fotoSkill">
             </figure>
                 <div class="skill">
                         <p th:text="${{oferta.descripcion}}"></p>

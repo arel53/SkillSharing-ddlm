@@ -16,6 +16,9 @@ public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
         colaboracion.setIdOferta(rs.getInt("id_oferta"));
         colaboracion.setIdDemanda(rs.getInt("id_demanda"));
         colaboracion.setIniFecha(rs.getObject("ini_fecha", LocalDate.class));
+        colaboracion.setRutaImgOfertante(rs.getString("rutaimgOfertante"));
+        colaboracion.setRutaImgDemandante(rs.getString("rutaimgDemandante"));
+        colaboracion.setRutaImgSkill(rs.getString("rutaim"));
 
         if (rs.getDate("fin_fecha") != null)
             colaboracion.setFinFecha(rs.getObject("fin_fecha", LocalDate.class));

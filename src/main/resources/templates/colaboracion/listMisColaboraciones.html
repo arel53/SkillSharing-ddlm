@@ -92,12 +92,12 @@
             <article th:each="colaboracion: ${misColaboraciones}" class="anuncio">
                 <figure class="colaborarImg">
                     <div class="iconoColaborar">
-                        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                        <img th:src="${colaboracion.rutaImgDemandante}" class="fotoPerfil">
                         <img src="/imagenes/colaborar1.png" class="colaborar">
-                        <img src="/imagenes/fotoPerfil.jfif" class="fotoPerfil">
+                        <img th:src="${colaboracion.rutaImgOfertante}" class="fotoPerfil">
                     </div>
                     <br>
-                    <img src="/imagenes/skill/Yoga.jfif" class="fotoSkillColab">
+                    <img th:src="${colaboracion.rutaImgSkill}" class="fotoSkillColab">
                 </figure>
                 <div class="info">
                     <table>

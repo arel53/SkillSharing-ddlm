@@ -9,6 +9,9 @@ public class Colaboracion {
     private int idColaboracion;
     private int idOferta;
     private int idDemanda;
+    private String rutaImgOfertante;
+    private String rutaImgDemandante;
+    private String rutaImgSkill;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
     private LocalDate iniFecha;
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -29,6 +32,15 @@ public class Colaboracion {
         super();
     }
 
+    public String getRutaImgOfertante() {
+        return rutaImgOfertante;
+    }
+    public String getRutaImgDemandante() {
+        return rutaImgDemandante;
+    }
+    public String getRutaImgSkill() {
+        return rutaImgSkill;
+    }
     public int getIdColaboracion() {
         return idColaboracion;
     }
@@ -64,7 +76,12 @@ public class Colaboracion {
     public int getHoras() {
         return horas;
     }
-
+    public void setRutaImgOfertante(String rutaImgOfertante) {
+        this.rutaImgOfertante = rutaImgOfertante;
+    }
+    public void setRutaImgDemandante(String rutaImgDemandante) {
+        this.rutaImgDemandante = rutaImgDemandante;
+    }
     public String getNombreApellidoOfertante() {
         return nombreApellidoOfertante;
     }
@@ -79,6 +96,10 @@ public class Colaboracion {
     }
 
     public String getSkill() {return skill;}
+
+    public void setRutaImgSkill(String rutaImgSkill) {
+        this.rutaImgSkill = rutaImgSkill;
+    }
 
     public void setIdColaboracion(int idColaboracion) {
         this.idColaboracion = idColaboracion;
