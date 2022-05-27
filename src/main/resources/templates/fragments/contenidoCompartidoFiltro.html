@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="filtroSkill">
+    <label>Skill: </label>
+    <select id="sel1" type="value" th:field="*{skill}">
+        <tr>
+            <option th:each="s: ${skills}" th:value="${s.idSkill}">
+                <td th:text="${s.nombre}"></td>
+                <td th:text="${s.nivel}"></td>
+            </option>
+
+        </tr>
+    </select>
+    <tr>
+        <label>Inicio:</label>
+        <input type="date" class="" id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+        <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+        <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
+    </tr>
+    <tr>
+        <label>Final:</label>
+        <input type="date" class="" id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+        <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+        <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
+    </tr>
+    <button type="submit" class="botonesFiltos">Buscar</button>
+    <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
+</div>
+
+
+</body>
+</html>
