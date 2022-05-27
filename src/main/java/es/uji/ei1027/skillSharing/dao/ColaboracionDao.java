@@ -40,8 +40,8 @@ public class ColaboracionDao {
 
     public Colaboracion getColaboracion(String idColaboracion) {
         try {
-            return jdbcTemplate.queryForObject("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill  " +
-                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+            return jdbcTemplate.queryForObject("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.rutaimg as rutaimgDemandante, s.rutaim, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill  " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.rutaimg as rutaimgOfertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
@@ -58,8 +58,8 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboraciones() {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
-                    "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.rutaimg as rutaimgDemandante, s.rutaim, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.rutaimg as rutaimgOfertante " +
                     "       FROM colaboracion AS c " +
                     "       JOIN oferta AS o USING(id_oferta) " +
                     "       JOIN estudiante as e ON(e.nif = o.estudiante)" +
@@ -74,8 +74,8 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboracionesEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
-                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.rutaimg as rutaimgDemandante, s.rutaim, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.rutaimg as rutaimgOfertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
@@ -91,8 +91,8 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboracionesEstudianteActivas(String nif) {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
-                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.rutaimg as rutaimgDemandante , s.rutaim, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.rutaimg as rutaimgOfertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
@@ -108,8 +108,8 @@ public class ColaboracionDao {
 
     public List<Colaboracion> getColaboracionesEstudianteNoActivas(String nif) {
         try {
-            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
-                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.nif AS nif_ofertante " +
+            return jdbcTemplate.query("SELECT t.*, es.nombre || ' ' || es.apellido AS nombre_apellido_demandante, es.rutaimg as rutaimgDemandante, s.rutaim, es.nif AS nif_demandante, s.nombre || ' ' || s.nivel AS skill " +
+                    "                      FROM ( SELECT c.* AS cs, e.nombre || ' ' || e.apellido AS nombre_apellido_ofertante, e.rutaimg as rutaimgOfertante, e.nif AS nif_ofertante " +
                     "                             FROM colaboracion AS c JOIN oferta AS o USING(id_oferta) " +
                     "                             JOIN estudiante as e ON(e.nif = o.estudiante) " +
                     "                           ) AS t " +
