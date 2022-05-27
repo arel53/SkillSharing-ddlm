@@ -5,6 +5,8 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
@@ -95,8 +97,8 @@
     </article>
     <div>
         <table>
-            <td><tr><a class="btn btn-secondary" role="button"
-                       th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colabora</a></tr></td>
+            <td><tr><a class="btn btn-primary" role="button"
+                       th:href="@{/colaboracion/addColaboracionDemanda/{idDemanda}(idDemanda=${demanda.idDemanda})}">Colaborar</a></tr></td>
             <br>
             <td><tr><a role="button" class="btn btn-primary" th:href="@{/demanda/listDemandasUser}">Continuar sin
                 colaborar</a></tr></td>

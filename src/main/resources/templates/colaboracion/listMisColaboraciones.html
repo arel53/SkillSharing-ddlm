@@ -78,6 +78,8 @@
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
@@ -119,7 +121,7 @@
                         <div th:if="${fechaActual.compareTo(colaboracion.finFecha) > 0}">
                             <td>
                                 <a th:href="@{/colaboracion/valorar/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
-                                   class="btn btn-secondary" role="button">Valorar</a></td>
+                                   class="btn btn-primary" role="button">Valorar</a></td>
                         </div>
                     </div>
 

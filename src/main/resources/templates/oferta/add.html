@@ -1,28 +1,30 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Oferta</title>
+    <title>Añadir Oferta</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 
 <div class="container">
-    <h2>Nova Oferta</h2>
+    <h1>Añadir Oferta</h1>
     <form class="form-horizontal" action="#" th:action="@{/oferta/add}"
           th:object="${oferta}" method="post">
 
         <div class="form-group row">
             <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <input type="hidden" class="form-control" id="estudiante" th:field="*{estudiante} "/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="horas">Hores:</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="horas">Horas:</label>
+            <div class="col-sm-6">
                 <input type="number" class="form-control" min=1 id="horas" th:field="*{horas}"/>
                 <div class="error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></div>
 
@@ -30,8 +32,8 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="iniFecha">Data de inici: </label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="iniFecha">Fecha de Inicio: </label>
+            <div class="col-sm-6">
                 <input type="date" class="form-control" id="iniFecha" th:field="*{iniFecha}"/>
                 <td th:text="${#temporals.format(oferta.iniFecha,'dd/MM/yyyy')}"></td>
                 <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
@@ -40,8 +42,8 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="finFecha">Data de final: </label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="finFecha">Fecha de Final: </label>
+            <div class="col-sm-6">
                 <input type="date" class="form-control"  id="finFecha" th:field="*{finFecha}"/>
                 <td th:text="${#temporals.format(oferta.finFecha,'dd/MM/yyyy')}"></td>
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
@@ -50,9 +52,9 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Skill: </label>
+            <label class="control-label col-sm-4">Skill: </label>
 
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
                     <tr >
                         <option th:each="s: ${skills}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
@@ -64,8 +66,8 @@
 
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="descripcion">Descripció:</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="descripcion">Descripcion:</label>
+            <div class="col-sm-6">
                 <input type="text" class="form-control" id="descripcion" maxlength="200" th:field="*{descripcion}"/>
                 <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
@@ -74,7 +76,7 @@
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Afegeix Oferta</button>
+                <button type="submit" class="btn btn-primary">Añadir Oferta</button>
             </div>
         </div>
 

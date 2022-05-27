@@ -338,6 +338,11 @@ body {
     border-bottom-left-radius: 100px;
 }
 
+h1{
+text-shadow: 0.5px 0.5px 0.5px black;
+font-family: arial;
+font-width: block;
+}
 
 .filtroSkill{
     text-align: center;

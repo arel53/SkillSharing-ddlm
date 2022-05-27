@@ -1,53 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica Oferta</title>
+    <title>Modificar Oferta</title>
     <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h2>Modifica Oferta</h2>
+    <h1>Modificar Oferta</h1>
+
     <form class="form-horizontal" action="#" th:action="@{/oferta/update}"
           th:object="${oferta}" method="post">
 
         <div class="form-group row">
 
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <input class="form-control" type="hidden" readonly th:field="*{idOferta}"/>
             </div>
         </div>
         <div class="form-group row">
 
 
-            <div class="col-sm-4">
+            <div class="col-sm-7">
                 <input class="form-control" type="hidden" readonly th:field="*{estudiante}"/>
             </div>
         </div>
         <div class="form-group row">
 
-            <label class="control-label col-sm-2">Hores</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Horas:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="number" th:field="*{horas}"/>
                 <div class="error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></div>
 
             </div>
         </div>
         <div class="form-group row">
-            <label class="control-label col-sm-2">Data de inici</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Fecha de Inicio:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="date" th:field="*{iniFecha}"/>
                 <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
-
-
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Data de final</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Fecha de Final:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="date" th:field="*{finFecha}"/>
                 <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
 
@@ -55,9 +56,9 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Skill</label>
+            <label class="control-label col-sm-4">Skill:</label>
 
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
                     <tr >
                         <option th:each="s: ${skills}" th:selected="${s.idSkill == oferta.skill}" th:value="${s.idSkill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
@@ -68,8 +69,8 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Descripcio</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4">Descripcion:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="text" th:field="*{descripcion}"/>
                 <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
@@ -77,7 +78,7 @@
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <input class="form-control" type="hidden" th:field="*{activa}"/>
             </div>
         </div>
@@ -85,13 +86,14 @@
         <div class="form-group row">
 
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary"/>
-                Modifica Oferta</button>
+                <button type="submit" class="btn btn-success"/>
+                Modificar Oferta</button>
             </div>
         </div>
 
 
     </form>
+
 </div>
 <footer class="footer">
     <hr>
