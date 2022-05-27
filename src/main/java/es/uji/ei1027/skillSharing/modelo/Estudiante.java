@@ -109,6 +109,7 @@ public class Estudiante {
                 ", sexo='" + sexo + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", horas=" + horas +
+                ", rutaimg='" + rutaimg + '\'' +
                 '}';
     }
 }

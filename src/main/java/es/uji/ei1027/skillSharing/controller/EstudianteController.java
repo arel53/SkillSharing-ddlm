@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -111,7 +113,6 @@ public class EstudianteController {
         }
         Estudiante es = estudianteDao.getEstudiante(nif);
 
-
         model.addAttribute("estudiante", es);
         session.setAttribute("old_estudiante", es);
         return "estudiante/update";
@@ -123,6 +124,7 @@ public class EstudianteController {
             BindingResult bindingResult) throws IOException {
           Usuario user = (Usuario) session.getAttribute("user");
           Estudiante oldEstudiante = (Estudiante) session.getAttribute("old_estudiante");
+          System.out.println(oldEstudiante.toString());
         if (user.isSkp()){
             return "redirect:/forbiden";
         }
@@ -154,20 +156,44 @@ public class EstudianteController {
         }
 
 
-        if (!imagen.isEmpty()){
+        if (!imagen.isEmpty()) {
             String rutavieja = oldEstudiante.getRutaimg();
-            if (!rutavieja.equals("")){
-                File fichero = new File(rutavieja);
-                fichero.delete();
+            System.out.println("rutavieja :" + rutavieja);
+            Path dic = Paths.get("src//main//resources//static");
+            String rac = dic.toFile().getAbsolutePath();
+            Path rutadelete = Paths.get(rac + "//" + rutavieja);
+            if (rutavieja != null) {
+                File fichero = new File(String.valueOf(rutadelete));
+                FileInputStream readImage = new FileInputStream(fichero);
+                readImage.close();
+                if (fichero.delete())
+                    System.out.println("El fichero ha sido borrado satisfactoriamente");
+                else
+                    System.out.println("El fichero no puede ser borrado");
             }
-            Path di = Paths.get("src//main//resources//static/imagenes/estudiantes");
+            Path di = Paths.get("src//main//resources//static/imagenes/estudiante");
             String ra = di.toFile().getAbsolutePath();
-            byte[] imgb = imagen.getBytes();
-            Path ruta = Paths.get(ra+"//"+imagen.getOriginalFilename());
-            Files.write(ruta,imgb, StandardOpenOption.CREATE);
-            String rutabd = "/imagenes/estudiantes/"+imagen.getOriginalFilename();
+            byte[] imgb = new byte[0];
+            try {
+                imgb = imagen.getBytes();
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("falla el get bytes");
+            }
+            Path ruta = Paths.get(ra + "//" + imagen.getOriginalFilename());
+            try {
+                Files.write(ruta, imgb, StandardOpenOption.CREATE);
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("falla el write");
+            }
+            String rutabd = "/imagenes/estudiante/" + imagen.getOriginalFilename();
+            System.out.println(rutabd);
             estudiante.setRutaimg(rutabd);
+            System.out.println(estudiante.toString());
 
+        }else{
+        estudiante.setRutaimg(oldEstudiante.getRutaimg());
         }
         estudianteDao.updateEstudiante(estudiante);
         return "redirect:perfil";

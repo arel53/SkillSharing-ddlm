@@ -170,6 +170,20 @@ public class OfertaController {
         return "oferta/listSKP";
     }
 
+    @RequestMapping("/listOfertasUser/{idSkill}/{idDemanda}")
+    public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill, @PathVariable String idDemanda){
+
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+
+        model.addAttribute("ofertas",ofertaDao.getOfertasAsociadasASkill(Integer.parseInt(idSkill)));
+        model.addAttribute("demanda",demandaDao.getDemanda(idDemanda));
+        return "oferta/listOfertasEnlazadas";
+    }
+
 
     @RequestMapping("/listOfertasUser")
     public String listOfertasUser(HttpSession session, Model model){
