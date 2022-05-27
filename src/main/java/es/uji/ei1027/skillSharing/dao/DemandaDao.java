@@ -38,7 +38,7 @@ public class DemandaDao {
 
     public Demanda getDemanda(String idDemanda) {
         try {
-            return jdbcTemplate.queryForObject("SELECT d.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) WHERE d.id_demanda = ?", new DemandaRowMapper(), Integer.parseInt(idDemanda));
+            return jdbcTemplate.queryForObject("SELECT d.*, s.nombre AS nombre_skill, e.rutaimg, s.rutaim, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.id_demanda = ?", new DemandaRowMapper(), Integer.parseInt(idDemanda));
         }
         catch (EmptyResultDataAccessException e){
             return null;
@@ -47,7 +47,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandas() {
         try {
-            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE", new DemandaRowMapper());
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE", new DemandaRowMapper());
         }
         catch (EmptyResultDataAccessException e) {
             return null;
@@ -56,7 +56,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandasEstudiante(String nif) {
         try {
-            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and estudiante = ?", new DemandaRowMapper(), nif);
         }
         catch (EmptyResultDataAccessException e) {
             return null;
@@ -65,7 +65,7 @@ public class DemandaDao {
 
     public List<Demanda> getTodasDemandasMenosMias(String estudiante) {
         try {
-            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and estudiante <> ?", new DemandaRowMapper(), estudiante);
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and estudiante <> ?", new DemandaRowMapper(), estudiante);
         }
         catch (EmptyResultDataAccessException e) {
             return null;
@@ -75,7 +75,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandasAsociadasASkill(int idSkill) {
         try {
-            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? ", new DemandaRowMapper(), idSkill);
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? ", new DemandaRowMapper(), idSkill);
         }
         catch (EmptyResultDataAccessException e) {
             return null;
@@ -84,7 +84,7 @@ public class DemandaDao {
 
     public List<Demanda> getDemandasAsociadasASkill(int idSkill, String iniFecha, String finFecha) {
         try {
-            return jdbcTemplate.query("SELECT d.id_demanda, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? and to_char(d.ini_fecha, 'YYYYMMDD') >=? and to_char(d.fin_fecha, 'YYYYMMDD') <=?", new DemandaRowMapper(), idSkill, iniFecha, finFecha);
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? and to_char(d.ini_fecha, 'YYYYMMDD') >=? and to_char(d.fin_fecha, 'YYYYMMDD') <=?", new DemandaRowMapper(), idSkill, iniFecha, finFecha);
         }
         catch (EmptyResultDataAccessException e) {
             return null;

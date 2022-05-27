@@ -37,7 +37,7 @@ public class OfertaDao {
 
     public Oferta getOferta(String idOferta) {
         try {
-            return jdbcTemplate.queryForObject("SELECT o.*, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) WHERE o.id_oferta = ?", new OfertaRowMapper(), Integer.parseInt(idOferta));
+            return jdbcTemplate.queryForObject("SELECT o.*, s.nombre AS nombre_skill, e.rutaimg, s.rutaim, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.id_oferta = ?", new OfertaRowMapper(), Integer.parseInt(idOferta));
         }
         catch (EmptyResultDataAccessException e){
             return null;

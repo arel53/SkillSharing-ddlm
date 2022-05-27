@@ -7,21 +7,30 @@ import java.time.LocalDate;
 public class Demanda {
     private int idDemanda;
     private String estudiante;
+    private String rutaImg;
+    private String rutaImgSkill;
     private int horas;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate iniFecha;
-    @DateTimeFormat(iso=DateTimeFormat.ISO.DATE)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate finFecha;
     private boolean activa;
     private int skill;
     private String nombreSkill;
-    private String  nivelSkill;
+    private String nivelSkill;
     private String descripcion;
 
-    public Demanda(){
+    public Demanda() {
 
     }
 
+    public void setRutaImg(String rutaImg) {
+        this.rutaImg = rutaImg;
+    }
+
+    public void setRutaImgSkill(String rutaImgSkill) {
+        this.rutaImgSkill = rutaImgSkill;
+    }
 
     public void setIdDemanda(int idDemanda) {
         this.idDemanda = idDemanda;
@@ -60,10 +69,18 @@ public class Demanda {
     }
 
 
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
+    public String getRutaImgSkill() {
+        return rutaImgSkill;
+    }
+
+    public String getRutaImg() {
+        return rutaImg;
+    }
+
 
     public int getIdDemanda() {
         return idDemanda;
