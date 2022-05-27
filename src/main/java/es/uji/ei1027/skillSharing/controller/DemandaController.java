@@ -188,6 +188,8 @@ public class DemandaController {
                     "Conectate a la aplicación para ver quien te podría ayudar y gana una nueva experiencia. ", email);
         }
 
+        Mail.close(s);
+
         return "demanda/listDemandasEnlazadas";
     }
 
@@ -220,7 +222,7 @@ public class DemandaController {
         return "demanda/listMisDemandas";
     }
 
-    @RequestMapping("/buscarOfertas/{idListado}")
+    @RequestMapping("/buscarDemandas/{idListado}")
     public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("demanda") Demanda demanda, @PathVariable("idListado") int idListado){
         if (idListado != 0 && session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
@@ -230,8 +232,9 @@ public class DemandaController {
             model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0","999999999"));
         else if(demanda.getIniFecha() == null)
             model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0",demanda.getFinFecha().toString()));
-        else if(demanda.getFinFecha()==null)
-            model.addAttribute("de,amdas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));
+        else if(demanda.getFinFecha()==null){
+            System.out.println(demanda.getIniFecha());
+            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));}
         else
             model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
         model.addAttribute("skills", skillDao.getSkillsActivas());

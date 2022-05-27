@@ -12,67 +12,15 @@
           th:action="@{/oferta/buscarOfertas/0/}"
           th:object="${oferta}" method="GET">
 
+        <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
 
-
-
-        <div class="filtroSkill">
-            <label>Skill: </label>
-        <select id="sel1" type="value" th:field="*{skill}">
-            <tr>
-                <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                    <td th:text="${s.nombre}"></td>
-                    <td th:text="${s.nivel}"></td>
-                </option>
-
-            </tr>
-        </select>
-            <tr>
-                <label>Inicio:</label>
-                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
-            </tr>
-            <tr>
-                <label>Final:</label>
-                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
-            </tr>
-            <button type="submit" class="botonesFiltos">Buscar</button>
-            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
-        </div>
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}"
           th:action="@{/oferta/buscarOfertas/1/}"
           th:object="${oferta}" method="GET">
 
-        <div class="filtroSkill">
-            <label>Skill: </label>
-            <select id="sel1" type="value" th:field="*{skill}">
-                <tr>
-                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                        <td th:text="${s.nombre}"></td>
-                        <td th:text="${s.nivel}"></td>
-                    </option>
-
-                </tr>
-            </select>
-            <tr>
-                <label>Inicio:</label>
-                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
-            </tr>
-            <tr>
-                <label>Final:</label>
-                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
-            </tr>
-            <button type="submit" class="botonesFiltos">Buscar</button>
-            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
-        </div>
+        <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
 
     </form>
 
@@ -81,65 +29,15 @@
           th:action="@{/oferta/buscarOfertas/2/}"
           th:object="${oferta}" method="GET">
 
-        <div class="filtroSkill">
-            <label>Skill: </label>
-            <select id="sel1" type="value" th:field="*{skill}">
-                <tr>
-                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                        <td th:text="${s.nombre}"></td>
-                        <td th:text="${s.nivel}"></td>
-                    </option>
-
-                </tr>
-            </select>
-            <tr>
-                <label>Inicio:</label>
-                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
-            </tr>
-            <tr>
-                <label>Final:</label>
-                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
-            </tr>
-            <button type="submit" class="botonesFiltos">Buscar</button>
-            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
-        </div>
-
+        <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}"
           th:action="@{/oferta/buscarOfertas/3/}"
           th:object="${oferta}" method="GET">
 
-        <div class="filtroSkill">
-            <label>Skill: </label>
-            <select id="sel1" type="value" th:field="*{skill}">
-                <tr>
-                    <option th:each="s: ${skills}" th:value="${s.idSkill}">
-                        <td th:text="${s.nombre}"></td>
-                        <td th:text="${s.nivel}"></td>
-                    </option>
+        <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
 
-                </tr>
-            </select>
-            <tr>
-                <label>Inicio:</label>
-                <input type="date" class=""   id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
-            </tr>
-            <tr>
-                <label>Final:</label>
-                <input type="date" class=""   id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
-                <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
-                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
-            </tr>
-            <button type="submit" class="botonesFiltos">Buscar</button>
-            <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
-        </div>
     </form>
 </div>
 </body>

@@ -1,5 +1,6 @@
 package es.uji.ei1027.skillSharing.controller;
 
+import es.uji.ei1027.skillSharing.Mail;
 import es.uji.ei1027.skillSharing.dao.ColaboracionDao;
 import es.uji.ei1027.skillSharing.dao.DemandaDao;
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 
@@ -109,6 +111,15 @@ public class ColaboracionController {
         colaboracion.setIdOferta(oferta.getIdOferta()); colaboracion.setIdDemanda(idDemanda);colaboracion.setHoras(oferta.getHoras());
         colaboracion.setIniFecha(oferta.getIniFecha()); colaboracion.setFinFecha(oferta.getFinFecha());
         colaboracionDao.addColaboracion(colaboracion);
+
+        Estudiante e = estudianteDao.getEstudiante(user.getNif());
+        Mail.connect();
+        Session s = Mail.connect();
+
+        Mail.send(s,"¡Hey! ¿Como va? Hay alguien que ha solicitado una colaboración contigo",
+            "Conectate a la aplicación para ver con quien vas a tener el gusto de colaborar. ", e.getEmail());
+
+        Mail.close(s);
         return "redirect:../listMisColaboraciones";
     }
 
@@ -134,6 +145,15 @@ public class ColaboracionController {
         colaboracion.setIdOferta(idOferta); colaboracion.setIdDemanda(demanda.getIdDemanda());colaboracion.setHoras(demanda.getHoras());
         colaboracion.setIniFecha(demanda.getIniFecha()); colaboracion.setFinFecha(demanda.getFinFecha());
         colaboracionDao.addColaboracion(colaboracion);
+
+        Estudiante e = estudianteDao.getEstudiante(user.getNif());
+        Mail.connect();
+        Session s = Mail.connect();
+
+        Mail.send(s,"¡Hey! ¿Como va? Hay alguien que ha solicitado una colaboración contigo",
+                "Conectate a la aplicación para ver con quien vas a tener el gusto de colaborar. ", e.getEmail());
+
+        Mail.close(s);
         return "redirect:../listMisColaboraciones";
     }
 

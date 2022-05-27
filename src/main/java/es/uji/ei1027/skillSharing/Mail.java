@@ -55,4 +55,16 @@ public class Mail {
         }
 
     }
+
+
+    public static void close(Session session){
+
+        try{
+            Transport t = session.getTransport();
+            t.close();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
 }
