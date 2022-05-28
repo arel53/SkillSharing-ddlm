@@ -6,7 +6,6 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
 
 public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
     @Override
@@ -29,6 +28,7 @@ public class ColaboracionRowMapper implements RowMapper<Colaboracion> {
         colaboracion.setNombreApellidoOfertante(rs.getString("nombre_apellido_ofertante"));
         colaboracion.setNombreApellidoDemandante(rs.getString("nombre_apellido_demandante"));
         colaboracion.setNifDemandante(rs.getString("nif_demandante"));
+        colaboracion.setNifOfertante(rs.getString("nif_ofertante"));
         colaboracion.setSkill(rs.getString("skill"));
         return colaboracion;
     }

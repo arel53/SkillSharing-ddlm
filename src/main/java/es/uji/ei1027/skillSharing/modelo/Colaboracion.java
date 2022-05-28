@@ -23,10 +23,10 @@ public class Colaboracion {
     private String nombreApellidoOfertante;
     private String nombreApellidoDemandante;
     private String nifDemandante;
+    private String nifOfertante;
 
 
     private String skill;
-
 
     public Colaboracion() {
         super();
@@ -151,12 +151,19 @@ public class Colaboracion {
 
     public void setSkill(String skill) {this.skill = skill;}
 
+    public String getNifOfertante() {
+        return nifOfertante;
+    }
+
     @Override
     public String toString() {
         return "Colaboracion{" +
                 "idColaboracion=" + idColaboracion +
                 ", idOferta=" + idOferta +
                 ", idDemanda=" + idDemanda +
+                ", rutaImgOfertante='" + rutaImgOfertante + '\'' +
+                ", rutaImgDemandante='" + rutaImgDemandante + '\'' +
+                ", rutaImgSkill='" + rutaImgSkill + '\'' +
                 ", iniFecha=" + iniFecha +
                 ", finFecha=" + finFecha +
                 ", activa=" + activa +
@@ -165,6 +172,14 @@ public class Colaboracion {
                 ", horas=" + horas +
                 ", nombreApellidoOfertante='" + nombreApellidoOfertante + '\'' +
                 ", nombreApellidoDemandante='" + nombreApellidoDemandante + '\'' +
+                ", nifDemandante='" + nifDemandante + '\'' +
+                ", nifOfertante='" + nifOfertante + '\'' +
+                ", skill='" + skill + '\'' +
                 '}';
     }
+
+    public void setNifOfertante(String nifOfertante) {
+        this.nifOfertante = nifOfertante;
+    }
+
 }
