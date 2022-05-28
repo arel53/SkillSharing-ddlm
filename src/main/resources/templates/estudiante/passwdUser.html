@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cambia contraseña</title>
+    <title>Cambiar contraseña</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -9,20 +9,30 @@
           th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
-<h2>Edita contraseña</h2>
-<form action="#" th:action="@{/estudiante/passwdUser}"
+<div class="container">
+<h1>Cambiar contraseña</h1>
+<form class="form-horizontal" action="#" th:action="@{/estudiante/passwdUser}"
       th:object="${usuario}" method="post">
+
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Username:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" readonly th:field="*{username}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+            <label class="control-label col-sm-4">Contraseña:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="text" th:field="*{password}"/>
+            </div>
+    </div>
+    <div class="form-group row">
+    <div class=" control-label col-sm-4 botones">
+        <input type="submit" class="btn btn-success" value="Cambiar" />
+    </div>
+</div>
     <table>
-        <tr>
-            <td><label>Username</label></td>
-            <td><input type="text"  readonly th:field="*{username}" /></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input type="text"   th:field="*{password}" size="35"/></td>
-        </tr>
-        <tr>
+
             <td><span>
                    <input type="radio" th:field ="*{skp}"
                           value=1 id="skpT" hidden/>
@@ -49,14 +59,16 @@
         </tr>
         <tr>
             <td><input type="text"  th:field="*{descripcion}" hidden /></td>
-        <tr>
-            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita contraseña" /></td>
-        </tr>
+
     </table>
+
 </form>
+</div>
+<div th:replace="../templates/fragments/navUser"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>
 </footer>
+
 </body>
 </html>

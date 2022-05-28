@@ -12,7 +12,7 @@
 <div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
     <h1>Mi perfil</h1>
-
+    <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-primary botonesAñadir" role="button">Editar</a>
     <article class="anuncio" xmlns:th="http://www.w3.org/1999/xhtml">
         <figure class="estudiante">
             <img th:src="${estudiante.rutaimg}" class="fotoPerfilMasGrande"/>
@@ -102,8 +102,6 @@
         </div>
     </article>
     <div>
-        <br>
-        <a th:href="@{/estudiante/update/{nif}(nif=${estudiante.nif})}" class="btn btn-primary" role="button">Editar</a>
     </div>
 </div>
 <footer class="footer">
