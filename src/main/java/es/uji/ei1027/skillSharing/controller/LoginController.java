@@ -28,11 +28,11 @@ class UserValidator implements Validator {
         Usuario usuario = (Usuario) obj;
         if (usuario.getUsername().equals("")){
             //System.out.println("baduser");
-            errors.rejectValue("username", "user_empty", "Cal introduir un usuari");
+            errors.rejectValue("username", "user_empty", "Debes intruducir un nombre de usuario");
         }
         if (usuario.getPassword().equals("")) {
             //System.out.println("empt pass");
-            errors.rejectValue("password", "pd_empty","Cal introduir una contrasenya");
+            errors.rejectValue("password", "pd_empty","Debes intruducir una contraseña");
         }
     }
 }

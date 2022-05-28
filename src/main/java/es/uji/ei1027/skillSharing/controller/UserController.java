@@ -29,16 +29,16 @@ class UsuarioValidator implements Validator {
 
         if (user.getUsername().trim().equals("")) {
             errors.rejectValue("username", "empty_username",
-                    "Cal introduir un nom d' usuari");
+                    "Debes introducir un nombre de usuario");
         }
         if (user.getPassword().trim().equals("")) {
             errors.rejectValue("password", "empty_password",
-                    "Cal introduir una contrasenya");
+                    "Debes introducir una contraseña");
         }
 
         if (user.getNif().trim().equals("")) {
             errors.rejectValue("nif", "empty_nif",
-                    "Cal introduir un nif");
+                    "Debes introducir un NIF");
         }
     }
 }

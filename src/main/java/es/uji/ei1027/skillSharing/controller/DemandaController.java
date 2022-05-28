@@ -30,15 +30,15 @@ class DemandaValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Demanda dem = (Demanda) obj;
         if (dem.getIniFecha() == null)
-            errors.rejectValue("iniFecha", "empty_fechai", "Cal introduir una data de inici");
+            errors.rejectValue("iniFecha", "empty_fechai", "Debes introducir una fecha de inicio");
         if (dem.getFinFecha() == null)
-            errors.rejectValue("finFecha", "empty_fechaf", "Cal introduir una data de finalització");
+            errors.rejectValue("finFecha", "empty_fechaf", "Debes introducir una fecha de final");
         if (dem.getDescripcion().equals(""))
-            errors.rejectValue("descripcion","empty_descr", "Cal introduir una descripció");
+            errors.rejectValue("descripcion","empty_descr", "Debes introducir una descripción");
         if (dem.getHoras() == 0 )
-            errors.rejectValue("horas","horas0","El nombre de hores no pot ser 0");
+            errors.rejectValue("horas","horas0","El número de horas debe ser superior a 0");
         if (dem.getHoras() < 0 )
-            errors.rejectValue("horas","horas_neg","El nombre de hores no pot ser negatiu");
+            errors.rejectValue("horas","horas_neg","El número de horas debe ser superior a 0");
 
     }
 }
@@ -265,5 +265,4 @@ public class DemandaController {
             return "demanda/listSKP";
         }
     }
-    // TODO Falta listDemandas de SKP, hay que pensar entre todos que listar y como 259x2x48
 }
