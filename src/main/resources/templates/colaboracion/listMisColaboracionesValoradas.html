@@ -11,7 +11,7 @@
 <body>
 
 <div class="container">
-    <h1>Mis Colaboraciones</h1>
+    <h1>Mis Colaboraciones Valoradas</h1>
 
     <div th:if="${valorada != null}" class="alert alert-success text-center alerta" role="alert">
         <div class="text-center"><p>Se ha valorado la colaboración correctamente</p>
@@ -39,6 +39,7 @@
                         <tr><td><p class="etiquetaDemandante">Demandante: </p></td> <td><p class="demandante" th:text="${{colaboracion.nombreApellidoDemandante}}"></p></td></tr>
                     </table>
                         <div class="comentario">
+                            <p class="etiquetaComentario">Comentario:</p>
                             <p th:text="${{colaboracion.comentario}}"></p>
                         </div>
 

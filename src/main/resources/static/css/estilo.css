@@ -254,7 +254,7 @@ body {
     border-bottom-left-radius: 30px;
     }
 
-.etiquetaHoras, .etiquetaInicio, .etiquetaOfertante, .etiquetaDemandante, .etiquetaRate, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio, .etiquetaHoras, .etiquetaRatios{
+.etiquetaHoras, .etiquetaInicio, .etiquetaOfertante, .etiquetaDemandante, .etiquetaRate, .etiquetaFinal, .etiquetaSkill, .etiquetaNivel, .etiquetaGrado, .etiquetaEmail, .etiquetaSexo, .etiquetaEdad, .etiquetaNIF, .etiquetaDomicilio, .etiquetaHoras, .etiquetaRatios, .etiquetaComentario{
     font-weight: bolder;
 }
 
@@ -363,3 +363,34 @@ font-width: block;
     margin-inline-start: 12em;
 }
 
+.horasInfo{
+    display: flex;
+}
+
+.horas1{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 6em;
+    margin-inline-end: 1em;
+}
+
+.horas2{
+    margin-block-start: 4em;
+    margin-block-end: 1em;
+    margin-inline-start: 2em;
+    margin-inline-end: 4em;
+}
+
+.tablaTextoAjustadoLinea{
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden;
+    text-align: left;
+}
+
+.botonesLinea{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 29em;
+    margin-inline-end: 1em;
+}

@@ -65,9 +65,9 @@
             <figure class="estudiante">
                 <img th:src="${oferta.rutaImgSkill}" class="fotoSkill">
             </figure>
-                <div class="skill">
-                        <p th:text="${{oferta.descripcion}}"></p>
-                </div>
+            <div class="skill">
+                <p th:text="${{oferta.descripcion}}"></p>
+            </div>
         </div>
         <div class="botones">
             <table>
@@ -95,14 +95,10 @@
 
         </div>
     </article>
-    <div>
-        <table>
-            <td><tr><a class="btn btn-primary botonesAñadir" role="button"
-           th:href="@{/colaboracion/addColaboracionOferta/{idOferta}(idOferta=${oferta.idOferta})}">Colaborar</a></tr></td>
-            <br>
-            <td><tr><a role="button" class="btn btn-primary" th:href="@{/oferta/listOfertasUser}">Continuar sin
-            colaborar</a></tr></td>
-        </table>
+    <div class="botones botonesLinea">
+        <a class="btn btn-primary" role="button"
+           th:href="@{/colaboracion/addColaboracionOferta/{idOferta}(idOferta=${oferta.idOferta})}">Colaborar</a>
+        <a role="button" class="btn btn-warning" th:href="@{/oferta/listOfertasUser}">Cancelar</a>
     </div>
 </div>
 <footer class="footer">
