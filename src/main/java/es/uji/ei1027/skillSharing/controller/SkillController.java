@@ -30,7 +30,7 @@ public class SkillController {
     @RequestMapping(value = "/add")
     public String addSkill(Model model, HttpSession session){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/add");
+            session.setAttribute("nextUrl","/skill/add");
             return "redirect:../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
@@ -45,10 +45,11 @@ public class SkillController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("skill") Skill skill, BindingResult bindingResult, @RequestParam("foto") MultipartFile foto, HttpSession session) throws IOException {
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/add");
+            session.setAttribute("nextUrl","/skill/add");
             return "redirect:../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
+        session.setAttribute("anadido", skill.getNombre() + " "+ skill.getNivel());
 
         if (!user.isSkp())
             return "redirect:/forbiden";
@@ -76,7 +77,7 @@ public class SkillController {
     @RequestMapping( value = "/update/{idSkill}", method = RequestMethod.GET)
     public String editSkill(Model model, @PathVariable String idSkill, HttpSession session){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/update/" + idSkill);
+            session.setAttribute("nextUrl","/skill/update/" + idSkill);
             return "redirect:../../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
@@ -103,14 +104,14 @@ public class SkillController {
             return "skill/update";
         }
         skillDao.updateSkill(skill);
-        session.setAttribute("editado", true);
+        session.setAttribute("editado", skill.getNombre() + " " + skill.getNivel());
         return "redirect:list";
     }
 
     @RequestMapping(value = "/delete/{idSkill}")
     public String processDeleteSkill(@PathVariable String idSkill, HttpSession session){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/delete/" + idSkill);
+            session.setAttribute("nextUrl","/skill/delete/" + idSkill);
             return "redirect:../../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
@@ -118,15 +119,16 @@ public class SkillController {
         if (!user.isSkp())
             return "redirect:/forbiden";
 
+        Skill skill = skillDao.getSkill(idSkill);
         skillDao.endSkill(idSkill);
         skillDao.endOfertasSkill(idSkill);
         skillDao.endDemandasSkill(idSkill);
-        session.setAttribute("eliminado", true);
+        session.setAttribute("eliminado", skill.getNombre() + " " + skill.getNivel());
         return "redirect:../list";
     }
 
     @RequestMapping("/list")
-    public String listSkills(Model model, @SessionAttribute(name = "eliminado", required = false) String eliminado,
+    public String listSkills(Model model, @SessionAttribute(name = "anadido", required = false) String anadido, @SessionAttribute(name = "eliminado", required = false) String eliminado,
                              @SessionAttribute(name = "editado", required = false) String editado, HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/skill/list");
@@ -148,6 +150,8 @@ public class SkillController {
         session.removeAttribute("eliminado");
         model.addAttribute("editado", editado);
         session.removeAttribute("editado");
+        model.addAttribute("anadido", anadido);
+        session.removeAttribute("anadido");
         return "skill/list";
     }
 

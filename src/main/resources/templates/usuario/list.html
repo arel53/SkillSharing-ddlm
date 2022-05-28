@@ -12,20 +12,20 @@
     <h1>Gestionar Usuarios</h1>
 
     <div th:if="${anadido != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha añadido correctamente al usuario</p>
-            <h5 th:text="${anadido}"></h5>
+        <div class="text-center"><p>Se ha <b>añadido</b> correctamente al usuario</p>
+            <h5 th:text="${anadido}" class="negrita"></h5>
         </div>
     </div>
 
     <div th:if="${editado != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha editado correctamente al usuario</p>
-            <h5 th:text="${editado}"></h5>
+        <div class="text-center"><p>Se ha <b>editado</b> correctamente al usuario</p>
+            <h5 th:text="${editado}" class="negrita"></h5>
         </div>
     </div>
 
     <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha eliminado correctamente el usuario</p>
-            <h5 th:text="${eliminado}"></h5>
+        <div class="text-center"><p>Se ha <b>eliminado</b> correctamente el usuario</p>
+            <h5 th:text="${eliminado}" class="negrita"></h5>
         </div>
     </div>
 

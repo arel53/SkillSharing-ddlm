@@ -229,22 +229,23 @@ public class ColaboracionController {
         return "redirect:list";
     }
 
-    @RequestMapping(value = "/delete/{idColaboracion}")
+    @RequestMapping(value = "/delete/{idColaboracion}/")
     public String  processDeleteColaboracion(@PathVariable String idColaboracion, HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/colaboracion/delete/" + idColaboracion);
-            return "redirect:../../login";
+            return "redirect:../../../login";
 
         }
 
         Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println(idColaboracion);
         colaboracionDao.endColaboracion(idColaboracion);
         session.setAttribute("eliminado", true);
         if (user.isSkp()){
             return "redirect:../../listSKP";
         }
         else
-            return "redirect:../listMisColaboraciones";
+            return "redirect:../../listMisColaboraciones";
     }
 
     @RequestMapping("/listSKP")
@@ -275,7 +276,6 @@ public class ColaboracionController {
         model.addAttribute("misColaboraciones",colaboracionDao.getColaboracionesEstudianteActivas(user.getNif()));
         model.addAttribute("fechaActual", LocalDate.now());
         model.addAttribute("userNif", user.getNif());
-        System.out.println(nombre);
         model.addAttribute("nombre", nombre);
         session.removeAttribute("nombre");
         model.addAttribute("eliminado", eliminado);
@@ -317,7 +317,6 @@ public class ColaboracionController {
         valoracionValidator.validate(colaboracion, bindingResult);
         if (bindingResult.hasErrors())
             return "colaboracion/valorar";
-        System.out.println(colaboracion);
         colaboracionDao.updateColaboracion(colaboracion);
         colaboracionDao.endColaboracion(colaboracion.getIdColaboracion() + "");
         session.setAttribute("valorada", true);

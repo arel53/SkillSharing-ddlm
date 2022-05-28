@@ -13,18 +13,18 @@
     <h1>Mis Demandas</h1>
 
     <div th:if="${nombre != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha generado correctamente la demanda con skill </p>
+        <div class="text-center"><p>Se ha <b>generado</b> correctamente la demanda con skill </p>
             <h3 th:text="${{nombre}}"></h3>
         </div>
     </div>
 
     <div th:if="${editado != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha editado correctamente la demanda elegida </p>
+        <div class="text-center"><p>Se ha <b>editado</b> correctamente la demanda elegida </p>
         </div>
     </div>
 
     <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
-        <div class="text-center"><p>Se ha eliminado correctamente la demanda elegida </p>
+        <div class="text-center"><p>Se ha <b>eliminado</b> correctamente la demanda elegida </p>
         </div>
     </div>
 
