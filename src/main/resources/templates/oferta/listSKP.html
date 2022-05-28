@@ -9,11 +9,15 @@
           th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
     <h1>Ofertas de los Usuarios</h1>
 
     <div th:replace="../templates/fragments/filtroOfertas"></div>
+
+    <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
+        <div class="text-center"><p>Se ha eliminado correctamente la oferta elegida </p>
+        </div>
+    </div>
 
     <div th:if="${#lists.isEmpty(ofertas)}" layout:fragment="content">
         Nadie oferta ninguna clase.
@@ -52,6 +56,7 @@
         </section>
     </div>
 </div>
+<div th:replace="../templates/fragments/navSKP"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>

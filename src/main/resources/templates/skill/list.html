@@ -9,9 +9,18 @@
           th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
     <h1>Gestionar Skills</h1>
+
+    <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
+        <div class="text-center"><p>Se ha eliminado correctamente la skill elegida </p>
+        </div>
+    </div>
+
+    <div th:if="${editado != null}" class="alert alert-success text-center alerta" role="alert">
+        <div class="text-center"><p>Se ha editado correctamente la skill elegida </p>
+        </div>
+    </div>
 
     <div th:if="${#lists.isEmpty(skills)}" layout:fragment="content">
         Aún no se han introducido skills a la aplicación.
@@ -56,6 +65,7 @@
 
     </table>
 </div>
+<div th:replace="../templates/fragments/navSKP"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>

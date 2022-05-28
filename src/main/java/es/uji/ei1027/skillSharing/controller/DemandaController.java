@@ -131,8 +131,8 @@ public class DemandaController {
     @RequestMapping(value = "/delete/{idDemanda}")
     public String  processDeleteOferta(HttpSession session,@PathVariable String idDemanda){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            session.setAttribute("nextUrl","/demanda/delete/"+ idDemanda);
+            return "redirect:../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         session.setAttribute("eliminado", true);
@@ -165,11 +165,18 @@ public class DemandaController {
     }
 
     @RequestMapping("/listSKP")
-    public String listDemandasSKP(Model model){
+    public String listDemandasSKP(Model model, HttpSession session, @SessionAttribute(name = "eliminado", required = false) String eliminado){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/demanda/listSKP");
+            return "redirect:../login";
+        }
+
         model.addAttribute("demandas",demandaDao.getDemandas());
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
         model.addAttribute("list","skpDemandas");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "demanda/listSKP";
     }
 

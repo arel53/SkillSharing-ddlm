@@ -15,6 +15,10 @@
 
   <div th:replace="../templates/fragments/filtroDemandas"></div>
 
+  <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
+    <div class="text-center"><p>Se ha eliminado correctamente la oferta elegida </p>
+    </div>
+  </div>
 
   <div th:if="${#lists.isEmpty(demandas)}" layout:fragment="content">
     No hay demandas en la aplicación

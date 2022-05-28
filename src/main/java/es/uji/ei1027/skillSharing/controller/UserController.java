@@ -2,6 +2,7 @@ package es.uji.ei1027.skillSharing.controller;
 
 import es.uji.ei1027.skillSharing.dao.EstudianteDao;
 import es.uji.ei1027.skillSharing.dao.UsuarioDao;
+import es.uji.ei1027.skillSharing.modelo.Estudiante;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -56,24 +54,31 @@ public class UserController {
         this.estudianteDao = estudianteDao;
     }
     @RequestMapping("/list")
-    public String listUsuarios(HttpSession session, Model model) {
+    public String listUsuarios(HttpSession session, Model model, @SessionAttribute(name = "anadido", required = false) String anadido,
+                               @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             model.addAttribute("usuario", new Usuario());
-            return "login";
+            return "redirect:../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
         if (!user.isSkp()){
             return "redirect:/forbiden";
         }
         model.addAttribute("usuarios", usuarioDao.getUsuarios());
+        model.addAttribute("anadido", anadido);
+        session.removeAttribute("anadido");
+        model.addAttribute("editado", editado);
+        session.removeAttribute("editado");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "usuario/list";
     }
     @RequestMapping(value="/add")
     public String addUsuario(HttpSession session,Model model) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/add");
-            return "redirect:/login";
+            return "redirect:../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
@@ -84,11 +89,11 @@ public class UserController {
         return "usuario/add";
     }
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(HttpSession session,Model model,@ModelAttribute("usuario") Usuario usuario,
+    public String processAddSubmit(HttpSession session, Model model, @ModelAttribute("usuario") Usuario usuario,
                                    BindingResult bindingResult) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/add");
-            return "redirect:/login";
+            return "redirect:../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
@@ -97,6 +102,8 @@ public class UserController {
         UsuarioValidator usuarioValidator = new UsuarioValidator();
         usuarioValidator.validate(usuario, bindingResult);
         model.addAttribute("estudiantes",estudianteDao.getEstudiantesSinCuentas());
+        Estudiante e = estudianteDao.getEstudiante(usuario.getNif());
+        session.setAttribute("anadido", e.getNombre() + " " + e.getApellido()+ " con NIF " + e.getNif());
 
         if (bindingResult.hasErrors())
             return "usuario/add";
@@ -117,7 +124,7 @@ public class UserController {
     public String editUsuario(HttpSession session, Model model, @PathVariable String username) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/update");
-            return "redirect:/login";
+            return "redirect:../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
@@ -132,7 +139,7 @@ public class UserController {
             BindingResult bindingResult) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/update");
-            return "redirect:/login";
+            return "redirect:../login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
         if (!user.isSkp()){
@@ -152,19 +159,26 @@ public class UserController {
             return "usuario/update";
         usuarioDao.updateUsuario(usuario);
         session.removeAttribute("old_usuario");
+
+        Estudiante e = estudianteDao.getEstudiante(usuario.getNif());
+        session.setAttribute("editado", e.getNombre() + " " + e.getApellido()+ " con NIF " + e.getNif());
         return "redirect:list";
     }
+
     @RequestMapping(value="/delete/{username}")
     public String processDelete(HttpSession session, @PathVariable String username) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");//el nexturl esta bien, no cambiar
-            return "redirect:/login";
+            return "redirect:../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
             return "redirect:/forbiden";
         }
+        Usuario usuario = usuarioDao.getUsuario(username);
         usuarioDao.deleteUsuario(username);
+        Estudiante e = estudianteDao.getEstudiante(usuario.getNif());
+        session.setAttribute("eliminado", e.getNombre() + " " + e.getApellido()+ " con NIF " + e.getNif());
         return "redirect:../list";
     }
     @RequestMapping(value="/passwd/{username}", method = RequestMethod.GET)

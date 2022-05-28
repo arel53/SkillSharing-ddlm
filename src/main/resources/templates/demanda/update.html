@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Modificar Demanda</title>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="css/estilo.css"
@@ -10,83 +10,91 @@
 </head>
 <body>
 <div class="container">
-<h1>Modificar Demanda</h1>
-<form class="form-horizontal" action="#" th:action="@{/demanda/update}"
-      th:object="${demanda}" method="post">
+    <h1>Modificar Demanda</h1>
+    <form class="form-horizontal" action="#" th:action="@{/demanda/update}"
+          th:object="${demanda}" method="post">
 
-    <div class="form-group row">
+        <div class="form-group row">
 
-        <div class="col-sm-6">
-            <input class="form-control" type="hidden" readonly th:field="*{idDemanda}"/>
+            <div class="col-sm-6">
+                <input class="form-control" type="hidden" readonly th:field="*{idDemanda}"/>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
+        <div class="form-group row">
 
 
-        <div class="col-sm-6">
-            <input class="form-control" type="hidden" readonly th:field="*{estudiante}"/>
+            <div class="col-sm-6">
+                <input class="form-control" type="hidden" readonly th:field="*{estudiante}"/>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
+        <div class="form-group row">
 
-        <label class="control-label col-sm-4">Horas:</label>
-        <div class="col-sm-6">
-            <input class="form-control" type="number" th:field="*{horas}"/>
+            <label class="control-label col-sm-4">Horas:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="number" th:field="*{horas}"/>
+                <div class="error" th:if="${#fields.hasErrors('horas')}" th:errors="*{horas}"></div>
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <label class="control-label col-sm-4">Fecha de Inicio:</label>
-        <div class="col-sm-6">
-            <input class="form-control" type="date" th:field="*{iniFecha}"/>
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Fecha de Inicio:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="date" th:field="*{iniFecha}"/>
+                <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
 
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="control-label col-sm-4">Fecha de Final:</label>
-        <div class="col-sm-6">
-            <input class="form-control" type="date" th:field="*{finFecha}"/>
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Fecha de Final:</label>
+            <div class="col-sm-6">
+                <input class="form-control" type="date" th:field="*{finFecha}"/>
+                <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="control-label col-sm-4">Skill:</label>
+        <div class="form-group row">
+            <label class="control-label col-sm-4">Skill:</label>
 
-        <div class="col-sm-6">
-            <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
-                <tr >
-                    <option th:each="s: ${skills}" th:value="${s.idSkill}" th:selected="${s.idSkill == demanda.skill}"><td th:text="${s.nombre}"></td> <td th:text="${s.nivel}"></td></option>
-                </tr>
-            </select>
-            </td>
+            <div class="col-sm-6">
+                <td><select class="form-control" id="sel1" type="value" th:field="*{skill}">
+                    <tr>
+                        <option th:each="s: ${skills}" th:value="${s.idSkill}"
+                                th:selected="${s.idSkill == demanda.skill}">
+                            <td th:text="${s.nombre}"></td>
+                            <td th:text="${s.nivel}"></td>
+                        </option>
+                    </tr>
+                </select>
+                </td>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label class="control-label col-sm-4">Descripcion:</label>
-        <div class="col-sm-6">
-            <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50" th:field="*{descripcion}"/></textarea>
-            <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+        <div class="form-group row">
+            <label class="control-label col-sm-4" for="descripcion">Descripcion:</label>
+            <div class="col-sm-6">
+                <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50"
+                          th:field="*{descripcion}"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
+            </div>
         </div>
-    </div>
-    <div class="form-group row">
-        <div class="col-sm-6">
-            <input class="form-control" type="hidden" th:field="*{activa}"/>
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <input class="form-control" type="hidden" th:field="*{activa}"/>
+            </div>
         </div>
-    </div>
 
 
-    <div class="form-group row">
+        <div class="form-group row">
 
-        <div class="col-sm-offset-2 col-sm-4">
-            <button type="submit" class="btn btn-success"/>
-            Modificar Demanda</button>
+            <div class="col-sm-offset-2 col-sm-4">
+                <button type="submit" class="btn btn-success"/>
+                Modificar Demanda</button>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
 </div>
 <div th:replace="../templates/fragments/navUser"></div>
 <footer class="footer">

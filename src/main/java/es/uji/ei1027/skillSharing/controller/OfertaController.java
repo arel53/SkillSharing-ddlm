@@ -163,12 +163,19 @@ public class OfertaController {
     }
 
     @RequestMapping("/listSKP")
-    public String listOfertasSKP(Model model){
+    public String listOfertasSKP(Model model, @SessionAttribute(name = "eliminado", required = false) String eliminado, HttpSession session){
+
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/listSKP");
+            return "redirect:../login";
+        }
 
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "skpOfertas");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
         return "oferta/listSKP";
     }
 
@@ -177,7 +184,7 @@ public class OfertaController {
 
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            return "redirect:../../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
