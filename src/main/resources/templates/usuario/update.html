@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Editar usuario</title>
+    <title>Modificar Usuario</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
@@ -10,20 +10,28 @@
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
-<h2>Edita usuario</h2>
-<form action="#" th:action="@{/usuario/update}"
+<div class="container">
+<h1>Modificar Usuario</h1>
+<form class="form-horizontal" action="#" th:action="@{/usuario/update}"
       th:object="${usuario}" method="post">
-    <table>
-        <tr>
-            <td><label>Username</label></td>
-            <td><input type="text"  readonly th:field="*{username}" /></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input type="text"  readonly th:field="*{password}" size="35"/></td>
-        </tr>
-        <tr>
-            <td><label>SKP</label></td>
+
+    <div class="form-group row">
+        <div class="col-sm-7">
+            <input class="form-control" type="hidden" readonly th:field="*{password}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Username:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" readonly th:field="*{username}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-4">SKP:</label>
+        <div class="col-sm-6">
+            <table>
             <td><span>
                    <input type="radio" th:field ="*{skp}"
                           value=1 id="skpT" />
@@ -35,38 +43,52 @@
                    <label for="skpF">NO</label>
                </span>
             </td>
-        </tr>
-        <tr>
-            <td><label>Activo</label></td>
-            <td><span>
+            </table>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Activo:</label>
+        <div class="col-sm-6">
+            <table>
+                <td><span>
                    <input type="radio" th:field ="*{active}"
                           value=1 id="activeT" checked />
                    <label for="activeT">SI</label>
                </span>
-                <span>
+                    <span>
                    <input type="radio" th:field ="*{active}"
                           value=0 id="activeF" />
                    <label for="activeF">NO</label>
                </span>
-            </td>
-        </tr>
-        <tr>
-            <td><label>Nif</label></td>
-            <td><input type="text"  readonly th:field="*{nif}" /></td>
-        </select>
-        </tr>
-        <tr>
-            <td><label>Descripcion</label></td>
-            <td><input type="text"  th:field="*{descripcion}" /></td>
-        </tr>
-        <tr><td><a th:href="@{/usuario/passwd/{username}(username=${usuario.username})}" class="btn btn-danger" role="button">Canvia la contrasenya</a></td>
-        </tr>
+                </td>
+            </table>
+        </div>
+    </div>
 
-        <tr>
-            <td colspan="2"><input type="submit" class="btn btn-success" value="Desa els canvis" /></td>
-        </tr>
-    </table>
+    <div class="form-group row">
+        <label class="control-label col-sm-4">NIF:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" readonly th:field="*{nif}"/>
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Descripción:</label>
+        <div class="col-sm-6">
+            <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50" th:field="*{descripcion}"></textarea>
+        </div>
+    </div>
+
+    <div class="botones botonesLinea">
+        <!--<button type="submit" class="btn btn-success" role="button">Modificar</button>-->
+        <input type="submit" class="btn btn-success" value="Modificar" />
+        <a th:href="@{/usuario/passwd/{username}(username=${usuario.username})}" class="btn btn-primary" role="button">Cambiar
+            contraseña</a>
+
+    </div>
 </form>
+    </div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>
