@@ -398,3 +398,7 @@ font-width: block;
     margin-inline-start: 29em;
     margin-inline-end: 1em;
 }
+
+.botonesColaboracion{
+    display: flex;
+}

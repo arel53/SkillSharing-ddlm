@@ -323,4 +323,39 @@ public class ColaboracionController {
         return "redirect:listMisColaboracionesValoradas";
     }
 
+
+    @RequestMapping(value = "porValorar")
+    public String porValorar(HttpSession session, Model model, @SessionAttribute(name="nombre", required = false) String nombre, @SessionAttribute(name="eliminado", required = false) String eliminado){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/porValorar");
+            return "redirect:../login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misColaboraciones", colaboracionDao.getColaboracionesEstudianteActivas(user.getNif()));
+        model.addAttribute("fechaActual", LocalDate.now());
+        model.addAttribute("userNif", user.getNif());
+        model.addAttribute("nombre", nombre);
+        session.removeAttribute("nombre");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
+        return "colaboracion/colaboracionesPorValorar";
+    }
+
+    @RequestMapping(value = "enCurso")
+    public String enCurso(HttpSession session, Model model, @SessionAttribute(name="nombre", required = false) String nombre, @SessionAttribute(name="eliminado", required = false) String eliminado){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/enCurso");
+            return "redirect:../login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+        model.addAttribute("misColaboraciones", colaboracionDao.getColaboracionesEstudianteActivas(user.getNif()));
+        model.addAttribute("fechaActual", LocalDate.now());
+        model.addAttribute("userNif", user.getNif());
+        model.addAttribute("nombre", nombre);
+        session.removeAttribute("nombre");
+        model.addAttribute("eliminado", eliminado);
+        session.removeAttribute("eliminado");
+        return "colaboracion/colaboracionesEnCurso";
+    }
+
 }

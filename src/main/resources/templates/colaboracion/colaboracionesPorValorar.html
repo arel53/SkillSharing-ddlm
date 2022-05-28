@@ -15,6 +15,7 @@
     <div class="botonesAñadir">
         <a role="button" class="btn btn-light" th:href="@{/colaboracion/enCurso}">En curso</a>
         <a role="button" class="btn btn-light" th:href="@{/colaboracion/porValorar}">Por valorar</a>
+        <a role="button" class="btn btn-light" th:href="@{/colaboracion/listMisColaboraciones}">Todas</a>
     </div>
 
     <div th:if="${eliminado != null}" class="alert alert-success text-center alerta" role="alert">
@@ -34,7 +35,7 @@
     </div>
 
     <section class="listado" th:if="${not #lists.isEmpty(misColaboraciones)}">
-        <article th:each="colaboracion: ${misColaboraciones}" class="anuncio">
+        <article th:each="colaboracion: ${misColaboraciones}" class="anuncio" th:if="${colaboracion.activa == true && (colaboracion.nifDemandante.equals(userNif) || colaboracion.nifOfertante.equals(userNif)) && fechaActual.compareTo(colaboracion.finFecha) > 0}">
             <figure class="colaborarImg">
                 <div class="iconoColaborar">
                     <img th:src="${colaboracion.rutaImgDemandante}" class="fotoPerfil">
@@ -57,13 +58,6 @@
                 </table>
                 <div class="comentario">
                     <p th:text="${{colaboracion.comentario}}"></p>
-                </div>
-                <div th:if="${colaboracion.activa == true}">
-                    <div th:if="${fechaActual.compareTo(colaboracion.finFecha) <= 0}">
-                        <td>
-                            <a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
-                               class="btn btn-danger" role="button">Anular</a></td>
-                    </div>
                 </div>
 
                 <div th:if="${colaboracion.activa == true && colaboracion.nifDemandante.equals(userNif)}">
