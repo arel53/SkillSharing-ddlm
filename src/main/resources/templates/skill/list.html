@@ -12,11 +12,11 @@
 <div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
     <h1>Gestionar Skills</h1>
-
+    <a href="add" class="btn btn-primary botonesAñadir" role="button">Añadir Skill</a><br>
     <div th:if="${#lists.isEmpty(skills)}" layout:fragment="content">
         Aún no se han introducido skills a la aplicación.
     </div>
-    <a href="add" class="btn btn-success" role="button">Añadir Skill</a><br>
+
     <table th:if="${not #lists.isEmpty(skills)}" class="table table-striped">
         <thead>
         <tr>

@@ -11,10 +11,12 @@
 <div th:replace="../templates/fragments/navSKP"></div>
 <div class="container">
     <h1>Gestionar Usuarios</h1>
+    <a href="add" class="btn btn-primary botonesAñadir" role="button">Añadir usuario</a>
     <div th:if="${#lists.isEmpty(usuarios)}" class="error">
         No hi ha usuaris en la base de dades
     </div>
-    <a href="add" class="btn btn-success" role="button">Añadir usuario</a>
+
+
     <table th:unless="${#lists.isEmpty(usuarios)}" class="table table-striped">
         <thead>
         <tr>
