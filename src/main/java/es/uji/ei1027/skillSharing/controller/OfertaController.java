@@ -28,15 +28,15 @@ class OfertaValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         Oferta of = (Oferta) obj;
         if (of.getIniFecha() == null)
-            errors.rejectValue("iniFecha", "empty_fechai", "Cal introduir una data de inici");
+            errors.rejectValue("iniFecha", "empty_fechai", "Debes introducir una fecha de inicio");
         if (of.getFinFecha() == null)
-            errors.rejectValue("finFecha", "empty_fechaf", "Cal introduir una data de finalització");
+            errors.rejectValue("finFecha", "empty_fechaf", "Debes introducir una fecha de final");
         if (of.getDescripcion().equals(""))
-            errors.rejectValue("descripcion","empty_descr", "Cal introduir una descripció");
+            errors.rejectValue("descripcion","empty_descr", "Debes introducir una descripción");
         if (of.getHoras() == 0 )
-            errors.rejectValue("horas","horas0","El nombre de hores no pot ser 0");
+            errors.rejectValue("horas","horas0","El número de horas debe ser superior a 0");
         if (of.getHoras() < 0 )
-            errors.rejectValue("horas","horas_neg","El nombre de hores no pot ser negatiu");
+            errors.rejectValue("horas","horas_neg","El número de horas debe ser superior a 0");
     }
 }
 
