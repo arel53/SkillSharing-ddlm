@@ -55,10 +55,13 @@
             </div>
         </div>
 
+
         <div class="form-group row">
-            <label class="control-label col-sm-4" for="descripcion">Descripcion:</label>
+            <label class="control-label col-sm-4" for="descripcion">Descripción:</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" maxlength="200" id="descripcion" th:field="*{descripcion}"/>
+                <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50" th:field="*{descripcion}"></textarea>
+                <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+
             </div>
         </div>
 

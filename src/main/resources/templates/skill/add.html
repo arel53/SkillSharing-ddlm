@@ -9,35 +9,34 @@
           th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-<div th:replace="../templates/fragments/navUser"></div>
 <div class="container">
-    <h2>Nueva Skill</h2>
+    <h1>Añadir Skill</h1>
     <form class="form-horizontal" action="#" th:action="@{/skill/add}"
           th:object="${skill}" method="post" enctype="multipart/form-data">
 
         <div class="form-group row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <input class="form-control" type="hidden" readonly th:field="*{idSkill}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <input class="form-control" type="hidden" readonly th:field="*{activo}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="nombre">Nombre:</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="nombre">Nombre:</label>
+            <div class="col-sm-6">
                 <input type="text" class="form-control" id="nombre" th:field="*{nombre}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2">Nivel</label>
+            <label class="control-label col-sm-4">Nivel:</label>
 
-            <div class="col-sm-4">
+            <div class="col-sm-6">
                 <td><select class="form-control" id="sel1" type="value" th:field="*{nivel}">
                     <tr>
                         <option th:value="Experto">Experto</option>
@@ -50,39 +49,41 @@
         </div>
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="descripcion">Descripción:</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="descripcion">Descripción:</label>
+            <div class="col-sm-6">
                 <input type="text" class="form-control" id="descripcion" th:field="*{descripcion}"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <div class="col-sm-4">
-                <input class="form-control" type="hidden" readonly th:field="*{activo}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-4">
-                <input class="form-control" type="hidden" readonly th:field="*{rutaim}"/>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" >Logo:</label>
+            <div class="col-sm-6">
                 <input class="form-control" type="file" name="foto"/>
             </div>
         </div>
 
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <input class="form-control" type="hidden" readonly th:field="*{activo}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6">
+                <input class="form-control" type="hidden" readonly th:field="*{rutaim}"/>
+            </div>
+        </div>
 
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Añadir Skill</button>
+                <button type="submit" class="btn btn-success">Añadir Skill</button>
             </div>
         </div>
 
 
     </form>
 </div>
+<div th:replace="../templates/fragments/navSKP"></div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>

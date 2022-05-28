@@ -16,7 +16,6 @@
           th:object="${oferta}" method="post">
 
         <div class="form-group row">
-            <!-- <label class="control-label col-sm-2" for="estudiante">DNI Estudiante:</label> -->
             <div class="col-sm-6">
                 <input type="hidden" class="form-control" id="estudiante" th:field="*{estudiante} "/>
             </div>
@@ -66,8 +65,8 @@
 
 
         <div class="form-group row">
-            <label class="control-label col-sm-2" for="descripcion">Descripció:</label>
-            <div class="col-sm-4">
+            <label class="control-label col-sm-4" for="descripcion">Descripción:</label>
+            <div class="col-sm-6">
                 <textarea type="text" class="form-control" id="descripcion" maxlength="200" rows="4" cols="50" th:field="*{descripcion}"></textarea>
                 <div class="error" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
 
@@ -76,7 +75,7 @@
 
         <div class="form-group row">
             <div class="col-sm-offset-2 col-sm-4">
-                <button type="submit" class="btn btn-primary">Añadir Oferta</button>
+                <button type="submit" class="btn btn-success">Añadir Oferta</button>
             </div>
         </div>
 
