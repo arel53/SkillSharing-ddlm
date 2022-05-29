@@ -248,6 +248,23 @@ public class ColaboracionController {
             return "redirect:../../listMisColaboraciones";
     }
 
+
+    @RequestMapping(value = "/deleteEnCurso/{idColaboracion}/")
+    public String  processDeleteColaboracionEnCurso(@PathVariable String idColaboracion, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/colaboracion/delete/" + idColaboracion);
+            return "redirect:../../../login";
+
+        }
+
+        Usuario user = (Usuario) session.getAttribute("user");
+        System.out.println(idColaboracion);
+        colaboracionDao.endColaboracion(idColaboracion);
+        session.setAttribute("eliminado", true);
+        return "redirect:../../enCurso";
+
+    }
+
     @RequestMapping("/listSKP")
     public String listColaboraciones(Model model, HttpSession session,@SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){

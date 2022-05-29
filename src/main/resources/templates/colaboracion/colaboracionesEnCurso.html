@@ -62,7 +62,7 @@
                 <div th:if="${colaboracion.activa == true}">
                     <div th:if="${fechaActual.compareTo(colaboracion.finFecha) <= 0}">
                         <td>
-                            <a th:href="@{/colaboracion/delete/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
+                            <a th:href="@{/colaboracion/deleteEnCurso/{idColaboracion}/(idColaboracion=${colaboracion.idColaboracion})}"
                                class="btn btn-danger" role="button">Anular</a></td>
                     </div>
                 </div>
