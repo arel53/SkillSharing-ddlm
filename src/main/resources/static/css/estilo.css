@@ -419,16 +419,17 @@ font-width: block;
 .buttonre {  text-align: left;
 }
 .buttona {  text-align: center;
+    background-color:#F7F7F7;
 }
 .buttonav {  text-align: rigth;
  }
 .repag {
     float:left;
-    margin.left:5em;
+    margin-left:2em;
 }
 .avpag{
     float: right;
-    margin-rigth:5em;
+    margin-right:2em;
 
 }
 .apag{
