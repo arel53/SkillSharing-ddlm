@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="filtroSkill">
+    <label>Skill: </label>
+    <select id="sel1" type="value" th:field="*{skill}">
+        <tr>
+            <option th:each="s: ${skills}" th:value="${s.nombre}">
+                <td th:text="${s.nombre}"></td>
+            </option>
+
+        </tr>
+    </select>
+    <tr>
+        <label>Inicio:</label>
+        <input type="date" class="" id="iniFecha" name="iniFecha" th:field="*{iniFecha}"/>
+        <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+        <div class="error" th:if="${#fields.hasErrors('iniFecha')}" th:errors="*{iniFecha}"></div>
+    </tr>
+    <tr>
+        <label>Final:</label>
+        <input type="date" class="" id="finFecha" name="iniFecha" th:field="*{finFecha}"/>
+        <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
+        <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
+    </tr>
+</div>
+
+
+</body>
+</html>
