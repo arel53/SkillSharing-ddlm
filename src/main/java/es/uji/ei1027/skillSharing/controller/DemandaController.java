@@ -238,36 +238,67 @@ public class DemandaController {
         return "demanda/listMisDemandas";
     }
 
-    @RequestMapping("/buscarDemandas/{idListado}")
+   @RequestMapping("/buscarDemandas/{idListado}")
     public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("demanda") Demanda demanda, @PathVariable("idListado") int idListado){
         if (idListado != 0 && session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
-            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0","999999999"));
-        else if(demanda.getIniFecha() == null)
-            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0",demanda.getFinFecha().toString()));
-        else if(demanda.getFinFecha()==null){
-            System.out.println(demanda.getIniFecha());
-            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));}
-        else
-            model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
+
+        Usuario user = (Usuario)session.getAttribute("user");
+
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
+            if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0","999999999"));
+            else if(demanda.getIniFecha() == null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0",demanda.getFinFecha().toString()));
+            else if(demanda.getFinFecha()==null){
+                System.out.println(demanda.getIniFecha());
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));}
+            else
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
             model.addAttribute("list", "inicioDemandas");
             return "demanda/list";
         }
         else if (idListado == 1){
+            if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkillMenosMias(demanda.getSkill(),user.getNif(), "0","999999999"));
+            else if(demanda.getIniFecha() == null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkillMenosMias(demanda.getSkill(),user.getNif(), "0",demanda.getFinFecha().toString()));
+            else if(demanda.getFinFecha()==null){
+                System.out.println(demanda.getIniFecha());
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkillMenosMias(demanda.getSkill(),user.getNif(), demanda.getIniFecha().toString(),"999999999"));}
+            else
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkillMenosMias(demanda.getSkill(),user.getNif(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
             model.addAttribute("list", "demandasUser");
             return "demanda/listDemandasUser";
         }
         else if (idListado == 2){
+            if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
+                model.addAttribute("demandas", demandaDao.getMisDemandasAsociadasASkill(demanda.getSkill(),user.getNif(), "0","999999999"));
+            else if(demanda.getIniFecha() == null)
+                model.addAttribute("demandas", demandaDao.getMisDemandasAsociadasASkill(demanda.getSkill(),user.getNif(), "0",demanda.getFinFecha().toString()));
+            else if(demanda.getFinFecha()==null){
+                System.out.println(demanda.getIniFecha());
+                model.addAttribute("demandas", demandaDao.getMisDemandasAsociadasASkill(demanda.getSkill(),user.getNif(), demanda.getIniFecha().toString(),"999999999"));}
+            else
+                model.addAttribute("demandas", demandaDao.getMisDemandasAsociadasASkill(demanda.getSkill(),user.getNif(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
+
             model.addAttribute("list", "misDemandas");
             return "demanda/listMisDemandas";
         }
         else {
+            if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0","999999999"));
+            else if(demanda.getIniFecha() == null)
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), "0",demanda.getFinFecha().toString()));
+            else if(demanda.getFinFecha()==null){
+                System.out.println(demanda.getIniFecha());
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(),"999999999"));}
+            else
+                model.addAttribute("demandas", demandaDao.getDemandasAsociadasASkill(demanda.getSkill(), demanda.getIniFecha().toString(), demanda.getFinFecha().toString()));
             model.addAttribute("list", "skpDemandas");
             return "demanda/listSKP";
         }
