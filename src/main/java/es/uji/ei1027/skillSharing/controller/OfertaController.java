@@ -208,7 +208,7 @@ public class OfertaController {
         ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
         int ipp = 3;
         int totali = ofFull.size();
-        //System.out.println(totali);
+        System.out.println(totali);
         int fin = Math.min(totali,(page +1) * ipp);
         List<Oferta> paginaof= new ArrayList<Oferta>();
         for (int i = page * ipp; i < fin; i++ ){
@@ -235,14 +235,29 @@ public class OfertaController {
 
     @RequestMapping("/listMisOfertas")
     public String listMisOfertas(HttpSession session, Model model, @SessionAttribute(name = "nombre", required = false) String nombre,
-                                 @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado){
+                                 @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado, @RequestParam (name="page", defaultValue = "0") int page){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
+        ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
+        int ipp = 3;
+        int totali = ofFull.size();
+        //System.out.println(totali);
+        int fin = Math.min(totali,(page +1) * ipp);
+        List<Oferta> paginaof= new ArrayList<Oferta>();
+        for (int i = page * ipp; i < fin; i++ ){
+            paginaof.add(ofFull.get(i));
+        }
+        model.addAttribute("pag_actual", page);
+        model.addAttribute("pag_ant", page-1);
+        model.addAttribute("pag_sig", page +1);
+        model.addAttribute("pag_total", Math.ceil( totali / ipp));
+        model.addAttribute("page_url","/oferta/listMisOfertas");
+        model.addAttribute("page_ready", 1);
 
-        model.addAttribute("ofertas",ofertaDao.getOfertasEstudiante(user.getNif()));
+        model.addAttribute("ofertas",paginaof);
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misOfertas");
@@ -259,8 +274,8 @@ public class OfertaController {
     @RequestMapping("/buscarOfertas/{idListado}")
     public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("oferta") Oferta oferta, @PathVariable("idListado") int idListado){
         if (idListado != 0 && session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            session.setAttribute("nextUrl","/listOfertasUser/");
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         model.addAttribute("page_ready", 0);
