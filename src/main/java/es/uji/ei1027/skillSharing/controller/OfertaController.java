@@ -240,29 +240,56 @@ public class OfertaController {
             session.setAttribute("nextUrl","/usuario/list");
             return "login";
         }
-        if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
-            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0","999999999"));
-        else if(oferta.getIniFecha() == null)
-            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0",oferta.getFinFecha().toString()));
-        else if(oferta.getFinFecha()==null)
-            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(),"999999999"));
-        else
-            model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
+        Usuario user = (Usuario)session.getAttribute("user");
+
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
+            if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0","999999999"));
+            else if(oferta.getIniFecha() == null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0",oferta.getFinFecha().toString()));
+            else if(oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(),"999999999"));
+            else
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
             model.addAttribute("list", "inicioOfertas");
             return "oferta/list";
         }
         else if (idListado == 1){
+            if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkillMenosMias(oferta.getSkill(),user.getNif(), "0","999999999"));
+            else if(oferta.getIniFecha() == null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkillMenosMias(oferta.getSkill(),user.getNif(), "0",oferta.getFinFecha().toString()));
+            else if(oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkillMenosMias(oferta.getSkill(),user.getNif(), oferta.getIniFecha().toString(),"999999999"));
+            else
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkillMenosMias(oferta.getSkill(),user.getNif(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
+
             model.addAttribute("list", "ofertasUser");
             return "oferta/listOfertasUser";
         }
         else if (idListado == 2){
+            if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getMisOfertasAsociadasASkill(oferta.getSkill(),user.getNif(), "0","999999999"));
+            else if(oferta.getIniFecha() == null)
+                model.addAttribute("ofertas", ofertaDao.getMisOfertasAsociadasASkill(oferta.getSkill(),user.getNif(), "0",oferta.getFinFecha().toString()));
+            else if(oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getMisOfertasAsociadasASkill(oferta.getSkill(),user.getNif(), oferta.getIniFecha().toString(),"999999999"));
+            else
+                model.addAttribute("ofertas", ofertaDao.getMisOfertasAsociadasASkill(oferta.getSkill(),user.getNif(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
             model.addAttribute("list", "misOfertas");
             return "oferta/listMisOfertas";
         }
         else {
+            if (oferta.getIniFecha() == null && oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0","999999999"));
+            else if(oferta.getIniFecha() == null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), "0",oferta.getFinFecha().toString()));
+            else if(oferta.getFinFecha()==null)
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(),"999999999"));
+            else
+                model.addAttribute("ofertas", ofertaDao.getOfertasAsociadasASkill(oferta.getSkill(), oferta.getIniFecha().toString(), oferta.getFinFecha().toString()));
             model.addAttribute("list", "skpOfertas");
             return "oferta/listSKP";
         }
@@ -272,3 +299,4 @@ public class OfertaController {
 
 
 }
+
