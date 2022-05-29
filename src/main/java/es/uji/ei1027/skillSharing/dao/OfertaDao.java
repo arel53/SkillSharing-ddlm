@@ -94,9 +94,18 @@ public class OfertaDao {
         }
     }
 
-    public List<Oferta> getMisOfertasAsociadasASkill(int idSkill,String estudiante) {
+    public List<Oferta> getOfertasAsociadasASkillMenosMias(int skill,String estudiante, String iniFecha, String finFecha) {
         try {
-            return jdbcTemplate.query("SELECT o.id_oferta, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as s USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and s.id_skill=? and estudiante = ?", new OfertaRowMapper(), idSkill, estudiante);
+            return jdbcTemplate.query("SELECT o.id_oferta, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as s USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and s.id_skill=? and estudiante <> ? and to_char(o.ini_fecha, 'YYYY-MM-DD') >=? and to_char(o.fin_fecha, 'YYYY-MM-DD') <=?", new OfertaRowMapper(), skill, estudiante, iniFecha, finFecha );
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public List<Oferta> getMisOfertasAsociadasASkill(int skill,String estudiante, String iniFecha, String finFecha) {
+        try {
+            return jdbcTemplate.query("SELECT o.id_oferta, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, o.horas, o.ini_fecha, o.fin_fecha, o.id_skill, o.activa, o.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM oferta AS o JOIN skill as s USING(id_skill) JOIN estudiante AS e ON (o.estudiante = e.nif) WHERE o.activa= TRUE and s.id_skill=? and estudiante = ? and to_char(o.ini_fecha, 'YYYY-MM-DD') >=? and to_char(o.fin_fecha, 'YYYY-MM-DD') <=?", new OfertaRowMapper(), skill, estudiante, iniFecha, finFecha );
         }
         catch (EmptyResultDataAccessException e) {
             return null;
