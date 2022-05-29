@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modifica Colaboración</title>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<div>
+    <form class="form-horizontal" th:if="${list != null && list == 'skpColaboraciones'}"
+          th:action="@{/colaboracion/buscarColaboraciones/0/}"
+          th:object="${colaboracion}" method="GET">
+
+
+
+        <div th:replace="../templates/fragments/contenidoFiltroColabo"></div>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="button" th:href="@{/colaboracion/listSKP}">Lista sin filtrar</a>
+
+    </form>
+
+    <form class="form-horizontal" th:if="${list != null && list.equals('misColaboraciones')}"
+          th:action="@{/colaboracion/buscarColaboraciones/1/}"
+          th:object="${colaboracion}" method="GET">
+
+        <div th:replace="../templates/fragments/contenidoFiltroColabo"></div>
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/colaboracion/listMisColaboraciones}">Lista sin filtrar</a>
+
+    </form>
+
+
+
+</div>
+</body>
+</html>
