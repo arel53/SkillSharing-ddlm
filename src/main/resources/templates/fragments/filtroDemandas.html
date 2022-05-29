@@ -21,7 +21,7 @@
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('demandasUser')}"
-          th:action="@{/oferta/buscarDemandas/1/}"
+          th:action="@{/demanda/buscarDemandas/1/}"
           th:object="${demanda}" method="GET">
 
         <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
