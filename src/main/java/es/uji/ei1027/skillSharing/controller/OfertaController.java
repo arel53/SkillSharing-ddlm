@@ -8,16 +8,14 @@ import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
+
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -155,7 +153,11 @@ public class OfertaController {
     }
 
     @RequestMapping("/list")
-    public String listOfertas(Model model){
+    public String listOfertas(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/oferta/list");
+            return "redirect:/login";
+        }
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         model.addAttribute("oferta",new Oferta());
         List<Skill> skills = skillDao.getSkillsActivas();
@@ -171,6 +173,10 @@ public class OfertaController {
             session.setAttribute("nextUrl","/oferta/listSKP");
             return "redirect:../login";
         }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.isSkp()){
+            return "redirect:/forbiden";
+        }
 
         model.addAttribute("ofertas",ofertaDao.getOfertas());
         model.addAttribute("oferta",new Oferta());
@@ -185,8 +191,8 @@ public class OfertaController {
     public String listOfertasAsociadasSkillUser(HttpSession session, Model model, @PathVariable String idSkill, @PathVariable String idDemanda){
 
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
-            return "redirect:../../../login";
+            session.setAttribute("nextUrl","/listOfertas/User");
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
@@ -197,67 +203,32 @@ public class OfertaController {
 
 
     @RequestMapping("/listOfertasUser")
-    public String listOfertasUser(HttpSession session, Model model, @RequestParam (name="page", defaultValue = "0") int page){
+    public String listOfertasUser(HttpSession session, Model model){
 
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
+            session.setAttribute("nextUrl","/oferta/listOfertasUser");
             return "redirect:../../login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
-        ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
-        int ipp = 3;
-        int totali = ofFull.size();
-        System.out.println(totali);
-        int fin = Math.min(totali,(page +1) * ipp);
-        List<Oferta> paginaof= new ArrayList<Oferta>();
-        for (int i = page * ipp; i < fin; i++ ){
-            paginaof.add(ofFull.get(i));
-        }
-        model.addAttribute("pag_actual", page);
-        model.addAttribute("pag_ant", page-1);
-        model.addAttribute("pag_sig", page +1);
-        model.addAttribute("pag_total", Math.ceil( totali / ipp));
-        model.addAttribute("page_url","/oferta/listOfertasUser");
-        model.addAttribute("page_ready", 1);
-
-
-
-
-        model.addAttribute("ofertas", paginaof);
+        model.addAttribute("ofertas",ofertaDao.getTodasOfertasMenosMias(user.getNif()));
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "ofertasUser");
-
         return "oferta/listOfertasUser";
     }
 
 
     @RequestMapping("/listMisOfertas")
     public String listMisOfertas(HttpSession session, Model model, @SessionAttribute(name = "nombre", required = false) String nombre,
-                                 @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado, @RequestParam (name="page", defaultValue = "0") int page){
+                                 @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/usuario/list");
+            session.setAttribute("nextUrl","/oferta/listMisOfertas");
             return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
-        ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
-        int ipp = 3;
-        int totali = ofFull.size();
-        System.out.println(totali);
-        int fin = Math.min(totali,(page +1) * ipp);
-        List<Oferta> paginaof= new ArrayList<Oferta>();
-        for (int i = page * ipp; i < fin; i++ ){
-            paginaof.add(ofFull.get(i));
-        }
-        model.addAttribute("pag_actual", page);
-        model.addAttribute("pag_ant", page-1);
-        model.addAttribute("pag_sig", page +1);
-        model.addAttribute("pag_total", Math.ceil( totali / ipp));
-        model.addAttribute("page_url","/oferta/listMisOfertas");
-        model.addAttribute("page_ready", 1);
 
-        model.addAttribute("ofertas",paginaof);
+        model.addAttribute("ofertas",ofertaDao.getOfertasEstudiante(user.getNif()));
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misOfertas");
@@ -274,11 +245,11 @@ public class OfertaController {
     @RequestMapping("/buscarOfertas/{idListado}")
     public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("oferta") Oferta oferta, @PathVariable("idListado") int idListado){
         if (idListado != 0 && session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/listOfertasUser/");
+            session.setAttribute("nextUrl","/oferta/listOfertasUser");
             return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
-        model.addAttribute("page_ready", 2);
+
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){

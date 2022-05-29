@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -157,7 +156,15 @@ public class DemandaController {
 
 
     @RequestMapping("/list")
-    public String listDemandas(Model model){
+    public String listDemandas(Model model,HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/demanda/list");
+            return "redirect:/login";
+        }
+        Usuario user = (Usuario)session.getAttribute("user");
+        if (!user.isSkp()){
+            return "redirect:/forbiden";
+        }
         model.addAttribute("demandas",demandaDao.getDemandas());
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
@@ -184,7 +191,7 @@ public class DemandaController {
     @RequestMapping("/listDemandasUser/{idSkill}/{idOferta}")
     public String listDemandasUser(Model model, HttpSession session,@PathVariable String idSkill,@PathVariable String idOferta){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/listDemandasUser/"+idSkill+"/"+idOferta);
+            session.setAttribute("nextUrl","/demanda/listDemandasUser");
             return "redirect:/login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
@@ -204,29 +211,13 @@ public class DemandaController {
     }
 
     @RequestMapping("/listDemandasUser")
-    public String listDemandasUser(Model model, HttpSession session, @RequestParam (name="page", defaultValue = "0") int page){
+    public String listDemandasUser(Model model, HttpSession session){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/demanda/listDemandasUser");
             return "redirect:/login";
         }
         Usuario user = (Usuario) session.getAttribute("user");
-        ArrayList<Demanda> ofFull = (ArrayList<Demanda>) demandaDao.getTodasDemandasMenosMias(user.getNif());
-        int ipp = 3;
-        int totali = ofFull.size();
-        //System.out.println(totali);
-        int fin = Math.min(totali,(page +1) * ipp);
-        List<Demanda> paginaof= new ArrayList<Demanda>();
-        for (int i = page * ipp; i < fin; i++ ){
-            paginaof.add(ofFull.get(i));
-        }
-        model.addAttribute("pag_actual", page);
-        model.addAttribute("pag_ant", page-1);
-        model.addAttribute("pag_sig", page +1);
-        model.addAttribute("pag_total", Math.ceil( totali / ipp));
-        model.addAttribute("page_url","/demanda/listDemandasUser");
-        model.addAttribute("page_ready", 1);
-
-        model.addAttribute("demandas",paginaof);
+        model.addAttribute("demandas",demandaDao.getTodasDemandasMenosMias(user.getNif()));
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills",skillDao.getSkillsActivas());
         model.addAttribute("list","demandasUser");
@@ -236,34 +227,13 @@ public class DemandaController {
 
     @RequestMapping("/listMisDemandas")
     public String listMisDemandas(Model model, HttpSession session, @SessionAttribute(name = "nombre", required = false)
-            String nombre, @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado,@RequestParam (name="page", defaultValue = "0") int page){
+            String nombre, @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado){
         if (session.getAttribute("user") == null){
-            session.setAttribute("nextUrl","/listMisDemandas");
+            session.setAttribute("nextUrl","/demanda/listMisDemandas");
             return "redirect:/login";
         }
-
         Usuario user = (Usuario) session.getAttribute("user");
-
-        ArrayList<Demanda> ofFull = (ArrayList<Demanda>) demandaDao.getTodasDemandasMenosMias(user.getNif());
-        int ipp = 3;
-        int totali = ofFull.size();
-        //System.out.println(totali);
-        int fin = Math.min(totali,(page +1) * ipp);
-        List<Demanda> paginaof= new ArrayList<Demanda>();
-        for (int i = page * ipp; i < fin; i++ ){
-            paginaof.add(ofFull.get(i));
-        }
-        model.addAttribute("pag_actual", page);
-        model.addAttribute("pag_ant", page-1);
-        model.addAttribute("pag_sig", page +1);
-        model.addAttribute("pag_total", (int)Math.ceil( totali / ipp));
-        model.addAttribute("page_url","/demanda/listMisDemandas");
-        model.addAttribute("page_ready", 1);
-        //System.out.println( Math.ceil( totali / ipp));
-
-
-
-        model.addAttribute("demandas", paginaof);
+        model.addAttribute("demandas",demandaDao.getDemandasEstudiante(user.getNif()));
         model.addAttribute("demanda",new Demanda());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "misDemandas");
@@ -284,9 +254,8 @@ public class DemandaController {
         }
 
         Usuario user = (Usuario)session.getAttribute("user");
-       model.addAttribute("page_ready", 2);
 
-       model.addAttribute("skills", skillDao.getSkillsActivas());
+        model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
             if (demanda.getIniFecha() == null && demanda.getFinFecha()==null)

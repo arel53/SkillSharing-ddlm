@@ -53,16 +53,16 @@ public class SkillController {
 
         if (!user.isSkp())
             return "redirect:/forbiden";
-
-        if (foto.isEmpty()){
-            //bindingResult.rejectValue();
-            System.out.println("empotyfoto");
-            return "skill/add ";//cambiar redirect
-        }
-        //System.out.println(foto.getOriginalFilename());
         if (bindingResult.hasErrors()) {
             return "skill/add";
         }
+        if (foto.isEmpty()){
+            //bindingResult.rejectValue();
+            //System.out.println("empotyfoto");
+            return "redirect:/skill/add ";
+        }
+        //System.out.println(foto.getOriginalFilename());
+
         Path di = Paths.get("src//main//resources//static/imagenes/skill");
         String ra = di.toFile().getAbsolutePath();
         byte[] imgb = foto.getBytes();

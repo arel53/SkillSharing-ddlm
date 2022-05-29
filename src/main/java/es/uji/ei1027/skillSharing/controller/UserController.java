@@ -124,7 +124,7 @@ public class UserController {
     public String editUsuario(HttpSession session, Model model, @PathVariable String username) {
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/update");
-            return "redirect:../../login";
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         if (!user.isSkp()){
