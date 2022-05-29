@@ -91,6 +91,24 @@ public class DemandaDao {
         }
     }
 
+    public List<Demanda> getDemandasAsociadasASkillMenosMias(int idSkill, String estudiante, String iniFecha, String finFecha) {
+        try {
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? and estudiante <> ? and to_char(d.ini_fecha, 'YYYY-MM-DD') >= ? and to_char(d.fin_fecha, 'YYYY-MM-DD') <= ?", new DemandaRowMapper(), idSkill, estudiante, iniFecha, finFecha);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public List<Demanda> getMisDemandasAsociadasASkill(int idSkill, String estudiante, String iniFecha, String finFecha) {
+        try {
+            return jdbcTemplate.query("SELECT d.id_demanda, e.rutaimg, s.rutaim, e.nombre || ' '  || e.apellido AS estudiante, d.horas, d.ini_fecha, d.fin_fecha, d.id_skill, d.activa, d.descripcion, s.nombre AS nombre_skill, s.nivel AS nivel_skill FROM demanda AS d JOIN skill as S USING(id_skill) JOIN estudiante AS e ON (d.estudiante = e.nif) WHERE d.activa= TRUE and id_skill = ? and estudiante = ? and to_char(d.ini_fecha, 'YYYY-MM-DD') >= ? and to_char(d.fin_fecha, 'YYYY-MM-DD') <= ?", new DemandaRowMapper(), idSkill, estudiante, iniFecha, finFecha);
+        }
+        catch (EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
 
     public List<String> getDemandasEstudiantesEnviarCorreo(int idSkill) {
         try {
@@ -100,4 +118,3 @@ public class DemandaDao {
             return null;
         }
     }
-}
