@@ -14,6 +14,9 @@
 
         <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
 
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="button" th:href="@{/oferta/list}">Lista sin filtrar</a>
+
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('ofertasUser')}"
@@ -21,6 +24,9 @@
           th:object="${oferta}" method="GET">
 
         <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
+
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listOfertasUser}">Lista sin filtrar</a>
 
     </form>
 
@@ -30,6 +36,10 @@
           th:object="${oferta}" method="GET">
 
         <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
+
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listMisOfertas}">Lista sin filtrar</a>
+
     </form>
 
     <form class="form-horizontal" th:if="${list != null && list.equals('skpOfertas')}"
@@ -37,6 +47,9 @@
           th:object="${oferta}" method="GET">
 
         <div th:replace="../templates/fragments/contenidoCompartidoFiltro"></div>
+
+        <button type="submit" class="botonesAñadir">Buscar</button>
+        <a th:if="${filtrado != null}" role="button" class="" th:href="@{/oferta/listSKP}">Lista sin filtrar</a>
 
     </form>
 </div>
