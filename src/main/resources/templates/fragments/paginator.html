@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>paginador</title>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
+</head>
+<body>
+<nav th:fragment="paginador">
+<div class="containernav">
+    <div class="repag" th:if="${ pag_actual > 0}">
+        <a th:href="@{${page_url}(page=${pag_ant})}"><button class="button buttonre" >Pagina anterior:
+        <span   th:text="${pag_ant+1}"></span>
+        </button></a>
+    </div>
+    <div class="apag">
+        <button class="button buttona">
+        Pagina actual :
+        <span th:text="${pag_actual+1}"></span> </button>
+    </div>
+    <div class="avpag" th:if="${ pag_actual < pag_total}">
+        <a th:href="@{${page_url}(page=${pag_sig})}">
+            <button class="button buttonrav"> Pagina siguiente: <span  th:text="${pag_sig+1}"></span>
+        </button>
+        </a>
+    </div>
+
+</div>
+
+
+</nav>
+</body>
+</html>

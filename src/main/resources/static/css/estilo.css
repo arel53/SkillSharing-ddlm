@@ -402,3 +402,35 @@ font-width: block;
 .botonesColaboracion{
     display: flex;
 }
+.button {
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  background-color: #f6ddcc;
+}
+.containernav{
+    text-align:center;
+}
+.buttonre {  text-align: left;
+}
+.buttona {  text-align: center;
+}
+.buttonav {  text-align: rigth;
+ }
+.repag {
+    float:left;
+    margin.left:5em;
+}
+.avpag{
+    float: right;
+    margin-rigth:5em;
+
+}
+.apag{
+    display:inline-block;
+}

@@ -8,14 +8,17 @@ import es.uji.ei1027.skillSharing.modelo.Oferta;
 import es.uji.ei1027.skillSharing.modelo.Skill;
 import es.uji.ei1027.skillSharing.modelo.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.data.domain.*;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -195,7 +198,7 @@ public class OfertaController {
 
 
     @RequestMapping("/listOfertasUser")
-    public String listOfertasUser(HttpSession session, Model model){
+    public String listOfertasUser(HttpSession session, Model model, @RequestParam (name="page", defaultValue = "0") int page){
 
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
@@ -203,10 +206,30 @@ public class OfertaController {
         }
         Usuario user = (Usuario)session.getAttribute("user");
 
-        model.addAttribute("ofertas",ofertaDao.getTodasOfertasMenosMias(user.getNif()));
+        ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
+        int ipp = 3;
+        int totali = ofFull.size();
+        //System.out.println(totali);
+        int fin = Math.min(totali,(page +1) * ipp);
+        List<Oferta> paginaof= new ArrayList<Oferta>();
+        for (int i = page * ipp; i < fin; i++ ){
+            paginaof.add(ofFull.get(i));
+        }
+        model.addAttribute("pag_actual", page);
+        model.addAttribute("pag_ant", page-1);
+        model.addAttribute("pag_sig", page +1);
+        model.addAttribute("pag_total", Math.ceil( totali / ipp));
+        model.addAttribute("page_url","/oferta/listOfertasUser");
+        model.addAttribute("page_ready", 1);
+
+
+
+
+        model.addAttribute("ofertas", paginaof);
         model.addAttribute("oferta",new Oferta());
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("list", "ofertasUser");
+
         return "oferta/listOfertasUser";
     }
 
@@ -241,7 +264,7 @@ public class OfertaController {
             return "login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
-
+        model.addAttribute("page_ready", 0);
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
