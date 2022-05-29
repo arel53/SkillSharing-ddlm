@@ -1,12 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Restricted acces</title>
+    <title>Acceso restringido</title>
     <link rel="shortcut icon" href="/imagenes/iconoUji.ico">
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/estilo.css"
+          th:href="@{/css/estilo.css}"/>
 </head>
 <body>
-Acceso no autorizado
+<div th:replace="../templates/fragments/navPublic"></div>
+
+<div class="container">
+    <div class="">
+        <br>
+        <img class="imgUsuarioCancelado" src="../imagenes/cancelado.jpg">
+        <br>
+        <h2>No puedes acceder a este lugar</h2>
+        <br>
+    </div>
+</div>
+
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>
