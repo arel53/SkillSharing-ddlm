@@ -7,17 +7,19 @@
       th:href="@{/css/estilo.css}"/>
 <head>
     <meta charset="UTF-8">
-    <title>Disabled user</title>
+    <title>Usuario deshabilitado</title>
     <link rel="shortcut icon" href="/imagenes/iconoUji.ico">
 </head>
-<body class="container">
+<body>
+<div class="container">
+    <br>
+    <div><img class="imgUsuarioCancelado" src="imagenes/cancelado.jpg" width="310" height="163" alt=""></div>
+    <br>
+    <h2>Lo sentimos, su usuario ha sido deshabilitado.</h2>
+    <p>Por favor ponte en contacto con administracion o inicia sesion con otra cuenta.</p>
+    <br>
+</div>
 <div th:replace="../templates/fragments/navPublic"></div>
-<br>
-<div><img class="imgUsuarioCancelado" src="imagenes/cancelado.jpg" width="310" height="163" alt=""></div>
-<br>
-<p>Lo sentimos, su usuario ha sido deshabilitado.</p>
-<p>Por favor ponte en contacto con administracion o inicia sesion con otra cuenta.</p>
-<br>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>
