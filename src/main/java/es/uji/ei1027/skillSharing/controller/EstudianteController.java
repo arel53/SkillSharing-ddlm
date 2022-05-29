@@ -95,7 +95,15 @@ public class EstudianteController {
 
 
     @RequestMapping("/list")
-    public String listDemandas(Model model){
+    public String listDemandas(Model model, HttpSession session){
+        if (session.getAttribute("user") == null){
+            session.setAttribute("nextUrl","/usuario/list");
+            return "redirect:/login";
+        }
+        Usuario user = (Usuario) session.getAttribute("user");
+
+        if (!user.isSkp())
+            return "redirect:/forbiden";
         model.addAttribute("estudiantes",estudianteDao.getEstudiantes());
         return "estudiante/list";
     }

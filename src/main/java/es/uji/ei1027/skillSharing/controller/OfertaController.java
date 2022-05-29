@@ -238,13 +238,13 @@ public class OfertaController {
                                  @SessionAttribute(name = "editado", required = false) String editado, @SessionAttribute(name = "eliminado", required = false) String eliminado, @RequestParam (name="page", defaultValue = "0") int page){
         if (session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/usuario/list");
-            return "login";
+            return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
         ArrayList<Oferta> ofFull = (ArrayList<Oferta>) ofertaDao.getTodasOfertasMenosMias(user.getNif());
         int ipp = 3;
         int totali = ofFull.size();
-        //System.out.println(totali);
+        System.out.println(totali);
         int fin = Math.min(totali,(page +1) * ipp);
         List<Oferta> paginaof= new ArrayList<Oferta>();
         for (int i = page * ipp; i < fin; i++ ){
