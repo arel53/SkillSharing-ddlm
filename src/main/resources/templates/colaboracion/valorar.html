@@ -109,7 +109,7 @@
     <div class="form-group row">
       <label class="control-label col-sm-4" for="comentario">Comentario:</label>
       <div class="col-sm-6">
-        <input type="text" class="form-control" id="comentario" th:field="*{comentario}"/>
+        <textarea type="text" class="form-control" id="comentario" maxlength="200" rows="4" cols="50" th:field="*{comentario}"></textarea>
         <div class="error" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
 
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Cambia contraseña</title>
+    <title>Cambiar contraseña</title>
     <link rel="shortcut icon" href="/imagenes/iconoUji.ico">
     <meta charset="UTF-8" />
     <link rel="stylesheet"
@@ -11,18 +11,11 @@
 </head>
 <body>
 <div th:replace="../templates/fragments/navSKP"></div>
-<h2>Edita contraseña</h2>
+<div class="container">
+<h1>Cambiar contraseña</h1>
 <form action="#" th:action="@{/usuario/passwd}"
       th:object="${usuario}" method="post">
     <table>
-        <tr>
-            <td><label>Username</label></td>
-            <td><input type="text"  readonly th:field="*{username}" /></td>
-        </tr>
-        <tr>
-            <td><label>Password</label></td>
-            <td><input type="text"   th:field="*{password}" size="35"/></td>
-        </tr>
         <tr>
             <td><span>
                    <input type="radio" th:field ="*{skp}"
@@ -50,11 +43,27 @@
         </tr>
         <tr>
             <td><input type="text"  th:field="*{descripcion}" hidden /></td>
-        <tr>
-            <td colspan="2"><input type="submit" class="btn btn-success" value="Edita contraseña" /></td>
-        </tr>
+
     </table>
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Username:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" readonly th:field="*{username}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="control-label col-sm-4">Contraseña:</label>
+        <div class="col-sm-6">
+            <input class="form-control" type="text" th:field="*{password}"/>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="botones botonesLinea">
+            <input type="submit" class="btn btn-success" value="Cambiar" />
+        </div>
+    </div>
 </form>
+    </div>
 <footer class="footer">
     <hr>
     <p class="text-muted">UJI - Skill Sharing</p>
