@@ -213,7 +213,7 @@ public class DemandaController {
         ArrayList<Demanda> ofFull = (ArrayList<Demanda>) demandaDao.getTodasDemandasMenosMias(user.getNif());
         int ipp = 3;
         int totali = ofFull.size();
-        System.out.println(totali);
+        //System.out.println(totali);
         int fin = Math.min(totali,(page +1) * ipp);
         List<Demanda> paginaof= new ArrayList<Demanda>();
         for (int i = page * ipp; i < fin; i++ ){
@@ -247,7 +247,7 @@ public class DemandaController {
         ArrayList<Demanda> ofFull = (ArrayList<Demanda>) demandaDao.getTodasDemandasMenosMias(user.getNif());
         int ipp = 3;
         int totali = ofFull.size();
-        System.out.println(totali);
+        //System.out.println(totali);
         int fin = Math.min(totali,(page +1) * ipp);
         List<Demanda> paginaof= new ArrayList<Demanda>();
         for (int i = page * ipp; i < fin; i++ ){
@@ -280,11 +280,11 @@ public class DemandaController {
     public String listBusqueda(HttpSession session,Model model, @ModelAttribute ("demanda") Demanda demanda, @PathVariable("idListado") int idListado){
         if (idListado != 0 && session.getAttribute("user") == null){
             session.setAttribute("nextUrl","/demanda/listDemandasUser");
-            return "login";
+            return "redirect:/login";
         }
 
         Usuario user = (Usuario)session.getAttribute("user");
-       model.addAttribute("page_ready", 0);
+       model.addAttribute("page_ready", 2);
 
        model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);

@@ -278,7 +278,7 @@ public class OfertaController {
             return "redirect:/login";
         }
         Usuario user = (Usuario)session.getAttribute("user");
-        model.addAttribute("page_ready", 0);
+        model.addAttribute("page_ready", 2);
         model.addAttribute("skills", skillDao.getSkillsActivas());
         model.addAttribute("filtrado", true);
         if (idListado == 0){
