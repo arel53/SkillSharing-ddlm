@@ -29,8 +29,6 @@
         <!--                <td th:text="${#temporals.format(oferta.iniFecha,'yyyy/mm/dd')}"></td>-->
         <div class="error" th:if="${#fields.hasErrors('finFecha')}" th:errors="*{finFecha}"></div>
     </tr>
-    <button type="submit" class="botonesFiltos">Buscar</button>
-    <a th:if="${filtrado != null}" role="button" class="botonesFiltos" th:href="@{/oferta/list}">Lista sin filtrar</a>
 </div>
 
 
